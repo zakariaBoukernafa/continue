@@ -6,17 +6,15 @@ import {
 } from "../";
 
 export const DEFAULT_CHAT_MODEL_CONFIG: ModelDescription = {
-  model: "claude-3-5-sonnet-latest",
-  provider: "anthropic",
-  apiKey: "",
-  title: "Claude 3.5 Sonnet",
+  model: "qwen2.5-coder:3b",
+  provider: "ollama",
+  title: "Qwen 2.5 Coder",
 };
 
 export const DEFAULT_AUTOCOMPLETE_MODEL_CONFIG: ModelDescription = {
-  title: "Codestral",
-  provider: "mistral",
-  model: "codestral-latest",
-  apiKey: "",
+  title: "Qwen 2.5 Coder",
+  provider: "ollama",
+  model: "qwen2.5-coder:3b",
 };
 
 export const FREE_TRIAL_MODELS: ModelDescription[] = [
