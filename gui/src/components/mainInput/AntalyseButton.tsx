@@ -37,7 +37,7 @@ const StyledButton = styled(Button)<{
   }
 `;
 
-function ContinueButton(props: {
+function antalyseButton(props: {
   onClick?: () => void;
   hidden?: boolean;
   disabled: boolean;
@@ -64,11 +64,11 @@ function ContinueButton(props: {
           ) : (
             <PlayIcon width="18px" height="18px" />
           )}
-          CONTINUE
+          antalyse
         </>
       )}
     </StyledButton>
   );
 }
 
-export default ContinueButton;
+export default antalyseButton;

@@ -3,6 +3,6 @@ target
 **/.DS_Store
 npm-debug.log*
 .env
-.continue-test
+.antalyse-test
 testDir
 coverage

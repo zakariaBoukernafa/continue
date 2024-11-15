@@ -45,11 +45,11 @@ const PROVIDER_HANDLES_TEMPLATING: ModelProvider[] = [
   "anthropic",
   "bedrock",
   "sagemaker",
-  "continue-proxy",
+  "antalyse-proxy",
   "mistral",
   "sambanova",
   "vertexai",
-  "watsonx"
+  "watsonx",
 ];
 
 const PROVIDER_SUPPORTS_IMAGES: ModelProvider[] = [
@@ -61,9 +61,9 @@ const PROVIDER_SUPPORTS_IMAGES: ModelProvider[] = [
   "anthropic",
   "bedrock",
   "sagemaker",
-  "continue-proxy",
+  "antalyse-proxy",
   "openrouter",
-  "vertexai"
+  "vertexai",
 ];
 
 const MODEL_SUPPORTS_IMAGES: string[] = [
@@ -121,7 +121,7 @@ const PARALLEL_PROVIDERS: ModelProvider[] = [
   "together",
   "sambanova",
   "nebius",
-  "vertexai"
+  "vertexai",
 ];
 
 function llmCanGenerateInParallel(

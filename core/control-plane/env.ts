@@ -6,13 +6,13 @@ interface ControlPlaneEnv {
   APP_URL: string;
 }
 
-export const EXTENSION_NAME = "continue";
+export const EXTENSION_NAME = "antalyse";
 
 const WORKOS_CLIENT_ID_PRODUCTION = "client_01J0FW6XN8N2XJAECF7NE0Y65J";
 const WORKOS_CLIENT_ID_STAGING = "client_01J0FW6XCPMJMQ3CG51RB4HBZQ";
 
-const WORKOS_ENV_ID_PRODUCTION = "continue";
-const WORKOS_ENV_ID_STAGING = "continue-staging";
+const WORKOS_ENV_ID_PRODUCTION = "antalyse";
+const WORKOS_ENV_ID_STAGING = "antalyse-staging";
 
 const PRODUCTION_ENV: ControlPlaneEnv = {
   DEFAULT_CONTROL_PLANE_PROXY_URL:
@@ -21,7 +21,7 @@ const PRODUCTION_ENV: ControlPlaneEnv = {
     "https://control-plane-api-service-i3dqylpbqa-uc.a.run.app/",
   AUTH_TYPE: WORKOS_ENV_ID_PRODUCTION,
   WORKOS_CLIENT_ID: WORKOS_CLIENT_ID_PRODUCTION,
-  APP_URL: "https://app.continue.dev",
+  APP_URL: "https://app.antalyse.dev",
 };
 
 const STAGING_ENV: ControlPlaneEnv = {
@@ -31,7 +31,7 @@ const STAGING_ENV: ControlPlaneEnv = {
     "https://control-plane-api-service-537175798139.us-central1.run.app/",
   AUTH_TYPE: WORKOS_CLIENT_ID_STAGING,
   WORKOS_CLIENT_ID: WORKOS_CLIENT_ID_STAGING,
-  APP_URL: "https://app-preview.continue.dev",
+  APP_URL: "https://app-preview.antalyse.dev",
 };
 
 const LOCAL_ENV: ControlPlaneEnv = {

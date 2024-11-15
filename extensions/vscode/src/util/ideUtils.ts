@@ -21,7 +21,6 @@ import {
   uriFromFilePath,
 } from "./vscode";
 
-
 import type { FileEdit, RangeInFile, Thread } from "core";
 
 const util = require("node:util");
@@ -181,7 +180,8 @@ export class VsCodeIdeUtils {
     vscode.workspace
       .openTextDocument(
         vscode.Uri.parse(
-          `${VsCodeExtension.continueVirtualDocumentScheme
+          `${
+            VsCodeExtension.antalyseVirtualDocumentScheme
           }:${encodeURIComponent(name)}?${encodeURIComponent(contents)}`,
         ),
       )
@@ -204,7 +204,7 @@ export class VsCodeIdeUtils {
 
     // If not, ask user for secret
     secret = await vscode.window.showInputBox({
-      prompt: `Either enter secret for ${key} or press enter to try Continue for free.`,
+      prompt: `Either enter secret for ${key} or press enter to try antalyse for free.`,
       password: true,
     });
 
@@ -305,8 +305,8 @@ export class VsCodeIdeUtils {
     return `${lines
       .slice(range.start.line, range.end.line)
       .join("\n")}\n${lines[
-        range.end.line < lines.length - 1 ? range.end.line : lines.length - 1
-      ].slice(0, range.end.character)}`;
+      range.end.line < lines.length - 1 ? range.end.line : lines.length - 1
+    ].slice(0, range.end.character)}`;
   }
 
   async getTerminalContents(commands = -1): Promise<string> {

@@ -1,14 +1,14 @@
-package com.github.continuedev.continueintellijextension.`continue`
+package com.github.antalysedev.antalyseintellijextension.`antalyse`
 
-import com.github.continuedev.continueintellijextension.auth.AuthListener
-import com.github.continuedev.continueintellijextension.auth.ContinueAuthService
-import com.github.continuedev.continueintellijextension.constants.getConfigJsPath
-import com.github.continuedev.continueintellijextension.constants.getConfigJsonPath
-import com.github.continuedev.continueintellijextension.constants.getContinueGlobalPath
-import com.github.continuedev.continueintellijextension.editor.DiffStreamHandler
-import com.github.continuedev.continueintellijextension.editor.DiffStreamService
-import com.github.continuedev.continueintellijextension.services.ContinueExtensionSettings
-import com.github.continuedev.continueintellijextension.services.ContinuePluginService
+import com.github.antalysedev.antalyseintellijextension.auth.AuthListener
+import com.github.antalysedev.antalyseintellijextension.auth.antalyseAuthService
+import com.github.antalysedev.antalyseintellijextension.constants.getConfigJsPath
+import com.github.antalysedev.antalyseintellijextension.constants.getConfigJsonPath
+import com.github.antalysedev.antalyseintellijextension.constants.getantalyseGlobalPath
+import com.github.antalysedev.antalyseintellijextension.editor.DiffStreamHandler
+import com.github.antalysedev.antalyseintellijextension.editor.DiffStreamService
+import com.github.antalysedev.antalyseintellijextension.services.antalyseExtensionSettings
+import com.github.antalysedev.antalyseintellijextension.services.antalysePluginService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
@@ -103,9 +103,9 @@ private fun readConfigJson(): Map<String, Any> {
 class AsyncFileSaveListener(private val ideProtocolClient: IdeProtocolClient) : AsyncFileListener {
     override fun prepareChange(events: MutableList<out VFileEvent>): AsyncFileListener.ChangeApplier? {
         for (event in events) {
-            if (event.path.endsWith(".continue/config.json") || event.path.endsWith(".continue/config.ts") || event.path.endsWith(
-                    ".continue\\config.json"
-                ) || event.path.endsWith(".continue\\config.ts") || event.path.endsWith(".continuerc.json")
+            if (event.path.endsWith(".antalyse/config.json") || event.path.endsWith(".antalyse/config.ts") || event.path.endsWith(
+                    ".antalyse\\config.json"
+                ) || event.path.endsWith(".antalyse\\config.ts") || event.path.endsWith(".antalyserc.json")
             ) {
                 return object : AsyncFileListener.ChangeApplier {
                     override fun afterVfsChange() {
@@ -120,7 +120,7 @@ class AsyncFileSaveListener(private val ideProtocolClient: IdeProtocolClient) : 
 }
 
 class IdeProtocolClient(
-    private val continuePluginService: ContinuePluginService,
+    private val antalysePluginService: antalysePluginService,
     private val coroutineScope: CoroutineScope,
     private val workspacePath: String?,
     private val project: Project
@@ -136,7 +136,7 @@ class IdeProtocolClient(
             override fun dispose() {}
         })
 
-        val myPluginId = "com.github.continuedev.continueintellijextension"
+        val myPluginId = "com.github.antalysedev.antalyseintellijextension"
         val pluginDescriptor =
             PluginManager.getPlugin(PluginId.getId(myPluginId)) ?: throw Exception("Plugin not found")
 
@@ -155,7 +155,7 @@ class IdeProtocolClient(
 
     private fun send(messageType: String, data: Any?, messageId: String? = null) {
         val id = messageId ?: uuid()
-        continuePluginService.sendToWebview(messageType, data, id)
+        antalysePluginService.sendToWebview(messageType, data, id)
     }
 
     fun handleMessage(text: String, respond: (Any?) -> Unit) {
@@ -179,13 +179,13 @@ class IdeProtocolClient(
 
                     "getIdeSettings" -> {
                         val settings =
-                            ServiceManager.getService(ContinueExtensionSettings::class.java)
+                            ServiceManager.getService(antalyseExtensionSettings::class.java)
                         respond(
                             mapOf(
-                                "remoteConfigServerUrl" to settings.continueState.remoteConfigServerUrl,
-                                "remoteConfigSyncPeriod" to settings.continueState.remoteConfigSyncPeriod,
-                                "userToken" to settings.continueState.userToken,
-                                "enableControlServerBeta" to settings.continueState.enableContinueTeamsBeta
+                                "remoteConfigServerUrl" to settings.antalyseState.remoteConfigServerUrl,
+                                "remoteConfigSyncPeriod" to settings.antalyseState.remoteConfigSyncPeriod,
+                                "userToken" to settings.antalyseState.userToken,
+                                "enableControlServerBeta" to settings.antalyseState.enableantalyseTeamsBeta
                             )
                         )
                     }
@@ -193,7 +193,7 @@ class IdeProtocolClient(
                     "getControlPlaneSessionInfo" -> {
                         val silent = (data as? Map<String, Any>)?.get("silent") as? Boolean ?: false
 
-                        val authService = service<ContinueAuthService>()
+                        val authService = service<antalyseAuthService>()
                         if (silent) {
                             val sessionInfo = authService.loadControlPlaneSessionInfo()
                             respond(sessionInfo)
@@ -204,7 +204,7 @@ class IdeProtocolClient(
                     }
 
                     "logoutOfControlPlane" -> {
-                        val authService = service<ContinueAuthService>()
+                        val authService = service<antalyseAuthService>()
                         authService.signOut()
                         ApplicationManager.getApplication().messageBus.syncPublisher(AuthListener.TOPIC)
                             .handleUpdatedSessionInfo(null)
@@ -223,7 +223,7 @@ class IdeProtocolClient(
                             remoteName = "ssh"
                         }
 
-                        val pluginId = "com.github.continuedev.continueintellijextension"
+                        val pluginId = "com.github.antalysedev.antalyseintellijextension"
                         val plugin = PluginManagerCore.getPlugin(PluginId.getId(pluginId))
                         val extensionVersion = plugin?.version ?: "Unknown"
 
@@ -311,9 +311,9 @@ class IdeProtocolClient(
                             if (dir != null) {
                                 val contents = dir.children.map { it.name }
 
-                                // Find any .continuerc.json files
+                                // Find any .antalyserc.json files
                                 for (file in contents) {
-                                    if (file.endsWith(".continuerc.json")) {
+                                    if (file.endsWith(".antalyserc.json")) {
                                         val filePath = workspacePath.resolve(file)
                                         val fileContent = File(filePath.toString()).readText()
                                         configs.add(fileContent)
@@ -553,8 +553,8 @@ class IdeProtocolClient(
                         respond(file.exists())
                     }
 
-                    "getContinueDir" -> {
-                        respond(getContinueGlobalPath())
+                    "getantalyseDir" -> {
+                        respond(getantalyseGlobalPath())
                     }
 
                     "openFile" -> {
@@ -710,12 +710,12 @@ class IdeProtocolClient(
                     }
 
                     "getGitHubAuthToken" -> {
-                        val continueSettingsService = service<ContinueExtensionSettings>()
-                        val ghAuthToken = continueSettingsService.continueState.ghAuthToken;
+                        val antalyseSettingsService = service<antalyseExtensionSettings>()
+                        val ghAuthToken = antalyseSettingsService.antalyseState.ghAuthToken;
 
                         if (ghAuthToken == null) {
                             // Open a dialog so user can enter their GitHub token
-                            continuePluginService.sendToWebview("openOnboardingCard", null, uuid())
+                            antalysePluginService.sendToWebview("openOnboardingCard", null, uuid())
                             respond(null)
                         } else {
                             respond(ghAuthToken)
@@ -723,9 +723,9 @@ class IdeProtocolClient(
                     }
 
                     "setGitHubAuthToken" -> {
-                        val continueSettingsService = service<ContinueExtensionSettings>()
+                        val antalyseSettingsService = service<antalyseExtensionSettings>()
                         val data = data as Map<String, String>
-                        continueSettingsService.continueState.ghAuthToken = data["token"]
+                        antalyseSettingsService.antalyseState.ghAuthToken = data["token"]
                         respond(null)
                     }
 
@@ -748,7 +748,7 @@ class IdeProtocolClient(
     }
 
     fun configUpdate() {
-        continuePluginService.coreMessenger?.request("config/reload", null, null) { _ -> }
+        antalysePluginService.coreMessenger?.request("config/reload", null, null) { _ -> }
     }
 
     private fun initIdeProtocol() {
@@ -769,7 +769,7 @@ class IdeProtocolClient(
         )
 
         val windowInfo = mapOf(
-            "window_id" to continuePluginService.windowId,
+            "window_id" to antalysePluginService.windowId,
             "unique_id" to uniqueId(),
             "ide_info" to IDEInfo(
                 name = ideName,
@@ -894,7 +894,7 @@ class IdeProtocolClient(
     fun sendHighlightedCode(edit: Boolean = false) {
         val rif = getHighlightedCode() ?: return
 
-        continuePluginService.sendToWebview(
+        antalysePluginService.sendToWebview(
             "highlightedCode",
             mapOf(
                 "rangeInFileWithContents" to rif,
@@ -929,7 +929,7 @@ class IdeProtocolClient(
         "bin",
         ".pytest_cache",
         ".vscode-test",
-        ".continue",
+        ".antalyse",
         "__pycache__",
         "site-packages",
         ".gradle",
@@ -945,7 +945,7 @@ class IdeProtocolClient(
     }
 
     private fun workspaceDirectories(): Array<String> {
-        val dirs = this.continuePluginService.workspacePaths
+        val dirs = this.antalysePluginService.workspacePaths
         if (dirs?.isNotEmpty() == true) {
             return dirs
         }
@@ -1028,9 +1028,9 @@ class IdeProtocolClient(
             }
 
             val deferred = CompletableDeferred<String?>()
-            val icon = IconLoader.getIcon("/icons/continue.svg", javaClass)
+            val icon = IconLoader.getIcon("/icons/antalyse.svg", javaClass)
 
-            val notification = NotificationGroupManager.getInstance().getNotificationGroup("Continue")
+            val notification = NotificationGroupManager.getInstance().getNotificationGroup("antalyse")
                 .createNotification(content, notificationType).setIcon(icon)
 
             buttonTexts.forEach { buttonText ->

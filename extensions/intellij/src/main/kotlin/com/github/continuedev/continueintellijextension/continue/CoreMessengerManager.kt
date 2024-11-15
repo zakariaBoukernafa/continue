@@ -1,7 +1,7 @@
-package com.github.continuedev.continueintellijextension.`continue`
+package com.github.antalysedev.antalyseintellijextension.`antalyse`
 
-import com.github.continuedev.continueintellijextension.services.ContinuePluginService
-import com.github.continuedev.continueintellijextension.services.TelemetryService
+import com.github.antalysedev.antalyseintellijextension.services.antalysePluginService
+import com.github.antalysedev.antalyseintellijextension.services.TelemetryService
 import com.intellij.ide.plugins.PluginManager
 import com.intellij.openapi.components.ServiceManager
 import com.intellij.openapi.components.service
@@ -21,10 +21,10 @@ class CoreMessengerManager(
 
   init {
     coroutineScope.launch {
-      val continuePluginService =
-          ServiceManager.getService(project, ContinuePluginService::class.java)
+      val antalysePluginService =
+          ServiceManager.getService(project, antalysePluginService::class.java)
 
-      val myPluginId = "com.github.continuedev.continueintellijextension"
+      val myPluginId = "com.github.antalysedev.antalyseintellijextension"
       val pluginDescriptor =
           PluginManager.getPlugin(PluginId.getId(myPluginId)) ?: throw Exception("Plugin not found")
 
@@ -51,15 +51,15 @@ class CoreMessengerManager(
 
       val corePath = Paths.get(pluginPath.toString(), "core").toString()
       val targetPath = Paths.get(corePath, target).toString()
-      val continueCorePath =
-          Paths.get(targetPath, "continue-binary" + (if (os == "win32") ".exe" else "")).toString()
+      val antalyseCorePath =
+          Paths.get(targetPath, "antalyse-binary" + (if (os == "win32") ".exe" else "")).toString()
 
-      setupCoreMessenger(continueCorePath)
+      setupCoreMessenger(antalyseCorePath)
     }
   }
 
-  private fun setupCoreMessenger(continueCorePath: String): Unit {
-    coreMessenger = CoreMessenger(project, continueCorePath, ideProtocolClient, coroutineScope)
+  private fun setupCoreMessenger(antalyseCorePath: String): Unit {
+    coreMessenger = CoreMessenger(project, antalyseCorePath, ideProtocolClient, coroutineScope)
 
     coreMessenger?.request("config/getSerializedProfileInfo", null, null) { resp ->
       val data = resp as? Map<String, Any>
@@ -76,7 +76,7 @@ class CoreMessengerManager(
       lastBackoffInterval *= 2
       println("CoreMessenger exited, retrying in $lastBackoffInterval seconds")
       Thread.sleep((lastBackoffInterval * 1000).toLong())
-      setupCoreMessenger(continueCorePath)
+      setupCoreMessenger(antalyseCorePath)
     }
   }
 }

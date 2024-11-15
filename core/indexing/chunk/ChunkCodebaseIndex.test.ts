@@ -5,7 +5,7 @@ import {
   mockFileContents,
   mockFilename,
   mockPathAndCacheKey,
-  testContinueServerClient,
+  testantalyseServerClient,
   updateIndexAndAwaitGenerator,
 } from "../../test/util/indexing";
 import { addToTestDir } from "../../test/util/testDir";
@@ -34,7 +34,7 @@ describe("ChunkCodebaseIndex", () => {
     index = new ChunkCodebaseIndex(
       testIde.readFile.bind(testIde),
       pathSep,
-      testContinueServerClient,
+      testantalyseServerClient,
       1000,
     );
 

@@ -17,7 +17,6 @@ import { getModelQuickPickVal } from "./ModelSelectionQuickPick";
 // @ts-ignore - error finding typings
 // @ts-ignore
 
-
 /**
  * Used to track what action to take after a user interacts
  * with the initial Quick Pick
@@ -210,14 +209,14 @@ export class QuickEdit {
       const { label } = quickPick.selectedItems[0];
       switch (label) {
         case UserPromptLabels.AcceptAll:
-          vscode.commands.executeCommand("continue.acceptDiff", path);
+          vscode.commands.executeCommand("antalyse.acceptDiff", path);
           break;
         case UserPromptLabels.RejectAll:
-          vscode.commands.executeCommand("continue.rejectDiff", path);
+          vscode.commands.executeCommand("antalyse.rejectDiff", path);
           break;
         case QuickEditInitialItemLabels.Submit:
           if (quickPick.value) {
-            await vscode.commands.executeCommand("continue.rejectDiff", path);
+            await vscode.commands.executeCommand("antalyse.rejectDiff", path);
             const newPrompt = quickPick.value;
             appendToHistory(newPrompt, this.context);
             this.handleUserPrompt(newPrompt, path);
@@ -486,7 +485,7 @@ export class QuickEdit {
   }) => {
     const { label } = quickPick.selectedItems[0];
 
-    // If not an initial item, it's a file selection. Allow continued prompt editing.
+    // If not an initial item, it's a file selection. Allow antalysed prompt editing.
     const isFileSelection = !Object.values(QuickEditInitialItemLabels).includes(
       label as QuickEditInitialItemLabels,
     );

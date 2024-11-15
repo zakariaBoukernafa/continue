@@ -2,7 +2,7 @@
  * Note: This file is out of sync with the contents of core/util/paths.ts, which we use in VS Code.
  * This is potentially causing JetBrains specific bugs.
  */
-package com.github.continuedev.continueintellijextension.constants
+package com.github.antalysedev.antalyseintellijextension.constants
 
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -71,16 +71,16 @@ export {
 };
 """
 
-fun getContinueGlobalPath(): String {
-  val continuePath = Paths.get(System.getProperty("user.home"), ".continue")
-  if (Files.notExists(continuePath)) {
-    Files.createDirectories(continuePath)
+fun getantalyseGlobalPath(): String {
+  val antalysePath = Paths.get(System.getProperty("user.home"), ".antalyse")
+  if (Files.notExists(antalysePath)) {
+    Files.createDirectories(antalysePath)
   }
-  return continuePath.toString()
+  return antalysePath.toString()
 }
 
-fun getContinueRemoteConfigPath(remoteHostname: String): String {
-  val path = Paths.get(getContinueGlobalPath(), ".configs")
+fun getantalyseRemoteConfigPath(remoteHostname: String): String {
+  val path = Paths.get(getantalyseGlobalPath(), ".configs")
   if (Files.notExists(path)) {
     Files.createDirectories(path)
   }
@@ -90,8 +90,8 @@ fun getContinueRemoteConfigPath(remoteHostname: String): String {
 fun getConfigJsonPath(remoteHostname: String? = null): String {
   val path =
       Paths.get(
-          if (remoteHostname != null) getContinueRemoteConfigPath(remoteHostname)
-          else getContinueGlobalPath(),
+          if (remoteHostname != null) getantalyseRemoteConfigPath(remoteHostname)
+          else getantalyseGlobalPath(),
           "config.json")
   if (Files.notExists(path)) {
     Files.createFile(path)
@@ -103,8 +103,8 @@ fun getConfigJsonPath(remoteHostname: String? = null): String {
 fun getConfigJsPath(remoteHostname: String? = null): String {
   val path =
       Paths.get(
-          if (remoteHostname != null) getContinueRemoteConfigPath(remoteHostname)
-          else getContinueGlobalPath(),
+          if (remoteHostname != null) getantalyseRemoteConfigPath(remoteHostname)
+          else getantalyseGlobalPath(),
           "config.js")
   if (Files.notExists(path)) {
     Files.createFile(path)
@@ -114,7 +114,7 @@ fun getConfigJsPath(remoteHostname: String? = null): String {
 }
 
 fun getSessionsDir(): String {
-  val path = Paths.get(getContinueGlobalPath(), "sessions")
+  val path = Paths.get(getantalyseGlobalPath(), "sessions")
   if (Files.notExists(path)) {
     Files.createDirectories(path)
   }

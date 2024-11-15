@@ -1,5 +1,5 @@
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
-import { ContinueConfig } from "core";
+import { antalyseConfig } from "core";
 import { useContext, useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -93,8 +93,8 @@ const ConfigJsonButton = styled(Button)`
 const ALL_MODEL_ROLES = ["default", "summarize", "edit", "chat"];
 
 function Settings() {
-  const formMethods = useForm<ContinueConfig>();
-  const onSubmit = (data: ContinueConfig) => console.log(data);
+  const formMethods = useForm<antalyseConfig>();
+  const onSubmit = (data: antalyseConfig) => console.log(data);
 
   const ideMessenger = useContext(IdeMessengerContext);
 

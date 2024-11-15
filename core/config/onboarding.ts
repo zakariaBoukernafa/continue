@@ -1,4 +1,4 @@
-import { SerializedContinueConfig } from "../";
+import { SerializedantalyseConfig } from "../";
 
 export const TRIAL_FIM_MODEL = "codestral-latest";
 export const ONBOARDING_LOCAL_MODEL_TITLE = "Ollama";
@@ -11,8 +11,8 @@ export const LOCAL_ONBOARDING_CHAT_TITLE = "Qwen 2.5 Coder 0.5b";
  * whenever a user doesn't have a config.json
  */
 export function setupBestConfig(
-  config: SerializedContinueConfig,
-): SerializedContinueConfig {
+  config: SerializedantalyseConfig,
+): SerializedantalyseConfig {
   return {
     ...config,
     models: config.models.filter((model) => model.provider !== "free-trial"),
@@ -20,8 +20,8 @@ export function setupBestConfig(
 }
 
 export function setupLocalConfig(
-  config: SerializedContinueConfig,
-): SerializedContinueConfig {
+  config: SerializedantalyseConfig,
+): SerializedantalyseConfig {
   return {
     ...config,
     models: [
@@ -45,8 +45,8 @@ export function setupLocalConfig(
 }
 
 export function setupLocalConfigAfterFreeTrial(
-  config: SerializedContinueConfig,
-): SerializedContinueConfig {
+  config: SerializedantalyseConfig,
+): SerializedantalyseConfig {
   return {
     ...config,
     models: [

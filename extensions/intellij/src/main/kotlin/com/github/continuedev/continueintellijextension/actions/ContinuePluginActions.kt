@@ -1,7 +1,7 @@
-package com.github.continuedev.continueintellijextension.actions
+package com.github.antalysedev.antalyseintellijextension.actions
 
-import com.github.continuedev.continueintellijextension.editor.DiffStreamService
-import com.github.continuedev.continueintellijextension.services.ContinuePluginService
+import com.github.antalysedev.antalyseintellijextension.editor.DiffStreamService
+import com.github.antalysedev.antalyseintellijextension.services.antalysePluginService
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformDataKeys
@@ -19,13 +19,13 @@ import javax.swing.event.DocumentListener
 import com.intellij.ui.components.JBScrollPane
 import java.awt.BorderLayout
 
-fun getPluginService(project: Project?): ContinuePluginService? {
+fun getPluginService(project: Project?): antalysePluginService? {
     if (project == null) {
         return null
     }
     return ServiceManager.getService(
         project,
-        ContinuePluginService::class.java
+        antalysePluginService::class.java
     )
 }
 
@@ -36,8 +36,8 @@ class AcceptDiffAction : AnAction() {
     }
 
     private fun acceptHorizontalDiff(e: AnActionEvent) {
-        val continuePluginService = getPluginService(e.project) ?: return
-        continuePluginService.ideProtocolClient?.diffManager?.acceptDiff(null)
+        val antalysePluginService = getPluginService(e.project) ?: return
+        antalysePluginService.ideProtocolClient?.diffManager?.acceptDiff(null)
     }
 
     private fun acceptVerticalDiff(e: AnActionEvent) {
@@ -56,8 +56,8 @@ class RejectDiffAction : AnAction() {
     }
 
     private fun rejectHorizontalDiff(e: AnActionEvent) {
-        val continuePluginService = getPluginService(e.project) ?: return
-        continuePluginService.ideProtocolClient?.diffManager?.rejectDiff(null)
+        val antalysePluginService = getPluginService(e.project) ?: return
+        antalysePluginService.ideProtocolClient?.diffManager?.rejectDiff(null)
     }
 
     private fun rejectVerticalDiff(e: AnActionEvent) {
@@ -69,10 +69,10 @@ class RejectDiffAction : AnAction() {
     }
 }
 
-fun getContinuePluginService(project: Project?): ContinuePluginService? {
+fun getantalysePluginService(project: Project?): antalysePluginService? {
     if (project != null) {
         val toolWindowManager = ToolWindowManager.getInstance(project)
-        val toolWindow = toolWindowManager.getToolWindow("Continue")
+        val toolWindow = toolWindowManager.getToolWindow("antalyse")
 
         if (toolWindow != null) {
             if (!toolWindow.isVisible) {
@@ -84,43 +84,43 @@ fun getContinuePluginService(project: Project?): ContinuePluginService? {
     return getPluginService(project)
 }
 
-fun focusContinueInput(project: Project?) {
-    val continuePluginService = getContinuePluginService(project) ?: return
-    continuePluginService.continuePluginWindow?.content?.components?.get(0)?.requestFocus()
-    continuePluginService.sendToWebview("focusContinueInputWithoutClear", null)
+fun focusantalyseInput(project: Project?) {
+    val antalysePluginService = getantalysePluginService(project) ?: return
+    antalysePluginService.antalysePluginWindow?.content?.components?.get(0)?.requestFocus()
+    antalysePluginService.sendToWebview("focusantalyseInputWithoutClear", null)
 
-    continuePluginService.ideProtocolClient?.sendHighlightedCode()
+    antalysePluginService.ideProtocolClient?.sendHighlightedCode()
 }
 
-class FocusContinueInputWithoutClearAction : AnAction() {
+class FocusantalyseInputWithoutClearAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         val project = e.project
-        focusContinueInput(project)
+        focusantalyseInput(project)
     }
 }
 
-class FocusContinueInputAction : AnAction() {
+class FocusantalyseInputAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
-        val continuePluginService = getContinuePluginService(e.project) ?: return
+        val antalysePluginService = getantalysePluginService(e.project) ?: return
 
-        continuePluginService.continuePluginWindow?.content?.components?.get(0)?.requestFocus()
-        continuePluginService.sendToWebview("focusContinueInput", null)
+        antalysePluginService.antalysePluginWindow?.content?.components?.get(0)?.requestFocus()
+        antalysePluginService.sendToWebview("focusantalyseInput", null)
 
-        continuePluginService.ideProtocolClient?.sendHighlightedCode()
+        antalysePluginService.ideProtocolClient?.sendHighlightedCode()
     }
 }
 
-class NewContinueSessionAction : AnAction() {
+class NewantalyseSessionAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
-        val continuePluginService = getContinuePluginService(e.project) ?: return
-        continuePluginService.continuePluginWindow?.content?.components?.get(0)?.requestFocus()
-        continuePluginService.sendToWebview("focusContinueInputWithNewSession", null)
+        val antalysePluginService = getantalysePluginService(e.project) ?: return
+        antalysePluginService.antalysePluginWindow?.content?.components?.get(0)?.requestFocus()
+        antalysePluginService.sendToWebview("focusantalyseInputWithNewSession", null)
     }
 }
 
 class ViewHistoryAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
-        val continuePluginService = getContinuePluginService(e.project) ?: return
-        continuePluginService.sendToWebview("viewHistory", null)
+        val antalysePluginService = getantalysePluginService(e.project) ?: return
+        antalysePluginService.sendToWebview("viewHistory", null)
     }
 }

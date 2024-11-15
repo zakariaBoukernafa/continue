@@ -1,17 +1,17 @@
 import {
-  ContinueConfig,
-  ContinueRcJson,
+  antalyseConfig,
+  antalyseRcJson,
   IDE,
   IdeSettings,
-  SerializedContinueConfig,
+  SerializedantalyseConfig,
 } from "../../";
-import { ContinueProxyReranker } from "../../context/rerankers/ContinueProxyReranker.js";
+import { AntalyseProxyReranker } from "../../context/rerankers/antalyseProxyReranker.js";
 import { ControlPlaneProxyInfo } from "../../control-plane/analytics/IAnalyticsProvider.js";
 import { ControlPlaneClient } from "../../control-plane/client.js";
 import { controlPlaneEnv } from "../../control-plane/env.js";
-import { TeamAnalytics } from "../../control-plane/TeamAnalytics.js";
-import ContinueProxyEmbeddingsProvider from "../../indexing/embeddings/ContinueProxyEmbeddingsProvider";
-import ContinueProxy from "../../llm/llms/stubs/ContinueProxy";
+import { TeamAnalytics } from "../../control-plane/TeamAnalytics";
+import antalyseProxyEmbeddingsProvider from "../../indexing/embeddings/antalyseProxyEmbeddingsProvider";
+import antalyseProxy from "../../llm/llms/stubs/antalyseProxy";
 import { Telemetry } from "../../util/posthog";
 import { TTS } from "../../util/tts";
 import { ConfigResult, loadFullConfigNode } from "../load";
@@ -21,9 +21,9 @@ export default async function doLoadConfig(
   ideSettingsPromise: Promise<IdeSettings>,
   controlPlaneClient: ControlPlaneClient,
   writeLog: (message: string) => Promise<void>,
-  overrideConfigJson: SerializedContinueConfig | undefined,
+  overrideConfigJson: SerializedantalyseConfig | undefined,
   workspaceId?: string,
-): Promise<ConfigResult<ContinueConfig>> {
+): Promise<ConfigResult<antalyseConfig>> {
   const workspaceConfigs = await getWorkspaceConfigs(ide);
   const ideInfo = await ide.getIdeInfo();
   const uniqueId = await ide.getUniqueId();
@@ -65,7 +65,7 @@ export default async function doLoadConfig(
   // Set up control plane proxy if configured
   const controlPlane = (newConfig as any).controlPlane;
   const useOnPremProxy =
-    controlPlane?.useContinueForTeamsProxy === false && controlPlane?.proxyUrl;
+    controlPlane?.useantalyseForTeamsProxy === false && controlPlane?.proxyUrl;
   let controlPlaneProxyUrl: string = useOnPremProxy
     ? controlPlane?.proxyUrl
     : controlPlaneEnv.DEFAULT_CONTROL_PLANE_PROXY_URL;
@@ -99,33 +99,33 @@ export default async function doLoadConfig(
 
 // Pass ControlPlaneProxyInfo to objects that need it
 async function injectControlPlaneProxyInfo(
-  config: ContinueConfig,
+  config: antalyseConfig,
   info: ControlPlaneProxyInfo,
-): Promise<ContinueConfig> {
+): Promise<antalyseConfig> {
   [...config.models, ...(config.tabAutocompleteModels ?? [])].forEach(
     async (model) => {
-      if (model.providerName === "continue-proxy") {
-        (model as ContinueProxy).controlPlaneProxyInfo = info;
+      if (model.providerName === "antalyse-proxy") {
+        (model as antalyseProxy).controlPlaneProxyInfo = info;
       }
     },
   );
 
-  if (config.embeddingsProvider?.providerName === "continue-proxy") {
+  if (config.embeddingsProvider?.providerName === "antalyse-proxy") {
     (
-      config.embeddingsProvider as ContinueProxyEmbeddingsProvider
+      config.embeddingsProvider as antalyseProxyEmbeddingsProvider
     ).controlPlaneProxyInfo = info;
   }
 
-  if (config.reranker?.name === "continue-proxy") {
-    (config.reranker as ContinueProxyReranker).controlPlaneProxyInfo = info;
+  if (config.reranker?.name === "antalyse-proxy") {
+    (config.reranker as AntalyseProxyReranker).controlPlaneProxyInfo = info;
   }
 
   return config;
 }
 
-async function getWorkspaceConfigs(ide: IDE): Promise<ContinueRcJson[]> {
+async function getWorkspaceConfigs(ide: IDE): Promise<antalyseRcJson[]> {
   const ideInfo = await ide.getIdeInfo();
-  let workspaceConfigs: ContinueRcJson[] = [];
+  let workspaceConfigs: antalyseRcJson[] = [];
 
   try {
     workspaceConfigs = await ide.getWorkspaceConfigs();

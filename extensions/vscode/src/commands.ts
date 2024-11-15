@@ -8,7 +8,7 @@ import { CompletionProvider } from "core/autocomplete/CompletionProvider";
 import { RangeInFileWithContents } from "core/commands/util";
 import { ConfigHandler } from "core/config/ConfigHandler";
 import { getModelByRole } from "core/config/util";
-import { ContinueServerClient } from "core/continueServer/stubs/client";
+import { AntalyseServerClient } from "core/antalyseServer/stubs/client";
 import { EXTENSION_NAME } from "core/control-plane/env";
 import { Core } from "core/core";
 import { walkDirAsync } from "core/indexing/walkDir";
@@ -27,7 +27,7 @@ import {
   quickPickStatusText,
   setupStatusBar,
 } from "./autocomplete/statusBar";
-import { ContinueGUIWebviewViewProvider } from "./ContinueGUIWebviewViewProvider";
+import { antalyseGUIWebviewViewProvider } from "./antalyseGUIWebviewViewProvider";
 import { DiffManager } from "./diff/horizontal";
 import { VerticalDiffManager } from "./diff/vertical/manager";
 import EditDecorationManager from "./quickEdit/EditDecorationManager";
@@ -44,7 +44,7 @@ let fullScreenPanel: vscode.WebviewPanel | undefined;
 function getFullScreenTab() {
   const tabs = vscode.window.tabGroups.all.flatMap((tabGroup) => tabGroup.tabs);
   return tabs.find((tab) =>
-    (tab.input as any)?.viewType?.endsWith("continue.continueGUIView"),
+    (tab.input as any)?.viewType?.endsWith("antalyse.antalyseGUIView"),
   );
 }
 
@@ -186,7 +186,7 @@ function focusGUI() {
     fullScreenPanel?.reveal();
   } else {
     // focus sidebar
-    vscode.commands.executeCommand("continue.continueGUIView.focus");
+    vscode.commands.executeCommand("antalyse.antalyseGUIView.focus");
     // vscode.commands.executeCommand("workbench.action.focusAuxiliaryBar");
   }
 }
@@ -207,11 +207,11 @@ function hideGUI() {
 const commandsMap: (
   ide: VsCodeIde,
   extensionContext: vscode.ExtensionContext,
-  sidebar: ContinueGUIWebviewViewProvider,
+  sidebar: antalyseGUIWebviewViewProvider,
   configHandler: ConfigHandler,
   diffManager: DiffManager,
   verticalDiffManager: VerticalDiffManager,
-  continueServerClientPromise: Promise<ContinueServerClient>,
+  antalyseServerClientPromise: Promise<AntalyseServerClient>,
   battery: Battery,
   quickEdit: QuickEdit,
   core: Core,
@@ -223,7 +223,7 @@ const commandsMap: (
   configHandler,
   diffManager,
   verticalDiffManager,
-  continueServerClientPromise,
+  antalyseServerClientPromise,
   battery,
   quickEdit,
   core,
@@ -271,7 +271,7 @@ const commandsMap: (
   }
 
   return {
-    "continue.acceptDiff": async (newFilepath?: string | vscode.Uri) => {
+    "antalyse.acceptDiff": async (newFilepath?: string | vscode.Uri) => {
       captureCommandTelemetry("acceptDiff");
 
       let fullPath = newFilepath;
@@ -291,7 +291,7 @@ const commandsMap: (
         status: "done",
       });
     },
-    "continue.rejectDiff": async (newFilepath?: string | vscode.Uri) => {
+    "antalyse.rejectDiff": async (newFilepath?: string | vscode.Uri) => {
       captureCommandTelemetry("rejectDiff");
 
       let fullPath = newFilepath;
@@ -310,15 +310,15 @@ const commandsMap: (
         status: "done",
       });
     },
-    "continue.acceptVerticalDiffBlock": (filepath?: string, index?: number) => {
+    "antalyse.acceptVerticalDiffBlock": (filepath?: string, index?: number) => {
       captureCommandTelemetry("acceptVerticalDiffBlock");
       verticalDiffManager.acceptRejectVerticalDiffBlock(true, filepath, index);
     },
-    "continue.rejectVerticalDiffBlock": (filepath?: string, index?: number) => {
+    "antalyse.rejectVerticalDiffBlock": (filepath?: string, index?: number) => {
       captureCommandTelemetry("rejectVerticalDiffBlock");
       verticalDiffManager.acceptRejectVerticalDiffBlock(false, filepath, index);
     },
-    "continue.quickFix": async (
+    "antalyse.quickFix": async (
       range: vscode.Range,
       diagnosticMessage: string,
     ) => {
@@ -328,14 +328,14 @@ const commandsMap: (
 
       addCodeToContextFromRange(range, sidebar.webviewProtocol, prompt);
 
-      vscode.commands.executeCommand("continue.continueGUIView.focus");
+      vscode.commands.executeCommand("antalyse.antalyseGUIView.focus");
     },
     // Passthrough for telemetry purposes
-    "continue.defaultQuickAction": async (args: QuickEditShowParams) => {
+    "antalyse.defaultQuickAction": async (args: QuickEditShowParams) => {
       captureCommandTelemetry("defaultQuickAction");
-      vscode.commands.executeCommand("continue.quickEdit", args);
+      vscode.commands.executeCommand("antalyse.quickEdit", args);
     },
-    "continue.customQuickActionSendToChat": async (
+    "antalyse.customQuickActionSendToChat": async (
       prompt: string,
       range: vscode.Range,
     ) => {
@@ -343,9 +343,9 @@ const commandsMap: (
 
       addCodeToContextFromRange(range, sidebar.webviewProtocol, prompt);
 
-      vscode.commands.executeCommand("continue.continueGUIView.focus");
+      vscode.commands.executeCommand("antalyse.antalyseGUIView.focus");
     },
-    "continue.customQuickActionStreamInlineEdit": async (
+    "antalyse.customQuickActionStreamInlineEdit": async (
       prompt: string,
       range: vscode.Range,
     ) => {
@@ -353,19 +353,19 @@ const commandsMap: (
 
       streamInlineEdit("docstring", prompt, false, range);
     },
-    "continue.codebaseForceReIndex": async () => {
+    "antalyse.codebaseForceReIndex": async () => {
       core.invoke("index/forceReIndex", undefined);
     },
-    "continue.rebuildCodebaseIndex": async () => {
+    "antalyse.rebuildCodebaseIndex": async () => {
       core.invoke("index/forceReIndex", { shouldClearIndexes: true });
     },
-    "continue.docsIndex": async () => {
+    "antalyse.docsIndex": async () => {
       core.invoke("context/indexDocs", { reIndex: false });
     },
-    "continue.docsReIndex": async () => {
+    "antalyse.docsReIndex": async () => {
       core.invoke("context/indexDocs", { reIndex: true });
     },
-    "continue.focusContinueInput": async () => {
+    "antalyse.focusantalyseInput": async () => {
       // This is a temporary fix—sidebar.webviewProtocol.request is blocking
       // when the GUI hasn't yet been setup and we should instead be
       // immediately throwing an error, or returning a Result object
@@ -378,24 +378,24 @@ const commandsMap: (
         "getWebviewHistoryLength",
         undefined,
       );
-      const isContinueInputFocused = await sidebar.webviewProtocol.request(
-        "isContinueInputFocused",
+      const isantalyseInputFocused = await sidebar.webviewProtocol.request(
+        "isantalyseInputFocused",
         undefined,
       );
 
-      if (isContinueInputFocused) {
+      if (isantalyseInputFocused) {
         if (historyLength === 0) {
           hideGUI();
         } else {
-          sidebar.webviewProtocol?.request("focusContinueInput", undefined);
+          sidebar.webviewProtocol?.request("focusantalyseInput", undefined);
         }
       } else {
         focusGUI();
-        sidebar.webviewProtocol?.request("focusContinueInput", undefined);
+        sidebar.webviewProtocol?.request("focusantalyseInput", undefined);
         await addHighlightedCodeToContext(sidebar.webviewProtocol);
       }
     },
-    "continue.focusContinueInputWithoutClear": async () => {
+    "antalyse.focusantalyseInputWithoutClear": async () => {
       // This is a temporary fix—sidebar.webviewProtocol.request is blocking
       // when the GUI hasn't yet been setup and we should instead be
       // immediately throwing an error, or returning a Result object
@@ -404,25 +404,25 @@ const commandsMap: (
         return;
       }
 
-      const isContinueInputFocused = await sidebar.webviewProtocol.request(
-        "isContinueInputFocused",
+      const isantalyseInputFocused = await sidebar.webviewProtocol.request(
+        "isantalyseInputFocused",
         undefined,
       );
 
-      if (isContinueInputFocused) {
+      if (isantalyseInputFocused) {
         hideGUI();
       } else {
         focusGUI();
 
         sidebar.webviewProtocol?.request(
-          "focusContinueInputWithoutClear",
+          "focusantalyseInputWithoutClear",
           undefined,
         );
 
         await addHighlightedCodeToContext(sidebar.webviewProtocol);
       }
     },
-    "continue.edit": async () => {
+    "antalyse.edit": async () => {
       captureCommandTelemetry("edit");
       focusGUI();
 
@@ -453,17 +453,17 @@ const commandsMap: (
         );
 
         setTimeout(() => {
-          sidebar.webviewProtocol?.request("focusContinueInput", undefined);
+          sidebar.webviewProtocol?.request("focusantalyseInput", undefined);
         }, 30);
       } else {
-        sidebar.webviewProtocol?.request("focusContinueInput", undefined);
+        sidebar.webviewProtocol?.request("focusantalyseInput", undefined);
       }
     },
-    "continue.exitEditMode": async () => {
+    "antalyse.exitEditMode": async () => {
       captureCommandTelemetry("exitEditMode");
       await sidebar.webviewProtocol?.request("exitEditMode", undefined);
     },
-    "continue.quickEdit": async (args: QuickEditShowParams) => {
+    "antalyse.quickEdit": async (args: QuickEditShowParams) => {
       let linesOfCode = undefined;
       if (args.range) {
         linesOfCode = args.range.end.line - args.range.start.line;
@@ -473,7 +473,7 @@ const commandsMap: (
       });
       quickEdit.show(args);
     },
-    "continue.writeCommentsForCode": async () => {
+    "antalyse.writeCommentsForCode": async () => {
       captureCommandTelemetry("writeCommentsForCode");
 
       streamInlineEdit(
@@ -481,7 +481,7 @@ const commandsMap: (
         "Write comments for this code. Do not change anything about the code itself.",
       );
     },
-    "continue.writeDocstringForCode": async () => {
+    "antalyse.writeDocstringForCode": async () => {
       captureCommandTelemetry("writeDocstringForCode");
 
       streamInlineEdit(
@@ -490,7 +490,7 @@ const commandsMap: (
         true,
       );
     },
-    "continue.fixCode": async () => {
+    "antalyse.fixCode": async () => {
       captureCommandTelemetry("fixCode");
 
       streamInlineEdit(
@@ -498,22 +498,22 @@ const commandsMap: (
         "Fix this code. If it is already 100% correct, simply rewrite the code.",
       );
     },
-    "continue.optimizeCode": async () => {
+    "antalyse.optimizeCode": async () => {
       captureCommandTelemetry("optimizeCode");
       streamInlineEdit("optimize", "Optimize this code");
     },
-    "continue.fixGrammar": async () => {
+    "antalyse.fixGrammar": async () => {
       captureCommandTelemetry("fixGrammar");
       streamInlineEdit(
         "fixGrammar",
         "If there are any grammar or spelling mistakes in this writing, fix them. Do not make other large changes to the writing.",
       );
     },
-    "continue.viewLogs": async () => {
+    "antalyse.viewLogs": async () => {
       captureCommandTelemetry("viewLogs");
 
-      // Open ~/.continue/continue.log
-      const logFile = path.join(os.homedir(), ".antalyse", "continue.log");
+      // Open ~/.antalyse/antalyse.log
+      const logFile = path.join(os.homedir(), ".antalyse", "antalyse.log");
       // Make sure the file/directory exist
       if (!fs.existsSync(logFile)) {
         fs.mkdirSync(path.dirname(logFile), { recursive: true });
@@ -523,40 +523,40 @@ const commandsMap: (
       const uri = vscode.Uri.file(logFile);
       await vscode.window.showTextDocument(uri);
     },
-    "continue.debugTerminal": async () => {
+    "antalyse.debugTerminal": async () => {
       captureCommandTelemetry("debugTerminal");
 
       const terminalContents = await ide.getTerminalContents();
 
-      vscode.commands.executeCommand("continue.continueGUIView.focus");
+      vscode.commands.executeCommand("antalyse.antalyseGUIView.focus");
 
       sidebar.webviewProtocol?.request("userInput", {
         input: `I got the following error, can you please help explain how to fix it?\n\n${terminalContents.trim()}`,
       });
     },
-    "continue.hideInlineTip": () => {
+    "antalyse.hideInlineTip": () => {
       vscode.workspace
         .getConfiguration(EXTENSION_NAME)
         .update("showInlineTip", false, vscode.ConfigurationTarget.Global);
     },
 
     // Commands without keyboard shortcuts
-    "continue.addModel": () => {
+    "antalyse.addModel": () => {
       captureCommandTelemetry("addModel");
 
-      vscode.commands.executeCommand("continue.continueGUIView.focus");
+      vscode.commands.executeCommand("antalyse.antalyseGUIView.focus");
       sidebar.webviewProtocol?.request("addModel", undefined);
     },
-    "continue.openSettingsUI": () => {
-      vscode.commands.executeCommand("continue.continueGUIView.focus");
+    "antalyse.openSettingsUI": () => {
+      vscode.commands.executeCommand("antalyse.antalyseGUIView.focus");
       sidebar.webviewProtocol?.request("openSettings", undefined);
     },
-    "continue.sendMainUserInput": (text: string) => {
+    "antalyse.sendMainUserInput": (text: string) => {
       sidebar.webviewProtocol?.request("userInput", {
         input: text,
       });
     },
-    "continue.selectRange": (startLine: number, endLine: number) => {
+    "antalyse.selectRange": (startLine: number, endLine: number) => {
       if (!vscode.window.activeTextEditor) {
         return;
       }
@@ -567,7 +567,7 @@ const commandsMap: (
         0,
       );
     },
-    "continue.foldAndUnfold": (
+    "antalyse.foldAndUnfold": (
       foldSelectionLines: number[],
       unfoldSelectionLines: number[],
     ) => {
@@ -578,17 +578,17 @@ const commandsMap: (
         selectionLines: foldSelectionLines,
       });
     },
-    "continue.sendToTerminal": (text: string) => {
+    "antalyse.sendToTerminal": (text: string) => {
       captureCommandTelemetry("sendToTerminal");
       ide.runCommand(text);
     },
-    "continue.newSession": () => {
+    "antalyse.newSession": () => {
       sidebar.webviewProtocol?.request("newSession", undefined);
     },
-    "continue.viewHistory": () => {
+    "antalyse.viewHistory": () => {
       sidebar.webviewProtocol?.request("viewHistory", undefined);
     },
-    "continue.focusContinueSessionId": async (
+    "antalyse.focusantalyseSessionId": async (
       sessionId: string | undefined,
     ) => {
       if (!sessionId) {
@@ -596,12 +596,12 @@ const commandsMap: (
           prompt: "Enter the Session ID",
         });
       }
-      sidebar.webviewProtocol?.request("focusContinueSessionId", { sessionId });
+      sidebar.webviewProtocol?.request("focusantalyseSessionId", { sessionId });
     },
-    "continue.applyCodeFromChat": () => {
+    "antalyse.applyCodeFromChat": () => {
       sidebar.webviewProtocol.request("applyCodeFromChat", undefined);
     },
-    "continue.toggleFullScreen": () => {
+    "antalyse.toggleFullScreen": () => {
       focusGUI();
 
       // Check if full screen is already open by checking open tabs
@@ -618,8 +618,8 @@ const commandsMap: (
 
       // Create the full screen panel
       let panel = vscode.window.createWebviewPanel(
-        "continue.continueGUIView",
-        "Continue",
+        "antalyse.antalyseGUIView",
+        "antalyse",
         vscode.ViewColumn.One,
         {
           retainContextWhenHidden: true,
@@ -640,7 +640,7 @@ const commandsMap: (
       panel.onDidDispose(
         () => {
           sidebar.resetWebviewProtocolWebview();
-          vscode.commands.executeCommand("continue.focusContinueInput");
+          vscode.commands.executeCommand("antalyse.focusantalyseInput");
         },
         null,
         extensionContext.subscriptions,
@@ -648,10 +648,10 @@ const commandsMap: (
 
       vscode.commands.executeCommand("workbench.action.copyEditorToNewWindow");
     },
-    "continue.openConfigJson": () => {
+    "antalyse.openConfigJson": () => {
       ide.openFile(getConfigJsonPath());
     },
-    "continue.selectFilesAsContext": async (
+    "antalyse.selectFilesAsContext": async (
       firstUri: vscode.Uri,
       uris: vscode.Uri[],
     ) => {
@@ -659,7 +659,7 @@ const commandsMap: (
         throw new Error("No files were selected");
       }
 
-      vscode.commands.executeCommand("continue.continueGUIView.focus");
+      vscode.commands.executeCommand("antalyse.antalyseGUIView.focus");
 
       for (const uri of uris) {
         // If it's a folder, add the entire folder contents recursively by using walkDir (to ignore ignored files)
@@ -679,13 +679,13 @@ const commandsMap: (
         }
       }
     },
-    "continue.logAutocompleteOutcome": (
+    "antalyse.logAutocompleteOutcome": (
       completionId: string,
       completionProvider: CompletionProvider,
     ) => {
       completionProvider.accept(completionId);
     },
-    "continue.toggleTabAutocompleteEnabled": () => {
+    "antalyse.toggleTabAutocompleteEnabled": () => {
       captureCommandTelemetry("toggleTabAutocompleteEnabled");
 
       const config = vscode.workspace.getConfiguration(EXTENSION_NAME);
@@ -721,7 +721,7 @@ const commandsMap: (
         }
       }
     },
-    "continue.openTabAutocompleteConfigMenu": async () => {
+    "antalyse.openTabAutocompleteConfigMenu": async () => {
       captureCommandTelemetry("openTabAutocompleteConfigMenu");
 
       const config = vscode.workspace.getConfiguration(EXTENSION_NAME);
@@ -812,37 +812,37 @@ const commandsMap: (
           );
           configHandler.reloadConfig();
         } else if (selectedOption === "$(feedback) Give feedback") {
-          vscode.commands.executeCommand("continue.giveAutocompleteFeedback");
+          vscode.commands.executeCommand("antalyse.giveAutocompleteFeedback");
         } else if (selectedOption === "$(comment) Open chat (Cmd+L)") {
-          vscode.commands.executeCommand("continue.focusContinueInput");
+          vscode.commands.executeCommand("antalyse.focusantalyseInput");
         } else if (
           selectedOption ===
           "$(screen-full) Open full screen chat (Cmd+K Cmd+M)"
         ) {
-          vscode.commands.executeCommand("continue.toggleFullScreen");
+          vscode.commands.executeCommand("antalyse.toggleFullScreen");
         } else if (selectedOption === "$(question) Open help center") {
           focusGUI();
-          vscode.commands.executeCommand("continue.navigateTo", "/more");
+          vscode.commands.executeCommand("antalyse.navigateTo", "/more");
         }
         quickPick.dispose();
       });
       quickPick.show();
     },
-    "continue.giveAutocompleteFeedback": async () => {
+    "antalyse.giveAutocompleteFeedback": async () => {
       const feedback = await vscode.window.showInputBox({
         ignoreFocusOut: true,
         prompt:
-          "Please share what went wrong with the last completion. The details of the completion as well as this message will be sent to the Continue team in order to improve.",
+          "Please share what went wrong with the last completion. The details of the completion as well as this message will be sent to the antalyse team in order to improve.",
       });
       if (feedback) {
-        const client = await continueServerClientPromise;
+        const client = await antalyseServerClientPromise;
         const completionsPath = getDevDataFilePath("autocomplete");
 
         const lastLines = await readLastLines.read(completionsPath, 2);
         client.sendFeedback(feedback, lastLines);
       }
     },
-    "continue.navigateTo": (path: string) => {
+    "antalyse.navigateTo": (path: string) => {
       sidebar.webviewProtocol?.request("navigateTo", { path });
       focusGUI();
     },
@@ -853,11 +853,11 @@ export function registerAllCommands(
   context: vscode.ExtensionContext,
   ide: VsCodeIde,
   extensionContext: vscode.ExtensionContext,
-  sidebar: ContinueGUIWebviewViewProvider,
+  sidebar: antalyseGUIWebviewViewProvider,
   configHandler: ConfigHandler,
   diffManager: DiffManager,
   verticalDiffManager: VerticalDiffManager,
-  continueServerClientPromise: Promise<ContinueServerClient>,
+  antalyseServerClientPromise: Promise<AntalyseServerClient>,
   battery: Battery,
   quickEdit: QuickEdit,
   core: Core,
@@ -871,7 +871,7 @@ export function registerAllCommands(
       configHandler,
       diffManager,
       verticalDiffManager,
-      continueServerClientPromise,
+      antalyseServerClientPromise,
       battery,
       quickEdit,
       core,

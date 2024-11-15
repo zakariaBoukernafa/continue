@@ -18,7 +18,7 @@ interface QuickModelSetupProps {
 }
 
 const MODEL_PROVIDERS_URL =
-  "https://docs.continue.dev/customize/model-providers";
+  "https://docs.antalyse.dev/customize/model-providers";
 
 function AddModelForm({ onDone }: QuickModelSetupProps) {
   // Default to Ollama as the first local provider

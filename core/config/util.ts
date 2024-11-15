@@ -1,6 +1,6 @@
 import {
   ContextProviderWithParams,
-  ContinueConfig,
+  antalyseConfig,
   ILLM,
   ModelDescription,
   ModelRoles,
@@ -81,7 +81,7 @@ export function deleteModel(title: string) {
 }
 
 export function getModelByRole<T extends keyof ModelRoles>(
-  config: ContinueConfig,
+  config: antalyseConfig,
   role: T,
 ): ILLM | undefined {
   const roleTitle = config.experimental?.modelRoles?.[role];

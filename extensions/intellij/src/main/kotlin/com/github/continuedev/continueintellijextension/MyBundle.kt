@@ -1,4 +1,4 @@
-package com.github.continuedev.continueintellijextension
+package com.github.antalysedev.antalyseintellijextension
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls

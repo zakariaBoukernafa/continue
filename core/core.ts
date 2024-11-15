@@ -12,7 +12,7 @@ import {
 } from "./config/onboarding";
 import { addModel, addOpenAIKey, deleteModel } from "./config/util";
 import { recentlyEditedFilesCache } from "./context/retrieval/recentlyEditedFilesCache";
-import { ContinueServerClient } from "./continueServer/stubs/client";
+import { AntalyseServerClient } from "./antalyseServer/stubs/client";
 import { getAuthUrlForTokenPage } from "./control-plane/auth/index";
 import { ControlPlaneClient } from "./control-plane/client";
 import { streamDiffLines } from "./edit/streamDiffLines";
@@ -27,7 +27,7 @@ import { DevDataSqliteDb } from "./util/devdataSqlite";
 import { fetchwithRequestOptions } from "./util/fetchWithOptions";
 import { GlobalContext } from "./util/GlobalContext";
 import historyManager from "./util/history";
-import { editConfigJson, setupInitialDotContinueDirectory } from "./util/paths";
+import { editConfigJson, setupInitialDotantalyseDirectory } from "./util/paths";
 import { Telemetry } from "./util/posthog";
 import { TTS } from "./util/tts";
 
@@ -40,7 +40,7 @@ export class Core {
   configHandler: ConfigHandler;
   codebaseIndexerPromise: Promise<CodebaseIndexer>;
   completionProvider: CompletionProvider;
-  continueServerClientPromise: Promise<ContinueServerClient>;
+  antalyseServerClientPromise: Promise<AntalyseServerClient>;
   indexingState: IndexingProgressUpdate;
   controlPlaneClient: ControlPlaneClient;
   private docsService: DocsService;
@@ -84,8 +84,8 @@ export class Core {
     private readonly ide: IDE,
     private readonly onWrite: (text: string) => Promise<void> = async () => {},
   ) {
-    // Ensure .continue directory is created
-    setupInitialDotContinueDirectory();
+    // Ensure .antalyse directory is created
+    setupInitialDotantalyseDirectory();
 
     this.indexingState = { status: "loading", desc: "loading", progress: 0 };
 
@@ -117,30 +117,30 @@ export class Core {
       this.messenger.send("didChangeAvailableProfiles", { profiles }),
     );
 
-    // Codebase Indexer and ContinueServerClient depend on IdeSettings
+    // Codebase Indexer and antalyseServerClient depend on IdeSettings
     let codebaseIndexerResolve: (_: any) => void | undefined;
     this.codebaseIndexerPromise = new Promise(
       async (resolve) => (codebaseIndexerResolve = resolve),
     );
 
-    let continueServerClientResolve: (_: any) => void | undefined;
-    this.continueServerClientPromise = new Promise(
-      (resolve) => (continueServerClientResolve = resolve),
+    let antalyseServerClientResolve: (_: any) => void | undefined;
+    this.antalyseServerClientPromise = new Promise(
+      (resolve) => (antalyseServerClientResolve = resolve),
     );
 
     void ideSettingsPromise.then((ideSettings) => {
-      const continueServerClient = new ContinueServerClient(
+      const antalyseServerClient = new AntalyseServerClient(
         ideSettings.remoteConfigServerUrl,
         ideSettings.userToken,
       );
-      continueServerClientResolve(continueServerClient);
+      antalyseServerClientResolve(antalyseServerClient);
 
       codebaseIndexerResolve(
         new CodebaseIndexer(
           this.configHandler,
           this.ide,
           this.indexingPauseToken,
-          continueServerClient,
+          antalyseServerClient,
         ),
       );
 

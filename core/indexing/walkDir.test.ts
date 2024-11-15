@@ -227,10 +227,10 @@ describe("walkDir", () => {
     );
   });
 
-  test("should listen to both .gitignore and .continueignore", async () => {
+  test("should listen to both .gitignore and .antalyseignore", async () => {
     const files = [
       [".gitignore", "*.py"],
-      [".continueignore", "*.ts"],
+      [".antalyseignore", "*.ts"],
       "a.txt",
       "b.py",
       "c.ts",
@@ -297,9 +297,9 @@ describe("walkDir", () => {
     );
   });
 
-  test("should walk continue repo without getting any files of the default ignore types", async () => {
+  test("should walk antalyse repo without getting any files of the default ignore types", async () => {
     const results = await walkDir(path.join(__dirname, ".."), ide, {
-      ignoreFiles: [".gitignore", ".continueignore"],
+      ignoreFiles: [".gitignore", ".antalyseignore"],
     });
     expect(results.length).toBeGreaterThan(0);
     expect(results.some((file) => file.includes("/node_modules/"))).toBe(false);
@@ -308,7 +308,7 @@ describe("walkDir", () => {
       results.some(
         (file) =>
           file.endsWith(".gitignore") ||
-          file.endsWith(".continueignore") ||
+          file.endsWith(".antalyseignore") ||
           file.endsWith("package-lock.json"),
       ),
     ).toBe(false);
@@ -318,10 +318,10 @@ describe("walkDir", () => {
 
   // This test is passing when this file is ran individually, but failing with `directory not found` error
   // when the full test suite is ran
-  test.skip("should walk continue/extensions/vscode without getting any files in the .continueignore", async () => {
+  test.skip("should walk antalyse/extensions/vscode without getting any files in the .antalyseignore", async () => {
     const vscodePath = path.join(__dirname, "../..", "extensions", "vscode");
     const results = await walkDir(vscodePath, ide, {
-      ignoreFiles: [".gitignore", ".continueignore"],
+      ignoreFiles: [".gitignore", ".antalyseignore"],
     });
     expect(results.length).toBeGreaterThan(0);
     expect(results.some((file) => file.includes("/textmate-syntaxes/"))).toBe(

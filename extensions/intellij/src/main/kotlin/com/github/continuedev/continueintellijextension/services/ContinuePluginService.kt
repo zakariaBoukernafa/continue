@@ -1,11 +1,11 @@
-package com.github.continuedev.continueintellijextension.services
+package com.github.antalysedev.antalyseintellijextension.services
 
-import com.github.continuedev.continueintellijextension.`continue`.CoreMessenger
-import com.github.continuedev.continueintellijextension.`continue`.CoreMessengerManager
-import com.github.continuedev.continueintellijextension.`continue`.IdeProtocolClient
-import com.github.continuedev.continueintellijextension.`continue`.uuid
-import com.github.continuedev.continueintellijextension.toolWindow.ContinueBrowser
-import com.github.continuedev.continueintellijextension.toolWindow.ContinuePluginToolWindowFactory
+import com.github.antalysedev.antalyseintellijextension.`antalyse`.CoreMessenger
+import com.github.antalysedev.antalyseintellijextension.`antalyse`.CoreMessengerManager
+import com.github.antalysedev.antalyseintellijextension.`antalyse`.IdeProtocolClient
+import com.github.antalysedev.antalyseintellijextension.`antalyse`.uuid
+import com.github.antalysedev.antalyseintellijextension.toolWindow.antalyseBrowser
+import com.github.antalysedev.antalyseintellijextension.toolWindow.antalysePluginToolWindowFactory
 import com.google.gson.Gson
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.Service
@@ -19,9 +19,9 @@ import kotlinx.coroutines.launch
 import java.util.UUID
 
 @Service(Service.Level.PROJECT)
-class ContinuePluginService(project: Project) : Disposable, DumbAware {
+class antalysePluginService(project: Project) : Disposable, DumbAware {
     val coroutineScope = CoroutineScope(Dispatchers.Main)
-    var continuePluginWindow: ContinuePluginToolWindowFactory.ContinuePluginWindow? = null
+    var antalysePluginWindow: antalysePluginToolWindowFactory.antalysePluginWindow? = null
 
     var ideProtocolClient: IdeProtocolClient? = null
 
@@ -41,6 +41,6 @@ class ContinuePluginService(project: Project) : Disposable, DumbAware {
         data: Any?,
         messageId: String = uuid()
     ) {
-        continuePluginWindow?.browser?.sendToWebview(messageType, data, messageId)
+        antalysePluginWindow?.browser?.sendToWebview(messageType, data, messageId)
     }
 }

@@ -1,4 +1,4 @@
-extensions/vscode/continue_rc_schema.json
-**/.continueignore
+extensions/vscode/antalyse_rc_schema.json
+**/.antalyseignore
 CHANGELOG.md
-**/continue_tutorial.py
+**/antalyse_tutorial.py

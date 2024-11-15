@@ -1,12 +1,12 @@
-package com.github.continuedev.continueintellijextension.autocomplete
+package com.github.antalysedev.antalyseintellijextension.autocomplete
 
-import com.github.continuedev.continueintellijextension.services.ContinueExtensionSettings
+import com.github.antalysedev.antalyseintellijextension.services.antalyseExtensionSettings
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.components.service
 class DisableTabAutocompleteAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
-        val continueSettingsService = service<ContinueExtensionSettings>()
-        continueSettingsService.continueState.enableTabAutocomplete = true
+        val antalyseSettingsService = service<antalyseExtensionSettings>()
+        antalyseSettingsService.antalyseState.enableTabAutocomplete = true
     }
 }

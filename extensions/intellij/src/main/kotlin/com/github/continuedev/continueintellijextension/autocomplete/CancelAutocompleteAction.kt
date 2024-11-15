@@ -1,4 +1,4 @@
-package com.github.continuedev.continueintellijextension.autocomplete
+package com.github.antalysedev.antalyseintellijextension.autocomplete
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent

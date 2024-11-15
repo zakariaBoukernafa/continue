@@ -1,6 +1,6 @@
 {
   "title": "config.json",
-  "$ref": "#/definitions/SerializedantalyseConfig",
+  "$ref": "#/definitions/SerializedContinueConfig",
   "definitions": {
     "BaseCompletionOptions": {
       "title": "BaseCompletionOptions",
@@ -93,7 +93,10 @@
           "type": "string"
         }
       },
-      "required": ["cert", "key"]
+      "required": [
+        "cert",
+        "key"
+      ]
     },
     "RequestOptions": {
       "title": "RequestOptions",
@@ -145,7 +148,7 @@
         },
         "noProxy": {
           "title": "No Proxy",
-          "description": "A list of hostnames for which antalyse should not use the proxy specified in requestOptions.proxy",
+          "description": "A list of hostnames for which Continue should not use the proxy specified in requestOptions.proxy",
           "type": "array",
           "items": {
             "type": "string"
@@ -208,33 +211,33 @@
             "kindo"
           ],
           "markdownEnumDescriptions": [
-            "### OpenAI\nUse gpt-4, gpt-3.5-turbo, or any other OpenAI model. See [here](https://openai.com/product#made-for-developers) to obtain an API key.\n\n> [Reference](https://docs.antalyse.dev/reference/Model%20Providers/openai)",
-            "### Free Trial\nNew users can try out antalyse for free using a proxy server that securely makes calls to OpenAI using our API key. If you are ready to use your own API key or have used all 250 free uses, you can enter your API key in config.json where it says `apiKey=\"\"` or select another model provider.\n> [Reference](https://docs.antalyse.dev/reference/Model%20Providers/freetrial)",
-            "### Anthropic\nTo get started with Anthropic models, you first need to sign up for the open beta [here](https://claude.ai/login) to obtain an API key.\n> [Reference](https://docs.antalyse.dev/reference/Model%20Providers/anthropicllm)",
+            "### OpenAI\nUse gpt-4, gpt-3.5-turbo, or any other OpenAI model. See [here](https://openai.com/product#made-for-developers) to obtain an API key.\n\n> [Reference](https://docs.continue.dev/reference/Model%20Providers/openai)",
+            "### Free Trial\nNew users can try out Continue for free using a proxy server that securely makes calls to OpenAI using our API key. If you are ready to use your own API key or have used all 250 free uses, you can enter your API key in config.json where it says `apiKey=\"\"` or select another model provider.\n> [Reference](https://docs.continue.dev/reference/Model%20Providers/freetrial)",
+            "### Anthropic\nTo get started with Anthropic models, you first need to sign up for the open beta [here](https://claude.ai/login) to obtain an API key.\n> [Reference](https://docs.continue.dev/reference/Model%20Providers/anthropicllm)",
             "### Anthropic Vertex AI\nTo get started you need to enable the [Vertex AI API](https://console.cloud.google.com/marketplace/product/google/aiplatform.googleapis.com) and set up the [Google Application Default Credentials](https://cloud.google.com/docs/authentication/provide-credentials-adc).",
-            "### Cohere\nTo use Cohere, visit the [Cohere dashboard](https://dashboard.cohere.com/api-keys) to create an API key.\n\n> [Reference](https://docs.antalyse.dev/reference/Model%20Providers/cohere)",
+            "### Cohere\nTo use Cohere, visit the [Cohere dashboard](https://dashboard.cohere.com/api-keys) to create an API key.\n\n> [Reference](https://docs.continue.dev/reference/Model%20Providers/cohere)",
             "### Bedrock\nTo get started with Bedrock you need to sign up on AWS [here](https://aws.amazon.com/bedrock)",
             "### Bedrock Imported Models\nTo get started with Bedrock you need to sign up on AWS [here](https://aws.amazon.com/bedrock)",
             "### Sagemaker\nSagemaker is AWS' machine learning platform.",
-            "### Together\nTogether is a hosted service that provides extremely fast streaming of open-source language models. To get started with Together:\n1. Obtain an API key from [here](https://together.ai)\n2. Paste below\n3. Select a model preset\n> [Reference](https://docs.antalyse.dev/reference/Model%20Providers/togetherllm)",
-            "### Ollama\nTo get started with Ollama, follow these steps:\n1. Download from [ollama.ai](https://ollama.ai/) and open the application\n2. Open a terminal and run `ollama run <MODEL_NAME>`. Example model names are `codellama:7b-instruct` or `llama2:7b-text`. You can find the full list [here](https://ollama.ai/library).\n3. Make sure that the model name used in step 2 is the same as the one in config.json (e.g. `model=\"codellama:7b-instruct\"`)\n4. Once the model has finished downloading, you can start asking questions through antalyse.\n> [Reference](https://docs.antalyse.dev/reference/Model%20Providers/ollama)",
-            "### Huggingface TGI\n\n> [Reference](https://docs.antalyse.dev/reference/Model%20Providers/huggingfacetgi)",
-            "### Huggingface Inference API\n\n> [Reference](https://docs.antalyse.dev/reference/Model%20Providers/huggingfaceinferenceapi)",
-            "### Llama.cpp\nllama.cpp comes with a [built-in server](https://github.com/ggerganov/llama.cpp/tree/master/examples/server#llamacppexampleserver) that can be run from source. To do this:\n\n1. Clone the repository with `git clone https://github.com/ggerganov/llama.cpp`.\n2. `cd llama.cpp`\n3. Run `make` to build the server.\n4. Download the model you'd like to use and place it in the `llama.cpp/models` directory (the best place to find models is [The Bloke on HuggingFace](https://huggingface.co/TheBloke))\n5. Run the llama.cpp server with the command below (replacing with the model you downloaded):\n\n```shell\n.\\server.exe -c 4096 --host 0.0.0.0 -t 16 --mlock -m models/codellama-7b-instruct.Q8_0.gguf\n```\n\nAfter it's up and running, you can start using antalyse.\n> [Reference](https://docs.antalyse.dev/reference/Model%20Providers/llamacpp)",
-            "### Replicate\nReplicate is a hosted service that makes it easy to run ML models. To get started with Replicate:\n1. Obtain an API key from [here](https://replicate.com)\n2. Paste below\n3. Select a model preset\n> [Reference](https://docs.antalyse.dev/reference/Model%20Providers/replicatellm)",
-            "### Gemini API\nTo get started with Google Makersuite, obtain your API key from [here](https://makersuite.google.com) and paste it below.\n> [Reference](https://docs.antalyse.dev/reference/Model%20Providers/geminiapi)",
+            "### Together\nTogether is a hosted service that provides extremely fast streaming of open-source language models. To get started with Together:\n1. Obtain an API key from [here](https://together.ai)\n2. Paste below\n3. Select a model preset\n> [Reference](https://docs.continue.dev/reference/Model%20Providers/togetherllm)",
+            "### Ollama\nTo get started with Ollama, follow these steps:\n1. Download from [ollama.ai](https://ollama.ai/) and open the application\n2. Open a terminal and run `ollama run <MODEL_NAME>`. Example model names are `codellama:7b-instruct` or `llama2:7b-text`. You can find the full list [here](https://ollama.ai/library).\n3. Make sure that the model name used in step 2 is the same as the one in config.json (e.g. `model=\"codellama:7b-instruct\"`)\n4. Once the model has finished downloading, you can start asking questions through Continue.\n> [Reference](https://docs.continue.dev/reference/Model%20Providers/ollama)",
+            "### Huggingface TGI\n\n> [Reference](https://docs.continue.dev/reference/Model%20Providers/huggingfacetgi)",
+            "### Huggingface Inference API\n\n> [Reference](https://docs.continue.dev/reference/Model%20Providers/huggingfaceinferenceapi)",
+            "### Llama.cpp\nllama.cpp comes with a [built-in server](https://github.com/ggerganov/llama.cpp/tree/master/examples/server#llamacppexampleserver) that can be run from source. To do this:\n\n1. Clone the repository with `git clone https://github.com/ggerganov/llama.cpp`.\n2. `cd llama.cpp`\n3. Run `make` to build the server.\n4. Download the model you'd like to use and place it in the `llama.cpp/models` directory (the best place to find models is [The Bloke on HuggingFace](https://huggingface.co/TheBloke))\n5. Run the llama.cpp server with the command below (replacing with the model you downloaded):\n\n```shell\n.\\server.exe -c 4096 --host 0.0.0.0 -t 16 --mlock -m models/codellama-7b-instruct.Q8_0.gguf\n```\n\nAfter it's up and running, you can start using Continue.\n> [Reference](https://docs.continue.dev/reference/Model%20Providers/llamacpp)",
+            "### Replicate\nReplicate is a hosted service that makes it easy to run ML models. To get started with Replicate:\n1. Obtain an API key from [here](https://replicate.com)\n2. Paste below\n3. Select a model preset\n> [Reference](https://docs.continue.dev/reference/Model%20Providers/replicatellm)",
+            "### Gemini API\nTo get started with Google Makersuite, obtain your API key from [here](https://makersuite.google.com) and paste it below.\n> [Reference](https://docs.continue.dev/reference/Model%20Providers/geminiapi)",
             "### Gemini API on Vertex AI\nTo get started you need to enable the [Vertex AI API](https://console.cloud.google.com/marketplace/product/google/aiplatform.googleapis.com) and set up the [Google Application Default Credentials](https://cloud.google.com/docs/authentication/provide-credentials-adc).",
-            "### LMStudio\nLMStudio provides a professional and well-designed GUI for exploring, configuring, and serving LLMs. It is available on both Mac and Windows. To get started:\n1. Download from [lmstudio.ai](https://lmstudio.ai/) and open the application\n2. Search for and download the desired model from the home screen of LMStudio.\n3. In the left-bar, click the '<->' icon to open the Local Inference Server and press 'Start Server'.\n4. Once your model is loaded and the server has started, you can begin using antalyse.\n> [Reference](https://docs.antalyse.dev/reference/Model%20Providers/lmstudio)",
-            "### Llamafile\nTo get started with llamafiles, find and download a binary on their [GitHub repo](https://github.com/Mozilla-Ocho/llamafile#binary-instructions). Then run it with the following command:\n\n```shell\nchmod +x ./llamafile\n./llamafile\n```\n> [Reference](https://docs.antalyse.dev/reference/Model%20Providers/llamafile)",
+            "### LMStudio\nLMStudio provides a professional and well-designed GUI for exploring, configuring, and serving LLMs. It is available on both Mac and Windows. To get started:\n1. Download from [lmstudio.ai](https://lmstudio.ai/) and open the application\n2. Search for and download the desired model from the home screen of LMStudio.\n3. In the left-bar, click the '<->' icon to open the Local Inference Server and press 'Start Server'.\n4. Once your model is loaded and the server has started, you can begin using Continue.\n> [Reference](https://docs.continue.dev/reference/Model%20Providers/lmstudio)",
+            "### Llamafile\nTo get started with llamafiles, find and download a binary on their [GitHub repo](https://github.com/Mozilla-Ocho/llamafile#binary-instructions). Then run it with the following command:\n\n```shell\nchmod +x ./llamafile\n./llamafile\n```\n> [Reference](https://docs.continue.dev/reference/Model%20Providers/llamafile)",
             "### Mistral API\n\nTo get access to the Mistral API, obtain your API key from the [Mistral platform](https://docs.mistral.ai/)",
             "### Mistral API on Vertex AI\nTo get started you need to enable the [Vertex AI API](https://console.cloud.google.com/marketplace/product/google/aiplatform.googleapis.com) and set up the [Google Application Default Credentials](https://cloud.google.com/docs/authentication/provide-credentials-adc).",
-            "### DeepInfra\n\n> [Reference](https://docs.antalyse.dev/reference/Model%20Providers/deepinfra)",
+            "### DeepInfra\n\n> [Reference](https://docs.continue.dev/reference/Model%20Providers/deepinfra)",
             "### Groq\nGroq provides extremely fast inference of open-source language models. To get started, obtain an API key from [their console](https://console.groq.com/keys).",
             "### Fireworks\nFireworks is a fast inference engine for open-source language models. To get started, obtain an API key from [their console](https://fireworks.ai/api-keys).",
             "### Cloudflare Workers AI\n\n[Reference](https://developers.cloudflare.com/workers-ai/)",
             "### Deepseek\n Deepseek's API provides the best pricing for their state-of-the-art Deepseek Coder models. To get started, obtain an API key from [their console](https://platform.deepseek.com/api_keys)",
-            "### Azure OpenAI\n Azure OpenAI lets you securely run OpenAI's models on Azure. To get started, follow the steps [here](https://docs.antalyse.dev/reference/Model%20Providers/azure)",
-            "### Msty\nMsty is the simplest way to get started with online or local LLMs on all desktop platforms - Windows, Mac, and Linux. No fussing around, one-click and you are up and running. To get started, follow these steps:\n1. Download from [Msty.app](https://msty.app/), open the application, and click 'Setup Local AI'.\n2. Go to the Local AI Module page and download a model of your choice.\n3. Once the model has finished downloading, you can start asking questions through antalyse.\n> [Reference](https://antalyse.dev/docs/reference/Model%20Providers/Msty)",
+            "### Azure OpenAI\n Azure OpenAI lets you securely run OpenAI's models on Azure. To get started, follow the steps [here](https://docs.continue.dev/reference/Model%20Providers/azure)",
+            "### Msty\nMsty is the simplest way to get started with online or local LLMs on all desktop platforms - Windows, Mac, and Linux. No fussing around, one-click and you are up and running. To get started, follow these steps:\n1. Download from [Msty.app](https://msty.app/), open the application, and click 'Setup Local AI'.\n2. Go to the Local AI Module page and download a model of your choice.\n3. Once the model has finished downloading, you can start asking questions through Continue.\n> [Reference](https://continue.dev/docs/reference/Model%20Providers/Msty)",
             "### IBM watsonx\nwatsonx, developed by IBM, offers a variety of pre-trained AI foundation models that can be used for natural language processing (NLP), computer vision, and speech recognition tasks.",
             "### OpenRouter\nOpenRouter offers a single API to access almost any language model. To get started, obtain an API key from [their console](https://openrouter.ai/settings/keys).",
             "### NVIDIA NIMs\nNVIDIA offers a single API to access almost any language model. To find out more, visit the [LLM APIs Documentation](https://docs.api.nvidia.com/nim/reference/llm-apis).\nFor information specific to getting a key, please check out the [docs here](https://docs.nvidia.com/nim/large-language-models/latest/getting-started.html#option-1-from-api-catalog)",
@@ -359,8 +362,8 @@
         },
         "promptTemplates": {
           "title": "Prompt Templates",
-          "markdownDescription": "A mapping of prompt template name ('edit' is currently the only one used in antalyse) to a string giving the prompt template. See [here](https://docs.antalyse.dev/model-setup/configuration#customizing-the-edit-prompt) for an example.",
-          "x-intellij-html-description": "A mapping of prompt template name ('edit' is currently the only one used in antalyse) to a string giving the prompt template. See <a href='https://docs.antalyse.dev/model-setup/configuration#customizing-the-edit-prompt'>here</a> for an example.",
+          "markdownDescription": "A mapping of prompt template name ('edit' is currently the only one used in Continue) to a string giving the prompt template. See [here](https://docs.continue.dev/model-setup/configuration#customizing-the-edit-prompt) for an example.",
+          "x-intellij-html-description": "A mapping of prompt template name ('edit' is currently the only one used in Continue) to a string giving the prompt template. See <a href='https://docs.continue.dev/model-setup/configuration#customizing-the-edit-prompt'>here</a> for an example.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -410,7 +413,10 @@
           "title": "Api Type",
           "markdownDescription": "OpenAI API type, either `openai` or `azure`",
           "x-intellij-html-description": "OpenAI API type, either <code>openai</code> or <code>azure</code>",
-          "enum": ["openai", "azure"]
+          "enum": [
+            "openai",
+            "azure"
+          ]
         },
         "apiVersion": {
           "title": "Api Version",
@@ -433,7 +439,11 @@
           }
         }
       },
-      "required": ["title", "provider", "model"],
+      "required": [
+        "title",
+        "provider",
+        "model"
+      ],
       "allOf": [
         {
           "if": {
@@ -443,7 +453,9 @@
               }
             },
             "not": {
-              "required": ["provider"]
+              "required": [
+                "provider"
+              ]
             }
           },
           "then": {
@@ -474,46 +486,67 @@
                 ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
-            "required": ["apiKey"]
+            "required": [
+              "apiKey"
+            ]
           }
         },
         {
           "if": {
             "properties": {
               "provider": {
-                "enum": ["bedrockimport"]
+                "enum": [
+                  "bedrockimport"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
-            "required": ["modelArn"]
+            "required": [
+              "modelArn"
+            ]
           }
         },
         {
           "if": {
             "properties": {
               "provider": {
-                "enum": ["huggingface-tgi", "huggingface-inference-api"]
+                "enum": [
+                  "huggingface-tgi",
+                  "huggingface-inference-api"
+                ]
               }
             }
           },
           "then": {
-            "required": ["apiBase"]
+            "required": [
+              "apiBase"
+            ]
           },
-          "required": ["provider"]
+          "required": [
+            "provider"
+          ]
         },
         {
           "if": {
             "properties": {
               "provider": {
-                "enum": ["openai"]
+                "enum": [
+                  "openai"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -533,10 +566,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["cloudflare"]
+                "enum": [
+                  "cloudflare"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -594,10 +631,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["openai"]
+                "enum": [
+                  "openai"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -629,17 +670,24 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["xAI"]
+                "enum": [
+                  "xAI"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
               "model": {
                 "anyOf": [
                   {
-                    "enum": ["grok-beta", "AUTODETECT"]
+                    "enum": [
+                      "grok-beta",
+                      "AUTODETECT"
+                    ]
                   },
                   {
                     "type": "string"
@@ -653,10 +701,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["replicate"]
+                "enum": [
+                  "replicate"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -690,10 +742,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["free-trial"]
+                "enum": [
+                  "free-trial"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -717,7 +773,9 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["openai"]
+                "enum": [
+                  "openai"
+                ]
               },
               "apiType": {
                 "not": {
@@ -725,7 +783,9 @@
                 }
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -787,10 +847,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["anthropic"]
+                "enum": [
+                  "anthropic"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -831,15 +895,22 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["cohere"]
+                "enum": [
+                  "cohere"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
               "model": {
-                "enum": ["command-r", "command-r-plus"]
+                "enum": [
+                  "command-r",
+                  "command-r-plus"
+                ]
               }
             }
           }
@@ -848,10 +919,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["bedrock"]
+                "enum": [
+                  "bedrock"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -876,10 +951,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["sagemaker"]
+                "enum": [
+                  "sagemaker"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -893,10 +972,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["gemini"]
+                "enum": [
+                  "gemini"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -926,10 +1009,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["together"]
+                "enum": [
+                  "together"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -967,10 +1054,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["deepinfra"]
+                "enum": [
+                  "deepinfra"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -994,7 +1085,9 @@
                 ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -1043,10 +1136,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["ollama"]
+                "enum": [
+                  "ollama"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -1098,10 +1195,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["mistral"]
+                "enum": [
+                  "mistral"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -1123,23 +1224,34 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["vertexai"]
+                "enum": [
+                  "vertexai"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
-            "required": ["projectId", "region"]
+            "required": [
+              "projectId",
+              "region"
+            ]
           }
         },
         {
           "if": {
             "properties": {
               "provider": {
-                "enum": ["deepseek"]
+                "enum": [
+                  "deepseek"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -1156,7 +1268,10 @@
                 }
               },
               "model": {
-                "enum": ["deepseek-chat", "deepseek-coder"]
+                "enum": [
+                  "deepseek-chat",
+                  "deepseek-coder"
+                ]
               }
             }
           }
@@ -1165,10 +1280,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["groq"]
+                "enum": [
+                  "groq"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -1193,15 +1312,21 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["fireworks"]
+                "enum": [
+                  "fireworks"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
               "model": {
-                "enum": ["starcoder-7b"]
+                "enum": [
+                  "starcoder-7b"
+                ]
               }
             }
           }
@@ -1213,20 +1338,29 @@
                 "const": "azure"
               }
             },
-            "required": ["apiType"]
+            "required": [
+              "apiType"
+            ]
           },
           "then": {
-            "required": ["deployment", "apiBase"]
+            "required": [
+              "deployment",
+              "apiBase"
+            ]
           }
         },
         {
           "if": {
             "properties": {
               "provider": {
-                "enum": ["openai"]
+                "enum": [
+                  "openai"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -1243,7 +1377,9 @@
                 "const": "llamafile"
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -1257,15 +1393,22 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["cerebras"]
+                "enum": [
+                  "cerebras"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
               "model": {
-                "enum": ["llama3.1-8b", "llama3.1-70b"]
+                "enum": [
+                  "llama3.1-8b",
+                  "llama3.1-70b"
+                ]
               }
             }
           }
@@ -1274,10 +1417,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["text-gen-webui"]
+                "enum": [
+                  "text-gen-webui"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -1291,10 +1438,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["flowise"]
+                "enum": [
+                  "flowise"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -1321,7 +1472,10 @@
                       "type": "string"
                     }
                   },
-                  "required": ["key", "value"]
+                  "required": [
+                    "key",
+                    "value"
+                  ]
                 }
               },
               "additionalFlowiseConfiguration": {
@@ -1340,7 +1494,10 @@
                       "description": "Configuration Property value"
                     }
                   },
-                  "required": ["key", "value"]
+                  "required": [
+                    "key",
+                    "value"
+                  ]
                 }
               },
               "model": {
@@ -1415,10 +1572,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["watsonx"]
+                "enum": [
+                  "watsonx"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -1454,24 +1615,36 @@
                 ]
               }
             },
-            "required": ["apiBase", "apiKey", "apiVersion"]
+            "required": [
+              "apiBase",
+              "apiKey",
+              "apiVersion"
+            ]
           }
         },
         {
           "if": {
             "properties": {
               "provider": {
-                "enum": ["sambanova"]
+                "enum": [
+                  "sambanova"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
               "model": {
                 "anyOf": [
                   {
-                    "enum": ["llama3.1-8b", "llama3.1-70b", "llama3.1-405b"]
+                    "enum": [
+                      "llama3.1-8b",
+                      "llama3.1-70b",
+                      "llama3.1-405b"
+                    ]
                   },
                   {
                     "type": "string"
@@ -1486,10 +1659,14 @@
           "if": {
             "properties": {
               "provider": {
-                "enum": ["ask-sage"]
+                "enum": [
+                  "ask-sage"
+                ]
               }
             },
-            "required": ["provider"]
+            "required": [
+              "provider"
+            ]
           },
           "then": {
             "properties": {
@@ -1544,7 +1721,9 @@
           "type": "string"
         }
       },
-      "required": ["default"]
+      "required": [
+        "default"
+      ]
     },
     "SlashCommand": {
       "title": "SlashCommand",
@@ -1601,7 +1780,9 @@
           "if": {
             "properties": {
               "name": {
-                "enum": ["issue"]
+                "enum": [
+                  "issue"
+                ]
               }
             }
           },
@@ -1614,17 +1795,23 @@
                     "description": "Enter the URL of the GitHub repository for which you want to generate the issue."
                   }
                 },
-                "required": ["repositoryUrl"]
+                "required": [
+                  "repositoryUrl"
+                ]
               }
             },
-            "required": ["params"]
+            "required": [
+              "params"
+            ]
           }
         },
         {
           "if": {
             "properties": {
               "name": {
-                "enum": ["edit"]
+                "enum": [
+                  "edit"
+                ]
               }
             }
           },
@@ -1634,12 +1821,12 @@
                 "properties": {
                   "recap": {
                     "type": "boolean",
-                    "markdownDescription": "If recap is set to `true`, antalyse will generate a summary of the changes after making the edit.",
-                    "x-intellij-html-description": "If recap is set to <code>true</code>, antalyse will generate a summary of the changes after making the edit."
+                    "markdownDescription": "If recap is set to `true`, Continue will generate a summary of the changes after making the edit.",
+                    "x-intellij-html-description": "If recap is set to <code>true</code>, Continue will generate a summary of the changes after making the edit."
                   },
                   "tokenLimit": {
                     "type": "integer",
-                    "description": "By default, antalyse doesn't let you edit extremely large ranges (beyond 1,200 tokens), because the LLM is unlikely to succeed. But if you would like to override this limit with the understanding of possible failure you may do so here."
+                    "description": "By default, Continue doesn't let you edit extremely large ranges (beyond 1,200 tokens), because the LLM is unlikely to succeed. But if you would like to override this limit with the understanding of possible failure you may do so here."
                   }
                 }
               }
@@ -1650,7 +1837,9 @@
           "if": {
             "properties": {
               "name": {
-                "enum": ["share"]
+                "enum": [
+                  "share"
+                ]
               }
             }
           },
@@ -1672,7 +1861,9 @@
           "if": {
             "properties": {
               "name": {
-                "enum": ["commit"]
+                "enum": [
+                  "commit"
+                ]
               }
             }
           },
@@ -1691,7 +1882,10 @@
           }
         }
       ],
-      "required": ["name", "description"]
+      "required": [
+        "name",
+        "description"
+      ]
     },
     "CustomCommand": {
       "title": "CustomCommand",
@@ -1710,7 +1904,11 @@
           "type": "string"
         }
       },
-      "required": ["name", "prompt", "description"]
+      "required": [
+        "name",
+        "prompt",
+        "description"
+      ]
     },
     "ContextProviderWithParams": {
       "title": "ContextProviderWithParams",
@@ -1790,7 +1988,9 @@
           "if": {
             "properties": {
               "name": {
-                "enum": ["discord"]
+                "enum": [
+                  "discord"
+                ]
               }
             }
           },
@@ -1823,11 +2023,15 @@
                               "description": "The name of the channel"
                             }
                           },
-                          "required": ["id"]
+                          "required": [
+                            "id"
+                          ]
                         }
                       }
                     },
-                    "required": ["discordKey"]
+                    "required": [
+                      "discordKey"
+                    ]
                   }
                 }
               },
@@ -1836,14 +2040,18 @@
                   {
                     "properties": {
                       "params": {
-                        "required": ["guildId"]
+                        "required": [
+                          "guildId"
+                        ]
                       }
                     }
                   },
                   {
                     "properties": {
                       "params": {
-                        "required": ["channels"]
+                        "required": [
+                          "channels"
+                        ]
                       }
                     }
                   }
@@ -1856,7 +2064,9 @@
           "if": {
             "properties": {
               "name": {
-                "enum": ["google"]
+                "enum": [
+                  "google"
+                ]
               }
             }
           },
@@ -1869,17 +2079,23 @@
                     "description": "Your API key for https://serper.dev in order to get Google search results"
                   }
                 },
-                "required": ["serperApiKey"]
+                "required": [
+                  "serperApiKey"
+                ]
               }
             },
-            "required": ["params"]
+            "required": [
+              "params"
+            ]
           }
         },
         {
           "if": {
             "properties": {
               "name": {
-                "enum": ["web"]
+                "enum": [
+                  "web"
+                ]
               }
             }
           },
@@ -1896,14 +2112,18 @@
                 }
               }
             },
-            "required": ["params"]
+            "required": [
+              "params"
+            ]
           }
         },
         {
           "if": {
             "properties": {
               "name": {
-                "enum": ["open"]
+                "enum": [
+                  "open"
+                ]
               }
             }
           },
@@ -1925,7 +2145,9 @@
           "if": {
             "properties": {
               "name": {
-                "enum": ["issue"]
+                "enum": [
+                  "issue"
+                ]
               }
             }
           },
@@ -1954,24 +2176,37 @@
                         "type": {
                           "type": "string",
                           "description": "The type of issues to search for",
-                          "enum": ["open", "closed", "all"]
+                          "enum": [
+                            "open",
+                            "closed",
+                            "all"
+                          ]
                         }
                       },
-                      "required": ["owner", "repo"]
+                      "required": [
+                        "owner",
+                        "repo"
+                      ]
                     }
                   }
                 },
-                "required": ["repos"]
+                "required": [
+                  "repos"
+                ]
               }
             },
-            "required": ["params"]
+            "required": [
+              "params"
+            ]
           }
         },
         {
           "if": {
             "properties": {
               "name": {
-                "enum": ["database"]
+                "enum": [
+                  "database"
+                ]
               }
             }
           },
@@ -1992,7 +2227,12 @@
                         "connection_type": {
                           "type": "string",
                           "description": "The type of database (e.g., 'postgres', 'mysql')",
-                          "enum": ["postgres", "mysql", "sqlite", "mssql"]
+                          "enum": [
+                            "postgres",
+                            "mysql",
+                            "sqlite",
+                            "mssql"
+                          ]
                         },
                         "connection": {
                           "type": "object",
@@ -2025,21 +2265,31 @@
                           "required": []
                         }
                       },
-                      "required": ["name", "connection_type", "connection"]
+                      "required": [
+                        "name",
+                        "connection_type",
+                        "connection"
+                      ]
                     }
                   }
                 },
-                "required": ["connections"]
+                "required": [
+                  "connections"
+                ]
               }
             },
-            "required": ["params"]
+            "required": [
+              "params"
+            ]
           }
         },
         {
           "if": {
             "properties": {
               "name": {
-                "enum": ["gitlab-mr"]
+                "enum": [
+                  "gitlab-mr"
+                ]
               }
             }
           },
@@ -2060,17 +2310,23 @@
                     "description": "If you have code selected, filters out comments that aren't related to the selection."
                   }
                 },
-                "required": ["token"]
+                "required": [
+                  "token"
+                ]
               }
             },
-            "required": ["params"]
+            "required": [
+              "params"
+            ]
           }
         },
         {
           "if": {
             "properties": {
               "name": {
-                "enum": ["jira"]
+                "enum": [
+                  "jira"
+                ]
               }
             }
           },
@@ -2117,17 +2373,24 @@
                     ]
                   }
                 },
-                "required": ["domain", "token"]
+                "required": [
+                  "domain",
+                  "token"
+                ]
               }
             },
-            "required": ["params"]
+            "required": [
+              "params"
+            ]
           }
         },
         {
           "if": {
             "properties": {
               "name": {
-                "enum": ["http"]
+                "enum": [
+                  "http"
+                ]
               }
             }
           },
@@ -2145,17 +2408,24 @@
                     "type": "object"
                   }
                 },
-                "required": ["url"]
+                "required": [
+                  "url"
+                ]
               }
             },
-            "required": ["params"]
+            "required": [
+              "params"
+            ]
           }
         },
         {
           "if": {
             "properties": {
               "name": {
-                "enum": ["codebase", "folder"]
+                "enum": [
+                  "codebase",
+                  "folder"
+                ]
               }
             }
           },
@@ -2190,7 +2460,9 @@
           "if": {
             "properties": {
               "name": {
-                "enum": ["postgres"]
+                "enum": [
+                  "postgres"
+                ]
               }
             }
           },
@@ -2242,14 +2514,22 @@
                 }
               }
             },
-            "required": ["host", "port", "user", "password", "database"]
+            "required": [
+              "host",
+              "port",
+              "user",
+              "password",
+              "database"
+            ]
           }
         },
         {
           "if": {
             "properties": {
               "name": {
-                "enum": ["greptile"]
+                "enum": [
+                  "greptile"
+                ]
               }
             }
           },
@@ -2272,13 +2552,18 @@
                 }
               }
             },
-            "required": ["GreptileToken", "GithubToken"]
+            "required": [
+              "GreptileToken",
+              "GithubToken"
+            ]
           }
         }
       ],
-      "required": ["name"]
+      "required": [
+        "name"
+      ]
     },
-    "SerializedantalyseConfig": {
+    "SerializedContinueConfig": {
       "title": "config.json",
       "type": "object",
       "properties": {
@@ -2310,20 +2595,23 @@
                 "description": "The URL path to a favicon for the site - by default, it will be `/favicon.ico` path from the Start URL"
               }
             },
-            "required": ["title", "startUrl"]
+            "required": [
+              "title",
+              "startUrl"
+            ]
           }
         },
         "allowAnonymousTelemetry": {
           "title": "Allow Anonymous Telemetry",
-          "markdownDescription": "If this field is set to `true`, we will collect anonymous telemetry as described in the documentation page on telemetry. If set to `false`, we will not collect any data. Learn more in [the docs](https://docs.antalyse.dev/telemetry).",
-          "x-intellij-html-description": "If this field is set to `true`, we will collect anonymous telemetry as described in the documentation page on telemetry. If set to `false`, we will not collect any data. Learn more in <a href='https://docs.antalyse.dev/telemetry'>the docs</a>.",
+          "markdownDescription": "If this field is set to `true`, we will collect anonymous telemetry as described in the documentation page on telemetry. If set to `false`, we will not collect any data. Learn more in [the docs](https://docs.continue.dev/telemetry).",
+          "x-intellij-html-description": "If this field is set to `true`, we will collect anonymous telemetry as described in the documentation page on telemetry. If set to `false`, we will not collect any data. Learn more in <a href='https://docs.continue.dev/telemetry'>the docs</a>.",
           "default": true,
           "type": "boolean"
         },
         "models": {
           "title": "Models",
-          "markdownDescription": "Learn about setting up models in [the documentation](https://docs.antalyse.dev/model-setup/overview).",
-          "x-intellij-html-description": "Learn about setting up models in <a href='https://docs.antalyse.dev/model-setup/overview'>the documentation</a>.",
+          "markdownDescription": "Learn about setting up models in [the documentation](https://docs.continue.dev/model-setup/overview).",
+          "x-intellij-html-description": "Learn about setting up models in <a href='https://docs.continue.dev/model-setup/overview'>the documentation</a>.",
           "default": [
             {
               "title": "GPT-4 (trial)",
@@ -2371,8 +2659,8 @@
         },
         "slashCommands": {
           "title": "Slash Commands",
-          "markdownDescription": "An array of slash commands that let you take custom actions from the sidebar. Learn more in the [documentation](https://docs.antalyse.dev/customization/slash-commands).",
-          "x-intellij-html-description": "An array of slash commands that let you take custom actions from the sidebar. Learn more in the <a href='https://docs.antalyse.dev/customization/slash-commands'>documentation</a>.",
+          "markdownDescription": "An array of slash commands that let you take custom actions from the sidebar. Learn more in the [documentation](https://docs.continue.dev/customization/slash-commands).",
+          "x-intellij-html-description": "An array of slash commands that let you take custom actions from the sidebar. Learn more in the <a href='https://docs.continue.dev/customization/slash-commands'>documentation</a>.",
           "default": [],
           "type": "array",
           "items": {
@@ -2381,8 +2669,8 @@
         },
         "customCommands": {
           "title": "Custom Commands",
-          "markdownDescription": "An array of custom commands that allow you to reuse prompts. Each has name, description, and prompt properties. When you enter `/<name>` in the text input, it will act as a shortcut to the prompt. Learn more in the [documentation](https://docs.antalyse.dev/customization/slash-commands#custom-commands-use-natural-language).",
-          "x-intellij-html-description": "An array of custom commands that allow you to reuse prompts. Each has name, description, and prompt properties. When you enter <code>/<name></code> in the text input, it will act as a shortcut to the prompt. Learn more in the <a href='https://docs.antalyse.dev/customization/slash-commands#custom-commands-use-natural-language'>documentation</a>.",
+          "markdownDescription": "An array of custom commands that allow you to reuse prompts. Each has name, description, and prompt properties. When you enter `/<name>` in the text input, it will act as a shortcut to the prompt. Learn more in the [documentation](https://docs.continue.dev/customization/slash-commands#custom-commands-use-natural-language).",
+          "x-intellij-html-description": "An array of custom commands that allow you to reuse prompts. Each has name, description, and prompt properties. When you enter <code>/<name></code> in the text input, it will act as a shortcut to the prompt. Learn more in the <a href='https://docs.continue.dev/customization/slash-commands#custom-commands-use-natural-language'>documentation</a>.",
           "default": [
             {
               "name": "test",
@@ -2397,8 +2685,8 @@
         },
         "contextProviders": {
           "title": "Context Providers",
-          "markdownDescription": "A list of ContextProvider objects that can be used to provide context to the LLM by typing '@'. Read more about ContextProviders in [the documentation](https://docs.antalyse.dev/customization/context-providers).",
-          "x-intellij-html-description": "A list of ContextProvider objects that can be used to provide context to the LLM by typing '@'. Read more about ContextProviders in <a href='https://docs.antalyse.dev/customization/context-providers'>the documentation</a>.",
+          "markdownDescription": "A list of ContextProvider objects that can be used to provide context to the LLM by typing '@'. Read more about ContextProviders in [the documentation](https://docs.continue.dev/customization/context-providers).",
+          "x-intellij-html-description": "A list of ContextProvider objects that can be used to provide context to the LLM by typing '@'. Read more about ContextProviders in <a href='https://docs.continue.dev/customization/context-providers'>the documentation</a>.",
           "default": [],
           "type": "array",
           "items": {
@@ -2412,22 +2700,22 @@
         },
         "disableIndexing": {
           "title": "Disable Indexing",
-          "markdownDescription": "If set to `true`, antalyse will not index the codebase. This is mainly used for debugging purposes.",
-          "x-intellij-html-description": "If set to <code>true</code>, antalyse will not index the codebase. This is mainly used for debugging purposes.",
+          "markdownDescription": "If set to `true`, Continue will not index the codebase. This is mainly used for debugging purposes.",
+          "x-intellij-html-description": "If set to <code>true</code>, Continue will not index the codebase. This is mainly used for debugging purposes.",
           "default": false,
           "type": "boolean"
         },
         "disableSessionTitles": {
           "title": "Disable Session Titles",
-          "markdownDescription": "If set to `true`, antalyse will not make extra requests to the LLM to generate a summary title of each session.",
-          "x-intellij-html-description": "If set to <code>true</code>, antalyse will not make extra requests to the LLM to generate a summary title of each session.",
+          "markdownDescription": "If set to `true`, Continue will not make extra requests to the LLM to generate a summary title of each session.",
+          "x-intellij-html-description": "If set to <code>true</code>, Continue will not make extra requests to the LLM to generate a summary title of each session.",
           "default": false,
           "type": "boolean"
         },
         "embeddingsProvider": {
           "title": "Embeddings Provider",
-          "markdownDescription": "The method that will be used to generate codebase embeddings. The default is `transformers.js`, which will run locally in the browser. Learn about the other options [here](https://docs.antalyse.dev/features/codebase-embeddings#embeddings-providers).",
-          "x-intellij-html-description": "The method that will be used to generate codebase embeddings. The default is <code>transformers.js</code>, which will run locally in the browser. Learn about the other options <a href='https://docs.antalyse.dev/features/codebase-embeddings#embeddings-providers'>here</a>.<br><br><strong>Note</strong>: <code>transformers.js</code> currently cannot be used in JetBrains.",
+          "markdownDescription": "The method that will be used to generate codebase embeddings. The default is `transformers.js`, which will run locally in the browser. Learn about the other options [here](https://docs.continue.dev/features/codebase-embeddings#embeddings-providers).",
+          "x-intellij-html-description": "The method that will be used to generate codebase embeddings. The default is <code>transformers.js</code>, which will run locally in the browser. Learn about the other options <a href='https://docs.continue.dev/features/codebase-embeddings#embeddings-providers'>here</a>.<br><br><strong>Note</strong>: <code>transformers.js</code> currently cannot be used in JetBrains.",
           "type": "object",
           "properties": {
             "provider": {
@@ -2438,7 +2726,7 @@
                 "openai",
                 "cohere",
                 "free-trial",
-                "antalyse-proxy",
+                "continue-proxy",
                 "gemini",
                 "voyage",
                 "nvidia",
@@ -2491,29 +2779,44 @@
               "type": "string"
             }
           },
-          "required": ["provider"],
+          "required": [
+            "provider"
+          ],
           "allOf": [
             {
               "if": {
                 "properties": {
                   "provider": {
-                    "enum": ["cohere", "voyage", "nvidia", "gemini"]
+                    "enum": [
+                      "cohere",
+                      "voyage",
+                      "nvidia",
+                      "gemini"
+                    ]
                   }
                 },
-                "required": ["provider"]
+                "required": [
+                  "provider"
+                ]
               },
               "then": {
-                "required": ["apiKey"]
+                "required": [
+                  "apiKey"
+                ]
               }
             },
             {
               "if": {
                 "properties": {
                   "provider": {
-                    "enum": ["sagemaker"]
+                    "enum": [
+                      "sagemaker"
+                    ]
                   }
                 },
-                "required": ["provider"]
+                "required": [
+                  "provider"
+                ]
               },
               "then": {
                 "properties": {
@@ -2521,17 +2824,23 @@
                     "description": "SageMaker endpoint name"
                   }
                 },
-                "required": ["model"]
+                "required": [
+                  "model"
+                ]
               }
             },
             {
               "if": {
                 "properties": {
                   "provider": {
-                    "enum": ["vertexai"]
+                    "enum": [
+                      "vertexai"
+                    ]
                   }
                 },
-                "required": ["provider"]
+                "required": [
+                  "provider"
+                ]
               },
               "then": {
                 "properties": {
@@ -2546,7 +2855,11 @@
                     "default": "text-embedding-004"
                   }
                 },
-                "required": ["projectId", "model", "region"]
+                "required": [
+                  "projectId",
+                  "model",
+                  "region"
+                ]
               }
             }
           ]
@@ -2569,16 +2882,22 @@
               "type": "object"
             }
           },
-          "required": ["name"],
+          "required": [
+            "name"
+          ],
           "allOf": [
             {
               "if": {
                 "properties": {
                   "name": {
-                    "enum": ["cohere"]
+                    "enum": [
+                      "cohere"
+                    ]
                   }
                 },
-                "required": ["name"]
+                "required": [
+                  "name"
+                ]
               },
               "then": {
                 "properties": {
@@ -2600,7 +2919,9 @@
                         "type": "string"
                       }
                     },
-                    "required": ["apiKey"]
+                    "required": [
+                      "apiKey"
+                    ]
                   }
                 }
               }
@@ -2609,10 +2930,14 @@
               "if": {
                 "properties": {
                   "name": {
-                    "enum": ["llm"]
+                    "enum": [
+                      "llm"
+                    ]
                   }
                 },
-                "required": ["name"]
+                "required": [
+                  "name"
+                ]
               },
               "then": {
                 "properties": {
@@ -2623,7 +2948,9 @@
                         "type": "string"
                       }
                     },
-                    "required": ["modelTitle"]
+                    "required": [
+                      "modelTitle"
+                    ]
                   }
                 }
               }
@@ -2632,10 +2959,14 @@
               "if": {
                 "properties": {
                   "name": {
-                    "enum": ["voyage"]
+                    "enum": [
+                      "voyage"
+                    ]
                   }
                 },
-                "required": ["name"]
+                "required": [
+                  "name"
+                ]
               },
               "then": {
                 "properties": {
@@ -2654,7 +2985,9 @@
                         ]
                       }
                     },
-                    "required": ["apiKey"]
+                    "required": [
+                      "apiKey"
+                    ]
                   }
                 }
               }
@@ -2663,10 +2996,14 @@
               "if": {
                 "properties": {
                   "name": {
-                    "enum": ["huggingface-tei"]
+                    "enum": [
+                      "huggingface-tei"
+                    ]
                   }
                 },
-                "required": ["name"]
+                "required": [
+                  "name"
+                ]
               },
               "then": {
                 "properties": {
@@ -2686,12 +3023,17 @@
                         "default": false
                       },
                       "truncation_direction": {
-                        "enum": ["Right", "Left"],
+                        "enum": [
+                          "Right",
+                          "Left"
+                        ],
                         "description": "Whether to truncate sequences from the left or right.",
                         "default": "Right"
                       }
                     },
-                    "required": ["apiBase"]
+                    "required": [
+                      "apiBase"
+                    ]
                   }
                 },
                 "if": {
@@ -2702,7 +3044,9 @@
                   }
                 },
                 "then": {
-                  "required": ["truncation_direction"]
+                  "required": [
+                    "truncation_direction"
+                  ]
                 }
               }
             }
@@ -2710,8 +3054,8 @@
         },
         "tabAutocompleteModel": {
           "title": "Tab Autocomplete Model",
-          "markdownDescription": "The model used for tab autocompletion. If undefined, antalyse will default to using starcoder2:3b on a local Ollama instance.\n\n*IMPORTANT*:\n\nIf you use a custom model, ensure that it is one trained for fill-in-the-middle completions. An instruct model is typically not well-suited to autocomplete and you may receive unsatisfactory completions.",
-          "x-intellij-html-description": "The model used for tab autocompletion. If undefined, antalyse will default to using starcoder2:3b on a local Ollama instance.<br><br><i>IMPORTANT</i>:<br><br>If you use a custom model, ensure that it is one trained for fill-in-the-middle completions. An instruct model is typically not well-suited to autocomplete and you may receive unsatisfactory completions.",
+          "markdownDescription": "The model used for tab autocompletion. If undefined, Continue will default to using starcoder2:3b on a local Ollama instance.\n\n*IMPORTANT*:\n\nIf you use a custom model, ensure that it is one trained for fill-in-the-middle completions. An instruct model is typically not well-suited to autocomplete and you may receive unsatisfactory completions.",
+          "x-intellij-html-description": "The model used for tab autocompletion. If undefined, Continue will default to using starcoder2:3b on a local Ollama instance.<br><br><i>IMPORTANT</i>:<br><br>If you use a custom model, ensure that it is one trained for fill-in-the-middle completions. An instruct model is typically not well-suited to autocomplete and you may receive unsatisfactory completions.",
           "default": {
             "title": "Tab Autocomplete Model",
             "provider": "ollama",
@@ -2732,8 +3076,8 @@
         "tabAutocompleteOptions": {
           "title": "TabAutocompleteOptions",
           "type": "object",
-          "markdownDescription": "These options let you customize your tab-autocomplete experience. Read about all options in [the docs](https://docs.antalyse.dev/features/tab-autocomplete#configuration-options).",
-          "x-intellij-html-description": "These options let you customize your tab-autocomplete experience. Read about all options in <a href='https://docs.antalyse.dev/features/tab-autocomplete#configuration-options'>the docs</a>.",
+          "markdownDescription": "These options let you customize your tab-autocomplete experience. Read about all options in [the docs](https://docs.continue.dev/features/tab-autocomplete#configuration-options).",
+          "x-intellij-html-description": "These options let you customize your tab-autocomplete experience. Read about all options in <a href='https://docs.continue.dev/features/tab-autocomplete#configuration-options'>the docs</a>.",
           "properties": {
             "disable": {
               "type": "boolean",
@@ -2773,8 +3117,12 @@
               "description": "An optional template string to be used for autocomplete. It will be rendered with the Mustache templating language, and is passed the 'prefix' and 'suffix' variables."
             },
             "multilineCompletions": {
-              "enum": ["always", "never", "auto"],
-              "description": "If set to true, antalyse will only complete a single line at a time."
+              "enum": [
+                "always",
+                "never",
+                "auto"
+              ],
+              "description": "If set to true, Continue will only complete a single line at a time."
             },
             "useCache": {
               "type": "boolean",
@@ -2782,11 +3130,11 @@
             },
             "onlyMyCode": {
               "type": "boolean",
-              "description": "If set to true, antalyse will not include any snippets from go to definition unless they are within your repository"
+              "description": "If set to true, Continue will not include any snippets from go to definition unless they are within your repository"
             },
             "useOtherFiles": {
               "type": "boolean",
-              "description": "Defaults to true. If set to false, antalyse will not attempt to include snippets from other files."
+              "description": "Defaults to true. If set to false, Continue will not attempt to include snippets from other files."
             },
             "disableInFiles": {
               "description": "A list of files / glob patterns in which to disable tab autocomplete. For example, *.csv if you'd like to disable autocomplete in .csv files.",
@@ -2802,7 +3150,10 @@
           "type": "object",
           "properties": {
             "codeBlockToolbarPosition": {
-              "enum": ["top", "bottom"],
+              "enum": [
+                "top",
+                "bottom"
+              ],
               "default": "top",
               "description": "Whether to show the copy and apply code buttons at the top or bottom of code blocks in the sidebar."
             },
@@ -2828,7 +3179,10 @@
           "properties": {
             "provider": {
               "type": "string",
-              "enum": ["posthog", "logstash"],
+              "enum": [
+                "posthog",
+                "logstash"
+              ],
               "description": "The 3rd party analytics provider to use.",
               "default": "posthog",
               "markdownEnumDescriptions": [
@@ -2844,30 +3198,40 @@
               "description": "The client key to use for analytics"
             }
           },
-          "required": ["provider"],
+          "required": [
+            "provider"
+          ],
           "allOf": [
             {
               "if": {
                 "properties": {
                   "provider": {
-                    "enum": ["posthog"]
+                    "enum": [
+                      "posthog"
+                    ]
                   }
                 }
               },
               "then": {
-                "required": ["clientKey"]
+                "required": [
+                  "clientKey"
+                ]
               }
             },
             {
               "if": {
                 "properties": {
                   "provider": {
-                    "enum": ["logstash"]
+                    "enum": [
+                      "logstash"
+                    ]
                   }
                 }
               },
               "then": {
-                "required": ["url"]
+                "required": [
+                  "url"
+                ]
               }
             }
           ]
@@ -2939,7 +3303,10 @@
                     "default": false
                   }
                 },
-                "required": ["prompt", "title"]
+                "required": [
+                  "prompt",
+                  "title"
+                ]
               },
               "description": "Quick actions are a way to add custom commands to the Code Lens of function and class declarations."
             },
@@ -2970,10 +3337,21 @@
             },
             "useChromiumForDocsCrawling": {
               "type": "boolean",
-              "description": "Use Chromium to crawl docs locally. Useful if the default Cheerio crawler fails on sites that require JavaScript rendering. Downloads and installs Chromium to `~/.antalyse/.utils`.",
+              "description": "Use Chromium to crawl docs locally. Useful if the default Cheerio crawler fails on sites that require JavaScript rendering. Downloads and installs Chromium to `~/.continue/.utils`.",
               "default": false
             }
           }
+        },
+        "mergeBehavior": {
+          "type": "string",
+          "enum": [
+            "merge",
+            "overwrite"
+          ],
+          "default": "merge",
+          "title": "Merge behavior",
+          "markdownDescription": "If set to 'merge', .continuerc.json will be applied on top of config.json (arrays and objects are merged). If set to 'overwrite', then every top-level property of .continuerc.json will overwrite that property from config.json.",
+          "x-intellij-html-description": "<p>If set to <code>merge</code>, <code>.continuerc.json</code> will be applied on top of <code>config.json</code> (arrays and objects are merged). If set to <code>overwrite</code>, then every top-level property of <code>.continuerc.json</code> will overwrite that property from <code>config.json</code>.</p>"
         }
       }
     }

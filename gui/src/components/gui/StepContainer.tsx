@@ -23,7 +23,7 @@ interface StepContainerProps {
   onReverse: () => void;
   onUserInput: (input: string) => void;
   onRetry: () => void;
-  onContinueGeneration: () => void;
+  onantalyseGeneration: () => void;
   onDelete: () => void;
   open: boolean;
   isFirst: boolean;
@@ -118,8 +118,8 @@ function StepContainer(props: StepContainerProps) {
         {truncatedEarly && (
           <HeaderButtonWithToolTip
             tabIndex={-1}
-            text="Continue generation"
-            onClick={props.onContinueGeneration}
+            text="antalyse generation"
+            onClick={props.onantalyseGeneration}
           >
             <BarsArrowDownIcon className="h-3.5 w-3.5 text-gray-500" />
           </HeaderButtonWithToolTip>

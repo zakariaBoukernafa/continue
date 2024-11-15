@@ -1,7 +1,7 @@
-package com.github.continuedev.continueintellijextension.`continue`
+package com.github.antalysedev.antalyseintellijextension.`antalyse`
 
-import com.github.continuedev.continueintellijextension.activities.ContinuePluginStartupActivity
-import com.github.continuedev.continueintellijextension.constants.getContinueGlobalPath
+import com.github.antalysedev.antalyseintellijextension.activities.antalysePluginStartupActivity
+import com.github.antalysedev.antalyseintellijextension.constants.getantalyseGlobalPath
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.io.StreamUtil
 import com.intellij.openapi.vfs.LocalFileSystem
@@ -22,21 +22,21 @@ class ConfigRcJsonSchemaProviderFactory : JsonSchemaProviderFactory {
 
 class ConfigRcJsonSchemaFileProvider : JsonSchemaFileProvider {
     override fun isAvailable(file: VirtualFile): Boolean {
-        return file.name == ".continuerc.json"
+        return file.name == ".antalyserc.json"
     }
 
     override fun getName(): String {
-        return ".continuerc.json"
+        return ".antalyserc.json"
     }
 
     override fun getSchemaFile(): VirtualFile? {
-        ContinuePluginStartupActivity::class.java.getClassLoader().getResourceAsStream("continue_rc_schema.json")
+        antalysePluginStartupActivity::class.java.getClassLoader().getResourceAsStream("antalyse_rc_schema.json")
             .use { `is` ->
                 if (`is` == null) {
-                    throw IOException("Resource not found: continue_rc_schema.json")
+                    throw IOException("Resource not found: antalyse_rc_schema.json")
                 }
                 val content = StreamUtil.readText(`is`, StandardCharsets.UTF_8)
-                val filepath = Paths.get(getContinueGlobalPath(), "continue_rc_schema.json").toString()
+                val filepath = Paths.get(getantalyseGlobalPath(), "antalyse_rc_schema.json").toString()
                 File(filepath).writeText(content)
                 return LocalFileSystem.getInstance().findFileByPath(filepath)
             }

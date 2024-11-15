@@ -1,9 +1,9 @@
-package com.github.continuedev.continueintellijextension.listeners
+package com.github.antalysedev.antalyseintellijextension.listeners
 
 import ToolTipComponent
-import com.github.continuedev.continueintellijextension.editor.EditorUtils
-import com.github.continuedev.continueintellijextension.services.ContinueExtensionSettings
-import com.github.continuedev.continueintellijextension.utils.Debouncer
+import com.github.antalysedev.antalyseintellijextension.editor.EditorUtils
+import com.github.antalysedev.antalyseintellijextension.services.antalyseExtensionSettings
+import com.github.antalysedev.antalyseintellijextension.utils.Debouncer
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.service
 import com.intellij.openapi.editor.Editor
@@ -20,7 +20,7 @@ import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.fileEditor.TextEditor
 
-class ContinuePluginSelectionListener(
+class antalysePluginSelectionListener(
     coroutineScope: CoroutineScope,
 ) : SelectionListener, DumbAware {
     private val debouncer = Debouncer(100, coroutineScope)
@@ -86,7 +86,7 @@ class ContinuePluginSelectionListener(
 
     private fun shouldRemoveTooltip(selectedText: String?, editor: Editor): Boolean {
         return selectedText.isNullOrEmpty() ||
-                !service<ContinueExtensionSettings>().continueState.displayEditorTooltip
+                !service<antalyseExtensionSettings>().antalyseState.displayEditorTooltip
     }
 
     private fun removeExistingTooltips(editor: Editor, onComplete: () -> Unit = {}) {

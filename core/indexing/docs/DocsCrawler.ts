@@ -2,7 +2,7 @@ import { URL } from "node:url";
 
 // @ts-ignore
 // @prettier-ignore
-import { ContinueConfig, IDE } from "../..";
+import { antalyseConfig, IDE } from "../..";
 
 import CheerioCrawler from "./crawlers/CheerioCrawler";
 import { ChromiumCrawler, ChromiumInstaller } from "./crawlers/ChromiumCrawler";
@@ -22,7 +22,7 @@ class DocsCrawler {
 
   constructor(
     private readonly ide: IDE,
-    private readonly config: ContinueConfig,
+    private readonly config: antalyseConfig,
   ) {
     this.chromiumInstaller = new ChromiumInstaller(this.ide, this.config);
   }

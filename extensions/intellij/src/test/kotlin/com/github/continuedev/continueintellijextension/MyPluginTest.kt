@@ -1,6 +1,6 @@
-package com.github.continuedev.continueintellijextension
+package com.github.antalysedev.antalyseintellijextension
 
-import com.github.continuedev.continueintellijextension.services.ContinuePluginService
+import com.github.antalysedev.antalyseintellijextension.services.antalysePluginService
 import com.intellij.ide.highlighter.XmlFileType
 import com.intellij.openapi.components.service
 import com.intellij.psi.xml.XmlFile
@@ -27,7 +27,7 @@ class MyPluginTest : BasePlatformTestCase() {
     }
 
     fun testProjectService() {
-        val projectService = project.service<ContinuePluginService>()
+        val projectService = project.service<antalysePluginService>()
 
 //        assertNotSame(
 //            projectService.getRandomNumber(),

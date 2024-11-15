@@ -40,7 +40,7 @@ import OpenRouter from "./OpenRouter";
 import Replicate from "./Replicate";
 import SageMaker from "./SageMaker";
 import SambaNova from "./SambaNova";
-import ContinueProxy from "./stubs/ContinueProxy";
+import antalyseProxy from "./stubs/antalyseProxy";
 import TextGenWebUI from "./TextGenWebUI";
 import Together from "./Together";
 import VertexAI from "./VertexAI";
@@ -72,7 +72,7 @@ const LLMs = [
   Flowise,
   Groq,
   Fireworks,
-  ContinueProxy,
+  antalyseProxy,
   Cloudflare,
   Deepseek,
   Msty,
@@ -129,7 +129,7 @@ export async function llmFromDescription(
     uniqueId,
   };
 
-  if (desc.provider === "continue-proxy") {
+  if (desc.provider === "antalyse-proxy") {
     options.apiKey = ideSettings.userToken;
     if (ideSettings.remoteConfigServerUrl) {
       options.apiBase = new URL(

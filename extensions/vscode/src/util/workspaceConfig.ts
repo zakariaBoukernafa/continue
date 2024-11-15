@@ -1,7 +1,7 @@
 import { workspace } from "vscode";
 
-export const CONTINUE_WORKSPACE_KEY = "continue";
+export const antalyse_WORKSPACE_KEY = "antalyse";
 
-export function getContinueWorkspaceConfig() {
-  return workspace.getConfiguration(CONTINUE_WORKSPACE_KEY);
+export function getantalyseWorkspaceConfig() {
+  return workspace.getConfiguration(antalyse_WORKSPACE_KEY);
 }

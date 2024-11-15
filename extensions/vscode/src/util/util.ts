@@ -121,12 +121,14 @@ export function getMetaKeyName() {
 }
 
 export function getExtensionVersion(): string {
-  const extension = vscode.extensions.getExtension("continue.continue");
+  const extension = vscode.extensions.getExtension("antalyse.antalyse");
   return extension?.packageJSON.version || "0.1.0";
 }
 
 export function getFullyQualifiedPath(ide: VsCodeIde, filepath: string) {
-  if (ide.ideUtils.path.isAbsolute(filepath)) {return filepath;}
+  if (ide.ideUtils.path.isAbsolute(filepath)) {
+    return filepath;
+  }
 
   const workspaceFolders = vscode.workspace.workspaceFolders;
 

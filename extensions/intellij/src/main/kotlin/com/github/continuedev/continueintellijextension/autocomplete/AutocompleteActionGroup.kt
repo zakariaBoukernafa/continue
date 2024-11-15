@@ -1,6 +1,6 @@
-package com.github.continuedev.continueintellijextension.autocomplete
+package com.github.antalysedev.antalyseintellijextension.autocomplete
 
-import com.github.continuedev.continueintellijextension.services.ContinueExtensionSettings
+import com.github.antalysedev.antalyseintellijextension.services.antalyseExtensionSettings
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DefaultActionGroup
@@ -15,8 +15,8 @@ class AutocompleteActionGroup : DefaultActionGroup() {
         super.update(e)
         removeAll()
 
-        val continueSettingsService = service<ContinueExtensionSettings>()
-        if (continueSettingsService.continueState.enableTabAutocomplete) {
+        val antalyseSettingsService = service<antalyseExtensionSettings>()
+        if (antalyseSettingsService.antalyseState.enableTabAutocomplete) {
             addAll(
                 DisableTabAutocompleteAction(),
             )

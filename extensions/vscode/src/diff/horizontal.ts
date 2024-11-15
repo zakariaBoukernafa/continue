@@ -34,7 +34,7 @@ export const DIFF_DIRECTORY = path
   .replace(/^C:/, "c:");
 
 export class DiffManager {
-  // Create a temporary file in the global .continue directory which displays the updated version
+  // Create a temporary file in the global .antalyse directory which displays the updated version
   // Doing this because virtual files are read-only
   private diffs: Map<string, DiffInfo> = new Map();
 
@@ -73,7 +73,7 @@ export class DiffManager {
       .replace(/:/g, "_c_");
   }
 
-  private remoteTmpDir = "/tmp/continue";
+  private remoteTmpDir = "/tmp/antalyse";
   private getNewFilepath(originalFilepath: string): string {
     if (vscode.env.remoteName) {
       // If we're in a remote, use the remote's temp directory
@@ -107,7 +107,7 @@ export class DiffManager {
 
     const rightUri = uriFromFilePath(newFilepath);
     const leftUri = uriFromFilePath(originalFilepath);
-    const title = "Continue Diff";
+    const title = "antalyse Diff";
     vscode.commands.executeCommand("vscode.diff", leftUri, rightUri, title);
 
     const editor = vscode.window.activeTextEditor;
@@ -122,7 +122,7 @@ export class DiffManager {
 
     if (
       this.extensionContext.globalState.get<boolean>(
-        "continue.showDiffInfoMessage",
+        "antalyse.showDiffInfoMessage",
       ) !== false
     ) {
       vscode.window
@@ -135,7 +135,7 @@ export class DiffManager {
           if (selection === "Don't show again") {
             // Get the global state
             this.extensionContext.globalState.update(
-              "continue.showDiffInfoMessage",
+              "antalyse.showDiffInfoMessage",
               false,
             );
           }

@@ -1,7 +1,7 @@
-package com.github.continuedev.continueintellijextension.`continue`
+package com.github.antalysedev.antalyseintellijextension.`antalyse`
 
-import com.github.continuedev.continueintellijextension.services.ContinuePluginService
-import com.github.continuedev.continueintellijextension.utils.getAltKeyLabel
+import com.github.antalysedev.antalyseintellijextension.services.antalysePluginService
+import com.github.antalysedev.antalyseintellijextension.utils.getAltKeyLabel
 import com.intellij.diff.DiffContentFactory
 import com.intellij.diff.DiffManager
 import com.intellij.diff.DiffRequestPanel
@@ -25,7 +25,7 @@ import javax.swing.JComponent
 
 fun getDiffDirectory(): File {
     val homeDirectory = System.getProperty("user.home")
-    val diffDirPath = Paths.get(homeDirectory).resolve(".continue").resolve(".diffs").toString()
+    val diffDirPath = Paths.get(homeDirectory).resolve(".antalyse").resolve(".diffs").toString()
     val diffDir = File(diffDirPath)
     if (!diffDir.exists()) {
         diffDir.mkdirs()
@@ -87,11 +87,11 @@ class DiffManager(private val project: Project) : DumbAware {
         FileDocumentManager.getInstance().saveDocument(document)
 
         // Notify server of acceptance
-        val continuePluginService = ServiceManager.getService(
+        val antalysePluginService = ServiceManager.getService(
             project,
-            ContinuePluginService::class.java
+            antalysePluginService::class.java
         )
-        continuePluginService.ideProtocolClient?.sendAcceptRejectDiff(true, diffInfo.stepIndex)
+        antalysePluginService.ideProtocolClient?.sendAcceptRejectDiff(true, diffInfo.stepIndex)
 
         // Clean up state
         cleanUpFile(file)
@@ -100,12 +100,12 @@ class DiffManager(private val project: Project) : DumbAware {
     fun rejectDiff(file2: String?) {
         val file = (file2 ?: lastFile2) ?: return
         val diffInfo = diffInfoMap[file] ?: return
-        val continuePluginService = ServiceManager.getService(
+        val antalysePluginService = ServiceManager.getService(
             project,
-            ContinuePluginService::class.java
+            antalysePluginService::class.java
         )
-        continuePluginService.ideProtocolClient?.deleteAtIndex(diffInfo.stepIndex)
-        continuePluginService.ideProtocolClient?.sendAcceptRejectDiff(false, diffInfo.stepIndex)
+        antalysePluginService.ideProtocolClient?.deleteAtIndex(diffInfo.stepIndex)
+        antalysePluginService.ideProtocolClient?.sendAcceptRejectDiff(false, diffInfo.stepIndex)
 
         cleanUpFile(file)
     }
@@ -122,7 +122,7 @@ class DiffManager(private val project: Project) : DumbAware {
         val content2: DiffContent = DiffContentFactory.getInstance().create(File(file2).readText())
 
         // Create a SimpleDiffRequest and populate it with the DiffContents and titles
-        val diffRequest = SimpleDiffRequest("Continue Diff", content1, content2, "Old", "New")
+        val diffRequest = SimpleDiffRequest("antalyse Diff", content1, content2, "Old", "New")
 
         // Get a DiffRequestPanel from the DiffManager and set the DiffRequest to it
         val diffInfo = diffInfoMap[file2]
@@ -153,7 +153,7 @@ class DiffManager(private val project: Project) : DumbAware {
                     ?: object : DialogWrapper(project, true, IdeModalityType.MODELESS) {
                         init {
                             init()
-                            title = "Continue Diff"
+                            title = "antalyse Diff"
                         }
 
                         override fun createCenterPanel(): JComponent? {

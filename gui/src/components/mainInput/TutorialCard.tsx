@@ -86,7 +86,7 @@ export function TutorialCard({ onClose }: TutorialCardProps) {
         <li className="flex items-start">
           <Cog6ToothIcon className="h-4 w-4 pr-3 align-middle" />
           <span>
-            Click the gear icon in the bottom right to configure Continue
+            Click the gear icon in the bottom right to configure antalyse
           </span>
         </li>
         <li className="flex items-start">
@@ -95,7 +95,7 @@ export function TutorialCard({ onClose }: TutorialCardProps) {
             <a
               className="cursor-pointer text-inherit underline hover:text-inherit"
               onClick={() =>
-                ideMessenger.post("openUrl", "https://docs.continue.dev")
+                ideMessenger.post("openUrl", "https://docs.antalyse.dev")
               }
             >
               Read our documentation

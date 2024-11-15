@@ -13,11 +13,11 @@ describe("Extension Test Suite", () => {
   // });
 
   test("Get the default model from webview", async () => {
-    const continueExtensionApi =
-      vscode.extensions.getExtension("continue.continue");
-    const extension: VsCodeExtension = continueExtensionApi?.exports.extension;
+    const antalyseExtensionApi =
+      vscode.extensions.getExtension("antalyse.antalyse");
+    const extension: VsCodeExtension = antalyseExtensionApi?.exports.extension;
     await new Promise((resolve) => setTimeout(resolve, 400));
-    await vscode.commands.executeCommand("continue.focusContinueInput");
+    await vscode.commands.executeCommand("antalyse.focusantalyseInput");
     await new Promise((resolve) => setTimeout(resolve, 400));
     const title = await (
       await extension.webviewProtocolPromise

@@ -6,7 +6,7 @@
 # Everything needs node and npm
 Write-Host "`nChecking for dependencies that may require manual installation...`n" -ForegroundColor White
 
-# $cargo = (get-command cargo -ErrorAction SilentlyContinue)
+# $cargo = (get-command cargo -ErrorAction Silentlyantalyse)
 # if ($null -eq $cargo) {
 #     Write-Host "Not Found " -ForegroundColor Red -NoNewLine
 #     Write-Host "cargo"
@@ -15,7 +15,7 @@ Write-Host "`nChecking for dependencies that may require manual installation...`
 #     & cargo --version
 # }
 
-$node  = (get-command node -ErrorAction SilentlyContinue)
+$node  = (get-command node -ErrorAction Silentlyantalyse)
 if ($null -eq $node) {
     Write-Host "Not Found " -ForegroundColor Red -NoNewLine
     Write-Host "node"

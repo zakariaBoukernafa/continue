@@ -2,7 +2,7 @@ import fs from "fs";
 
 import ignore from "ignore";
 
-import { getGlobalContinueIgnorePath } from "../util/paths";
+import { getGlobalantalyseIgnorePath } from "../util/paths";
 
 export const DEFAULT_IGNORE_FILETYPES = [
   "*.DS_Store",
@@ -66,7 +66,7 @@ export const DEFAULT_IGNORE_FILETYPES = [
   "*.env",
   "*.gitignore",
   "*.gitkeep",
-  "*.continueignore",
+  "*.antalyseignore",
   "config.json",
   "*.csv",
   "*.uasset",
@@ -98,7 +98,7 @@ export const DEFAULT_IGNORE_DIRS = [
   "bin/",
   ".pytest_cache/",
   ".vscode-test/",
-  ".continue/",
+  ".antalyse/",
   "__pycache__/",
   "site-packages/",
   ".gradle/",
@@ -119,7 +119,7 @@ export function gitIgArrayFromFile(file: string) {
     .filter((l) => !/^#|^$/.test(l)); // Remove empty lines
 }
 
-export const getGlobalContinueIgArray = () => {
-  const contents = fs.readFileSync(getGlobalContinueIgnorePath(), "utf8");
+export const getGlobalantalyseIgArray = () => {
+  const contents = fs.readFileSync(getGlobalantalyseIgnorePath(), "utf8");
   return gitIgArrayFromFile(contents);
 };

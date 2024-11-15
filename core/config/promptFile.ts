@@ -11,7 +11,7 @@ import { getBasename } from "../util/index";
 import type {
   ChatMessage,
   ContextItem,
-  ContinueSDK,
+  antalyseSDK,
   IContextProvider,
   IDE,
   SlashCommand,
@@ -43,9 +43,9 @@ export async function getPromptFiles(
 }
 
 const DEFAULT_PROMPT_FILE = `# This is an example ".prompt" file
-# It is used to define and reuse prompts within Continue
-# Continue will automatically create a slash command for each prompt in the .prompts folder
-# To learn more, see the full .prompt file reference: https://docs.continue.dev/features/prompt-files
+# It is used to define and reuse prompts within antalyse
+# antalyse will automatically create a slash command for each prompt in the .prompts folder
+# To learn more, see the full .prompt file reference: https://docs.antalyse.dev/features/prompt-files
 temperature: 0.0
 ---
 {{{ diff }}}
@@ -164,7 +164,7 @@ function extractUserInput(input: string, commandName: string): string {
 
 async function renderPrompt(
   prompt: string,
-  context: ContinueSDK,
+  context: antalyseSDK,
   userInput: string,
 ) {
   const helpers = getContextProviderHelpers(context);
@@ -189,7 +189,7 @@ async function renderPrompt(
 }
 
 function getContextProviderHelpers(
-  context: ContinueSDK,
+  context: antalyseSDK,
 ): Array<[string, Handlebars.HelperDelegate]> | undefined {
   return context.config.contextProviders?.map((provider: IContextProvider) => [
     provider.description.title,

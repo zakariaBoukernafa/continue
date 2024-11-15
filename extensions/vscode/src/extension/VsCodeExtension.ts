@@ -10,14 +10,14 @@ import { getConfigJsonPath, getConfigTsPath } from "core/util/paths";
 import { v4 as uuidv4 } from "uuid";
 import * as vscode from "vscode";
 
-import { ContinueCompletionProvider } from "../autocomplete/completionProvider";
+import { antalyseCompletionProvider } from "../autocomplete/completionProvider";
 import {
   monitorBatteryChanges,
   setupStatusBar,
   StatusBarStatus,
 } from "../autocomplete/statusBar";
 import { registerAllCommands } from "../commands";
-import { ContinueGUIWebviewViewProvider } from "../ContinueGUIWebviewViewProvider";
+import { antalyseGUIWebviewViewProvider } from "../antalyseGUIWebviewViewProvider";
 import { DiffManager } from "../diff/horizontal";
 import { VerticalDiffManager } from "../diff/vertical/manager";
 import { registerAllCodeLensProviders } from "../lang-server/codeLens";
@@ -46,7 +46,7 @@ export class VsCodeExtension {
   private extensionContext: vscode.ExtensionContext;
   private ide: VsCodeIde;
   private tabAutocompleteModel: TabAutocompleteModel;
-  private sidebar: ContinueGUIWebviewViewProvider;
+  private sidebar: antalyseGUIWebviewViewProvider;
   private windowId: string;
   private diffManager: DiffManager;
   private editDecorationManager: EditDecorationManager;
@@ -87,7 +87,7 @@ export class VsCodeExtension {
     const configHandlerPromise = new Promise<ConfigHandler>((resolve) => {
       resolveConfigHandler = resolve;
     });
-    this.sidebar = new ContinueGUIWebviewViewProvider(
+    this.sidebar = new antalyseGUIWebviewViewProvider(
       configHandlerPromise,
       this.windowId,
       this.extensionContext,
@@ -96,7 +96,7 @@ export class VsCodeExtension {
     // Sidebar
     context.subscriptions.push(
       vscode.window.registerWebviewViewProvider(
-        "continue.continueGUIView",
+        "antalyse.antalyseGUIView",
         this.sidebar,
         {
           webviewOptions: { retainContextWhenHidden: true },
@@ -107,7 +107,7 @@ export class VsCodeExtension {
 
     // Config Handler with output channel
     const outputChannel = vscode.window.createOutputChannel(
-      "Continue - LLM Prompt/Completion",
+      "antalyse - LLM Prompt/Completion",
     );
     const inProcessMessenger = new InProcessMessenger<
       ToCoreProtocol,
@@ -199,7 +199,7 @@ export class VsCodeExtension {
     context.subscriptions.push(
       vscode.languages.registerInlineCompletionItemProvider(
         [{ pattern: "**" }],
-        new ContinueCompletionProvider(
+        new antalyseCompletionProvider(
           this.configHandler,
           this.ide,
           this.tabAutocompleteModel,
@@ -239,7 +239,7 @@ export class VsCodeExtension {
       this.configHandler,
       this.diffManager,
       this.verticalDiffManager,
-      this.core.continueServerClientPromise,
+      this.core.antalyseServerClientPromise,
       this.battery,
       quickEdit,
       this.core,
@@ -283,12 +283,12 @@ export class VsCodeExtension {
       }
 
       if (
-        filepath.endsWith(".continuerc.json") ||
+        filepath.endsWith(".antalyserc.json") ||
         filepath.endsWith(".prompt")
       ) {
         this.configHandler.reloadConfig();
       } else if (
-        filepath.endsWith(".continueignore") ||
+        filepath.endsWith(".antalyseignore") ||
         filepath.endsWith(".gitignore")
       ) {
         // Reindex the workspaces
@@ -296,14 +296,16 @@ export class VsCodeExtension {
       } else {
         // Reindex the file
         this.core.invoke("index/forceReIndex", {
-          dirs: [filepath]
+          dirs: [filepath],
         });
       }
     });
 
     vscode.workspace.onDidDeleteFiles(async (event) => {
       this.core.invoke("index/forceReIndex", {
-        dirs: event.files.map((file) => file.fsPath.split("/").slice(0, -1).join("/"))
+        dirs: event.files.map((file) =>
+          file.fsPath.split("/").slice(0, -1).join("/"),
+        ),
       });
     });
 
@@ -318,7 +320,7 @@ export class VsCodeExtension {
             sessionInfo,
           });
 
-          // To make sure continue-proxy models and anything else requiring it get updated access token
+          // To make sure antalyse-proxy models and anything else requiring it get updated access token
           this.configHandler.reloadConfig();
         });
         this.core.invoke("didChangeControlPlaneSessionInfo", { sessionInfo });
@@ -352,7 +354,8 @@ export class VsCodeExtension {
 
     // Register a content provider for the readonly virtual documents
     const documentContentProvider = new (class
-      implements vscode.TextDocumentContentProvider {
+      implements vscode.TextDocumentContentProvider
+    {
       // emitter and its event
       onDidChangeEmitter = new vscode.EventEmitter<vscode.Uri>();
       onDidChange = this.onDidChangeEmitter.event;
@@ -363,7 +366,7 @@ export class VsCodeExtension {
     })();
     context.subscriptions.push(
       vscode.workspace.registerTextDocumentContentProvider(
-        VsCodeExtension.continueVirtualDocumentScheme,
+        VsCodeExtension.antalyseVirtualDocumentScheme,
         documentContentProvider,
       ),
     );
@@ -383,7 +386,7 @@ export class VsCodeExtension {
     });
   }
 
-  static continueVirtualDocumentScheme = EXTENSION_NAME;
+  static antalyseVirtualDocumentScheme = EXTENSION_NAME;
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
   private PREVIOUS_BRANCH_FOR_WORKSPACE_DIR: { [dir: string]: string } = {};

@@ -64,7 +64,7 @@ async function installNodeModuleInTempDirAndCopyToCurrent(packageName, toCopy) {
   const tempDir = path.join(
     __dirname,
     "tmp",
-    `continue-node_modules-${adjustedName}`,
+    `antalyse-node_modules-${adjustedName}`,
   );
   const currentDir = process.cwd();
 
@@ -246,7 +246,7 @@ async function installNodeModuleInTempDirAndCopyToCurrent(packageName, toCopy) {
         {
           name: "binary",
           version: "1.0.0",
-          author: "Continue Dev, Inc",
+          author: "antalyse Dev, Inc",
           license: "Apache-2.0",
         },
         undefined,
@@ -283,7 +283,7 @@ async function installNodeModuleInTempDirAndCopyToCurrent(packageName, toCopy) {
     const exe = target.startsWith("win") ? ".exe" : "";
     const targetDir = `bin/${target}`;
     pathsToVerify.push(
-      `${targetDir}/continue-binary${exe}`,
+      `${targetDir}/antalyse-binary${exe}`,
       `${targetDir}/index.node`, // @lancedb
       "package.json", // Informs of where to look for node_sqlite3.node https://www.npmjs.com/package/bindings#:~:text=The%20searching%20for,file%20is%20found
       `${targetDir}/build/Release/node_sqlite3.node`,

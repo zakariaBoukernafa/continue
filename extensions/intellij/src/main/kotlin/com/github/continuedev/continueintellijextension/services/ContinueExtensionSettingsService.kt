@@ -1,7 +1,7 @@
-package com.github.continuedev.continueintellijextension.services
+package com.github.antalysedev.antalyseintellijextension.services
 
-import com.github.continuedev.continueintellijextension.constants.getConfigJsPath
-import com.github.continuedev.continueintellijextension.constants.getConfigJsonPath
+import com.github.antalysedev.antalyseintellijextension.constants.getConfigJsPath
+import com.github.antalysedev.antalyseintellijextension.constants.getConfigJsonPath
 import com.intellij.openapi.application.ApplicationInfo
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.*
@@ -23,13 +23,13 @@ import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
 import javax.swing.*
 
-class ContinueSettingsComponent : DumbAware {
+class antalyseSettingsComponent : DumbAware {
     val panel: JPanel = JPanel(GridBagLayout())
     val remoteConfigServerUrl: JTextField = JTextField()
     val remoteConfigSyncPeriod: JTextField = JTextField()
     val userToken: JTextField = JTextField()
     val enableTabAutocomplete: JCheckBox = JCheckBox("Enable Tab Autocomplete")
-    val enableContinueTeamsBeta: JCheckBox = JCheckBox("Enable Continue for Teams Beta")
+    val enableantalyseTeamsBeta: JCheckBox = JCheckBox("Enable antalyse for Teams Beta")
     val enableOSR: JCheckBox = JCheckBox("Enable Off-Screen Rendering")
     val displayEditorTooltip: JCheckBox = JCheckBox("Display Editor Tooltip")
 
@@ -57,7 +57,7 @@ class ContinueSettingsComponent : DumbAware {
         constraints.gridy++
         panel.add(enableTabAutocomplete, constraints)
         constraints.gridy++
-        panel.add(enableContinueTeamsBeta, constraints)
+        panel.add(enableantalyseTeamsBeta, constraints)
         constraints.gridy++
         panel.add(enableOSR, constraints)
         constraints.gridy++
@@ -72,18 +72,18 @@ class ContinueSettingsComponent : DumbAware {
 }
 
 @Serializable
-class ContinueRemoteConfigSyncResponse {
+class antalyseRemoteConfigSyncResponse {
     var configJson: String? = null
     var configJs: String? = null
 }
 
 @State(
-    name = "com.github.continuedev.continueintellijextension.services.ContinueExtensionSettings",
-    storages = [Storage("ContinueExtensionSettings.xml")]
+    name = "com.github.antalysedev.antalyseintellijextension.services.antalyseExtensionSettings",
+    storages = [Storage("antalyseExtensionSettings.xml")]
 )
-open class ContinueExtensionSettings : PersistentStateComponent<ContinueExtensionSettings.ContinueState> {
+open class antalyseExtensionSettings : PersistentStateComponent<antalyseExtensionSettings.antalyseState> {
 
-    class ContinueState {
+    class antalyseState {
         var lastSelectedInlineEditModel: String? = null
         var shownWelcomeDialog: Boolean = false
         var remoteConfigServerUrl: String? = null
@@ -91,32 +91,32 @@ open class ContinueExtensionSettings : PersistentStateComponent<ContinueExtensio
         var userToken: String? = null
         var enableTabAutocomplete: Boolean = true
         var ghAuthToken: String? = null
-        var enableContinueTeamsBeta: Boolean = false
+        var enableantalyseTeamsBeta: Boolean = false
         var enableOSR: Boolean = shouldRenderOffScreen()
         var displayEditorTooltip: Boolean = true
     }
 
-    var continueState: ContinueState = ContinueState()
+    var antalyseState: antalyseState = antalyseState()
 
     private var remoteSyncFuture: ScheduledFuture<*>? = null
 
-    override fun getState(): ContinueState {
-        return continueState
+    override fun getState(): antalyseState {
+        return antalyseState
     }
 
-    override fun loadState(state: ContinueState) {
-        continueState = state
+    override fun loadState(state: antalyseState) {
+        antalyseState = state
     }
 
     companion object {
-        val instance: ContinueExtensionSettings
-            get() = ServiceManager.getService(ContinueExtensionSettings::class.java)
+        val instance: antalyseExtensionSettings
+            get() = ServiceManager.getService(antalyseExtensionSettings::class.java)
     }
 
 
     // Sync remote config from server
     private fun syncRemoteConfig() {
-        val state = instance.continueState
+        val state = instance.antalyseState
 
         if (state.remoteConfigServerUrl != null && state.remoteConfigServerUrl!!.isNotEmpty()) {
             // download remote config as json file
@@ -131,7 +131,7 @@ open class ContinueExtensionSettings : PersistentStateComponent<ContinueExtensio
             }
 
             val request = requestBuilder.build()
-            var configResponse: ContinueRemoteConfigSyncResponse? = null
+            var configResponse: antalyseRemoteConfigSyncResponse? = null
 
             try {
                 client.newCall(request).execute().use { response ->
@@ -140,7 +140,7 @@ open class ContinueExtensionSettings : PersistentStateComponent<ContinueExtensio
                     response.body?.string()?.let { responseBody ->
                         try {
                             configResponse =
-                                Json.decodeFromString<ContinueRemoteConfigSyncResponse>(responseBody)
+                                Json.decodeFromString<antalyseRemoteConfigSyncResponse>(responseBody)
                         } catch (e: Exception) {
                             e.printStackTrace()
                             return
@@ -175,68 +175,68 @@ open class ContinueExtensionSettings : PersistentStateComponent<ContinueExtensio
             .scheduleWithFixedDelay(
                 { syncRemoteConfig() },
                 0,
-                continueState.remoteConfigSyncPeriod.toLong(),
+                antalyseState.remoteConfigSyncPeriod.toLong(),
                 TimeUnit.MINUTES
             )
     }
 }
 
 interface SettingsListener {
-    fun settingsUpdated(settings: ContinueExtensionSettings.ContinueState)
+    fun settingsUpdated(settings: antalyseExtensionSettings.antalyseState)
 
     companion object {
         val TOPIC = Topic.create("SettingsUpdate", SettingsListener::class.java)
     }
 }
 
-class ContinueExtensionConfigurable : Configurable {
-    private var mySettingsComponent: ContinueSettingsComponent? = null
+class antalyseExtensionConfigurable : Configurable {
+    private var mySettingsComponent: antalyseSettingsComponent? = null
 
     override fun createComponent(): JComponent {
-        mySettingsComponent = ContinueSettingsComponent()
+        mySettingsComponent = antalyseSettingsComponent()
         return mySettingsComponent!!.panel
     }
 
     override fun isModified(): Boolean {
-        val settings = ContinueExtensionSettings.instance
+        val settings = antalyseExtensionSettings.instance
         val modified =
-            mySettingsComponent?.remoteConfigServerUrl?.text != settings.continueState.remoteConfigServerUrl ||
-                    mySettingsComponent?.remoteConfigSyncPeriod?.text?.toInt() != settings.continueState.remoteConfigSyncPeriod ||
-                    mySettingsComponent?.userToken?.text != settings.continueState.userToken ||
-                    mySettingsComponent?.enableTabAutocomplete?.isSelected != settings.continueState.enableTabAutocomplete ||
-                    mySettingsComponent?.enableContinueTeamsBeta?.isSelected != settings.continueState.enableContinueTeamsBeta ||
-                    mySettingsComponent?.enableOSR?.isSelected != settings.continueState.enableOSR ||
-                    mySettingsComponent?.displayEditorTooltip?.isSelected != settings.continueState.displayEditorTooltip
+            mySettingsComponent?.remoteConfigServerUrl?.text != settings.antalyseState.remoteConfigServerUrl ||
+                    mySettingsComponent?.remoteConfigSyncPeriod?.text?.toInt() != settings.antalyseState.remoteConfigSyncPeriod ||
+                    mySettingsComponent?.userToken?.text != settings.antalyseState.userToken ||
+                    mySettingsComponent?.enableTabAutocomplete?.isSelected != settings.antalyseState.enableTabAutocomplete ||
+                    mySettingsComponent?.enableantalyseTeamsBeta?.isSelected != settings.antalyseState.enableantalyseTeamsBeta ||
+                    mySettingsComponent?.enableOSR?.isSelected != settings.antalyseState.enableOSR ||
+                    mySettingsComponent?.displayEditorTooltip?.isSelected != settings.antalyseState.displayEditorTooltip
         return modified
     }
 
     override fun apply() {
-        val settings = ContinueExtensionSettings.instance
-        settings.continueState.remoteConfigServerUrl = mySettingsComponent?.remoteConfigServerUrl?.text
-        settings.continueState.remoteConfigSyncPeriod = mySettingsComponent?.remoteConfigSyncPeriod?.text?.toInt() ?: 60
-        settings.continueState.userToken = mySettingsComponent?.userToken?.text
-        settings.continueState.enableTabAutocomplete = mySettingsComponent?.enableTabAutocomplete?.isSelected ?: false
-        settings.continueState.enableContinueTeamsBeta =
-            mySettingsComponent?.enableContinueTeamsBeta?.isSelected ?: false
-        settings.continueState.enableOSR = mySettingsComponent?.enableOSR?.isSelected ?: true
-        settings.continueState.displayEditorTooltip = mySettingsComponent?.displayEditorTooltip?.isSelected ?: true
+        val settings = antalyseExtensionSettings.instance
+        settings.antalyseState.remoteConfigServerUrl = mySettingsComponent?.remoteConfigServerUrl?.text
+        settings.antalyseState.remoteConfigSyncPeriod = mySettingsComponent?.remoteConfigSyncPeriod?.text?.toInt() ?: 60
+        settings.antalyseState.userToken = mySettingsComponent?.userToken?.text
+        settings.antalyseState.enableTabAutocomplete = mySettingsComponent?.enableTabAutocomplete?.isSelected ?: false
+        settings.antalyseState.enableantalyseTeamsBeta =
+            mySettingsComponent?.enableantalyseTeamsBeta?.isSelected ?: false
+        settings.antalyseState.enableOSR = mySettingsComponent?.enableOSR?.isSelected ?: true
+        settings.antalyseState.displayEditorTooltip = mySettingsComponent?.displayEditorTooltip?.isSelected ?: true
 
         ApplicationManager.getApplication().messageBus.syncPublisher(SettingsListener.TOPIC)
-            .settingsUpdated(settings.continueState)
-        ContinueExtensionSettings.instance.addRemoteSyncJob()
+            .settingsUpdated(settings.antalyseState)
+        antalyseExtensionSettings.instance.addRemoteSyncJob()
     }
 
     override fun reset() {
-        val settings = ContinueExtensionSettings.instance
-        mySettingsComponent?.remoteConfigServerUrl?.text = settings.continueState.remoteConfigServerUrl
-        mySettingsComponent?.remoteConfigSyncPeriod?.text = settings.continueState.remoteConfigSyncPeriod.toString()
-        mySettingsComponent?.userToken?.text = settings.continueState.userToken
-        mySettingsComponent?.enableTabAutocomplete?.isSelected = settings.continueState.enableTabAutocomplete
-        mySettingsComponent?.enableContinueTeamsBeta?.isSelected = settings.continueState.enableContinueTeamsBeta
-        mySettingsComponent?.enableOSR?.isSelected = settings.continueState.enableOSR
-        mySettingsComponent?.displayEditorTooltip?.isSelected = settings.continueState.displayEditorTooltip
+        val settings = antalyseExtensionSettings.instance
+        mySettingsComponent?.remoteConfigServerUrl?.text = settings.antalyseState.remoteConfigServerUrl
+        mySettingsComponent?.remoteConfigSyncPeriod?.text = settings.antalyseState.remoteConfigSyncPeriod.toString()
+        mySettingsComponent?.userToken?.text = settings.antalyseState.userToken
+        mySettingsComponent?.enableTabAutocomplete?.isSelected = settings.antalyseState.enableTabAutocomplete
+        mySettingsComponent?.enableantalyseTeamsBeta?.isSelected = settings.antalyseState.enableantalyseTeamsBeta
+        mySettingsComponent?.enableOSR?.isSelected = settings.antalyseState.enableOSR
+        mySettingsComponent?.displayEditorTooltip?.isSelected = settings.antalyseState.displayEditorTooltip
 
-        ContinueExtensionSettings.instance.addRemoteSyncJob()
+        antalyseExtensionSettings.instance.addRemoteSyncJob()
     }
 
     override fun disposeUIResources() {
@@ -244,7 +244,7 @@ class ContinueExtensionConfigurable : Configurable {
     }
 
     override fun getDisplayName(): String {
-        return "Continue Extension Settings"
+        return "antalyse Extension Settings"
     }
 }
 

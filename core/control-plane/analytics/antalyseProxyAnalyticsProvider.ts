@@ -8,7 +8,7 @@ import {
   IAnalyticsProvider,
 } from "./IAnalyticsProvider.js";
 
-export default class ContinueProxyAnalyticsProvider
+export default class antalyseProxyAnalyticsProvider
   implements IAnalyticsProvider
 {
   uniqueId?: string;

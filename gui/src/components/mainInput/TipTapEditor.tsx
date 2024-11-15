@@ -617,7 +617,7 @@ function TipTapEditor(props: TipTapEditorProps) {
   });
 
   useWebviewListener(
-    "focusContinueInput",
+    "focusantalyseInput",
     async (data) => {
       if (!props.isMainInput) {
         return;
@@ -634,7 +634,7 @@ function TipTapEditor(props: TipTapEditorProps) {
   );
 
   useWebviewListener(
-    "focusContinueInputWithoutClear",
+    "focusantalyseInputWithoutClear",
     async () => {
       if (!props.isMainInput) {
         return;
@@ -647,7 +647,7 @@ function TipTapEditor(props: TipTapEditorProps) {
   );
 
   useWebviewListener(
-    "focusContinueInputWithNewSession",
+    "focusantalyseInputWithNewSession",
     async () => {
       if (!props.isMainInput) {
         return;
@@ -739,7 +739,7 @@ function TipTapEditor(props: TipTapEditorProps) {
   );
 
   useWebviewListener(
-    "isContinueInputFocused",
+    "isantalyseInputFocused",
     async () => {
       return props.isMainInput && editorFocusedRef.current;
     },
@@ -748,7 +748,7 @@ function TipTapEditor(props: TipTapEditorProps) {
   );
 
   useWebviewListener(
-    "focusContinueSessionId",
+    "focusantalyseSessionId",
     async (data) => {
       if (!props.isMainInput) {
         return;

@@ -1,7 +1,7 @@
 import { ControlPlaneSessionInfo } from "../control-plane/client";
 
 import type {
-  ContinueRcJson,
+  antalyseRcJson,
   DiffLine,
   FileType,
   IDE,
@@ -26,7 +26,7 @@ export type ToIdeFromWebviewOrCoreProtocol = {
   listFolders: [undefined, string[]];
   writeFile: [{ path: string; contents: string }, void];
   showVirtualFile: [{ name: string; content: string }, void];
-  getContinueDir: [undefined, string];
+  getantalyseDir: [undefined, string];
   openFile: [{ path: string }, void];
   runCommand: [{ command: string }, void];
   getSearchResults: [{ query: string }, string];
@@ -49,16 +49,22 @@ export type ToIdeFromWebviewOrCoreProtocol = {
   ];
   getProblems: [{ filepath: string }, Problem[]];
   getOpenFiles: [undefined, string[]];
-  getCurrentFile: [undefined, undefined | {
-    isUntitled: boolean;
-    path: string;
-    contents: string;
-  }];
+  getCurrentFile: [
+    undefined,
+    (
+      | undefined
+      | {
+          isUntitled: boolean;
+          path: string;
+          contents: string;
+        }
+    ),
+  ];
   getPinnedFiles: [undefined, string[]];
   showLines: [{ filepath: string; startLine: number; endLine: number }, void];
   readRangeInFile: [{ filepath: string; range: Range }, string];
   getDiff: [{ includeUnstaged: boolean }, string];
-  getWorkspaceConfigs: [undefined, ContinueRcJson[]];
+  getWorkspaceConfigs: [undefined, antalyseRcJson[]];
   getTerminalContents: [undefined, string];
   getDebugLocals: [{ threadIndex: number }, string];
   getTopLevelCallStackSources: [

@@ -1,6 +1,6 @@
 import { Response } from "node-fetch";
 
-import { getHeaders } from "../../continueServer/stubs/headers.js";
+import { getHeaders } from "../../antalyseServer/stubs/headers.js";
 import { TRIAL_PROXY_URL } from "../../control-plane/client.js";
 import {
   EmbeddingsProviderName,

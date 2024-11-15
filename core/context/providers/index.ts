@@ -2,7 +2,7 @@ import { BaseContextProvider } from "../";
 import { ContextProviderName } from "../../";
 
 import CodeContextProvider from "./CodeContextProvider";
-import ContinueProxyContextProvider from "./ContinueProxyContextProvider";
+import antalyseProxyContextProvider from "./antalyseProxyContextProvider";
 import CurrentFileContextProvider from "./CurrentFileContextProvider";
 import DatabaseContextProvider from "./DatabaseContextProvider";
 import DebugLocalsProvider from "./DebugLocalsProvider";
@@ -32,7 +32,7 @@ import WebContextProvider from "./WebContextProvider";
  * - `CodeOutlineContextProvider`
  * - `CodeHighlightsContextProvider`
  *
- * See this issue for details: https://github.com/continuedev/continue/issues/1365
+ * See this issue for details: https://github.com/antalysedev/antalyse/issues/1365
  */
 export const Providers: (typeof BaseContextProvider)[] = [
   DiffContextProvider,
@@ -55,7 +55,7 @@ export const Providers: (typeof BaseContextProvider)[] = [
   CodeContextProvider,
   CurrentFileContextProvider,
   URLContextProvider,
-  ContinueProxyContextProvider,
+  antalyseProxyContextProvider,
   RepoMapContextProvider,
   DiscordContextProvider,
   GreptileContextProvider,

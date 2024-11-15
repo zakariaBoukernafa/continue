@@ -3,8 +3,8 @@ import { EmbeddingsProviderName } from "../../index.js";
 
 import OpenAIEmbeddingsProvider from "./OpenAIEmbeddingsProvider.js";
 
-class ContinueProxyEmbeddingsProvider extends OpenAIEmbeddingsProvider {
-  static providerName: EmbeddingsProviderName = "continue-proxy";
+class antalyseProxyEmbeddingsProvider extends OpenAIEmbeddingsProvider {
+  static providerName: EmbeddingsProviderName = "antalyse-proxy";
 
   set controlPlaneProxyInfo(value: ControlPlaneProxyInfo) {
     this.options.apiKey = value.workOsAccessToken;
@@ -15,4 +15,4 @@ class ContinueProxyEmbeddingsProvider extends OpenAIEmbeddingsProvider {
   }
 }
 
-export default ContinueProxyEmbeddingsProvider;
+export default antalyseProxyEmbeddingsProvider;

@@ -1,4 +1,4 @@
-package com.github.continuedev.continueintellijextension.autocomplete
+package com.github.antalysedev.antalyseintellijextension.autocomplete
 
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.EditorCustomElementRenderer
@@ -15,7 +15,7 @@ import java.awt.Rectangle
 import kotlin.math.ceil
 import kotlin.math.max
 
-class ContinueMultilineCustomElementRenderer(
+class antalyseMultilineCustomElementRenderer(
     val editor: Editor,
     val text: String,
 ) : EditorCustomElementRenderer {

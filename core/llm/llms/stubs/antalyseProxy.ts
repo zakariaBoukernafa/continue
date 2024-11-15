@@ -4,18 +4,18 @@ import OpenAI from "../OpenAI.js";
 
 import type { LLMOptions, ModelProvider } from "../../../index.js";
 
-class ContinueProxy extends OpenAI {
+class antalyseProxy extends OpenAI {
   set controlPlaneProxyInfo(value: ControlPlaneProxyInfo) {
     this.apiKey = value.workOsAccessToken;
     this.apiBase = new URL("openai/v1/", value.controlPlaneProxyUrl).toString();
   }
 
-  static providerName: ModelProvider = "continue-proxy";
+  static providerName: ModelProvider = "antalyse-proxy";
   static defaultOptions: Partial<LLMOptions> = {
     useLegacyCompletionsEndpoint: false,
     requestOptions: {
       headers: {
-        "x-continue-unique-id": Telemetry.uniqueId,
+        "x-antalyse-unique-id": Telemetry.uniqueId,
       },
     },
   };
@@ -29,4 +29,4 @@ class ContinueProxy extends OpenAI {
   }
 }
 
-export default ContinueProxy;
+export default antalyseProxy;

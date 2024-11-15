@@ -2,10 +2,10 @@ import { ConfigJson } from "@continuedev/config-types";
 
 import { ControlPlaneClient } from "../../control-plane/client.js";
 import {
-  ContinueConfig,
+  antalyseConfig,
   IDE,
   IdeSettings,
-  SerializedContinueConfig,
+  SerializedantalyseConfig,
 } from "../../index.js";
 import { ConfigResult } from "../load.js";
 
@@ -39,13 +39,13 @@ export default class ControlPlaneProfileLoader implements IProfileLoader {
     }, ControlPlaneProfileLoader.RELOAD_INTERVAL);
   }
 
-  async doLoadConfig(): Promise<ConfigResult<ContinueConfig>> {
+  async doLoadConfig(): Promise<ConfigResult<antalyseConfig>> {
     const settings =
       this.workspaceSettings ??
       ((await this.controlPlaneClient.getSettingsForWorkspace(
         this.profileId,
       )) as any);
-    const serializedConfig: SerializedContinueConfig = settings;
+    const serializedConfig: SerializedantalyseConfig = settings;
 
     const results = await doLoadConfig(
       this.ide,

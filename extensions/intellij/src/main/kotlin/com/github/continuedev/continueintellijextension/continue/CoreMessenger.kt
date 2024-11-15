@@ -1,9 +1,9 @@
-package com.github.continuedev.continueintellijextension.`continue`
+package com.github.antalysedev.antalyseintellijextension.`antalyse`
 
-import com.github.continuedev.continueintellijextension.constants.MessageTypes
-import com.github.continuedev.continueintellijextension.services.ContinueExtensionSettings
-import com.github.continuedev.continueintellijextension.services.ContinuePluginService
-import com.github.continuedev.continueintellijextension.services.TelemetryService
+import com.github.antalysedev.antalyseintellijextension.constants.MessageTypes
+import com.github.antalysedev.antalyseintellijextension.services.antalyseExtensionSettings
+import com.github.antalysedev.antalyseintellijextension.services.antalysePluginService
+import com.github.antalysedev.antalyseintellijextension.services.TelemetryService
 import com.google.gson.Gson
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
@@ -17,7 +17,7 @@ import kotlinx.coroutines.*
 
 class CoreMessenger(
     private val project: Project,
-    continueCorePath: String,
+    antalyseCorePath: String,
     private val ideProtocolClient: IdeProtocolClient,
     coroutineScope: CoroutineScope
 ) {
@@ -33,7 +33,7 @@ class CoreMessenger(
       writer?.write(message + "\r\n")
       writer?.flush()
     } catch (e: Exception) {
-      println("Error writing to Continue core: $e")
+      println("Error writing to antalyse core: $e")
     }
   }
 
@@ -66,8 +66,8 @@ class CoreMessenger(
       // TODO: Currently we aren't set up to receive a response back from the webview
       // Can circumvent for getDefaultsModelTitle here for now
       if (messageType == "getDefaultModelTitle") {
-        val continueSettingsService = service<ContinueExtensionSettings>()
-        val defaultModelTitle = continueSettingsService.continueState.lastSelectedInlineEditModel
+        val antalyseSettingsService = service<antalyseExtensionSettings>()
+        val defaultModelTitle = antalyseSettingsService.antalyseState.lastSelectedInlineEditModel
         val message =
             gson.toJson(
                 mapOf(
@@ -76,8 +76,8 @@ class CoreMessenger(
                     "data" to defaultModelTitle))
         write(message)
       }
-      val continuePluginService = project.service<ContinuePluginService>()
-      continuePluginService.sendToWebview(messageType, responseMap["data"], messageType)
+      val antalysePluginService = project.service<antalysePluginService>()
+      antalysePluginService.sendToWebview(messageType, responseMap["data"], messageType)
     }
 
     // Responses for messageId
@@ -161,11 +161,11 @@ class CoreMessenger(
       }
     } else {
       // Set proper permissions
-      coroutineScope.launch(Dispatchers.IO) { setPermissions(continueCorePath) }
+      coroutineScope.launch(Dispatchers.IO) { setPermissions(antalyseCorePath) }
 
       // Start the subprocess
       val processBuilder =
-          ProcessBuilder(continueCorePath).directory(File(continueCorePath).parentFile)
+          ProcessBuilder(antalyseCorePath).directory(File(antalyseCorePath).parentFile)
       process = processBuilder.start()
 
       val outputStream = process!!.outputStream

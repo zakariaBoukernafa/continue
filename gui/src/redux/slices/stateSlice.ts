@@ -8,7 +8,7 @@ import {
   PersistedSessionInfo,
   PromptLog,
 } from "core";
-import { BrowserSerializedContinueConfig } from "core/config/load";
+import { BrowserSerializedantalyseConfig } from "core/config/load";
 import { ConfigValidationError } from "core/config/validation";
 import { stripImages } from "core/llm/images";
 import { createSelector } from "reselect";
@@ -37,7 +37,7 @@ type State = {
   ttsActive: boolean;
   active: boolean;
   isGatheringContext: boolean;
-  config: BrowserSerializedContinueConfig;
+  config: BrowserSerializedantalyseConfig;
   title: string;
   sessionId: string;
   defaultModelTitle: string;
@@ -81,7 +81,7 @@ export const stateSlice = createSlice({
   reducers: {
     setConfig: (
       state,
-      { payload: config }: PayloadAction<BrowserSerializedContinueConfig>,
+      { payload: config }: PayloadAction<BrowserSerializedantalyseConfig>,
     ) => {
       const defaultModelTitle =
         config.models.find((model) => model.title === state.defaultModelTitle)
@@ -172,7 +172,7 @@ export const stateSlice = createSlice({
         contextItems: [],
       });
 
-      // https://github.com/continuedev/continue/pull/1021
+      // https://github.com/antalysedev/antalyse/pull/1021
       // state.contextItems = [];
       state.active = true;
     },
@@ -201,7 +201,7 @@ export const stateSlice = createSlice({
         },
         contextItems: [],
       });
-      // https://github.com/continuedev/continue/pull/1021
+      // https://github.com/antalysedev/antalyse/pull/1021
       // state.contextItems = [];
       state.active = true;
     },

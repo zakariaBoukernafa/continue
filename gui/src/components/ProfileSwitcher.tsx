@@ -148,7 +148,7 @@ function ProfileSwitcher() {
       const shouldShowPopup =
         !lastControlServerBetaEnabledStatus && enableControlServerBeta;
       if (shouldShowPopup) {
-        ideMessenger.ide.showToast("info", "Continue for Teams enabled");
+        ideMessenger.ide.showToast("info", "antalyse for Teams enabled");
       }
     });
   }, []);
@@ -261,7 +261,7 @@ function ProfileSwitcher() {
         ) : (
           <HeaderButtonWithToolTip
             tooltipPlacement="top-end"
-            text="Click to login to Continue"
+            text="Click to login to antalyse"
             onClick={login}
           >
             <UserCircleIconOutline className="h-4 w-4" />

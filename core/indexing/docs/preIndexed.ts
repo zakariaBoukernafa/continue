@@ -10,7 +10,7 @@ export function getS3Filename(
 }
 
 export enum S3Buckets {
-  continueIndexedDocs = "continue-indexed-docs",
+  antalyseIndexedDocs = "antalyse-indexed-docs",
 }
 
 const AWS_REGION = "us-west-1";

@@ -2,7 +2,7 @@ import os from "os";
 
 import { jest } from "@jest/globals";
 
-import { ContinueConfig } from "../..";
+import { antalyseConfig } from "../..";
 import { testConfigHandler } from "../../test/util/fixtures";
 import FileSystemIde from "../../util/filesystem";
 
@@ -22,7 +22,7 @@ ChromiumInstaller.PCR_CONFIG = { downloadPath: os.tmpdir() };
 describe.skip("DocsCrawler", () => {
   const NUM_PAGES_TO_CRAWL = 5;
 
-  let config: ContinueConfig;
+  let config: antalyseConfig;
   let mockIde: FileSystemIde;
   let chromiumInstaller;
   let docsCrawler: DocsCrawler;

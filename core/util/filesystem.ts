@@ -2,7 +2,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 
 import {
-  ContinueRcJson,
+  antalyseRcJson,
   FileType,
   IDE,
   IdeInfo,
@@ -17,10 +17,10 @@ import {
 } from "../index.d.js";
 import { GetGhTokenArgs } from "../protocol/ide.js";
 
-import { getContinueGlobalPath } from "./paths.js";
+import { getantalyseGlobalPath } from "./paths.js";
 
 class FileSystemIde implements IDE {
-  constructor(private readonly workspaceDir: string) { }
+  constructor(private readonly workspaceDir: string) {}
   showToast(
     type: ToastType,
     message: string,
@@ -121,7 +121,7 @@ class FileSystemIde implements IDE {
     return Promise.resolve("NOT_UNIQUE");
   }
 
-  getWorkspaceConfigs(): Promise<ContinueRcJson[]> {
+  getWorkspaceConfigs(): Promise<antalyseRcJson[]> {
     return Promise.resolve([]);
   }
 
@@ -179,8 +179,8 @@ class FileSystemIde implements IDE {
     return Promise.resolve();
   }
 
-  getContinueDir(): Promise<string> {
-    return Promise.resolve(getContinueGlobalPath());
+  getantalyseDir(): Promise<string> {
+    return Promise.resolve(getantalyseGlobalPath());
   }
 
   openFile(path: string): Promise<void> {

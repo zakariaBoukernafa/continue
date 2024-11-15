@@ -3,7 +3,7 @@ import { RunResult } from "sqlite3";
 import { v4 as uuidv4 } from "uuid";
 import lance, { Table } from "vectordb";
 
-import { IContinueServerClient } from "../continueServer/interface.js";
+import { IantalyseServerClient } from "../antalyseServer/interface.js";
 import {
   BranchAndDir,
   Chunk,
@@ -47,7 +47,7 @@ export class LanceDbIndex implements CodebaseIndex {
     private readonly embeddingsProvider: EmbeddingsProvider,
     private readonly readFile: (filepath: string) => Promise<string>,
     private readonly pathSep: string,
-    private readonly continueServerClient?: IContinueServerClient,
+    private readonly antalyseServerClient?: IantalyseServerClient,
   ) {}
 
   tableNameForTag(tag: IndexTag) {
@@ -241,10 +241,10 @@ export class LanceDbIndex implements CodebaseIndex {
     };
 
     // Check remote cache
-    if (this.continueServerClient?.connected) {
+    if (this.antalyseServerClient?.connected) {
       try {
         const keys = results.compute.map(({ cacheKey }) => cacheKey);
-        const resp = await this.continueServerClient.getFromIndexCache(
+        const resp = await this.antalyseServerClient.getFromIndexCache(
           keys,
           "embeddings",
           repoName,
@@ -256,7 +256,7 @@ export class LanceDbIndex implements CodebaseIndex {
           )?.path;
           if (!path) {
             console.warn(
-              "Continue server sent a cacheKey that wasn't requested",
+              "antalyse server sent a cacheKey that wasn't requested",
               cacheKey,
             );
             continue;

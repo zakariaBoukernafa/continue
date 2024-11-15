@@ -1,4 +1,4 @@
-import { Chunk, ContinueConfig, IDE, ILLM } from "../..";
+import { Chunk, antalyseConfig, IDE, ILLM } from "../..";
 import { getModelByRole } from "../../config/util";
 import { stripImages } from "../../llm/images";
 import generateRepoMap from "../../util/generateRepoMap";
@@ -12,7 +12,7 @@ const SUPPORTED_MODEL_TITLE_FAMILIES = [
 ];
 
 function isSupportedModel(
-  config: ContinueConfig,
+  config: antalyseConfig,
   modelTitle?: string,
 ): boolean {
   if (config.experimental?.modelRoles?.applyCodeBlock) {
@@ -32,7 +32,7 @@ function isSupportedModel(
 
 export async function requestFilesFromRepoMap(
   defaultLlm: ILLM,
-  config: ContinueConfig,
+  config: antalyseConfig,
   ide: IDE,
   input: string,
   filterDirectory?: string,

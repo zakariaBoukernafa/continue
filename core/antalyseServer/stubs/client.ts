@@ -1,10 +1,10 @@
 import type {
   ArtifactType,
   EmbeddingsCacheResponse,
-  IContinueServerClient,
+  IantalyseServerClient,
 } from "../interface.js";
 
-export class ContinueServerClient implements IContinueServerClient {
+export class AntalyseServerClient implements IantalyseServerClient {
   url: URL | undefined;
 
   constructor(
@@ -17,7 +17,7 @@ export class ContinueServerClient implements IContinueServerClient {
           ? undefined
           : new URL(serverUrl);
     } catch (e) {
-      console.warn("Invalid Continue server url", e);
+      console.warn("Invalid antalyse server url", e);
       this.url = undefined;
     }
   }

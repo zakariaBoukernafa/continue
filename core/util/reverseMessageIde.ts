@@ -126,8 +126,8 @@ export class ReverseMessageIde {
       return undefined;
     });
 
-    this.on("getContinueDir", () => {
-      return this.ide.getContinueDir();
+    this.on("getantalyseDir", () => {
+      return this.ide.getantalyseDir();
     });
 
     this.on("writeFile", (data) => {

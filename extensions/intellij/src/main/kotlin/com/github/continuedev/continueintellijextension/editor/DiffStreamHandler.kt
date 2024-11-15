@@ -1,6 +1,6 @@
-package com.github.continuedev.continueintellijextension.editor
+package com.github.antalysedev.antalyseintellijextension.editor
 
-import com.github.continuedev.continueintellijextension.services.ContinuePluginService
+import com.github.antalysedev.antalyseintellijextension.services.antalysePluginService
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.command.undo.UndoManager
@@ -40,8 +40,8 @@ class DiffStreamHandler(
     private val unfinishedHighlighters: MutableList<RangeHighlighter> = mutableListOf()
     private val diffBlocks: MutableList<VerticalDiffBlock> = mutableListOf()
 
-    private val curLineKey = createTextAttributesKey("CONTINUE_DIFF_CURRENT_LINE", 0x40888888, editor)
-    private val unfinishedKey = createTextAttributesKey("CONTINUE_DIFF_UNFINISHED_LINE", 0x20888888, editor)
+    private val curLineKey = createTextAttributesKey("antalyse_DIFF_CURRENT_LINE", 0x40888888, editor)
+    private val unfinishedKey = createTextAttributesKey("antalyse_DIFF_UNFINISHED_LINE", 0x20888888, editor)
 
     init {
         initUnfinishedRangeHighlights()
@@ -70,10 +70,10 @@ class DiffStreamHandler(
     ) {
         isRunning = true
 
-        val continuePluginService = ServiceManager.getService(project, ContinuePluginService::class.java)
+        val antalysePluginService = ServiceManager.getService(project, antalysePluginService::class.java)
         val virtualFile = getVirtualFile()
 
-        continuePluginService.coreMessenger?.request(
+        antalysePluginService.coreMessenger?.request(
             "streamDiffLines", createRequestParams(input, prefix, highlighted, suffix, virtualFile, modelTitle), null
         ) { response ->
             if (!isRunning) return@request

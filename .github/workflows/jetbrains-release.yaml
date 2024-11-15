@@ -153,20 +153,20 @@ jobs:
       # - name: Code sign darwin binaries
       #   run: |
       #     echo "Signing executable with keychain: ${{ github.run_id }}"
-      #     codesign --sign - ../../binary/bin/darwin-x64/continue-binary
-      #     codesign --sign - ../../binary/bin/darwin-arm64/continue-binary
+      #     codesign --sign - ../../binary/bin/darwin-x64/antalyse-binary
+      #     codesign --sign - ../../binary/bin/darwin-arm64/antalyse-binary
 
       # - name: Sign darwin-arm64 binary
       #   uses: lando/code-sign-action@v2
       #   with:
-      #     file: ./binary/bin/darwin-arm64/continue-binary
+      #     file: ./binary/bin/darwin-arm64/antalyse-binary
       #     certificate-data: ${{ secrets.APPLE_CERT_DATA }}
       #     certificate-password: ${{ secrets.APPLE_CERT_PASSWORD }}
       #     apple-notary-user: ${{ secrets.APPLE_NOTARY_USER }}
       #     apple-notary-password: ${{ secrets.APPLE_NOTARY_PASSWORD }}
       #     apple-notary-tool: altool
       #     apple-team-id: 43XFLY66ZD
-      #     apple-product-id: dev.continue.continue-binary
+      #     apple-product-id: dev.antalyse.antalyse-binary
       #     options: --options runtime --entitlements entitlements.xml
 
       # Build plugin
@@ -201,7 +201,7 @@ jobs:
           echo "Contents of distributions folder:"
           ls
           echo "---"
-          FILENAME=`ls continue-intellij-extension-*.zip`
+          FILENAME=`ls antalyse-intellij-extension-*.zip`
           echo "Filename=${FILENAME}"
           unzip "$FILENAME" -d content
 
@@ -218,31 +218,31 @@ jobs:
       - name: Upload artifact (darwin-arm64)
         uses: actions/upload-artifact@v4
         with:
-          name: continue-binary-darwin-arm64
+          name: antalyse-binary-darwin-arm64
           path: ./binary/bin/darwin-arm64/
 
       - name: Upload artifact (darwin-x64)
         uses: actions/upload-artifact@v4
         with:
-          name: continue-binary-darwin-x64
+          name: antalyse-binary-darwin-x64
           path: ./binary/bin/darwin-x64/
 
       - name: Upload artifact (win32-x64)
         uses: actions/upload-artifact@v4
         with:
-          name: continue-binary-win32-x64
+          name: antalyse-binary-win32-x64
           path: ./binary/bin/win32-x64/
 
       - name: Upload artifact (linux-arm64)
         uses: actions/upload-artifact@v4
         with:
-          name: continue-binary-linux-arm64
+          name: antalyse-binary-linux-arm64
           path: ./binary/bin/linux-arm64/
 
       - name: Upload artifact (linux-x64)
         uses: actions/upload-artifact@v4
         with:
-          name: continue-binary-linux-x64
+          name: antalyse-binary-linux-x64
           path: ./binary/bin/linux-x64/
 
   test-binaries:
@@ -309,14 +309,14 @@ jobs:
       - name: Download binary artifact
         uses: actions/download-artifact@v4
         with:
-          name: continue-binary-${{ matrix.platform }}-${{ matrix.arch }}
+          name: antalyse-binary-${{ matrix.platform }}-${{ matrix.arch }}
           path: ./binary/bin/${{ matrix.platform }}-${{ matrix.arch }}/
 
       # Set execute permissions for the binary (non-Windows)
       - name: Set execute permissions
         run: |
           cd ../../binary/bin/${{ matrix.platform }}-${{ matrix.arch }}
-          chmod +x continue-binary
+          chmod +x antalyse-binary
           chmod +x build/Release/node_sqlite3.node
           chmod +x index.node
         if: ${{ matrix.platform }} != 'win32'
@@ -332,7 +332,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: core-logs-${{ matrix.platform }}-${{ matrix.arch }}
-          path: ~/.continue/logs/core.log
+          path: ~/.antalyse/logs/core.log
 
   # Run tests and upload a code coverage report
   test:

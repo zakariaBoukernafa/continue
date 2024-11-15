@@ -1,4 +1,4 @@
-package com.github.continuedev.continueintellijextension.utils
+package com.github.antalysedev.antalyseintellijextension.utils
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job

@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 
-class ContinueQuickFixProvider implements vscode.CodeActionProvider {
+class antalyseQuickFixProvider implements vscode.CodeActionProvider {
   public static readonly providedCodeActionKinds = [
     vscode.CodeActionKind.QuickFix,
   ];
@@ -18,7 +18,7 @@ class ContinueQuickFixProvider implements vscode.CodeActionProvider {
     const diagnostic = context.diagnostics[0];
 
     const quickFix = new vscode.CodeAction(
-      "Ask Continue",
+      "Ask antalyse",
       vscode.CodeActionKind.QuickFix,
     );
 
@@ -32,8 +32,8 @@ class ContinueQuickFixProvider implements vscode.CodeActionProvider {
     );
 
     quickFix.command = {
-      command: "continue.quickFix",
-      title: "Continue Quick Fix",
+      command: "antalyse.quickFix",
+      title: "antalyse Quick Fix",
       arguments: [surroundingRange, diagnostic.message],
     };
 
@@ -45,9 +45,9 @@ export default function registerQuickFixProvider() {
   // In your extension's activate function:
   vscode.languages.registerCodeActionsProvider(
     { language: "*" },
-    new ContinueQuickFixProvider(),
+    new antalyseQuickFixProvider(),
     {
-      providedCodeActionKinds: ContinueQuickFixProvider.providedCodeActionKinds,
+      providedCodeActionKinds: antalyseQuickFixProvider.providedCodeActionKinds,
     },
   );
 }

@@ -1,7 +1,7 @@
-package com.github.continuedev.continueintellijextension.editor
+package com.github.antalysedev.antalyseintellijextension.editor
 
-import com.github.continuedev.continueintellijextension.utils.getAltKeyLabel
-import com.github.continuedev.continueintellijextension.utils.getShiftKeyLabel
+import com.github.antalysedev.antalyseintellijextension.utils.getAltKeyLabel
+import com.github.antalysedev.antalyseintellijextension.utils.getShiftKeyLabel
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
@@ -30,7 +30,7 @@ class VerticalDiffBlock(
     private var deletionInlay: Disposable? = null
     private var textArea: JTextArea? = null // Used for calculation of the text area height when rendering buttons
     private val editorComponentInlaysManager = EditorComponentInlaysManager.from(editor, false)
-    private val greenKey = createTextAttributesKey("CONTINUE_DIFF_NEW_LINE", 0x3000FF00, editor)
+    private val greenKey = createTextAttributesKey("antalyse_DIFF_NEW_LINE", 0x3000FF00, editor)
 
     init {
         val (acceptBtn, rejectBtn) = createButtons()

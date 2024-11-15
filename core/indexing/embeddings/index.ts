@@ -3,7 +3,7 @@ import { EmbeddingsProviderName } from "../../index.js";
 import BaseEmbeddingsProvider from "./BaseEmbeddingsProvider.js";
 import BedrockEmbeddingsProvider from "./BedrockEmbeddingsProvider.js";
 import CohereEmbeddingsProvider from "./CohereEmbeddingsProvider.js";
-import ContinueProxyEmbeddingsProvider from "./ContinueProxyEmbeddingsProvider.js";
+import antalyseProxyEmbeddingsProvider from "./antalyseProxyEmbeddingsProvider.js";
 import DeepInfraEmbeddingsProvider from "./DeepInfraEmbeddingsProvider.js";
 import FreeTrialEmbeddingsProvider from "./FreeTrialEmbeddingsProvider.js";
 import GeminiEmbeddingsProvider from "./GeminiEmbeddingsProvider.js";
@@ -37,7 +37,7 @@ export const allEmbeddingsProviders: Record<
   "free-trial": FreeTrialEmbeddingsProvider,
   "huggingface-tei": HuggingFaceTEIEmbeddingsProvider,
   gemini: GeminiEmbeddingsProvider,
-  "continue-proxy": ContinueProxyEmbeddingsProvider,
+  "antalyse-proxy": antalyseProxyEmbeddingsProvider,
   deepinfra: DeepInfraEmbeddingsProvider,
   nvidia: NvidiaEmbeddingsProvider,
   voyage: VoyageEmbeddingsProvider,
@@ -45,5 +45,5 @@ export const allEmbeddingsProviders: Record<
   nebius: NebiusEmbeddingsProvider,
   vertexai: VertexEmbeddingsProvider,
   watsonx: WatsonxEmbeddingsProvider,
-  lmstudio: LMStudioEmbeddingsProvider
+  lmstudio: LMStudioEmbeddingsProvider,
 };

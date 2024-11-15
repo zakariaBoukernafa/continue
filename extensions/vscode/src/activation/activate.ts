@@ -1,4 +1,4 @@
-import { getContinueRcPath, getTsConfigPath } from "core/util/paths";
+import { getantalyseRcPath, getTsConfigPath } from "core/util/paths";
 import { Telemetry } from "core/util/posthog";
 import * as vscode from "vscode";
 
@@ -6,13 +6,13 @@ import { VsCodeExtension } from "../extension/VsCodeExtension";
 import registerQuickFixProvider from "../lang-server/codeActions";
 import { getExtensionVersion } from "../util/util";
 
-import { VsCodeContinueApi } from "./api";
+import { VsCodeantalyseApi } from "./api";
 import { setupInlineTips } from "./inlineTips";
 
 export async function activateExtension(context: vscode.ExtensionContext) {
   // Add necessary files
   getTsConfigPath();
-  getContinueRcPath();
+  getantalyseRcPath();
 
   // Register commands and providers
   registerQuickFixProvider();
@@ -20,7 +20,7 @@ export async function activateExtension(context: vscode.ExtensionContext) {
 
   const vscodeExtension = new VsCodeExtension(context);
 
-  // Load Continue configuration
+  // Load antalyse configuration
   if (!context.globalState.get("hasBeenInstalled")) {
     context.globalState.update("hasBeenInstalled", true);
     Telemetry.capture(
@@ -32,8 +32,8 @@ export async function activateExtension(context: vscode.ExtensionContext) {
     );
   }
 
-  const api = new VsCodeContinueApi(vscodeExtension);
-  const continuePublicApi = {
+  const api = new VsCodeantalyseApi(vscodeExtension);
+  const antalysePublicApi = {
     registerCustomContextProvider: api.registerCustomContextProvider.bind(api),
   };
 
@@ -41,8 +41,8 @@ export async function activateExtension(context: vscode.ExtensionContext) {
   // or entire extension for testing
   return process.env.NODE_ENV === "test"
     ? {
-        ...continuePublicApi,
+        ...antalysePublicApi,
         extension: vscodeExtension,
       }
-    : continuePublicApi;
+    : antalysePublicApi;
 }

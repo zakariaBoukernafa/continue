@@ -1,6 +1,6 @@
-package com.github.continuedev.continueintellijextension.toolWindow
+package com.github.antalysedev.antalyseintellijextension.toolWindow
 
-import com.github.continuedev.continueintellijextension.services.ContinuePluginService
+import com.github.antalysedev.antalyseintellijextension.services.antalysePluginService
 import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.components.ServiceManager
@@ -13,11 +13,11 @@ import javax.swing.*
 
 const val JS_QUERY_POOL_SIZE = "200"
 
-class ContinuePluginToolWindowFactory : ToolWindowFactory, DumbAware {
+class antalysePluginToolWindowFactory : ToolWindowFactory, DumbAware {
   override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-    val continueToolWindow = ContinuePluginWindow(project)
+    val antalyseToolWindow = antalysePluginWindow(project)
     val content =
-        ContentFactory.getInstance().createContent(continueToolWindow.content, null, false)
+        ContentFactory.getInstance().createContent(antalyseToolWindow.content, null, false)
     toolWindow.contentManager.addContent(content)
     val titleActions = mutableListOf<AnAction>()
     createTitleActions(titleActions)
@@ -32,7 +32,7 @@ class ContinuePluginToolWindowFactory : ToolWindowFactory, DumbAware {
   }
 
   private fun createTitleActions(titleActions: MutableList<in AnAction>) {
-    val action = ActionManager.getInstance().getAction("ContinueSidebarActionsGroup")
+    val action = ActionManager.getInstance().getAction("antalyseSidebarActionsGroup")
     if (action != null) {
       titleActions.add(action)
     }
@@ -40,21 +40,21 @@ class ContinuePluginToolWindowFactory : ToolWindowFactory, DumbAware {
 
   override fun shouldBeAvailable(project: Project) = true
 
-  class ContinuePluginWindow(project: Project) {
-    private val defaultGUIUrl = "http://continue/index.html"
+  class antalysePluginWindow(project: Project) {
+    private val defaultGUIUrl = "http://antalyse/index.html"
 
     init {
       System.setProperty("ide.browser.jcef.jsQueryPoolSize", JS_QUERY_POOL_SIZE)
       System.setProperty("ide.browser.jcef.contextMenu.devTools.enabled", "true")
     }
 
-    val browser: ContinueBrowser by lazy {
+    val browser: antalyseBrowser by lazy {
       val url = System.getenv("GUI_URL")?.toString() ?: defaultGUIUrl
 
-      val browser = ContinueBrowser(project, url)
-      val continuePluginService =
-          ServiceManager.getService(project, ContinuePluginService::class.java)
-      continuePluginService.continuePluginWindow = this
+      val browser = antalyseBrowser(project, url)
+      val antalysePluginService =
+          ServiceManager.getService(project, antalysePluginService::class.java)
+      antalysePluginService.antalysePluginWindow = this
       browser
     }
 

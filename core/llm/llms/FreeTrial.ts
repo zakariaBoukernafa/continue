@@ -1,5 +1,5 @@
 import { TRIAL_FIM_MODEL } from "../../config/onboarding.js";
-import { getHeaders } from "../../continueServer/stubs/headers.js";
+import { getHeaders } from "../../antalyseServer/stubs/headers.js";
 import { TRIAL_PROXY_URL } from "../../control-plane/client.js";
 import { ChatMessage, CompletionOptions, ModelProvider } from "../../index.js";
 import { BaseLLM } from "../index.js";
@@ -17,7 +17,7 @@ class FreeTrial extends BaseLLM {
   private async _getHeaders() {
     if (!this.ghAuthToken) {
       throw new Error(
-        "Please sign in with GitHub in order to use the free trial. If you'd like to use Continue without signing in, you can set up your own local model or API key.",
+        "Please sign in with GitHub in order to use the free trial. If you'd like to use antalyse without signing in, you can set up your own local model or API key.",
       );
     }
     return {
@@ -164,7 +164,7 @@ class FreeTrial extends BaseLLM {
     } catch (e: any) {
       if (e.message.startsWith("HTTP 429")) {
         throw new Error(
-          "You have reached the 2000 request limit for the autocomplete free trial. To continue using autocomplete, please set up a local model or your own Codestral API key.",
+          "You have reached the 2000 request limit for the autocomplete free trial. To antalyse using autocomplete, please set up a local model or your own Codestral API key.",
         );
       }
       throw e;

@@ -1,4 +1,4 @@
-import { SerializedContinueConfig } from "core";
+import { SerializedantalyseConfig } from "core";
 // import Mock from "core/llm/llms/Mock.js";
 import { FromIdeProtocol, ToIdeProtocol } from "core/protocol/index.js";
 import FileSystemIde from "core/util/filesystem";
@@ -51,11 +51,11 @@ function autodetectPlatformAndArch() {
   return [platform, arch];
 }
 
-const CONTINUE_GLOBAL_DIR = path.join(__dirname, "..", ".continue");
-if (fs.existsSync(CONTINUE_GLOBAL_DIR)) {
-  fs.rmSync(CONTINUE_GLOBAL_DIR, { recursive: true, force: true });
+const antalyse_GLOBAL_DIR = path.join(__dirname, "..", ".antalyse");
+if (fs.existsSync(antalyse_GLOBAL_DIR)) {
+  fs.rmSync(antalyse_GLOBAL_DIR, { recursive: true, force: true });
 }
-fs.mkdirSync(CONTINUE_GLOBAL_DIR);
+fs.mkdirSync(antalyse_GLOBAL_DIR);
 
 describe("Test Suite", () => {
   let messenger: IMessenger<ToIdeProtocol, FromIdeProtocol>;
@@ -65,9 +65,9 @@ describe("Test Suite", () => {
     const [platform, arch] = autodetectPlatformAndArch();
     const binaryDir = path.join(__dirname, "..", "bin", `${platform}-${arch}`);
     const exe = platform === "win32" ? ".exe" : "";
-    const binaryPath = path.join(binaryDir, `continue-binary${exe}`);
+    const binaryPath = path.join(binaryDir, `antalyse-binary${exe}`);
     const expectedItems = [
-      `continue-binary${exe}`,
+      `antalyse-binary${exe}`,
       `esbuild${exe}`,
       "index.node",
       "package.json",
@@ -116,7 +116,7 @@ describe("Test Suite", () => {
     } else {
       try {
         subprocess = spawn(binaryPath, {
-          env: { ...process.env, CONTINUE_GLOBAL_DIR },
+          env: { ...process.env, antalyse_GLOBAL_DIR },
         });
         console.log("Successfully spawned subprocess");
       } catch (error) {
@@ -157,8 +157,8 @@ describe("Test Suite", () => {
     expect(resp).toBe("pong");
   });
 
-  it("should create .continue directory at the specified location with expected files", async () => {
-    expect(fs.existsSync(CONTINUE_GLOBAL_DIR)).toBe(true);
+  it("should create .antalyse directory at the specified location with expected files", async () => {
+    expect(fs.existsSync(antalyse_GLOBAL_DIR)).toBe(true);
 
     // Many of the files are only created when trying to load the config
     const config = await messenger.request(
@@ -176,7 +176,7 @@ describe("Test Suite", () => {
     ];
 
     const missingFiles = expectedFiles.filter((file) => {
-      const filePath = path.join(CONTINUE_GLOBAL_DIR, file);
+      const filePath = path.join(antalyse_GLOBAL_DIR, file);
       return !fs.existsSync(filePath);
     });
 
@@ -222,7 +222,7 @@ describe("Test Suite", () => {
   });
 
   it("should add and delete a model from config.json", async () => {
-    const model: SerializedContinueConfig["models"][number] = {
+    const model: SerializedantalyseConfig["models"][number] = {
       title: "Test Model",
       provider: "openai",
       model: "gpt-3.5-turbo",
@@ -247,7 +247,7 @@ describe("Test Suite", () => {
   });
 
   it("should make an LLM completion", async () => {
-    const model: SerializedContinueConfig["models"][number] = {
+    const model: SerializedantalyseConfig["models"][number] = {
       title: "Test Model",
       provider: "mock",
       model: "gpt-3.5-turbo",

@@ -1,7 +1,7 @@
-package com.github.continuedev.continueintellijextension.`continue`
+package com.github.antalysedev.antalyseintellijextension.`antalyse`
 
-import com.github.continuedev.continueintellijextension.constants.getSessionFilePath
-import com.github.continuedev.continueintellijextension.constants.getSessionsListPath
+import com.github.antalysedev.antalyseintellijextension.constants.getSessionFilePath
+import com.github.antalysedev.antalyseintellijextension.constants.getSessionsListPath
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.File

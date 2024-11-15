@@ -34,7 +34,7 @@ function handleSelectionChange(e: vscode.TextEditorSelectionChangeEvent) {
   const line = Math.max(0, selection.start.line - 1);
 
   const hoverMarkdown = new vscode.MarkdownString(
-    `Click [here](command:continue.hideInlineTip) to hide these suggestions`,
+    `Click [here](command:antalyse.hideInlineTip) to hide these suggestions`,
   );
   hoverMarkdown.isTrusted = true;
   hoverMarkdown.supportHtml = true;

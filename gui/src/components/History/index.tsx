@@ -149,7 +149,7 @@ export function History() {
       </table>
       <br />
       <i className="ml-4 text-sm">
-        All session data is saved in ~/.continue/sessions
+        All session data is saved in ~/.antalyse/sessions
       </i>
     </div>
   );

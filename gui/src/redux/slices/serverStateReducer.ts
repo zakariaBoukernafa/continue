@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {
   ContextProviderDescription,
-  ContinueConfig,
+  antalyseConfig,
   SlashCommandDescription,
 } from "core";
 
@@ -9,7 +9,7 @@ type ServerState = {
   meilisearchUrl: string | undefined;
   slashCommands: SlashCommandDescription[];
   selectedContextItems: any[];
-  config: ContinueConfig;
+  config: antalyseConfig;
   contextProviders: ContextProviderDescription[];
   savedContextGroups: any[]; // TODO: Context groups
   indexingProgress: number;

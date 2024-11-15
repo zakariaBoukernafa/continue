@@ -1,4 +1,4 @@
-package com.github.continuedev.continueintellijextension.services
+package com.github.antalysedev.antalyseintellijextension.services
 
 import com.intellij.openapi.components.Service
 import com.posthog.java.PostHog

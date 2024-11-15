@@ -4,7 +4,7 @@ import path from "node:path";
 
 import { jest } from "@jest/globals";
 
-import { ContinueServerClient } from "../continueServer/stubs/client.js";
+import { antalyseServerClient } from "../antalyseServer/stubs/client.js";
 import { testConfigHandler, testIde } from "../test/util/fixtures.js";
 import {
   addToTestDir,
@@ -62,12 +62,12 @@ class TestCodebaseIndexer extends CodebaseIndexer {
 // the individual CodebaseIndex classes
 describe("CodebaseIndexer", () => {
   const pauseToken = new PauseToken(false);
-  const continueServerClient = new ContinueServerClient(undefined, undefined);
+  const antalyseServerClient = new antalyseServerClient(undefined, undefined);
   const codebaseIndexer = new TestCodebaseIndexer(
     testConfigHandler,
     testIde,
     pauseToken,
-    continueServerClient,
+    antalyseServerClient,
   );
   const testIndex = new TestCodebaseIndex();
 
@@ -76,8 +76,8 @@ describe("CodebaseIndexer", () => {
     setUpTestDir();
 
     execSync("git init", { cwd: TEST_DIR });
-    execSync("git config user.email \"test@example.com\"", { cwd: TEST_DIR });
-    execSync("git config user.name \"Test\"", { cwd: TEST_DIR });
+    execSync('git config user.email "test@example.com"', { cwd: TEST_DIR });
+    execSync('git config user.name "Test"', { cwd: TEST_DIR });
   });
 
   afterAll(async () => {

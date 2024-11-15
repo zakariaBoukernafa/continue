@@ -1,7 +1,7 @@
 import {
   ContextProviderWithParams,
   ModelDescription,
-  SerializedContinueConfig,
+  SerializedantalyseConfig,
   SlashCommandDescription,
 } from "../";
 
@@ -59,7 +59,7 @@ export const defaultSlashCommandsJetBrains = [
   },
 ];
 
-export const defaultConfig: SerializedContinueConfig = {
+export const defaultConfig: SerializedantalyseConfig = {
   models: [DEFAULT_CHAT_MODEL_CONFIG],
   tabAutocompleteModel: DEFAULT_AUTOCOMPLETE_MODEL_CONFIG,
   customCommands: [
@@ -74,7 +74,7 @@ export const defaultConfig: SerializedContinueConfig = {
   slashCommands: defaultSlashCommandsVscode,
 };
 
-export const defaultConfigJetBrains: SerializedContinueConfig = {
+export const defaultConfigJetBrains: SerializedantalyseConfig = {
   models: [DEFAULT_CHAT_MODEL_CONFIG],
   tabAutocompleteModel: DEFAULT_AUTOCOMPLETE_MODEL_CONFIG,
   customCommands: [

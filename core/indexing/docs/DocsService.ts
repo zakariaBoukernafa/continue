@@ -4,7 +4,7 @@ import lancedb, { Connection } from "vectordb";
 
 import {
   Chunk,
-  ContinueConfig,
+  antalyseConfig,
   EmbeddingsProvider,
   IDE,
   IndexingProgressUpdate,
@@ -76,7 +76,7 @@ export default class DocsService {
   private globalContext = new GlobalContext();
   private lanceTableNamesSet = new Set<string>();
 
-  private config!: ContinueConfig;
+  private config!: antalyseConfig;
   private sqliteDb?: Database;
 
   private docsCrawler!: DocsCrawler;
@@ -709,7 +709,7 @@ export default class DocsService {
     const embeddingsProvider = await this.getEmbeddingsProvider(true);
 
     const data = await downloadFromS3(
-      S3Buckets.continueIndexedDocs,
+      S3Buckets.antalyseIndexedDocs,
       getS3Filename(embeddingsProvider.id, title),
     );
 
@@ -746,7 +746,7 @@ export default class DocsService {
       //   "The 'transformers.js' embeddings provider currently cannot be used to index " +
       //     "documentation in JetBrains. To enable documentation indexing, you can use " +
       //     "any of the other providers described in the docs: " +
-      //     "https://docs.continue.dev/walkthroughs/codebase-embeddings#embeddings-providers",
+      //     "https://docs.antalyse.dev/walkthroughs/codebase-embeddings#embeddings-providers",
       // );
 
       this.globalContext.update(

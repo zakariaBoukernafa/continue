@@ -1,4 +1,4 @@
-package com.github.continuedev.continueintellijextension.autocomplete
+package com.github.antalysedev.antalyseintellijextension.autocomplete
 
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.components.service

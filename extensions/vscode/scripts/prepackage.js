@@ -286,7 +286,7 @@ const exe = os === "win32" ? ".exe" : "";
     // Create a temporary directory for installing the package
     const adjustedName = packageName.replace(/@/g, "").replace("/", "-");
 
-    const tempDir = `/tmp/continue-node_modules-${adjustedName}`;
+    const tempDir = `/tmp/antalyse-node_modules-${adjustedName}`;
     const currentDir = process.cwd();
 
     // Remove the dir we will be copying to
@@ -382,7 +382,7 @@ const exe = os === "win32" ? ".exe" : "";
     rimrafSync("node_modules/@esbuild");
     fs.mkdirSync("node_modules/@esbuild", { recursive: true });
     execCmdSync(
-      `curl -o node_modules/@esbuild/esbuild.zip https://continue-server-binaries.s3.us-west-1.amazonaws.com/${target}/esbuild.zip`,
+      `curl -o node_modules/@esbuild/esbuild.zip https://antalyse-server-binaries.s3.us-west-1.amazonaws.com/${target}/esbuild.zip`,
     );
     execCmdSync(`cd node_modules/@esbuild && unzip esbuild.zip`);
     fs.unlinkSync("node_modules/@esbuild/esbuild.zip");
@@ -481,11 +481,12 @@ const exe = os === "win32" ? ".exe" : "";
 
     // onnx runtime bindngs
     `bin/napi-v3/${os}/${arch}/onnxruntime_binding.node`,
-    `bin/napi-v3/${os}/${arch}/${os === "darwin"
-      ? "libonnxruntime.1.14.0.dylib"
-      : os === "linux"
-        ? "libonnxruntime.so.1.14.0"
-        : "onnxruntime.dll"
+    `bin/napi-v3/${os}/${arch}/${
+      os === "darwin"
+        ? "libonnxruntime.1.14.0.dylib"
+        : os === "linux"
+          ? "libonnxruntime.so.1.14.0"
+          : "onnxruntime.dll"
     }`,
     "builtin-themes/dark_modern.json",
 
@@ -495,7 +496,7 @@ const exe = os === "win32" ? ".exe" : "";
 
     // Tutorial
     "media/move-chat-panel-right.md",
-    "continue_tutorial.py",
+    "antalyse_tutorial.py",
     "config_schema.json",
 
     // Embeddings model
@@ -520,15 +521,17 @@ const exe = os === "win32" ? ".exe" : "";
 
     // out/node_modules (to be accessed by extension.js)
     `out/node_modules/@vscode/ripgrep/bin/rg${exe}`,
-    `out/node_modules/@esbuild/${target === "win32-arm64"
-      ? "esbuild.exe"
-      : target === "win32-x64"
-        ? "win32-x64/esbuild.exe"
-        : `${target}/bin/esbuild`
+    `out/node_modules/@esbuild/${
+      target === "win32-arm64"
+        ? "esbuild.exe"
+        : target === "win32-x64"
+          ? "win32-x64/esbuild.exe"
+          : `${target}/bin/esbuild`
     }`,
-    `out/node_modules/@lancedb/vectordb-${os === "win32"
-      ? "win32-x64-msvc"
-      : `${target}${os === "linux" ? "-gnu" : ""}`
+    `out/node_modules/@lancedb/vectordb-${
+      os === "win32"
+        ? "win32-x64-msvc"
+        : `${target}${os === "linux" ? "-gnu" : ""}`
     }/index.node`,
     `out/node_modules/esbuild/lib/main.js`,
     `out/node_modules/esbuild/bin/esbuild`,

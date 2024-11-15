@@ -1,6 +1,6 @@
 import * as YAML from "yaml";
 
-import { ContinueSDK, SlashCommand } from "../..";
+import { antalyseSDK, SlashCommand } from "../..";
 import { stripImages } from "../../llm/images";
 import { getBasename } from "../../util/index";
 
@@ -40,7 +40,7 @@ export function extractUserInput(input: string, commandName: string): string {
 }
 
 export async function getDefaultVariables(
-  context: ContinueSDK,
+  context: antalyseSDK,
   userInput: string,
 ): Promise<Record<string, string>> {
   const currentFile = await context.ide.getCurrentFile();
@@ -53,7 +53,7 @@ export async function getDefaultVariables(
 
 export async function renderPrompt(
   prompt: string,
-  context: ContinueSDK,
+  context: antalyseSDK,
   userInput: string,
 ) {
   const helpers = getContextProviderHelpers(context);

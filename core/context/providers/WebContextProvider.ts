@@ -4,7 +4,7 @@ import {
   ContextProviderDescription,
   ContextProviderExtras,
 } from "../..";
-import { getHeaders } from "../../continueServer/stubs/headers";
+import { getHeaders } from "../../antalyseServer/stubs/headers";
 import { TRIAL_PROXY_URL } from "../../control-plane/client";
 
 export default class WebContextProvider extends BaseContextProvider {

@@ -17,7 +17,7 @@ import {
 
 import { PromiseAdapter, promiseFromEvent } from "./promiseUtils";
 
-const AUTH_NAME = "Continue";
+const AUTH_NAME = "antalyse";
 
 const SESSIONS_SECRET_KEY = `${controlPlaneEnv.AUTH_TYPE}.sessions`;
 
@@ -62,7 +62,7 @@ async function generateCodeChallenge(verifier: string) {
   return base64String;
 }
 
-interface ContinueAuthenticationSession extends AuthenticationSession {
+interface antalyseAuthenticationSession extends AuthenticationSession {
   refreshToken: string;
   expiresInMs: number;
   loginNeeded: boolean;
@@ -136,21 +136,21 @@ export class WorkOsAuthProvider implements AuthenticationProvider, Disposable {
     }
   }
 
-  private async storeSessions(value: ContinueAuthenticationSession[]) {
+  private async storeSessions(value: antalyseAuthenticationSession[]) {
     const data = JSON.stringify(value, null, 2);
     await this.secretStorage.store(SESSIONS_SECRET_KEY, data);
   }
 
   public async getSessions(
     scopes?: string[],
-  ): Promise<ContinueAuthenticationSession[]> {
+  ): Promise<antalyseAuthenticationSession[]> {
     const data = await this.secretStorage.get(SESSIONS_SECRET_KEY);
     if (!data) {
       return [];
     }
 
     try {
-      const value = JSON.parse(data) as ContinueAuthenticationSession[];
+      const value = JSON.parse(data) as antalyseAuthenticationSession[];
       return value;
     } catch (e: any) {
       console.warn(`Error parsing sessions.json: ${e}`);
@@ -279,19 +279,19 @@ export class WorkOsAuthProvider implements AuthenticationProvider, Disposable {
    */
   public async createSession(
     scopes: string[],
-  ): Promise<ContinueAuthenticationSession> {
+  ): Promise<antalyseAuthenticationSession> {
     try {
       const codeVerifier = generateRandomString(64);
       const codeChallenge = await generateCodeChallenge(codeVerifier);
       const token = await this.login(codeChallenge, scopes);
       if (!token) {
-        throw new Error(`Continue login failure`);
+        throw new Error(`antalyse login failure`);
       }
 
       const userInfo = (await this.getUserInfo(token, codeVerifier)) as any;
       const { user, access_token, refresh_token } = userInfo;
 
-      const session: ContinueAuthenticationSession = {
+      const session: antalyseAuthenticationSession = {
         id: uuidv4(),
         accessToken: access_token,
         refreshToken: refresh_token,
@@ -353,13 +353,13 @@ export class WorkOsAuthProvider implements AuthenticationProvider, Disposable {
   }
 
   /**
-   * Log in to Continue
+   * Log in to antalyse
    */
   private async login(codeChallenge: string, scopes: string[] = []) {
     return await window.withProgress<string>(
       {
         location: ProgressLocation.Notification,
-        title: "Signing in to Continue...",
+        title: "Signing in to antalyse...",
         cancellable: true,
       },
       async (_, token) => {
@@ -425,7 +425,7 @@ export class WorkOsAuthProvider implements AuthenticationProvider, Disposable {
   }
 
   /**
-   * Handle the redirect to VS Code (after sign in from Continue)
+   * Handle the redirect to VS Code (after sign in from antalyse)
    * @param scopes
    * @returns
    */

@@ -1,8 +1,6 @@
 import os from "node:os";
 
-import { Analytics } from "@continuedev/config-types";
-
-import ContinueProxyAnalyticsProvider from "./analytics/ContinueProxyAnalyticsProvider.js";
+import antalyseProxyAnalyticsProvider from "./analytics/antalyseProxyAnalyticsProvider.js";
 import {
   ControlPlaneProxyInfo,
   IAnalyticsProvider,
@@ -10,6 +8,7 @@ import {
 import LogStashAnalyticsProvider from "./analytics/LogStashAnalyticsProvider.js";
 import PostHogAnalyticsProvider from "./analytics/PostHogAnalyticsProvider.js";
 import { ControlPlaneClient } from "./client.js";
+import { Analytics } from "@continuedev/config-types";
 
 function createAnalyticsProvider(
   config: Analytics,
@@ -21,7 +20,7 @@ function createAnalyticsProvider(
     case "logstash":
       return new LogStashAnalyticsProvider();
     case "continue-proxy":
-      return new ContinueProxyAnalyticsProvider();
+      return new antalyseProxyAnalyticsProvider();
     default:
       return undefined;
   }
@@ -65,7 +64,7 @@ export class TeamAnalytics {
 
       if (config.provider === "continue-proxy") {
         (
-          TeamAnalytics.provider as ContinueProxyAnalyticsProvider
+          TeamAnalytics.provider as antalyseProxyAnalyticsProvider
         ).controlPlaneClient = controlPlaneClient;
       }
     }

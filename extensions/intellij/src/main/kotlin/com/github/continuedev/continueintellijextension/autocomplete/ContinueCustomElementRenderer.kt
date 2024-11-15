@@ -1,4 +1,4 @@
-package com.github.continuedev.continueintellijextension.autocomplete
+package com.github.antalysedev.antalyseintellijextension.autocomplete
 
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.EditorCustomElementRenderer
@@ -14,7 +14,7 @@ import java.awt.Graphics
 import java.awt.Rectangle
 import kotlin.math.ceil
 
-class ContinueCustomElementRenderer(
+class antalyseCustomElementRenderer(
     val editor: Editor,
     val text: String,
 ) : EditorCustomElementRenderer {

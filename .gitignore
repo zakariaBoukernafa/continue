@@ -135,9 +135,9 @@ cached_embeddings.pkl
 .ruff_cache
 codeql
 
-**/.continue
+**/.antalyse
 .DS_Store
-.continue
+.antalyse
 .test
 .tiktoken_cache
 
@@ -147,14 +147,14 @@ codeql
 **/**/.qodana
 **/**/build
 
-continue_server.build
-continue_server.dist
+antalyse_server.build
+antalyse_server.dist
 
 Icon
 Icon?
 
-.continue
-.continuerc.json
+.antalyse
+.antalyserc.json
 .prompts/
 .aider*
 
@@ -168,4 +168,4 @@ extensions/intellij/.idea/**
 **/.idea/shelf/
 
 extensions/intellij/bin
-extensions/.continue-debug/
+extensions/.antalyse-debug/

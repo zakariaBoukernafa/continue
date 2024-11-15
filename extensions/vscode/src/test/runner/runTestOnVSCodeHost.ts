@@ -13,7 +13,7 @@ export const testWorkspacePath = path.resolve(
   "test-workspace",
 );
 
-const continueGlobalDir = path.resolve(
+const antalyseGlobalDir = path.resolve(
   __dirname,
   "..",
   "src",
@@ -49,15 +49,15 @@ function setupTestWorkspace() {
   );
 }
 
-function setupContinueGlobalDir() {
-  if (fs.existsSync(continueGlobalDir)) {
-    fs.rmSync(continueGlobalDir, { recursive: true });
+function setupantalyseGlobalDir() {
+  if (fs.existsSync(antalyseGlobalDir)) {
+    fs.rmSync(antalyseGlobalDir, { recursive: true });
   }
-  fs.mkdirSync(continueGlobalDir, {
+  fs.mkdirSync(antalyseGlobalDir, {
     recursive: true,
   });
   fs.writeFileSync(
-    path.join(continueGlobalDir, "config.json"),
+    path.join(antalyseGlobalDir, "config.json"),
     JSON.stringify({
       ...defaultConfig,
       models: [
@@ -78,9 +78,9 @@ function cleanupTestWorkspace() {
   }
 }
 
-function cleanupContinueGlobalDir() {
-  if (fs.existsSync(continueGlobalDir)) {
-    fs.rmSync(continueGlobalDir, { recursive: true });
+function cleanupantalyseGlobalDir() {
+  if (fs.existsSync(antalyseGlobalDir)) {
+    fs.rmSync(antalyseGlobalDir, { recursive: true });
   }
 }
 
@@ -102,11 +102,11 @@ async function main() {
 
     const extensionTestsEnv = {
       NODE_ENV: "test",
-      CONTINUE_GLOBAL_DIR: continueGlobalDir,
+      antalyse_GLOBAL_DIR: antalyseGlobalDir,
     };
 
     setupTestWorkspace();
-    setupContinueGlobalDir();
+    setupantalyseGlobalDir();
 
     // Download VS Code, unzip it and run the integration test
     await runTests({
@@ -120,7 +120,7 @@ async function main() {
     process.exit(1);
   } finally {
     cleanupTestWorkspace();
-    cleanupContinueGlobalDir();
+    cleanupantalyseGlobalDir();
   }
 }
 

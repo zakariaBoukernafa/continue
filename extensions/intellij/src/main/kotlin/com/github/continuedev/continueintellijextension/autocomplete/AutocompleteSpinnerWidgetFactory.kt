@@ -1,6 +1,6 @@
-package com.github.continuedev.continueintellijextension.autocomplete
+package com.github.antalysedev.antalyseintellijextension.autocomplete
 
-import com.github.continuedev.continueintellijextension.services.ContinueExtensionSettings
+import com.github.antalysedev.antalyseintellijextension.services.antalyseExtensionSettings
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
@@ -50,8 +50,8 @@ class AutocompleteSpinnerWidget(project: Project) : EditorBasedWidget(project), 
     }
 
     override fun getTooltipText(): String? {
-        val enabled = service<ContinueExtensionSettings>().state.enableTabAutocomplete
-        return if (enabled) "Continue autocomplete enabled" else "Continue autocomplete disabled"
+        val enabled = service<antalyseExtensionSettings>().state.enableTabAutocomplete
+        return if (enabled) "antalyse autocomplete enabled" else "antalyse autocomplete disabled"
     }
 
     override fun getClickConsumer(): Consumer<MouseEvent>? {
@@ -59,7 +59,7 @@ class AutocompleteSpinnerWidget(project: Project) : EditorBasedWidget(project), 
     }
 
     override fun getIcon(): Icon = if (isLoading) animatedIcon else
-        IconLoader.getIcon("/icons/continue.svg", javaClass)
+        IconLoader.getIcon("/icons/antalyse.svg", javaClass)
 
     fun setLoading(loading: Boolean) {
         isLoading = loading
@@ -94,7 +94,7 @@ class AutocompleteSpinnerWidgetFactory : StatusBarWidgetFactory {
     }
 
     override fun getDisplayName(): String {
-        return "Continue Autocomplete"
+        return "antalyse Autocomplete"
     }
 
     override fun isAvailable(p0: Project): Boolean {

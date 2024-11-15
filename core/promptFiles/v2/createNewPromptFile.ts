@@ -6,8 +6,8 @@ import { GlobalContext } from "../../util/GlobalContext";
 import { DEFAULT_PROMPTS_FOLDER_V2 } from "./getPromptFiles";
 
 const FIRST_TIME_DEFAULT_PROMPT_FILE = `# This is an example ".prompt" file
-# It is used to define and reuse prompts within Continue
-# Continue will automatically create a context provider for each prompt in the .prompts folder
+# It is used to define and reuse prompts within antalyse
+# antalyse will automatically create a context provider for each prompt in the .prompts folder
 
 # A prompt file consists of two parts:
 # 1. Everything above the "---" is YAML. Here you can set "temperature", "description", and other options
@@ -27,7 +27,7 @@ const FIRST_TIME_DEFAULT_PROMPT_FILE = `# This is an example ".prompt" file
   # e.g. @os
   # e.g. @repo-map
 
-# To learn more, see the full .prompt file reference: https://docs.continue.dev/features/prompt-files
+# To learn more, see the full .prompt file reference: https://docs.antalyse.dev/features/prompt-files
 name: Example
 description: Example prompt file
 version: 2

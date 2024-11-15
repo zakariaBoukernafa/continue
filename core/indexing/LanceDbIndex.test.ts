@@ -5,7 +5,7 @@ import { testConfigHandler, testIde } from "../test/util/fixtures";
 import {
   mockPathAndCacheKey,
   mockTag,
-  testContinueServerClient,
+  testantalyseServerClient,
   updateIndexAndAwaitGenerator,
 } from "../test/util/indexing";
 import { getLanceDbPath } from "../util/paths";
@@ -33,7 +33,7 @@ describe.skip("ChunkCodebaseIndex", () => {
       mockConfig.embeddingsProvider,
       testIde.readFile.bind(testIde),
       pathSep,
-      testContinueServerClient,
+      testantalyseServerClient,
     );
 
     sqliteDb = await SqliteDb.get();

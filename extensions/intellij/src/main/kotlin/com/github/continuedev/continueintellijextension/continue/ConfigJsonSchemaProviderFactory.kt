@@ -1,7 +1,7 @@
-package com.github.continuedev.continueintellijextension.`continue`
+package com.github.antalysedev.antalyseintellijextension.`antalyse`
 
-import com.github.continuedev.continueintellijextension.activities.ContinuePluginStartupActivity
-import com.github.continuedev.continueintellijextension.constants.getContinueGlobalPath
+import com.github.antalysedev.antalyseintellijextension.activities.antalysePluginStartupActivity
+import com.github.antalysedev.antalyseintellijextension.constants.getantalyseGlobalPath
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.io.StreamUtil
 import com.intellij.openapi.vfs.LocalFileSystem
@@ -22,7 +22,7 @@ class ConfigJsonSchemaProviderFactory : JsonSchemaProviderFactory {
 
 class ConfigJsonSchemaFileProvider : JsonSchemaFileProvider {
     override fun isAvailable(file: VirtualFile): Boolean {
-        return file.path.endsWith("/.continue/config.json")
+        return file.path.endsWith("/.antalyse/config.json")
     }
 
     override fun getName(): String {
@@ -30,13 +30,13 @@ class ConfigJsonSchemaFileProvider : JsonSchemaFileProvider {
     }
 
     override fun getSchemaFile(): VirtualFile? {
-        ContinuePluginStartupActivity::class.java.getClassLoader().getResourceAsStream("config_schema.json")
+        antalysePluginStartupActivity::class.java.getClassLoader().getResourceAsStream("config_schema.json")
             .use { `is` ->
                 if (`is` == null) {
                     throw IOException("Resource not found: config_schema.json")
                 }
                 val content = StreamUtil.readText(`is`, StandardCharsets.UTF_8)
-                val filepath = Paths.get(getContinueGlobalPath(), "config_schema.json").toString()
+                val filepath = Paths.get(getantalyseGlobalPath(), "config_schema.json").toString()
                 File(filepath).writeText(content)
                 return LocalFileSystem.getInstance().findFileByPath(filepath)
             }

@@ -1,12 +1,12 @@
-package com.github.continuedev.continueintellijextension.toolWindow
+package com.github.antalysedev.antalyseintellijextension.toolWindow
 
-import com.github.continuedev.continueintellijextension.activities.showTutorial
-import com.github.continuedev.continueintellijextension.constants.MessageTypes
-import com.github.continuedev.continueintellijextension.constants.getConfigJsonPath
-import com.github.continuedev.continueintellijextension.`continue`.*
-import com.github.continuedev.continueintellijextension.factories.CustomSchemeHandlerFactory
-import com.github.continuedev.continueintellijextension.services.ContinueExtensionSettings
-import com.github.continuedev.continueintellijextension.services.ContinuePluginService
+import com.github.antalysedev.antalyseintellijextension.activities.showTutorial
+import com.github.antalysedev.antalyseintellijextension.constants.MessageTypes
+import com.github.antalysedev.antalyseintellijextension.constants.getConfigJsonPath
+import com.github.antalysedev.antalyseintellijextension.`antalyse`.*
+import com.github.antalysedev.antalyseintellijextension.factories.CustomSchemeHandlerFactory
+import com.github.antalysedev.antalyseintellijextension.services.antalyseExtensionSettings
+import com.github.antalysedev.antalyseintellijextension.services.antalysePluginService
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -21,7 +21,7 @@ import org.cef.handler.CefLoadHandlerAdapter
 import com.intellij.openapi.application.ApplicationInfo
 import com.intellij.openapi.util.SystemInfo
 
-class ContinueBrowser(val project: Project, url: String) {
+class antalyseBrowser(val project: Project, url: String) {
     private val coroutineScope = CoroutineScope(
         SupervisorJob() + Dispatchers.Default
     )
@@ -71,7 +71,7 @@ class ContinueBrowser(val project: Project, url: String) {
     private fun registerAppSchemeHandler() {
         CefApp.getInstance().registerSchemeHandlerFactory(
             "http",
-            "continue",
+            "antalyse",
             CustomSchemeHandlerFactory()
         )
     }
@@ -79,7 +79,7 @@ class ContinueBrowser(val project: Project, url: String) {
     val browser: JBCefBrowser
 
     init {
-        val enableOSR = ServiceManager.getService(ContinueExtensionSettings::class.java).continueState.enableOSR
+        val enableOSR = ServiceManager.getService(antalyseExtensionSettings::class.java).antalyseState.enableOSR
         this.browser = JBCefBrowser.createBuilder().setOffScreenRendering(enableOSR).build()
 
 
@@ -101,12 +101,12 @@ class ContinueBrowser(val project: Project, url: String) {
             val data = json.get("data")
             val messageId = json.get("messageId")?.asString
 
-            val continuePluginService = ServiceManager.getService(
+            val antalysePluginService = ServiceManager.getService(
                 project,
-                ContinuePluginService::class.java
+                antalysePluginService::class.java
             )
 
-            val ide = continuePluginService.ideProtocolClient;
+            val ide = antalysePluginService.ideProtocolClient;
 
             val respond = fun(data: Any?) {
                 // This matches the way that we expect receive messages in IdeMessenger.ts (gui)
@@ -126,7 +126,7 @@ class ContinueBrowser(val project: Project, url: String) {
             }
 
             if (PASS_THROUGH_TO_CORE.contains(messageType)) {
-                continuePluginService.coreMessenger?.request(messageType, data, messageId, respond)
+                antalysePluginService.coreMessenger?.request(messageType, data, messageId, respond)
                 return@addHandler null
             }
 
@@ -143,10 +143,10 @@ class ContinueBrowser(val project: Project, url: String) {
                         sendToWebview("setColors", colors)
 
                         val jsonData = mutableMapOf(
-                            "windowId" to continuePluginService.windowId,
-                            "workspacePaths" to continuePluginService.workspacePaths,
+                            "windowId" to antalysePluginService.windowId,
+                            "workspacePaths" to antalysePluginService.workspacePaths,
                             "vscMachineId" to getMachineUniqueID(),
-                            "vscMediaUrl" to "http://continue",
+                            "vscMediaUrl" to "http://antalyse",
                         )
                         respond(jsonData)
                     }

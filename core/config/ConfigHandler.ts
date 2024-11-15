@@ -3,8 +3,8 @@ import {
   ControlPlaneSessionInfo,
 } from "../control-plane/client.js";
 import {
-  BrowserSerializedContinueConfig,
-  ContinueConfig,
+  BrowserSerializedantalyseConfig,
+  antalyseConfig,
   IContextProvider,
   IDE,
   IdeSettings,
@@ -27,7 +27,7 @@ import {
 
 export type { ProfileDescription };
 
-type ConfigUpdateFunction = (payload: ConfigResult<ContinueConfig>) => void;
+type ConfigUpdateFunction = (payload: ConfigResult<antalyseConfig>) => void;
 
 // Separately manages saving/reloading each profile
 
@@ -154,7 +154,7 @@ export class ConfigHandler {
     return dirs.join("&");
   }
 
-  // Automatically refresh config when Continue-related IDE (e.g. VS Code) settings are changed
+  // Automatically refresh config when antalyse-related IDE (e.g. VS Code) settings are changed
   updateIdeSettings(ideSettings: IdeSettings) {
     this.ideSettingsPromise = Promise.resolve(ideSettings);
     this.reloadConfig();
@@ -184,7 +184,7 @@ export class ConfigHandler {
     }
   }
 
-  private notifyConfigListeners(result: ConfigResult<ContinueConfig>) {
+  private notifyConfigListeners(result: ConfigResult<antalyseConfig>) {
     // Notify listeners that config changed
     for (const listener of this.updateListeners) {
       listener(result);
@@ -211,7 +211,7 @@ export class ConfigHandler {
     return { config, errors };
   }
 
-  getSerializedConfig(): Promise<BrowserSerializedContinueConfig> {
+  getSerializedConfig(): Promise<BrowserSerializedantalyseConfig> {
     return this.currentProfile.getSerializedConfig(
       this.additionalContextProviders,
     );
@@ -221,7 +221,7 @@ export class ConfigHandler {
     return this.profiles.map((p) => p.profileDescription);
   }
 
-  async loadConfig(): Promise<ContinueConfig> {
+  async loadConfig(): Promise<antalyseConfig> {
     return this.currentProfile.loadConfig(this.additionalContextProviders);
   }
 

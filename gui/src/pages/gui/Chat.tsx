@@ -28,7 +28,7 @@ import { ChatScrollAnchor } from "../../components/ChatScrollAnchor";
 import { useFindWidget } from "../../components/find/FindWidget";
 import StepContainer from "../../components/gui/StepContainer";
 import TimelineItem from "../../components/gui/TimelineItem";
-import ContinueInputBox from "../../components/mainInput/ContinueInputBox";
+import antalyseInputBox from "../../components/mainInput/antalyseInputBox";
 import { defaultInputModifiers } from "../../components/mainInput/inputModifiers";
 import { NewSessionButton } from "../../components/mainInput/NewSessionButton";
 import { TutorialCard } from "../../components/mainInput/TutorialCard";
@@ -209,7 +209,7 @@ export function Chat() {
             posthog?.capture("ftc_reached");
             ideMessenger.ide.showToast(
               "info",
-              "You've reached the free trial limit. Please configure a model to continue.",
+              "You've reached the free trial limit. Please configure a model to antalyse.",
             );
             return;
           }
@@ -228,7 +228,7 @@ export function Chat() {
           dispatch(
             setDialogMessage(
               <div className="p-4 text-center">
-                👋 Thanks for using Continue. We are always trying to improve
+                👋 Thanks for using antalyse. We are always trying to improve
                 and love hearing from users. If you're interested in speaking,
                 enter your name and email. We won't use this information for
                 anything other than reaching out.
@@ -332,7 +332,7 @@ export function Chat() {
               }}
             >
               {item.message.role === "user" ? (
-                <ContinueInputBox
+                <antalyseInputBox
                   onEnter={async (editorState, modifiers) => {
                     streamResponse(editorState, modifiers, ideMessenger, index);
                   }}
@@ -389,13 +389,13 @@ export function Chat() {
                           index - 1,
                         );
                       }}
-                      onContinueGeneration={() => {
+                      onantalyseGeneration={() => {
                         window.postMessage(
                           {
                             messageType: "userInput",
                             data: {
                               input:
-                                "Continue your response exactly where you left off:",
+                                "antalyse your response exactly where you left off:",
                             },
                           },
                           "*",
@@ -447,7 +447,7 @@ export function Chat() {
             </StopButton>
           )}
         </div>
-        <ContinueInputBox
+        <antalyseInputBox
           isMainInput
           isLastUserInput={false}
           onEnter={(editorContent, modifiers) => {

@@ -1,5 +1,5 @@
 import { ControlPlaneClient } from "../../control-plane/client.js";
-import { ContinueConfig, IDE, IdeSettings } from "../../index.js";
+import { antalyseConfig, IDE, IdeSettings } from "../../index.js";
 import { ConfigResult } from "../load.js";
 
 import doLoadConfig from "./doLoadConfig.js";
@@ -17,7 +17,7 @@ export default class LocalProfileLoader implements IProfileLoader {
     private writeLog: (message: string) => Promise<void>,
   ) {}
 
-  async doLoadConfig(): Promise<ConfigResult<ContinueConfig>> {
+  async doLoadConfig(): Promise<ConfigResult<antalyseConfig>> {
     return doLoadConfig(
       this.ide,
       this.ideSettingsPromise,

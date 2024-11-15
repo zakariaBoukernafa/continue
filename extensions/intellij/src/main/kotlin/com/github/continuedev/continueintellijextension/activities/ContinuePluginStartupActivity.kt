@@ -1,14 +1,14 @@
-package com.github.continuedev.continueintellijextension.activities
+package com.github.antalysedev.antalyseintellijextension.activities
 
-import com.github.continuedev.continueintellijextension.auth.AuthListener
-import com.github.continuedev.continueintellijextension.auth.ContinueAuthService
-import com.github.continuedev.continueintellijextension.auth.ControlPlaneSessionInfo
-import com.github.continuedev.continueintellijextension.constants.getContinueGlobalPath
-import com.github.continuedev.continueintellijextension.`continue`.*
-import com.github.continuedev.continueintellijextension.listeners.ContinuePluginSelectionListener
-import com.github.continuedev.continueintellijextension.services.ContinueExtensionSettings
-import com.github.continuedev.continueintellijextension.services.ContinuePluginService
-import com.github.continuedev.continueintellijextension.services.SettingsListener
+import com.github.antalysedev.antalyseintellijextension.auth.AuthListener
+import com.github.antalysedev.antalyseintellijextension.auth.antalyseAuthService
+import com.github.antalysedev.antalyseintellijextension.auth.ControlPlaneSessionInfo
+import com.github.antalysedev.antalyseintellijextension.constants.getantalyseGlobalPath
+import com.github.antalysedev.antalyseintellijextension.`antalyse`.*
+import com.github.antalysedev.antalyseintellijextension.listeners.antalysePluginSelectionListener
+import com.github.antalysedev.antalyseintellijextension.services.antalyseExtensionSettings
+import com.github.antalysedev.antalyseintellijextension.services.antalysePluginService
+import com.github.antalysedev.antalyseintellijextension.services.SettingsListener
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.actionSystem.KeyboardShortcut
 import com.intellij.openapi.application.ApplicationManager
@@ -39,7 +39,7 @@ import com.intellij.openapi.vfs.newvfs.events.VFileContentChangeEvent
 fun showTutorial(project: Project) {
     val tutorialFileName = getTutorialFileName()
 
-    ContinuePluginStartupActivity::class.java.getClassLoader().getResourceAsStream(tutorialFileName)
+    antalysePluginStartupActivity::class.java.getClassLoader().getResourceAsStream(tutorialFileName)
         .use { `is` ->
             if (`is` == null) {
                 throw IOException("Resource not found: $tutorialFileName")
@@ -48,7 +48,7 @@ fun showTutorial(project: Project) {
             if (!System.getProperty("os.name").lowercase().contains("mac")) {
                 content = content.replace("⌘", "⌃")
             }
-            val filepath = Paths.get(getContinueGlobalPath(), tutorialFileName).toString()
+            val filepath = Paths.get(getantalyseGlobalPath(), tutorialFileName).toString()
             File(filepath).writeText(content)
             val virtualFile = LocalFileSystem.getInstance().findFileByPath(filepath)
 
@@ -63,14 +63,14 @@ fun showTutorial(project: Project) {
 private fun getTutorialFileName(): String {
     val appName = ApplicationNamesInfo.getInstance().fullProductName.lowercase()
     return when {
-        appName.contains("intellij") -> "continue_tutorial.java"
-        appName.contains("pycharm") -> "continue_tutorial.py"
-        appName.contains("webstorm") -> "continue_tutorial.ts"
-        else -> "continue_tutorial.py" // Default to Python tutorial
+        appName.contains("intellij") -> "antalyse_tutorial.java"
+        appName.contains("pycharm") -> "antalyse_tutorial.py"
+        appName.contains("webstorm") -> "antalyse_tutorial.ts"
+        else -> "antalyse_tutorial.py" // Default to Python tutorial
     }
 }
 
-class ContinuePluginStartupActivity : StartupActivity, Disposable, DumbAware {
+class antalysePluginStartupActivity : StartupActivity, Disposable, DumbAware {
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     override fun runActivity(project: Project) {
@@ -91,14 +91,14 @@ class ContinuePluginStartupActivity : StartupActivity, Disposable, DumbAware {
         val keyStroke = KeyStroke.getKeyStroke(shortcut)
         val actionIds = keymap.getActionIds(keyStroke)
 
-        // If Continue has been re-assigned to another key, don't remove the shortcut
-        if (!actionIds.any { it.startsWith("continue") }) {
+        // If antalyse has been re-assigned to another key, don't remove the shortcut
+        if (!actionIds.any { it.startsWith("antalyse") }) {
             return
         }
 
         for (actionId in actionIds) {
-            if (actionId.startsWith("continue")) {
-                continue
+            if (actionId.startsWith("antalyse")) {
+                antalyse
             }
             val shortcuts = keymap.getShortcuts(actionId)
             for (shortcut in shortcuts) {
@@ -110,16 +110,16 @@ class ContinuePluginStartupActivity : StartupActivity, Disposable, DumbAware {
     }
 
     private fun initializePlugin(project: Project) {
-        val continuePluginService = ServiceManager.getService(
+        val antalysePluginService = ServiceManager.getService(
             project,
-            ContinuePluginService::class.java
+            antalysePluginService::class.java
         )
 
         coroutineScope.launch {
             val settings =
-                ServiceManager.getService(ContinueExtensionSettings::class.java)
-            if (!settings.continueState.shownWelcomeDialog) {
-                settings.continueState.shownWelcomeDialog = true
+                ServiceManager.getService(antalyseExtensionSettings::class.java)
+            if (!settings.antalyseState.shownWelcomeDialog) {
+                settings.antalyseState.shownWelcomeDialog = true
                 // Open tutorial file
                 showTutorial(project)
             }
@@ -127,26 +127,26 @@ class ContinuePluginStartupActivity : StartupActivity, Disposable, DumbAware {
             settings.addRemoteSyncJob()
 
             val ideProtocolClient = IdeProtocolClient(
-                continuePluginService,
+                antalysePluginService,
                 coroutineScope,
                 project.basePath,
                 project
             )
 
-            continuePluginService.ideProtocolClient = ideProtocolClient
+            antalysePluginService.ideProtocolClient = ideProtocolClient
 
             // Listen to changes to settings so the core can reload remote configuration
             val connection = ApplicationManager.getApplication().messageBus.connect()
             connection.subscribe(SettingsListener.TOPIC, object : SettingsListener {
-                override fun settingsUpdated(settings: ContinueExtensionSettings.ContinueState) {
-                    continuePluginService.coreMessenger?.request("config/ideSettingsUpdate", settings, null) { _ -> }
-                    continuePluginService.sendToWebview(
+                override fun settingsUpdated(settings: antalyseExtensionSettings.antalyseState) {
+                    antalysePluginService.coreMessenger?.request("config/ideSettingsUpdate", settings, null) { _ -> }
+                    antalysePluginService.sendToWebview(
                         "didChangeIdeSettings", mapOf(
                             "settings" to mapOf(
                                 "remoteConfigServerUrl" to settings.remoteConfigServerUrl,
                                 "remoteConfigSyncPeriod" to settings.remoteConfigSyncPeriod,
                                 "userToken" to settings.userToken,
-                                "enableControlServerBeta" to settings.enableContinueTeamsBeta
+                                "enableControlServerBeta" to settings.enableantalyseTeamsBeta
                             )
                         )
                     )
@@ -170,21 +170,21 @@ class ContinuePluginStartupActivity : StartupActivity, Disposable, DumbAware {
                     // Create a data map if there are any paths to re-index
                     if (allPaths.isNotEmpty()) {
                         val data = mapOf("dirs" to allPaths)
-                        continuePluginService.coreMessenger?.request("index/forceReIndex", data, null) { _ -> }
+                        antalysePluginService.coreMessenger?.request("index/forceReIndex", data, null) { _ -> }
                     }
                 }
             })
 
             // Listen for clicking settings button to start the auth flow
-            val authService = service<ContinueAuthService>()
+            val authService = service<antalyseAuthService>()
             val initialSessionInfo = authService.loadControlPlaneSessionInfo()
 
             if (initialSessionInfo != null) {
                 val data = mapOf(
                     "sessionInfo" to initialSessionInfo
                 )
-                continuePluginService.coreMessenger?.request("didChangeControlPlaneSessionInfo", data, null) { _ -> }
-                continuePluginService.sendToWebview("didChangeControlPlaneSessionInfo", data)
+                antalysePluginService.coreMessenger?.request("didChangeControlPlaneSessionInfo", data, null) { _ -> }
+                antalysePluginService.sendToWebview("didChangeControlPlaneSessionInfo", data)
             }
 
             connection.subscribe(AuthListener.TOPIC, object : AuthListener {
@@ -196,22 +196,22 @@ class ContinuePluginStartupActivity : StartupActivity, Disposable, DumbAware {
                     val data = mapOf(
                         "sessionInfo" to sessionInfo
                     )
-                    continuePluginService.coreMessenger?.request(
+                    antalysePluginService.coreMessenger?.request(
                         "didChangeControlPlaneSessionInfo",
                         data,
                         null
                     ) { _ -> }
-                    continuePluginService.sendToWebview("didChangeControlPlaneSessionInfo", data)
+                    antalysePluginService.sendToWebview("didChangeControlPlaneSessionInfo", data)
                 }
             })
 
             val listener =
-                ContinuePluginSelectionListener(
+                antalysePluginSelectionListener(
                     coroutineScope,
                 )
 
             // Reload the WebView
-            continuePluginService?.let { pluginService ->
+            antalysePluginService?.let { pluginService ->
                 val allModulePaths = ModuleManager.getInstance(project).modules
                     .flatMap { module -> ModuleRootManager.getInstance(module).contentRoots.map { it.path } }
                     .map { Paths.get(it).normalize() }
@@ -225,11 +225,11 @@ class ContinuePluginStartupActivity : StartupActivity, Disposable, DumbAware {
 
             EditorFactory.getInstance().eventMulticaster.addSelectionListener(
                 listener,
-                this@ContinuePluginStartupActivity
+                this@antalysePluginStartupActivity
             )
 
             val coreMessengerManager = CoreMessengerManager(project, ideProtocolClient, coroutineScope)
-            continuePluginService.coreMessengerManager = coreMessengerManager
+            antalysePluginService.coreMessengerManager = coreMessengerManager
         }
     }
 

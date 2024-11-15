@@ -1,4 +1,4 @@
-package com.github.continuedev.continueintellijextension.constants
+package com.github.antalysedev.antalyseintellijextension.constants
 
 class MessageTypes {
     companion object {
@@ -19,7 +19,7 @@ class MessageTypes {
             "getWorkspaceDirs",
             "showLines",
             "listFolders",
-            "getContinueDir",
+            "getantalyseDir",
             "writeFile",
             "fileExists",
             "showVirtualFile",

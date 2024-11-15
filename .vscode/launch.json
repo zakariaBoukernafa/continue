@@ -20,8 +20,8 @@
       "outFiles": ["${workspaceFolder}/extensions/vscode/out/extension.js"],
       "preLaunchTask": "vscode-extension:build",
       "env": {
-        "CONTINUE_GLOBAL_DIR": "${workspaceFolder}/extensions/.antalyse-debug"
-        // "staging" for the preview deployment	        "CONTINUE_GLOBAL_DIR": "${workspaceFolder}/extensions/.continue-debug"
+        "antalyse_GLOBAL_DIR": "${workspaceFolder}/extensions/.antalyse-debug"
+        // "staging" for the preview deployment	        "antalyse_GLOBAL_DIR": "${workspaceFolder}/extensions/.antalyse-debug"
         // "local" for entirely local development of control plane/proxy
         // "CONTROL_PLANE_ENV": "staging"
       }
@@ -38,8 +38,8 @@
       "internalConsoleOptions": "openOnSessionStart",
       "cwd": "${workspaceFolder}/binary",
       "env": {
-        "CONTINUE_DEVELOPMENT": "true",
-        "CONTINUE_GLOBAL_DIR": "${workspaceFolder}/extensions/.antalyse-debug"
+        "antalyse_DEVELOPMENT": "true",
+        "antalyse_GLOBAL_DIR": "${workspaceFolder}/extensions/.antalyse-debug"
       }
     },
     {

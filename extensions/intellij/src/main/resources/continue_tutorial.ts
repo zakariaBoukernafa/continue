@@ -7,12 +7,11 @@
                                          Chat, Edit, and Autocomplete tutorial
 */
 
-
 /* —————————————————————————————————————————————————     Chat      ————————————————————————————————————————————————— */
 
 // Highlight the code below
 // Press [Cmd/Ctrl + J] to add to Chat
-// Try asking Continue "what sorting algorithm is this?"
+// Try asking antalyse "what sorting algorithm is this?"
 function sortingAlgorithm(x: number[]): number[] {
   for (let i = 0; i < x.length; i++) {
     for (let j = 0; j < x.length - 1; j++) {
@@ -30,7 +29,7 @@ function sortingAlgorithm(x: number[]): number[] {
 
 // Highlight the code below
 // Press [Cmd/Ctrl + I] to Edit
-// Try asking Continue to "make this more readable"
+// Try asking antalyse to "make this more readable"
 function sortingAlgorithm2(x: number[]): number[] {
   for (let i = 0; i < x.length; i++) {
     for (let j = 0; j < x.length - 1; j++) {
@@ -51,5 +50,4 @@ function sortingAlgorithm2(x: number[]): number[] {
 
 // Basic assertion for sortingAlgorithm...
 
-
-/* ——————————————————      Learn more at https://docs.continue.dev/getting-started/overview      ——————————————————— */
+/* ——————————————————      Learn more at https://docs.antalyse.dev/getting-started/overview      ——————————————————— */

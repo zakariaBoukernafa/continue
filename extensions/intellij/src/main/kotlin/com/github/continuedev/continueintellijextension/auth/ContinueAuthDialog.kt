@@ -1,4 +1,4 @@
-package com.github.continuedev.continueintellijextension.auth
+package com.github.antalysedev.antalyseintellijextension.auth
 
 import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.ui.components.JBLabel
@@ -7,17 +7,17 @@ import javax.swing.JComponent
 import javax.swing.JPanel
 import java.awt.BorderLayout
 
-class ContinueAuthDialog(private val onTokenEntered: (String) -> Unit) : DialogWrapper(true) {
+class antalyseAuthDialog(private val onTokenEntered: (String) -> Unit) : DialogWrapper(true) {
     private val tokenField = JBTextField()
 
     init {
         init()
-        title = "Enter Continue Authentication Token"
+        title = "Enter antalyse Authentication Token"
     }
 
     override fun createCenterPanel(): JComponent {
         val panel = JPanel(BorderLayout())
-        panel.add(JBLabel("Please enter your Continue authentication token:"), BorderLayout.NORTH)
+        panel.add(JBLabel("Please enter your antalyse authentication token:"), BorderLayout.NORTH)
         panel.add(tokenField, BorderLayout.CENTER)
         return panel
     }

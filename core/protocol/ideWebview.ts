@@ -79,9 +79,9 @@ export type ToWebviewFromIdeProtocol = ToWebviewFromIdeOrCoreProtocol & {
   ];
   newSessionWithPrompt: [{ prompt: string }, void];
   userInput: [{ input: string }, void];
-  focusContinueInput: [undefined, void];
-  focusContinueInputWithoutClear: [undefined, void];
-  focusContinueInputWithNewSession: [undefined, void];
+  focusantalyseInput: [undefined, void];
+  focusantalyseInputWithoutClear: [undefined, void];
+  focusantalyseInputWithNewSession: [undefined, void];
   highlightedCode: [
     {
       rangeInFileWithContents: RangeInFileWithContents;
@@ -98,7 +98,7 @@ export type ToWebviewFromIdeProtocol = ToWebviewFromIdeOrCoreProtocol & {
    * @deprecated Use navigateTo with a path instead.
    */
   viewHistory: [undefined, void];
-  focusContinueSessionId: [{ sessionId: string | undefined }, void];
+  focusantalyseSessionId: [{ sessionId: string | undefined }, void];
   newSession: [undefined, void];
   setTheme: [{ theme: any }, void];
   setColors: [{ [key: string]: string }, void];

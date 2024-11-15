@@ -3,8 +3,8 @@ import fetch from "node-fetch";
 import { ControlPlaneProxyInfo } from "../../control-plane/analytics/IAnalyticsProvider.js";
 import { Chunk, Reranker } from "../../index.js";
 
-export class ContinueProxyReranker implements Reranker {
-  name = "continue-proxy";
+export class AntalyseProxyReranker implements Reranker {
+  name = "antalyse-proxy";
 
   private _controlPlaneProxyInfo?: ControlPlaneProxyInfo;
 

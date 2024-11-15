@@ -8,11 +8,11 @@ import {
 } from "../../index.js";
 import { BaseContextProvider } from "../index.js";
 
-class ContinueProxyContextProvider extends BaseContextProvider {
+class antalyseProxyContextProvider extends BaseContextProvider {
   static description: ContextProviderDescription = {
-    title: "continue-proxy",
-    displayTitle: "Continue Proxy",
-    description: "Retrieve a context item from a Continue for Teams add-on",
+    title: "antalyse-proxy",
+    displayTitle: "antalyse Proxy",
+    description: "Retrieve a context item from a antalyse for Teams add-on",
     type: "submenu",
   };
 
@@ -21,14 +21,14 @@ class ContinueProxyContextProvider extends BaseContextProvider {
   override get description(): ContextProviderDescription {
     return {
       title:
-        this.options.title || ContinueProxyContextProvider.description.title,
+        this.options.title || antalyseProxyContextProvider.description.title,
       displayTitle:
         this.options.displayTitle ||
-        ContinueProxyContextProvider.description.displayTitle,
+        antalyseProxyContextProvider.description.displayTitle,
       description:
         this.options.description ||
-        ContinueProxyContextProvider.description.description,
-      type: this.options.type || ContinueProxyContextProvider.description.type,
+        antalyseProxyContextProvider.description.description,
+      type: this.options.type || antalyseProxyContextProvider.description.type,
     };
   }
 
@@ -79,4 +79,4 @@ class ContinueProxyContextProvider extends BaseContextProvider {
   }
 }
 
-export default ContinueProxyContextProvider;
+export default antalyseProxyContextProvider;

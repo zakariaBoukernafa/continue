@@ -1,4 +1,4 @@
-package com.github.continuedev.continueintellijextension.`continue`
+package com.github.antalysedev.antalyseintellijextension.`antalyse`
 
 import com.intellij.codeInsight.codeVision.*
 import com.intellij.openapi.editor.Editor
@@ -6,7 +6,7 @@ import com.intellij.openapi.util.TextRange
 
 class InputBoxCodeVision : CodeVisionProvider<Unit> {
     companion object {
-        const val id: String = "continue.code.vision"
+        const val id: String = "antalyse.code.vision"
     }
 
     override val name: String

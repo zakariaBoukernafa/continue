@@ -88,9 +88,9 @@ function EditorFrame(props: EditorFrameProps) {
 }
 
 const FILENAMES = [
-  "/Users/natesesti/Desktop/continue/gui/src/hooks/CustomPostHogProvider.tsx",
-  "/Users/natesesti/Desktop/continue/gui/src/hooks/CustomPostHogProvider.tsx",
-  "/Users/natesesti/Desktop/continue/gui/src/hooks/CustomPostHogProvider.tsx",
+  "/Users/natesesti/Desktop/antalyse/gui/src/hooks/CustomPostHogProvider.tsx",
+  "/Users/natesesti/Desktop/antalyse/gui/src/hooks/CustomPostHogProvider.tsx",
+  "/Users/natesesti/Desktop/antalyse/gui/src/hooks/CustomPostHogProvider.tsx",
 ];
 
 function MonacoPage() {

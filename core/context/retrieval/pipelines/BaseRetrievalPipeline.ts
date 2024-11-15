@@ -1,7 +1,7 @@
 // @ts-ignore
 import nlp from "wink-nlp-utils";
 
-import { BranchAndDir, Chunk, ContinueConfig, IDE, ILLM } from "../../../";
+import { BranchAndDir, Chunk, antalyseConfig, IDE, ILLM } from "../../../";
 import { chunkDocument } from "../../../indexing/chunk/chunk";
 import { FullTextSearchCodebaseIndex } from "../../../indexing/FullTextSearchCodebaseIndex";
 import { LanceDbIndex } from "../../../indexing/LanceDbIndex";
@@ -9,7 +9,7 @@ import { recentlyEditedFilesCache } from "../recentlyEditedFilesCache";
 
 export interface RetrievalPipelineOptions {
   llm: ILLM;
-  config: ContinueConfig;
+  config: antalyseConfig;
   ide: IDE;
   input: string;
   nRetrieve: number;

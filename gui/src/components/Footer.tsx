@@ -41,7 +41,7 @@ function Footer() {
     } else {
       ideMessenger.post(
         "openUrl",
-        `http://app.continue.dev/workspaces/${selectedProfileId}/chat`,
+        `http://app.antalyse.dev/workspaces/${selectedProfileId}/chat`,
       );
     }
   }
@@ -80,7 +80,7 @@ function Footer() {
         <HeaderButtonWithToolTip
           tooltipPlacement="top-end"
           onClick={onClickSettings}
-          text="Configure Continue"
+          text="Configure antalyse"
         >
           <Cog6ToothIcon className="h-4 w-4" />
         </HeaderButtonWithToolTip>

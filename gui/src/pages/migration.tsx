@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import ContinueButton from "../components/mainInput/ContinueButton";
+import antalyseButton from "../components/mainInput/antalyseButton";
 
 function MigrationPage() {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ function MigrationPage() {
       </h1>
 
       <p>
-        Continue now uses a .json config file. We hope that this takes the
+        antalyse now uses a .json config file. We hope that this takes the
         guesswork out of setting up.
       </p>
 
@@ -23,7 +23,7 @@ function MigrationPage() {
         For a summary of what changed and examples of <code>config.json</code>,
         please see the{" "}
         <a
-          href="https://docs.continue.dev/walkthroughs/config-file-migration"
+          href="https://docs.antalyse.dev/walkthroughs/config-file-migration"
           target="_blank"
         >
           migration walkthrough
@@ -40,7 +40,7 @@ function MigrationPage() {
         server, this message does not apply.
       </i>
 
-      <ContinueButton
+      <antalyseButton
         showStop={false}
         onClick={() => {
           navigate("/");

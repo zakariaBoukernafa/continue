@@ -12,7 +12,7 @@ import ContextItemsPeek from "./ContextItemsPeek";
 import TipTapEditor from "./TipTapEditor";
 import AcceptRejectAllButtons from "./AcceptRejectAllButtons";
 
-interface ContinueInputBoxProps {
+interface antalyseInputBoxProps {
   isLastUserInput: boolean;
   isMainInput?: boolean;
   onEnter: (
@@ -62,7 +62,7 @@ const GradientBorder = styled.div<{
   align-items: center;
 `;
 
-function ContinueInputBox(props: ContinueInputBoxProps) {
+function antalyseInputBox(props: antalyseInputBoxProps) {
   const dispatch = useDispatch();
 
   const active = useSelector((store: RootState) => store.state.active);
@@ -151,4 +151,4 @@ function ContinueInputBox(props: ContinueInputBoxProps) {
   );
 }
 
-export default ContinueInputBox;
+export default antalyseInputBox;

@@ -1,4 +1,4 @@
-package com.github.continuedev.continueintellijextension.factories
+package com.github.antalysedev.antalyseintellijextension.factories
 
 import com.intellij.openapi.project.DumbAware
 import org.cef.browser.CefBrowser
@@ -35,11 +35,11 @@ class CustomResourceHandler : CefResourceHandler, DumbAware {
     ): Boolean {
         val url = cefRequest.url
         return if (url != null) {
-            val pathToResource = url.replace("http://continue", "webview/").replace("http://localhost:5173", "webview/")
+            val pathToResource = url.replace("http://antalyse", "webview/").replace("http://localhost:5173", "webview/")
             val newUrl = javaClass.classLoader.getResource(pathToResource)
             state = OpenedConnection(newUrl?.openConnection())
             currentUrl = url
-            cefCallback.Continue()
+            cefCallback.antalyse()
             true
         } else {
             false

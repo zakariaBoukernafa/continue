@@ -1,4 +1,4 @@
-package com.github.continuedev.continueintellijextension.editor
+package com.github.antalysedev.antalyseintellijextension.editor
 
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.colors.TextAttributesKey

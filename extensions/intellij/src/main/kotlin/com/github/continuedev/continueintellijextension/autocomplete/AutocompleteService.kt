@@ -1,8 +1,8 @@
-package com.github.continuedev.continueintellijextension.autocomplete
+package com.github.antalysedev.antalyseintellijextension.autocomplete
 
-import com.github.continuedev.continueintellijextension.`continue`.uuid
-import com.github.continuedev.continueintellijextension.services.ContinueExtensionSettings
-import com.github.continuedev.continueintellijextension.services.ContinuePluginService
+import com.github.antalysedev.antalyseintellijextension.`antalyse`.uuid
+import com.github.antalysedev.antalyseintellijextension.services.antalyseExtensionSettings
+import com.github.antalysedev.antalyseintellijextension.services.antalysePluginService
 import com.google.gson.Gson
 import com.intellij.injected.editor.VirtualFileWindow
 import com.intellij.openapi.application.*
@@ -50,8 +50,8 @@ class AutocompleteService(private val project: Project) {
 
     fun triggerCompletion(editor: Editor) {
         val settings =
-            ServiceManager.getService(ContinueExtensionSettings::class.java)
-        if (!settings.continueState.enableTabAutocomplete) {
+            ServiceManager.getService(antalyseExtensionSettings::class.java)
+        if (!settings.antalyseState.enableTabAutocomplete) {
             return
         }
 
@@ -84,7 +84,7 @@ class AutocompleteService(private val project: Project) {
         val lineEnd = editor.document.getLineEndOffset(editor.caretModel.primaryCaret.logicalPosition.line)
         val lineLength = lineEnd - lineStart
 
-        project.service<ContinuePluginService>().coreMessenger?.request(
+        project.service<antalysePluginService>().coreMessenger?.request(
             "autocomplete/complete",
             input,
             null,
@@ -163,20 +163,20 @@ class AutocompleteService(private val project: Project) {
                     editor.inlayModel.addBlockElement(
                         offset,
                         properties,
-                        ContinueMultilineCustomElementRenderer(editor, completion)
+                        antalyseMultilineCustomElementRenderer(editor, completion)
                     )
                 } else {
                     editor.inlayModel.addInlineElement(
                         offset,
                         properties,
-                        ContinueCustomElementRenderer(editor, completion)
+                        antalyseCustomElementRenderer(editor, completion)
                     )
                 }
 
 //                val attributes = TextAttributes().apply {
 //                    backgroundColor = JBColor.GREEN
 //                }
-//                val key = TextAttributesKey.createTextAttributesKey("CONTINUE_AUTOCOMPLETE")
+//                val key = TextAttributesKey.createTextAttributesKey("antalyse_AUTOCOMPLETE")
 //                key.let { editor.colorsScheme.setAttributes(it, attributes) }
 //                editor.markupModel.addLineHighlighter(key, editor.caretModel.logicalPosition.line, HighlighterLayer.LAST)
             }
@@ -192,7 +192,7 @@ class AutocompleteService(private val project: Project) {
 
         editor.caretModel.moveToOffset(offset + text.length)
 
-        project.service<ContinuePluginService>().coreMessenger?.request(
+        project.service<antalysePluginService>().coreMessenger?.request(
             "autocomplete/accept",
             hashMapOf("completionId" to completion.completionId),
             null,
@@ -255,7 +255,7 @@ class AutocompleteService(private val project: Project) {
     private fun cancelCompletion(completion: PendingCompletion) {
         // Send cancellation message to core
         widget?.setLoading(false)
-        project.service<ContinuePluginService>().coreMessenger?.request("autocomplete/cancel", null, null, ({}))
+        project.service<antalysePluginService>().coreMessenger?.request("autocomplete/cancel", null, null, ({}))
     }
 
     fun clearCompletions(editor: Editor) {
@@ -266,12 +266,12 @@ class AutocompleteService(private val project: Project) {
             pendingCompletion = null
         }
         editor.inlayModel.getInlineElementsInRange(0, editor.document.textLength).forEach {
-            if (it.renderer is ContinueCustomElementRenderer) {
+            if (it.renderer is antalyseCustomElementRenderer) {
                 it.dispose()
             }
         }
         editor.inlayModel.getBlockElementsInRange(0, editor.document.textLength).forEach {
-            if (it.renderer is ContinueMultilineCustomElementRenderer) {
+            if (it.renderer is antalyseMultilineCustomElementRenderer) {
                 it.dispose()
             }
         }
@@ -290,12 +290,12 @@ class AutocompleteService(private val project: Project) {
         if (isInjectedFile(editor)) return
 
         editor.inlayModel.getInlineElementsInRange(0, editor.document.textLength).forEach {
-            if (it.renderer is ContinueCustomElementRenderer) {
+            if (it.renderer is antalyseCustomElementRenderer) {
                 it.dispose()
             }
         }
         editor.inlayModel.getBlockElementsInRange(0, editor.document.textLength).forEach {
-            if (it.renderer is ContinueMultilineCustomElementRenderer) {
+            if (it.renderer is antalyseMultilineCustomElementRenderer) {
                 it.dispose()
             }
         }

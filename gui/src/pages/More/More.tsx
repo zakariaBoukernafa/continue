@@ -56,10 +56,10 @@ function MorePage() {
           <div className="flex flex-col gap-5">
             <MoreHelpRow
               title="Documentation"
-              description="Learn how to configure and use Continue"
+              description="Learn how to configure and use antalyse"
               Icon={ArrowTopRightOnSquareIcon}
               onClick={() =>
-                ideMessenger.post("openUrl", "https://docs.continue.dev/")
+                ideMessenger.post("openUrl", "https://docs.antalyse.dev/")
               }
             />
 
@@ -70,7 +70,7 @@ function MorePage() {
               onClick={() =>
                 ideMessenger.post(
                   "openUrl",
-                  "https://github.com/continuedev/continue/issues/new/choose",
+                  "https://github.com/antalysedev/antalyse/issues/new/choose",
                 )
               }
             />

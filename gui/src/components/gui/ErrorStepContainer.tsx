@@ -1,5 +1,5 @@
 import { MinusCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { ContinueError } from "core";
+import { antalyseError } from "core";
 import styled from "styled-components";
 import { defaultBorderRadius, vscBackground } from "..";
 import HeaderButtonWithToolTip from "./HeaderButtonWithToolTip";
@@ -13,7 +13,7 @@ const Div = styled.div`
 `;
 
 interface ErrorStepContainerProps {
-  error: ContinueError;
+  error: antalyseError;
   onClose: () => void;
   onDelete: () => void;
 }

@@ -1,7 +1,7 @@
-package com.github.continuedev.continueintellijextension.auth
+package com.github.antalysedev.antalyseintellijextension.auth
 
-import com.github.continuedev.continueintellijextension.services.ContinueExtensionSettings
-import com.github.continuedev.continueintellijextension.services.ContinuePluginService
+import com.github.antalysedev.antalyseintellijextension.services.antalyseExtensionSettings
+import com.github.antalysedev.antalyseintellijextension.services.antalysePluginService
 import com.google.gson.Gson
 import com.intellij.credentialStore.Credentials
 import com.intellij.ide.passwordSafe.PasswordSafe
@@ -23,23 +23,23 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.net.URL
 
 @Service
-class ContinueAuthService {
+class antalyseAuthService {
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     companion object {
-        fun getInstance(): ContinueAuthService = service<ContinueAuthService>()
-        private const val CREDENTIALS_USER = "ContinueAuthUser"
-        private const val ACCESS_TOKEN_KEY = "ContinueAccessToken"
-        private const val REFRESH_TOKEN_KEY = "ContinueRefreshToken"
-        private const val ACCOUNT_ID_KEY = "ContinueAccountId"
-        private const val ACCOUNT_LABEL_KEY = "ContinueAccountLabel"
+        fun getInstance(): antalyseAuthService = service<antalyseAuthService>()
+        private const val CREDENTIALS_USER = "antalyseAuthUser"
+        private const val ACCESS_TOKEN_KEY = "antalyseAccessToken"
+        private const val REFRESH_TOKEN_KEY = "antalyseRefreshToken"
+        private const val ACCOUNT_ID_KEY = "antalyseAccountId"
+        private const val ACCOUNT_LABEL_KEY = "antalyseAccountLabel"
         private const val CONTROL_PLANE_URL = "https://control-plane-api-service-i3dqylpbqa-uc.a.run.app"
 //        private const val CONTROL_PLANE_URL = "http://localhost:3001"
     }
 
     init {
-        val settings = service<ContinueExtensionSettings>()
-        if (settings.continueState.enableContinueTeamsBeta) {
+        val settings = service<antalyseExtensionSettings>()
+        if (settings.antalyseState.enableantalyseTeamsBeta) {
             setupRefreshTokenInterval()
         }
     }
@@ -50,7 +50,7 @@ class ContinueAuthService {
 
         // Open a dialog where the user should paste their sign-in token
         ApplicationManager.getApplication().invokeLater {
-            val dialog = ContinueAuthDialog() { token ->
+            val dialog = antalyseAuthDialog() { token ->
                 // Store the token
                 updateRefreshToken(token)
             }
@@ -133,7 +133,7 @@ class ContinueAuthService {
 
 
     private fun openSignInPage(project: Project) {
-        val coreMessenger = project.service<ContinuePluginService>().coreMessenger
+        val coreMessenger = project.service<antalysePluginService>().coreMessenger
         coreMessenger?.request("auth/getAuthUrl", null, null) { response ->
             val authUrl = (response as? Map<*, *>)?.get("url") as? String
             if (authUrl != null) {

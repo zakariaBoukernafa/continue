@@ -1,8 +1,8 @@
 import { config } from "dotenv";
 
 import {
-  BrowserSerializedContinueConfig,
-  ContinueConfig,
+  BrowserSerializedantalyseConfig,
+  antalyseConfig,
   IContextProvider,
 } from "../index.js";
 
@@ -15,9 +15,9 @@ export interface ProfileDescription {
 }
 
 export class ProfileLifecycleManager {
-  private savedConfig: ContinueConfig | undefined;
-  private savedBrowserConfig?: BrowserSerializedContinueConfig;
-  private pendingConfigPromise?: Promise<ContinueConfig>;
+  private savedConfig: antalyseConfig | undefined;
+  private savedBrowserConfig?: BrowserSerializedantalyseConfig;
+  private pendingConfigPromise?: Promise<antalyseConfig>;
 
   constructor(private readonly profileLoader: IProfileLoader) {}
 
@@ -43,7 +43,7 @@ export class ProfileLifecycleManager {
   }
 
   // Clear saved config and reload
-  async reloadConfig(): Promise<ConfigResult<ContinueConfig>> {
+  async reloadConfig(): Promise<ConfigResult<antalyseConfig>> {
     this.savedConfig = undefined;
     this.savedBrowserConfig = undefined;
     this.pendingConfigPromise = undefined;
@@ -53,7 +53,7 @@ export class ProfileLifecycleManager {
 
   async loadConfig(
     additionalContextProviders: IContextProvider[],
-  ): Promise<ContinueConfig> {
+  ): Promise<antalyseConfig> {
     // If we already have a config, return it
     if (this.savedConfig) {
       return this.savedConfig;
@@ -89,10 +89,10 @@ export class ProfileLifecycleManager {
 
   async getSerializedConfig(
     additionalContextProviders: IContextProvider[],
-  ): Promise<BrowserSerializedContinueConfig> {
+  ): Promise<BrowserSerializedantalyseConfig> {
     if (!this.savedBrowserConfig) {
-      const continueConfig = await this.loadConfig(additionalContextProviders);
-      this.savedBrowserConfig = finalToBrowserConfig(continueConfig);
+      const antalyseConfig = await this.loadConfig(additionalContextProviders);
+      this.savedBrowserConfig = finalToBrowserConfig(antalyseConfig);
     }
     return this.savedBrowserConfig;
   }

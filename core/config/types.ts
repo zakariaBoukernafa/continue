@@ -111,7 +111,7 @@ declare global {
   export type FetchFunction = (url: string | URL, init?: any) => Promise<any>;
 
   export interface ContextProviderExtras {
-    config: ContinueConfig;
+    config: antalyseConfig;
     fullInput: string;
     embeddingsProvider: EmbeddingsProvider;
     reranker: Reranker | undefined;
@@ -122,7 +122,7 @@ declare global {
   }
 
   export interface LoadSubmenuItemsArgs {
-    config: ContinueConfig;
+    config: antalyseConfig;
     ide: IDE;
     fetch: FetchFunction;
   }
@@ -219,7 +219,7 @@ declare global {
     replacement: string;
   }
 
-  export interface ContinueError {
+  export interface antalyseError {
     title: string;
     message: string;
   }
@@ -442,11 +442,11 @@ declare global {
     getAvailableThreads(): Promise<Thread[]>;
     listFolders(): Promise<string[]>;
     getWorkspaceDirs(): Promise<string[]>;
-    getWorkspaceConfigs(): Promise<ContinueRcJson[]>;
+    getWorkspaceConfigs(): Promise<antalyseRcJson[]>;
     fileExists(filepath: string): Promise<boolean>;
     writeFile(path: string, contents: string): Promise<void>;
     showVirtualFile(title: string, contents: string): Promise<void>;
-    getContinueDir(): Promise<string>;
+    getantalyseDir(): Promise<string>;
     openFile(path: string): Promise<void>;
     runCommand(command: string): Promise<void>;
     saveFile(filepath: string): Promise<void>;
@@ -493,7 +493,7 @@ declare global {
 
   // Slash Commands
 
-  export interface ContinueSDK {
+  export interface antalyseSDK {
     ide: IDE;
     llm: ILLM;
     addContextItem: (item: ContextItemWithId) => void;
@@ -502,7 +502,7 @@ declare global {
     params?: { [key: string]: any } | undefined;
     contextItems: ContextItemWithId[];
     selectedCode: RangeInFile[];
-    config: ContinueConfig;
+    config: antalyseConfig;
     fetch: FetchFunction;
   }
 
@@ -510,7 +510,7 @@ declare global {
     name: string;
     description: string;
     params?: { [key: string]: any };
-    run: (sdk: ContinueSDK) => AsyncGenerator<string | undefined>;
+    run: (sdk: antalyseSDK) => AsyncGenerator<string | undefined>;
   }
 
   // Config
@@ -592,7 +592,7 @@ declare global {
     | "deepinfra"
     | "flowise"
     | "groq"
-    | "continue-proxy"
+    | "antalyse-proxy"
     | "fireworks"
     | "custom"
     | "cloudflare"
@@ -776,7 +776,7 @@ declare global {
     | "cohere"
     | "free-trial"
     | "gemini"
-    | "continue-proxy"
+    | "antalyse-proxy"
     | "deepinfra"
     | "voyage"
     | "watsonx"
@@ -811,7 +811,7 @@ declare global {
     | "llm"
     | "free-trial"
     | "huggingface-tei"
-    | "continue-proxy";
+    | "antalyse-proxy";
 
   export interface RerankerDescription {
     name: RerankerName;
@@ -846,7 +846,7 @@ declare global {
     useImports?: boolean;
   }
 
-  export interface ContinueUIConfig {
+  export interface antalyseUIConfig {
     codeBlockToolbarPosition?: "top" | "bottom";
     fontSize?: number;
     displayRawMarkdown?: boolean;
@@ -919,7 +919,7 @@ declare global {
   }
 
   // config.json
-  export interface SerializedContinueConfig {
+  export interface SerializedantalyseConfig {
     env?: string[];
     allowAnonymousTelemetry?: boolean;
     models: ModelDescription[];
@@ -935,7 +935,7 @@ declare global {
     embeddingsProvider?: EmbeddingsProviderDescription;
     tabAutocompleteModel?: ModelDescription | ModelDescription[];
     tabAutocompleteOptions?: Partial<TabAutocompleteOptions>;
-    ui?: ContinueUIConfig;
+    ui?: antalyseUIConfig;
     reranker?: RerankerDescription;
     experimental?: ExperimentalConfig;
     analytics?: AnalyticsConfig;
@@ -944,17 +944,17 @@ declare global {
 
   export type ConfigMergeType = "merge" | "overwrite";
 
-  export type ContinueRcJson = Partial<SerializedContinueConfig> & {
+  export type antalyseRcJson = Partial<SerializedantalyseConfig> & {
     mergeBehavior: ConfigMergeType;
   };
 
   // config.ts - give users simplified interfaces
   export interface Config {
-    /** If set to true, Continue will collect anonymous usage data to improve the product. If set to false, we will collect nothing. Read here to learn more: https://docs.continue.dev/telemetry */
+    /** If set to true, antalyse will collect anonymous usage data to improve the product. If set to false, we will collect nothing. Read here to learn more: https://docs.antalyse.dev/telemetry */
     allowAnonymousTelemetry?: boolean;
     /** Each entry in this array will originally be a ModelDescription, the same object from your config.json, but you may add CustomLLMs.
      * A CustomLLM requires you only to define an AsyncGenerator that calls the LLM and yields string updates. You can choose to define either \`streamCompletion\` or \`streamChat\` (or both).
-     * Continue will do the rest of the work to construct prompt templates, handle context items, prune context, etc.
+     * antalyse will do the rest of the work to construct prompt templates, handle context items, prune context, etc.
      */
     models: (CustomLLM | ModelDescription)[];
     /** A system message to be followed by all of your models */
@@ -966,18 +966,18 @@ declare global {
     /** The list of slash commands that will be available in the sidebar */
     slashCommands?: SlashCommand[];
     /** Each entry in this array will originally be a ContextProviderWithParams, the same object from your config.json, but you may add CustomContextProviders.
-     * A CustomContextProvider requires you only to define a title and getContextItems function. When you type '@title <query>', Continue will call \`getContextItems(query)\`.
+     * A CustomContextProvider requires you only to define a title and getContextItems function. When you type '@title <query>', antalyse will call \`getContextItems(query)\`.
      */
     contextProviders?: (CustomContextProvider | ContextProviderWithParams)[];
-    /** If set to true, Continue will not index your codebase for retrieval */
+    /** If set to true, antalyse will not index your codebase for retrieval */
     disableIndexing?: boolean;
-    /** If set to true, Continue will not make extra requests to the LLM to generate a summary title of each session. */
+    /** If set to true, antalyse will not make extra requests to the LLM to generate a summary title of each session. */
     disableSessionTitles?: boolean;
-    /** An optional token to identify a user. Not used by Continue unless you write custom coniguration that requires such a token */
+    /** An optional token to identify a user. Not used by antalyse unless you write custom coniguration that requires such a token */
     userToken?: string;
-    /** The provider used to calculate embeddings. If left empty, Continue will use transformers.js to calculate the embeddings with all-MiniLM-L6-v2 */
+    /** The provider used to calculate embeddings. If left empty, antalyse will use transformers.js to calculate the embeddings with all-MiniLM-L6-v2 */
     embeddingsProvider?: EmbeddingsProviderDescription | EmbeddingsProvider;
-    /** The model that Continue will use for tab autocompletions. */
+    /** The model that antalyse will use for tab autocompletions. */
     tabAutocompleteModel?:
       | CustomLLM
       | ModelDescription
@@ -985,7 +985,7 @@ declare global {
     /** Options for tab autocomplete */
     tabAutocompleteOptions?: Partial<TabAutocompleteOptions>;
     /** UI styles customization */
-    ui?: ContinueUIConfig;
+    ui?: antalyseUIConfig;
     /** Options for the reranker */
     reranker?: RerankerDescription | Reranker;
     /** Experimental configuration */
@@ -994,8 +994,8 @@ declare global {
     analytics?: AnalyticsConfig;
   }
 
-  // in the actual Continue source code
-  export interface ContinueConfig {
+  // in the actual antalyse source code
+  export interface antalyseConfig {
     allowAnonymousTelemetry?: boolean;
     models: ILLM[];
     systemMessage?: string;
@@ -1009,14 +1009,14 @@ declare global {
     embeddingsProvider: EmbeddingsProvider;
     tabAutocompleteModels?: ILLM[];
     tabAutocompleteOptions?: Partial<TabAutocompleteOptions>;
-    ui?: ContinueUIConfig;
+    ui?: antalyseUIConfig;
     reranker?: Reranker;
     experimental?: ExperimentalConfig;
     analytics?: AnalyticsConfig;
     docs?: SiteIndexingConfig[];
   }
 
-  export interface BrowserSerializedContinueConfig {
+  export interface BrowserSerializedantalyseConfig {
     allowAnonymousTelemetry?: boolean;
     models: ModelDescription[];
     systemMessage?: string;
@@ -1028,7 +1028,7 @@ declare global {
     disableSessionTitles?: boolean;
     userToken?: string;
     embeddingsProvider?: string;
-    ui?: ContinueUIConfig;
+    ui?: antalyseUIConfig;
     reranker?: RerankerDescription;
     experimental?: ExperimentalConfig;
     analytics?: AnalyticsConfig;

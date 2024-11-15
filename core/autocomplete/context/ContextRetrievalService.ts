@@ -37,7 +37,7 @@ export class ContextRetrievalService {
     // Import definitions of any symbols in near range of the caret
     snippets.push(...(await this.getSnippetsFromImportDefinitions(helper)));
 
-    // Root path context https://blog.continue.dev/root-path-context-the-secret-ingredient-in-continues-autocomplete-prompt/
+    // Root path context https://blog.antalyse.dev/root-path-context-the-secret-ingredient-in-antalyses-autocomplete-prompt/
     if (helper.options.useRootPathContext && helper.treePath) {
       snippets.push(
         ...(await this.rootPathContextService.getContextForPath(

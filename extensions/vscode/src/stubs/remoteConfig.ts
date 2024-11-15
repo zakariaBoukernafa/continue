@@ -1,6 +1,6 @@
 import * as fs from "fs";
 
-import { ContinueServerClient } from "core/continueServer/stubs/client";
+import { AntalyseServerClient } from "core/antalyseServer/stubs/client";
 import { EXTENSION_NAME } from "core/control-plane/env";
 import {
   getConfigJsPathForRemote,
@@ -8,7 +8,7 @@ import {
 } from "core/util/paths";
 import * as vscode from "vscode";
 
-import { CONTINUE_WORKSPACE_KEY } from "../util/workspaceConfig";
+import { antalyse_WORKSPACE_KEY } from "../util/workspaceConfig";
 
 export class RemoteConfigSync {
   private userToken: string | null;
@@ -32,7 +32,7 @@ export class RemoteConfigSync {
 
     // Listen for changes to VS Code settings, then trigger a refresh
     vscode.workspace.onDidChangeConfiguration(async (event) => {
-      if (event.affectsConfiguration(CONTINUE_WORKSPACE_KEY)) {
+      if (event.affectsConfiguration(antalyse_WORKSPACE_KEY)) {
         const { userToken, remoteConfigServerUrl, remoteConfigSyncPeriod } =
           await this.loadVsCodeSettings();
         if (
@@ -122,7 +122,7 @@ export class RemoteConfigSync {
 
   async sync(userToken: string, remoteConfigServerUrl: string) {
     try {
-      const client = new ContinueServerClient(
+      const client = new AntalyseServerClient(
         remoteConfigServerUrl.toString(),
         userToken,
       );

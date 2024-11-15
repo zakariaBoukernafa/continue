@@ -1,4 +1,4 @@
-package com.github.continuedev.continueintellijextension.`continue`
+package com.github.antalysedev.antalyseintellijextension.`antalyse`
 
 import com.intellij.codeInsight.hints.presentation.BasePresentation
 import com.intellij.openapi.editor.Editor

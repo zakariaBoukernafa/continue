@@ -1,7 +1,7 @@
 import { jest } from "@jest/globals";
 
 import { IndexTag } from "../..";
-import { IContinueServerClient } from "../../continueServer/interface";
+import { IantalyseServerClient } from "../../antalyseServer/interface";
 import { ChunkCodebaseIndex } from "../../indexing/chunk/ChunkCodebaseIndex";
 import { tagToString } from "../../indexing/refreshIndex";
 import {
@@ -12,9 +12,6 @@ import {
 
 import { testIde } from "./fixtures";
 import { addToTestDir, TEST_DIR } from "./testDir";
-
-
-
 
 export const mockFilename = "test.py";
 export const mockPathAndCacheKey = {
@@ -39,15 +36,15 @@ export const mockTag: IndexTag = {
 
 export const mockTagString = tagToString(mockTag);
 
-export const testContinueServerClient = {
+export const testantalyseServerClient = {
   connected: false,
   getFromIndexCache: jest.fn(),
-} as unknown as IContinueServerClient;
+} as unknown as IantalyseServerClient;
 
-const mockContinueServerClient = {
+const mockantalyseServerClient = {
   connected: false,
   getFromIndexCache: jest.fn(),
-} as unknown as IContinueServerClient;
+} as unknown as IantalyseServerClient;
 
 const mockResults: RefreshIndexResults = {
   compute: [],
@@ -66,7 +63,7 @@ export async function insertMockChunks() {
   const index = new ChunkCodebaseIndex(
     testIde.readFile.bind(testIde),
     pathSep,
-    mockContinueServerClient,
+    mockantalyseServerClient,
     1000,
   );
 

@@ -126,7 +126,7 @@ export class VsCodeMessenger {
     });
     this.onWebview("toggleDevTools", (msg) => {
       vscode.commands.executeCommand("workbench.action.toggleDevTools");
-      vscode.commands.executeCommand("continue.viewLogs");
+      vscode.commands.executeCommand("antalyse.viewLogs");
     });
     this.onWebview("reloadWindow", (msg) => {
       vscode.commands.executeCommand("workbench.action.reloadWindow");
@@ -135,7 +135,7 @@ export class VsCodeMessenger {
       vscode.commands.executeCommand("workbench.action.focusActiveEditorGroup");
     });
     this.onWebview("toggleFullScreen", (msg) => {
-      vscode.commands.executeCommand("continue.toggleFullScreen");
+      vscode.commands.executeCommand("antalyse.toggleFullScreen");
     });
     // History
     this.onWebview("saveFile", async (msg) => {
@@ -153,11 +153,11 @@ export class VsCodeMessenger {
     });
 
     webviewProtocol.on("acceptDiff", async ({ data: { filepath } }) => {
-      await vscode.commands.executeCommand("continue.acceptDiff", filepath);
+      await vscode.commands.executeCommand("antalyse.acceptDiff", filepath);
     });
 
     webviewProtocol.on("rejectDiff", async ({ data: { filepath } }) => {
-      await vscode.commands.executeCommand("continue.rejectDiff", filepath);
+      await vscode.commands.executeCommand("antalyse.rejectDiff", filepath);
     });
 
     this.onWebview("applyToFile", async ({ data }) => {
@@ -273,7 +273,7 @@ export class VsCodeMessenger {
     this.onWebview("showTutorial", async (msg) => {
       const tutorialPath = path.join(
         getExtensionUri().fsPath,
-        "continue_tutorial.py",
+        "antalyse_tutorial.py",
       );
       // Ensure keyboard shortcuts match OS
       if (process.platform !== "darwin") {
@@ -338,23 +338,23 @@ export class VsCodeMessenger {
       if (accept && onlyFirst) {
         // Accept first
         vscode.commands.executeCommand(
-          "continue.acceptVerticalDiffBlock",
+          "antalyse.acceptVerticalDiffBlock",
           filepath,
           0,
         );
       } else if (accept) {
-        vscode.commands.executeCommand("continue.acceptDiff", filepath);
+        vscode.commands.executeCommand("antalyse.acceptDiff", filepath);
         // Accept all
       } else if (onlyFirst) {
         // Reject first
         vscode.commands.executeCommand(
-          "continue.rejectVerticalDiffBlock",
+          "antalyse.rejectVerticalDiffBlock",
           filepath,
           0,
         );
       } else {
         // Reject all
-        vscode.commands.executeCommand("continue.rejectDiff", filepath);
+        vscode.commands.executeCommand("antalyse.rejectDiff", filepath);
       }
     });
     this.onWebview("edit/escape", async (msg) => {
@@ -416,8 +416,8 @@ export class VsCodeMessenger {
     this.onWebviewOrCore("showVirtualFile", async (msg) => {
       return ide.showVirtualFile(msg.data.name, msg.data.content);
     });
-    this.onWebviewOrCore("getContinueDir", async (msg) => {
-      return ide.getContinueDir();
+    this.onWebviewOrCore("getantalyseDir", async (msg) => {
+      return ide.getantalyseDir();
     });
     this.onWebviewOrCore("openFile", async (msg) => {
       return ide.openFile(msg.data.path);

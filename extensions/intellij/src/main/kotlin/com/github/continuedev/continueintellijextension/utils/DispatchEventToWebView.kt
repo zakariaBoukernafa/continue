@@ -1,4 +1,4 @@
-package com.github.continuedev.continueintellijextension.utils
+package com.github.antalysedev.antalyseintellijextension.utils
 
 import com.google.gson.Gson
 import com.intellij.ui.jcef.JBCefBrowser

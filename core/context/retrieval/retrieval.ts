@@ -33,7 +33,7 @@ export async function retrieveContextItemsFromEmbeddings(
       "Codebase retrieval is limited when `embeddingsProvider` is empty or set to `transformers.js` in JetBrains. " +
         "You can use Ollama to set up local embeddings, use our 'free-trial', " +
         "or configure your own. See here to learn more: " +
-        "https://docs.continue.dev/customize/model-types/embeddings",
+        "https://docs.antalyse.dev/customize/model-types/embeddings",
     );
   }
 

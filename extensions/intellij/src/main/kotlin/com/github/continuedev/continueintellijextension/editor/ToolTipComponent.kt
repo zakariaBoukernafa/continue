@@ -1,5 +1,5 @@
-import com.github.continuedev.continueintellijextension.actions.focusContinueInput
-import com.github.continuedev.continueintellijextension.editor.openInlineEdit
+import com.github.antalysedev.antalyseintellijextension.actions.focusantalyseInput
+import com.github.antalysedev.antalyseintellijextension.editor.openInlineEdit
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.colors.EditorColorsManager
 import com.intellij.openapi.editor.colors.EditorFontType
@@ -92,7 +92,7 @@ class ToolTipComponent(editor: Editor, x: Int, y: Int) :
         editButton = StyledButton("Edit (${cmdCtrlChar}I)")
 
         addToChatButton.addActionListener { e: ActionEvent? ->
-            focusContinueInput(editor.project)
+            focusantalyseInput(editor.project)
             editor.contentComponent.remove(this)
         }
         editButton.addActionListener { e: ActionEvent? ->

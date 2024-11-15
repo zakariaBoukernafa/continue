@@ -9,7 +9,7 @@ import { GetGhTokenArgs } from "core/protocol/ide";
 import {
   editConfigJson,
   getConfigJsonPath,
-  getContinueGlobalPath,
+  getantalyseGlobalPath,
 } from "core/util/paths";
 import * as vscode from "vscode";
 
@@ -25,7 +25,7 @@ import {
 import { VsCodeWebviewProtocol } from "./webviewProtocol";
 
 import type {
-  ContinueRcJson,
+  antalyseRcJson,
   FileType,
   IDE,
   IdeInfo,
@@ -111,7 +111,7 @@ class VsCodeIde implements IDE {
       if (!this.askedForAuth) {
         vscode.window
           .showInformationMessage(
-            "Continue will request read access to your GitHub email so that we can prevent abuse of the free trial. If you prefer not to sign in, you can use Continue with your own API keys or local model.",
+            "antalyse will request read access to your GitHub email so that we can prevent abuse of the free trial. If you prefer not to sign in, you can use antalyse with your own API keys or local model.",
             "Sign in",
             "Use API key / local model",
             "Learn more",
@@ -119,7 +119,7 @@ class VsCodeIde implements IDE {
           .then(async (selection) => {
             if (selection === "Use API key / local model") {
               await vscode.commands.executeCommand(
-                "continue.continueGUIView.focus",
+                "antalyse.antalyseGUIView.focus",
               );
               (await this.vscodeWebviewProtocolPromise).request(
                 "openOnboardingCard",
@@ -150,7 +150,7 @@ class VsCodeIde implements IDE {
             } else if (selection === "Learn more") {
               vscode.env.openExternal(
                 vscode.Uri.parse(
-                  "https://docs.continue.dev/reference/Model%20Providers/freetrial",
+                  "https://docs.antalyse.dev/reference/Model%20Providers/freetrial",
                 ),
               );
             } else if (selection === "Sign in") {
@@ -266,7 +266,7 @@ class VsCodeIde implements IDE {
       version: vscode.version,
       remoteName: vscode.env.remoteName || "local",
       extensionVersion:
-        vscode.extensions.getExtension("continue.continue")?.packageJSON
+        vscode.extensions.getExtension("antalyse.antalyse")?.packageJSON
           .version,
     });
   }
@@ -299,11 +299,11 @@ class VsCodeIde implements IDE {
 
   async isTelemetryEnabled(): Promise<boolean> {
     const globalEnabled = vscode.env.isTelemetryEnabled;
-    const continueEnabled: boolean =
+    const antalyseEnabled: boolean =
       (await vscode.workspace
         .getConfiguration(EXTENSION_NAME)
         .get("telemetryEnabled")) ?? true;
-    return globalEnabled && continueEnabled;
+    return globalEnabled && antalyseEnabled;
   }
 
   getUniqueId(): Promise<string> {
@@ -338,14 +338,14 @@ class VsCodeIde implements IDE {
   async getWorkspaceConfigs() {
     const workspaceDirs =
       vscode.workspace.workspaceFolders?.map((folder) => folder.uri) || [];
-    const configs: ContinueRcJson[] = [];
+    const configs: antalyseRcJson[] = [];
     for (const workspaceDir of workspaceDirs) {
       const files = await vscode.workspace.fs.readDirectory(workspaceDir);
       for (const [filename, type] of files) {
         if (
           (type === vscode.FileType.File ||
             type === vscode.FileType.SymbolicLink) &&
-          filename === ".continuerc.json"
+          filename === ".antalyserc.json"
         ) {
           const contents = await this.readFile(
             vscode.Uri.joinPath(workspaceDir, filename).fsPath,
@@ -373,8 +373,8 @@ class VsCodeIde implements IDE {
     return this.ideUtils.getWorkspaceDirectories();
   }
 
-  async getContinueDir(): Promise<string> {
-    return getContinueGlobalPath();
+  async getantalyseDir(): Promise<string> {
+    return getantalyseGlobalPath();
   }
 
   async writeFile(path: string, contents: string): Promise<void> {
@@ -609,7 +609,7 @@ class VsCodeIde implements IDE {
       ),
       userToken: settings.get<string>("userToken", ""),
       enableControlServerBeta: settings.get<boolean>(
-        "enableContinueForTeams",
+        "enableantalyseForTeams",
         false,
       ),
       pauseCodebaseIndexOnStart: settings.get<boolean>(

@@ -5,53 +5,53 @@ import * as path from "path";
 import * as JSONC from "comment-json";
 import dotenv from "dotenv";
 
-import { IdeType, SerializedContinueConfig } from "../";
+import { IdeType, SerializedantalyseConfig } from "../";
 import { defaultConfig, defaultConfigJetBrains } from "../config/default";
 import Types from "../config/types";
 
 dotenv.config();
 
-const CONTINUE_GLOBAL_DIR =
-  process.env.CONTINUE_GLOBAL_DIR ?? path.join(os.homedir(), ".antalyse");
+const antalyse_GLOBAL_DIR =
+  process.env.antalyse_GLOBAL_DIR ?? path.join(os.homedir(), ".antalyse");
 
 export const DEFAULT_CONFIG_TS_CONTENTS = `export function modifyConfig(config: Config): Config {
   return config;
 }`;
 
 export function getChromiumPath(): string {
-  return path.join(getContinueUtilsPath(), ".chromium-browser-snapshots");
+  return path.join(getantalyseUtilsPath(), ".chromium-browser-snapshots");
 }
 
-export function getContinueUtilsPath(): string {
-  const utilsPath = path.join(getContinueGlobalPath(), ".utils");
+export function getantalyseUtilsPath(): string {
+  const utilsPath = path.join(getantalyseGlobalPath(), ".utils");
   if (!fs.existsSync(utilsPath)) {
     fs.mkdirSync(utilsPath);
   }
   return utilsPath;
 }
 
-export function getGlobalContinueIgnorePath(): string {
-  const continueIgnorePath = path.join(
-    getContinueGlobalPath(),
+export function getGlobalantalyseIgnorePath(): string {
+  const antalyseIgnorePath = path.join(
+    getantalyseGlobalPath(),
     ".antalyseignore",
   );
-  if (!fs.existsSync(continueIgnorePath)) {
-    fs.writeFileSync(continueIgnorePath, "");
+  if (!fs.existsSync(antalyseIgnorePath)) {
+    fs.writeFileSync(antalyseIgnorePath, "");
   }
-  return continueIgnorePath;
+  return antalyseIgnorePath;
 }
 
-export function getContinueGlobalPath(): string {
-  // This is ~/.continue on mac/linux
-  const continuePath = CONTINUE_GLOBAL_DIR;
-  if (!fs.existsSync(continuePath)) {
-    fs.mkdirSync(continuePath);
+export function getantalyseGlobalPath(): string {
+  // This is ~/.antalyse on mac/linux
+  const antalysePath = antalyse_GLOBAL_DIR;
+  if (!fs.existsSync(antalysePath)) {
+    fs.mkdirSync(antalysePath);
   }
-  return continuePath;
+  return antalysePath;
 }
 
 export function getSessionsFolderPath(): string {
-  const sessionsPath = path.join(getContinueGlobalPath(), "sessions");
+  const sessionsPath = path.join(getantalyseGlobalPath(), "sessions");
   if (!fs.existsSync(sessionsPath)) {
     fs.mkdirSync(sessionsPath);
   }
@@ -59,7 +59,7 @@ export function getSessionsFolderPath(): string {
 }
 
 export function getIndexFolderPath(): string {
-  const indexPath = path.join(getContinueGlobalPath(), "index");
+  const indexPath = path.join(getantalyseGlobalPath(), "index");
   if (!fs.existsSync(indexPath)) {
     fs.mkdirSync(indexPath);
   }
@@ -83,7 +83,7 @@ export function getSessionsListPath(): string {
 }
 
 export function getConfigJsonPath(ideType: IdeType = "vscode"): string {
-  const p = path.join(getContinueGlobalPath(), "config.json");
+  const p = path.join(getantalyseGlobalPath(), "config.json");
   if (!fs.existsSync(p)) {
     if (ideType === "jetbrains") {
       fs.writeFileSync(p, JSON.stringify(defaultConfigJetBrains, null, 2));
@@ -95,12 +95,12 @@ export function getConfigJsonPath(ideType: IdeType = "vscode"): string {
 }
 
 export function getConfigTsPath(): string {
-  const p = path.join(getContinueGlobalPath(), "config.ts");
+  const p = path.join(getantalyseGlobalPath(), "config.ts");
   if (!fs.existsSync(p)) {
     fs.writeFileSync(p, DEFAULT_CONFIG_TS_CONTENTS);
   }
 
-  const typesPath = path.join(getContinueGlobalPath(), "types");
+  const typesPath = path.join(getantalyseGlobalPath(), "types");
   if (!fs.existsSync(typesPath)) {
     fs.mkdirSync(typesPath);
   }
@@ -108,14 +108,14 @@ export function getConfigTsPath(): string {
   if (!fs.existsSync(corePath)) {
     fs.mkdirSync(corePath);
   }
-  const packageJsonPath = path.join(getContinueGlobalPath(), "package.json");
+  const packageJsonPath = path.join(getantalyseGlobalPath(), "package.json");
   if (!fs.existsSync(packageJsonPath)) {
     fs.writeFileSync(
       packageJsonPath,
       JSON.stringify({
-        name: "continue-config",
+        name: "antalyse-config",
         version: "1.0.0",
-        description: "My Continue Configuration",
+        description: "My antalyse Configuration",
         main: "config.js",
       }),
     );
@@ -127,11 +127,11 @@ export function getConfigTsPath(): string {
 
 export function getConfigJsPath(): string {
   // Do not create automatically
-  return path.join(getContinueGlobalPath(), "out", "config.js");
+  return path.join(getantalyseGlobalPath(), "out", "config.js");
 }
 
 export function getTsConfigPath(): string {
-  const tsConfigPath = path.join(getContinueGlobalPath(), "tsconfig.json");
+  const tsConfigPath = path.join(getantalyseGlobalPath(), "tsconfig.json");
   if (!fs.existsSync(tsConfigPath)) {
     fs.writeFileSync(
       tsConfigPath,
@@ -164,12 +164,12 @@ export function getTsConfigPath(): string {
   return tsConfigPath;
 }
 
-export function getContinueRcPath(): string {
+export function getantalyseRcPath(): string {
   // Disable indexing of the config folder to prevent infinite loops
-  const continuercPath = path.join(getContinueGlobalPath(), ".antalyserc.json");
-  if (!fs.existsSync(continuercPath)) {
+  const antalysercPath = path.join(getantalyseGlobalPath(), ".antalyserc.json");
+  if (!fs.existsSync(antalysercPath)) {
     fs.writeFileSync(
-      continuercPath,
+      antalysercPath,
       JSON.stringify(
         {
           disableIndexing: true,
@@ -179,11 +179,11 @@ export function getContinueRcPath(): string {
       ),
     );
   }
-  return continuercPath;
+  return antalysercPath;
 }
 
 export function devDataPath(): string {
-  const sPath = path.join(getContinueGlobalPath(), "dev_data");
+  const sPath = path.join(getantalyseGlobalPath(), "dev_data");
   if (!fs.existsSync(sPath)) {
     fs.mkdirSync(sPath);
   }
@@ -199,7 +199,7 @@ export function getDevDataFilePath(fileName: string): string {
 }
 
 export function editConfigJson(
-  callback: (config: SerializedContinueConfig) => SerializedContinueConfig,
+  callback: (config: SerializedantalyseConfig) => SerializedantalyseConfig,
 ): void {
   const config = fs.readFileSync(getConfigJsonPath(), "utf8");
   let configJson = JSONC.parse(config);
@@ -213,7 +213,7 @@ export function editConfigJson(
 }
 
 function getMigrationsFolderPath(): string {
-  const migrationsPath = path.join(getContinueGlobalPath(), ".migrations");
+  const migrationsPath = path.join(getantalyseGlobalPath(), ".migrations");
   if (!fs.existsSync(migrationsPath)) {
     fs.mkdirSync(migrationsPath);
   }
@@ -263,7 +263,7 @@ export function getDocsSqlitePath(): string {
 }
 
 export function getRemoteConfigsFolderPath(): string {
-  const dir = path.join(getContinueGlobalPath(), ".configs");
+  const dir = path.join(getantalyseGlobalPath(), ".configs");
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
   }
@@ -286,7 +286,7 @@ export function getPathToRemoteConfig(remoteConfigServerUrl: string): string {
 }
 
 export function internalBetaPathExists(): boolean {
-  const sPath = path.join(getContinueGlobalPath(), ".internal_beta");
+  const sPath = path.join(getantalyseGlobalPath(), ".internal_beta");
   return fs.existsSync(sPath);
 }
 
@@ -302,8 +302,8 @@ export function getConfigJsPathForRemote(
   return path.join(getPathToRemoteConfig(remoteConfigServerUrl), "config.js");
 }
 
-export function getContinueDotEnv(): { [key: string]: string } {
-  const filepath = path.join(getContinueGlobalPath(), ".env");
+export function getantalyseDotEnv(): { [key: string]: string } {
+  const filepath = path.join(getantalyseGlobalPath(), ".env");
   if (fs.existsSync(filepath)) {
     return dotenv.parse(fs.readFileSync(filepath));
   }
@@ -311,7 +311,7 @@ export function getContinueDotEnv(): { [key: string]: string } {
 }
 
 export function getLogsDirPath(): string {
-  const logsPath = path.join(getContinueGlobalPath(), "logs");
+  const logsPath = path.join(getantalyseGlobalPath(), "logs");
   if (!fs.existsSync(logsPath)) {
     fs.mkdirSync(logsPath);
   }
@@ -327,7 +327,7 @@ export function getPromptLogsPath(): string {
 }
 
 export function getGlobalPromptsPath(): string {
-  return path.join(getContinueGlobalPath(), ".prompts");
+  return path.join(getantalyseGlobalPath(), ".prompts");
 }
 
 export function readAllGlobalPromptFiles(
@@ -355,14 +355,14 @@ export function readAllGlobalPromptFiles(
 }
 
 export function getRepoMapFilePath(): string {
-  return path.join(getContinueUtilsPath(), "repo_map.txt");
+  return path.join(getantalyseUtilsPath(), "repo_map.txt");
 }
 
 export function getEsbuildBinaryPath(): string {
-  return path.join(getContinueUtilsPath(), "esbuild");
+  return path.join(getantalyseUtilsPath(), "esbuild");
 }
 
-export function setupInitialDotContinueDirectory() {
+export function setupInitialDotantalyseDirectory() {
   const devDataTypes = [
     "chat",
     "autocomplete",

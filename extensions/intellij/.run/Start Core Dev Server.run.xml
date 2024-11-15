@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Start Core Dev Server" type="NodeJSConfigurationType" path-to-js-file="out/index.js" working-dir="$PROJECT_DIR$/binary">
     <envs>
-      <env name="CONTINUE_DEVELOPMENT" value="true" />
-      <env name="CONTINUE_GLOBAL_DIR" value="$PROJECT_DIR$/binary/.continue" />
+      <env name="antalyse_DEVELOPMENT" value="true" />
+      <env name="antalyse_GLOBAL_DIR" value="$PROJECT_DIR$/binary/.antalyse" />
     </envs>
     <method v="2" />
   </configuration>

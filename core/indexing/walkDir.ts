@@ -9,7 +9,7 @@ import {
   DEFAULT_IGNORE_FILETYPES,
   defaultIgnoreDir,
   defaultIgnoreFile,
-  getGlobalContinueIgArray,
+  getGlobalantalyseIgArray,
   gitIgArrayFromFile,
 } from "./ignore.js";
 
@@ -87,7 +87,7 @@ class DFSWalker {
   }
 
   private newRootWalkContext(): WalkContext {
-    const globalIgnoreFile = getGlobalContinueIgArray();
+    const globalIgnoreFile = getGlobalantalyseIgArray();
     return {
       walkableEntry: {
         relPath: "",
@@ -97,7 +97,10 @@ class DFSWalker {
       },
       ignoreContexts: [
         {
-          ignore: ignore().add(defaultIgnoreDir).add(defaultIgnoreFile).add(globalIgnoreFile),
+          ignore: ignore()
+            .add(defaultIgnoreDir)
+            .add(defaultIgnoreFile)
+            .add(globalIgnoreFile),
           dirname: "",
         },
       ],
@@ -209,7 +212,7 @@ class DFSWalker {
 }
 
 const defaultOptions: WalkerOptions = {
-  ignoreFiles: [".gitignore", ".continueignore"],
+  ignoreFiles: [".gitignore", ".antalyseignore"],
   additionalIgnoreRules: [...DEFAULT_IGNORE_DIRS, ...DEFAULT_IGNORE_FILETYPES],
 };
 

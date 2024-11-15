@@ -1,7 +1,7 @@
 import * as fs from "fs/promises";
 
 import { ConfigHandler } from "../config/ConfigHandler.js";
-import { IContinueServerClient } from "../continueServer/interface.js";
+import { IantalyseServerClient } from "../antalyseServer/interface.js";
 import { IDE, IndexingProgressUpdate, IndexTag } from "../index.js";
 import { extractMinimalStackTraceInfo } from "../util/extractMinimalStackTraceInfo.js";
 import { getIndexSqlitePath, getLanceDbPath } from "../util/paths.js";
@@ -53,7 +53,7 @@ export class CodebaseIndexer {
     private readonly configHandler: ConfigHandler,
     protected readonly ide: IDE,
     private readonly pauseToken: PauseToken,
-    private readonly continueServerClient: IContinueServerClient,
+    private readonly antalyseServerClient: IantalyseServerClient,
   ) {}
 
   async clearIndexes() {
@@ -81,14 +81,14 @@ export class CodebaseIndexer {
       new ChunkCodebaseIndex(
         this.ide.readFile.bind(this.ide),
         pathSep,
-        this.continueServerClient,
+        this.antalyseServerClient,
         config.embeddingsProvider.maxChunkSize,
       ), // Chunking must come first
       new LanceDbIndex(
         config.embeddingsProvider,
         this.ide.readFile.bind(this.ide),
         pathSep,
-        this.continueServerClient,
+        this.antalyseServerClient,
       ),
       new FullTextSearchCodebaseIndex(),
       new CodeSnippetsCodebaseIndex(this.ide),

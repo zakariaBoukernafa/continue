@@ -1,27 +1,27 @@
 {
-  "name": "continue",
+  "name": "antalyse",
   "icon": "media/icon.png",
-  "author": "Continue Dev, Inc",
-  "version": "0.9.237",
+  "author": "antalyse Dev, Inc",
+  "version": "0.9.239",
   "repository": {
     "type": "git",
-    "url": "https://github.com/continuedev/continue"
+    "url": "https://github.com/antalysedev/antalyse"
   },
   "extensionKind": [
     "ui",
     "workspace"
   ],
   "bugs": {
-    "url": "https://github.com/continuedev/continue/issues",
-    "email": "nate@continue.dev"
+    "url": "https://github.com/antalysedev/antalyse/issues",
+    "email": "nate@antalyse.dev"
   },
-  "homepage": "https://continue.dev",
-  "qna": "https://github.com/continuedev/continue/issues/new/choose",
+  "homepage": "https://antalyse.dev",
+  "qna": "https://github.com/antalysedev/antalyse/issues/new/choose",
   "license": "Apache-2.0",
-  "displayName": "Continue - Codestral, Claude, and more",
+  "displayName": "antalyse - Codestral, Claude, and more",
   "pricing": "Free",
   "description": "The leading open-source AI code assistant",
-  "publisher": "Continue",
+  "publisher": "antalyse",
   "engines": {
     "vscode": "^1.70.0",
     "node": ">=20.11.0"
@@ -53,7 +53,7 @@
   ],
   "activationEvents": [
     "onStartupFinished",
-    "onView:continueGUIView"
+    "onView:antalyseGUIView"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -61,7 +61,7 @@
       {
         "filenames": [
           "config.json",
-          ".continuerc.json"
+          ".antalyserc.json"
         ],
         "id": "jsonc"
       },
@@ -84,59 +84,59 @@
       }
     ],
     "configuration": {
-      "title": "Continue",
+      "title": "antalyse",
       "properties": {
-        "continue.telemetryEnabled": {
+        "antalyse.telemetryEnabled": {
           "type": "boolean",
           "default": true,
-          "markdownDescription": "Continue collects anonymous usage data, cleaned of PII, to help us improve the product for our users. Read more  at [continue.dev › Telemetry](https://docs.continue.dev/telemetry)."
+          "markdownDescription": "antalyse collects anonymous usage data, cleaned of PII, to help us improve the product for our users. Read more  at [antalyse.dev › Telemetry](https://docs.antalyse.dev/telemetry)."
         },
-        "continue.enableContinueForTeams": {
+        "antalyse.enableantalyseForTeams": {
           "type": "boolean",
           "default": false,
-          "markdownDescription": "Enable Continue for teams beta features. To sign in, click the person icon in the bottom right of the sidebar."
+          "markdownDescription": "Enable antalyse for teams beta features. To sign in, click the person icon in the bottom right of the sidebar."
         },
-        "continue.showInlineTip": {
+        "antalyse.showInlineTip": {
           "type": "boolean",
           "default": true,
-          "description": "Show inline suggestion to use the Continue keyboard shortcuts (e.g. \"Cmd/Ctrl L to select code, Cmd/Ctrl I to edit\")."
+          "description": "Show inline suggestion to use the antalyse keyboard shortcuts (e.g. \"Cmd/Ctrl L to select code, Cmd/Ctrl I to edit\")."
         },
-        "continue.enableQuickActions": {
+        "antalyse.enableQuickActions": {
           "type": "boolean",
           "default": false,
-          "markdownDescription": "Enable the experimental Quick Actions feature. Read our walkthrough to learn about configuration and how to share feedback: [continue.dev › Walkthrough: Quick Actions (experimental)](https://docs.continue.dev/features/quick-actions)"
+          "markdownDescription": "Enable the experimental Quick Actions feature. Read our walkthrough to learn about configuration and how to share feedback: [antalyse.dev › Walkthrough: Quick Actions (experimental)](https://docs.antalyse.dev/features/quick-actions)"
         },
-        "continue.enableTabAutocomplete": {
+        "antalyse.enableTabAutocomplete": {
           "type": "boolean",
           "default": true,
-          "markdownDescription": "Enable Continue's tab autocomplete feature. Read our walkthrough to learn about configuration and how to share feedback: [continue.dev › Walkthrough: Tab Autocomplete (beta)](https://docs.continue.dev/features/tab-autocomplete)"
+          "markdownDescription": "Enable antalyse's tab autocomplete feature. Read our walkthrough to learn about configuration and how to share feedback: [antalyse.dev › Walkthrough: Tab Autocomplete (beta)](https://docs.antalyse.dev/features/tab-autocomplete)"
         },
-        "continue.pauseTabAutocompleteOnBattery": {
+        "antalyse.pauseTabAutocompleteOnBattery": {
           "type": "boolean",
           "default": false,
-          "markdownDescription": "Pause Continue's tab autocomplete feature when your battery is low."
+          "markdownDescription": "Pause antalyse's tab autocomplete feature when your battery is low."
         },
-        "continue.pauseCodebaseIndexOnStart": {
+        "antalyse.pauseCodebaseIndexOnStart": {
           "type": "boolean",
           "default": false,
-          "markdownDescription": "Pause Continue's codebase index on start."
+          "markdownDescription": "Pause antalyse's codebase index on start."
         },
-        "continue.enableDebugLogs": {
+        "antalyse.enableDebugLogs": {
           "type": "boolean",
           "default": false,
-          "markdownDescription": "Enable Continue Debug Logs in the Output panel."
+          "markdownDescription": "Enable antalyse Debug Logs in the Output panel."
         },
-        "continue.remoteConfigServerUrl": {
+        "antalyse.remoteConfigServerUrl": {
           "type": "string",
           "default": null,
           "markdownDescription": "If your team is set up to use shared configuration, enter the server URL here and your user token below to enable automatic syncing."
         },
-        "continue.userToken": {
+        "antalyse.userToken": {
           "type": "string",
           "default": null,
           "markdownDescription": "If your team is set up to use shared configuration, enter your user token here and your server URL above to enable automatic syncing."
         },
-        "continue.remoteConfigSyncPeriod": {
+        "antalyse.remoteConfigSyncPeriod": {
           "type": "number",
           "default": 60,
           "description": "The period of time in minutes between automatic syncs."
@@ -145,376 +145,376 @@
     },
     "commands": [
       {
-        "command": "continue.applyCodeFromChat",
-        "category": "Continue",
+        "command": "antalyse.applyCodeFromChat",
+        "category": "antalyse",
         "title": "Apply code from chat",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.acceptDiff",
-        "category": "Continue",
+        "command": "antalyse.acceptDiff",
+        "category": "antalyse",
         "title": "Accept Diff",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.rejectDiff",
-        "category": "Continue",
+        "command": "antalyse.rejectDiff",
+        "category": "antalyse",
         "title": "Reject Diff",
-        "group": "Continue",
+        "group": "antalyse",
         "icon": "$(stop)"
       },
       {
-        "command": "continue.acceptVerticalDiffBlock",
-        "category": "Continue",
+        "command": "antalyse.acceptVerticalDiffBlock",
+        "category": "antalyse",
         "title": "Accept Vertical Diff Block",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.rejectVerticalDiffBlock",
-        "category": "Continue",
+        "command": "antalyse.rejectVerticalDiffBlock",
+        "category": "antalyse",
         "title": "Reject Vertical Diff Block",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.quickEdit",
-        "category": "Continue",
+        "command": "antalyse.quickEdit",
+        "category": "antalyse",
         "title": "Generate Code",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.focusContinueInput",
-        "category": "Continue",
+        "command": "antalyse.focusantalyseInput",
+        "category": "antalyse",
         "title": "Add Highlighted Code to Context and Clear Chat",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.focusContinueInputWithoutClear",
-        "category": "Continue",
+        "command": "antalyse.focusantalyseInputWithoutClear",
+        "category": "antalyse",
         "title": "Add Highlighted Code to Context",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.debugTerminal",
-        "category": "Continue",
+        "command": "antalyse.debugTerminal",
+        "category": "antalyse",
         "title": "Debug Terminal",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.edit",
-        "category": "Continue",
+        "command": "antalyse.edit",
+        "category": "antalyse",
         "title": "Edit code with natural language",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.exitEditMode",
-        "category": "Continue",
+        "command": "antalyse.exitEditMode",
+        "category": "antalyse",
         "title": "Exit Edit Mode",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.toggleFullScreen",
-        "category": "Continue",
+        "command": "antalyse.toggleFullScreen",
+        "category": "antalyse",
         "title": "Toggle Full Screen",
         "icon": "$(fullscreen)",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.openConfigJson",
-        "category": "Continue",
+        "command": "antalyse.openConfigJson",
+        "category": "antalyse",
         "title": "Open config.json",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.toggleTabAutocompleteEnabled",
-        "category": "Continue",
+        "command": "antalyse.toggleTabAutocompleteEnabled",
+        "category": "antalyse",
         "title": "Toggle Autocomplete Enabled",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.selectFilesAsContext",
-        "category": "Continue",
+        "command": "antalyse.selectFilesAsContext",
+        "category": "antalyse",
         "title": "Select Files as Context",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.newSession",
-        "category": "Continue",
+        "command": "antalyse.newSession",
+        "category": "antalyse",
         "title": "New Session",
         "icon": "$(add)",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.viewHistory",
-        "category": "Continue",
+        "command": "antalyse.viewHistory",
+        "category": "antalyse",
         "title": "View History",
         "icon": "$(history)",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.navigateTo",
-        "category": "Continue",
+        "command": "antalyse.navigateTo",
+        "category": "antalyse",
         "title": "Navigate to a path",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.writeCommentsForCode",
-        "category": "Continue",
+        "command": "antalyse.writeCommentsForCode",
+        "category": "antalyse",
         "title": "Write Comments for this Code",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.writeDocstringForCode",
-        "category": "Continue",
+        "command": "antalyse.writeDocstringForCode",
+        "category": "antalyse",
         "title": "Write a Docstring for this Code",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.fixCode",
-        "category": "Continue",
+        "command": "antalyse.fixCode",
+        "category": "antalyse",
         "title": "Fix this Code",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.optimizeCode",
-        "category": "Continue",
+        "command": "antalyse.optimizeCode",
+        "category": "antalyse",
         "title": "Optimize this Code",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.fixGrammar",
-        "category": "Continue",
+        "command": "antalyse.fixGrammar",
+        "category": "antalyse",
         "title": "Fix Grammar / Spelling",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.codebaseForceReIndex",
-        "category": "Continue",
+        "command": "antalyse.codebaseForceReIndex",
+        "category": "antalyse",
         "title": "Codebase Force Re-Index",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.rebuildCodebaseIndex",
-        "category": "Continue",
+        "command": "antalyse.rebuildCodebaseIndex",
+        "category": "antalyse",
         "title": "Rebuild codebase index",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.docsIndex",
-        "category": "Continue",
+        "command": "antalyse.docsIndex",
+        "category": "antalyse",
         "title": "Docs Index",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.docsReIndex",
-        "category": "Continue",
+        "command": "antalyse.docsReIndex",
+        "category": "antalyse",
         "title": "Docs Force Re-Index",
-        "group": "Continue"
+        "group": "antalyse"
       },
       {
-        "command": "continue.focusContinueSessionId",
-        "category": "Continue",
-        "title": "Focus Continue Chat",
-        "group": "Continue"
+        "command": "antalyse.focusantalyseSessionId",
+        "category": "antalyse",
+        "title": "Focus antalyse Chat",
+        "group": "antalyse"
       }
     ],
     "keybindings": [
       {
-        "command": "continue.focusContinueInput",
+        "command": "antalyse.focusantalyseInput",
         "mac": "cmd+l",
         "key": "ctrl+l"
       },
       {
-        "command": "continue.focusContinueInputWithoutClear",
+        "command": "antalyse.focusantalyseInputWithoutClear",
         "mac": "cmd+shift+l",
         "key": "ctrl+shift+l"
       },
       {
-        "command": "continue.acceptDiff",
+        "command": "antalyse.acceptDiff",
         "mac": "shift+cmd+enter",
         "key": "shift+ctrl+enter"
       },
       {
-        "command": "continue.rejectDiff",
+        "command": "antalyse.rejectDiff",
         "mac": "shift+cmd+backspace",
         "key": "shift+ctrl+backspace"
       },
       {
-        "command": "continue.rejectDiff",
+        "command": "antalyse.rejectDiff",
         "mac": "cmd+z",
         "key": "ctrl+z",
-        "when": "continue.diffVisible"
+        "when": "antalyse.diffVisible"
       },
       {
-        "command": "continue.quickEditHistoryUp",
+        "command": "antalyse.quickEditHistoryUp",
         "mac": "up",
         "key": "up",
-        "when": "false && continue.quickEditHistoryFocused"
+        "when": "false && antalyse.quickEditHistoryFocused"
       },
       {
-        "command": "continue.quickEditHistoryDown",
+        "command": "antalyse.quickEditHistoryDown",
         "mac": "down",
         "key": "down",
-        "when": "false && continue.quickEditHistoryFocused"
+        "when": "false && antalyse.quickEditHistoryFocused"
       },
       {
-        "command": "continue.acceptVerticalDiffBlock",
+        "command": "antalyse.acceptVerticalDiffBlock",
         "mac": "alt+cmd+y",
         "key": "alt+ctrl+y"
       },
       {
-        "command": "continue.rejectVerticalDiffBlock",
+        "command": "antalyse.rejectVerticalDiffBlock",
         "mac": "alt+cmd+n",
         "key": "alt+ctrl+n"
       },
       {
-        "command": "continue.quickEdit",
+        "command": "antalyse.quickEdit",
         "mac": "cmd+shift+i",
         "key": "ctrl+shift+i"
       },
       {
-        "command": "continue.edit",
+        "command": "antalyse.edit",
         "mac": "cmd+i",
         "key": "ctrl+i"
       },
       {
-        "command": "continue.exitEditMode",
+        "command": "antalyse.exitEditMode",
         "mac": "escape",
         "key": "escape",
-        "when": "continue.inEditMode && editorFocus"
+        "when": "antalyse.inEditMode && editorFocus"
       },
       {
-        "command": "continue.debugTerminal",
+        "command": "antalyse.debugTerminal",
         "mac": "cmd+shift+r",
         "key": "ctrl+shift+r"
       },
       {
-        "command": "continue.toggleFullScreen",
+        "command": "antalyse.toggleFullScreen",
         "mac": "cmd+k cmd+m",
         "key": "ctrl+k ctrl+m",
         "when": "!terminalFocus"
       },
       {
-        "command": "continue.toggleTabAutocompleteEnabled",
+        "command": "antalyse.toggleTabAutocompleteEnabled",
         "mac": "cmd+k cmd+a",
         "key": "ctrl+k ctrl+a",
         "when": "!terminalFocus"
       },
       {
-        "command": "continue.applyCodeFromChat",
+        "command": "antalyse.applyCodeFromChat",
         "mac": "alt+a",
         "key": "alt+a"
       }
     ],
     "submenus": [
       {
-        "id": "continue.continueSubMenu",
-        "label": "Continue"
+        "id": "antalyse.antalyseSubMenu",
+        "label": "antalyse"
       }
     ],
     "menus": {
       "commandPalette": [
         {
-          "command": "continue.quickEdit"
+          "command": "antalyse.quickEdit"
         },
         {
-          "command": "continue.focusContinueInput"
+          "command": "antalyse.focusantalyseInput"
         },
         {
-          "command": "continue.focusContinueInputWithoutClear"
+          "command": "antalyse.focusantalyseInputWithoutClear"
         },
         {
-          "command": "continue.debugTerminal"
+          "command": "antalyse.debugTerminal"
         },
         {
-          "command": "continue.toggleFullScreen"
+          "command": "antalyse.toggleFullScreen"
         },
         {
-          "command": "continue.newSession"
+          "command": "antalyse.newSession"
         }
       ],
       "editor/context": [
         {
-          "submenu": "continue.continueSubMenu",
-          "group": "0_acontinue"
+          "submenu": "antalyse.antalyseSubMenu",
+          "group": "0_aantalyse"
         }
       ],
       "editor/title/run": [
         {
-          "command": "continue.rejectDiff",
-          "group": "Continue",
-          "when": "continue.streamingDiff"
+          "command": "antalyse.rejectDiff",
+          "group": "antalyse",
+          "when": "antalyse.streamingDiff"
         }
       ],
-      "continue.continueSubMenu": [
+      "antalyse.antalyseSubMenu": [
         {
-          "command": "continue.focusContinueInputWithoutClear",
-          "group": "Continue",
+          "command": "antalyse.focusantalyseInputWithoutClear",
+          "group": "antalyse",
           "when": "editorHasSelection"
         },
         {
-          "command": "continue.writeCommentsForCode",
-          "group": "Continue",
+          "command": "antalyse.writeCommentsForCode",
+          "group": "antalyse",
           "when": "editorHasSelection"
         },
         {
-          "command": "continue.writeDocstringForCode",
-          "group": "Continue",
+          "command": "antalyse.writeDocstringForCode",
+          "group": "antalyse",
           "when": "editorHasSelection"
         },
         {
-          "command": "continue.fixCode",
-          "group": "Continue",
+          "command": "antalyse.fixCode",
+          "group": "antalyse",
           "when": "editorHasSelection"
         },
         {
-          "command": "continue.optimizeCode",
-          "group": "Continue",
+          "command": "antalyse.optimizeCode",
+          "group": "antalyse",
           "when": "editorHasSelection"
         },
         {
-          "command": "continue.fixGrammar",
-          "group": "Continue",
+          "command": "antalyse.fixGrammar",
+          "group": "antalyse",
           "when": "editorHasSelection && editorLangId == 'markdown'"
         }
       ],
       "explorer/context": [
         {
-          "command": "continue.selectFilesAsContext",
+          "command": "antalyse.selectFilesAsContext",
           "group": "1_debug@1"
         }
       ],
       "view/title": [
         {
-          "command": "continue.newSession",
+          "command": "antalyse.newSession",
           "group": "navigation@1",
-          "when": "view == continue.continueGUIView"
+          "when": "view == antalyse.antalyseGUIView"
         },
         {
-          "command": "continue.viewHistory",
+          "command": "antalyse.viewHistory",
           "group": "navigation@2",
-          "when": "view == continue.continueGUIView"
+          "when": "view == antalyse.antalyseGUIView"
         },
         {
-          "command": "continue.toggleFullScreen",
+          "command": "antalyse.toggleFullScreen",
           "group": "navigation@3",
-          "when": "view == continue.continueGUIView"
+          "when": "view == antalyse.antalyseGUIView"
         }
       ],
       "editor/title": [
         {
-          "command": "continue.newSession",
+          "command": "antalyse.newSession",
           "group": "navigation@1",
-          "when": "activeWebviewPanelId == continue.continueGUIView"
+          "when": "activeWebviewPanelId == antalyse.antalyseGUIView"
         },
         {
-          "command": "continue.viewHistory",
+          "command": "antalyse.viewHistory",
           "group": "navigation@2",
-          "when": "activeWebviewPanelId == continue.continueGUIView"
+          "when": "activeWebviewPanelId == antalyse.antalyseGUIView"
         }
       ],
       "terminal/context": [
         {
-          "command": "continue.debugTerminal",
+          "command": "antalyse.debugTerminal",
           "group": "navigation@top"
         }
       ]
@@ -522,17 +522,17 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "continue",
-          "title": "Continue",
+          "id": "antalyse",
+          "title": "antalyse",
           "icon": "media/sidebar-icon.png"
         }
       ]
     },
     "views": {
-      "continue": [
+      "antalyse": [
         {
           "type": "webview",
-          "id": "continue.continueGUIView",
+          "id": "antalyse.antalyseGUIView",
           "name": "",
           "visibility": "visible"
         }
@@ -540,12 +540,12 @@
     },
     "jsonValidation": [
       {
-        "fileMatch": "**/.continue*/config.json",
+        "fileMatch": "**/.antalyse*/config.json",
         "url": "./config_schema.json"
       },
       {
-        "fileMatch": ".continuerc.json",
-        "url": "./continue_rc_schema.json"
+        "fileMatch": ".antalyserc.json",
+        "url": "./antalyse_rc_schema.json"
       }
     ]
   },

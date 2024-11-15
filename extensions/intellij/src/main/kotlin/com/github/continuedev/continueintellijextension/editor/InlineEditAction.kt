@@ -1,9 +1,9 @@
-package com.github.continuedev.continueintellijextension.editor
+package com.github.antalysedev.antalyseintellijextension.editor
 
-import com.github.continuedev.continueintellijextension.`continue`.GetTheme
-import com.github.continuedev.continueintellijextension.services.ContinueExtensionSettings
-import com.github.continuedev.continueintellijextension.services.ContinuePluginService
-import com.github.continuedev.continueintellijextension.utils.getMetaKeyLabel
+import com.github.antalysedev.antalyseintellijextension.`antalyse`.GetTheme
+import com.github.antalysedev.antalyseintellijextension.services.antalyseExtensionSettings
+import com.github.antalysedev.antalyseintellijextension.services.antalysePluginService
+import com.github.antalysedev.antalyseintellijextension.utils.getMetaKeyLabel
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
@@ -124,9 +124,9 @@ fun openInlineEdit(project: Project?, editor: Editor) {
     val manager = EditorComponentInlaysManager.from(editor, true)
 
     // Get list of model titles
-    val continuePluginService = project.service<ContinuePluginService>()
+    val antalysePluginService = project.service<antalysePluginService>()
     val modelTitles = mutableListOf<String>()
-    continuePluginService.coreMessenger?.request("config/getSerializedProfileInfo", null, null) { response ->
+    antalysePluginService.coreMessenger?.request("config/getSerializedProfileInfo", null, null) { response ->
         val config = response as Map<String, Any>
         val models = (config["config"] as Map<String, Any>)["models"] as List<Map<String, Any>>
         modelTitles.addAll(models.map { it["title"] as String })
@@ -148,7 +148,7 @@ fun openInlineEdit(project: Project?, editor: Editor) {
     // newlines.
     // The only case this matters is when a user double-clicks to highlight a full line. Without this
     // check.
-    // the highlighted range will continue to the following line.
+    // the highlighted range will antalyse to the following line.
     val isSingleLineSelection =
         endLineNumber > startLineNumber &&
                 endLineNumber < editor.document.lineCount &&
@@ -391,7 +391,7 @@ class CustomPanel(
         JPanel(MigLayout("insets 0, fillx")).apply {
             val globalScheme = EditorColorsManager.getInstance().globalScheme
             val defaultBackground = globalScheme.defaultBackground
-            val continueSettingsService = service<ContinueExtensionSettings>()
+            val antalyseSettingsService = service<antalyseExtensionSettings>()
             val dropdown =
                 JComboBox(modelTitles.toTypedArray()).apply {
                     setUI(TransparentArrowButtonUI())
@@ -425,7 +425,7 @@ class CustomPanel(
                     }
 
                     selectedIndex =
-                        continueSettingsService.continueState.lastSelectedInlineEditModel?.let {
+                        antalyseSettingsService.antalyseState.lastSelectedInlineEditModel?.let {
                             if (modelTitles.isEmpty()) -1
                             else {
                                 val index = modelTitles.indexOf(it)
@@ -434,7 +434,7 @@ class CustomPanel(
                         } ?: 0
 
                     addActionListener {
-                        continueSettingsService.continueState.lastSelectedInlineEditModel =
+                        antalyseSettingsService.antalyseState.lastSelectedInlineEditModel =
                             selectedItem as String
                     }
                 }

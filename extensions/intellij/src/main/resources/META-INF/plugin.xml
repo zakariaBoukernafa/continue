@@ -1,10 +1,10 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.continuedev.continueintellijextension</id>
-    <name>Continue</name>
-    <vendor url="https://www.continue.dev/">continue-dev</vendor>
+    <id>com.github.antalysedev.antalyseintellijextension</id>
+    <name>antalyse</name>
+    <vendor url="https://www.antalyse.dev/">antalyse-dev</vendor>
     <change-notes>
-        <![CDATA[View the latest release notes on <a href="https://github.com/continuedev/continue/releases">GitHub</a>]]></change-notes>
+        <![CDATA[View the latest release notes on <a href="https://github.com/antalysedev/antalyse/releases">GitHub</a>]]></change-notes>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.json</depends>
@@ -13,30 +13,30 @@
 
     <extensions defaultExtensionNs="JavaScript.JsonSchema">
         <ProviderFactory
-                implementation="com.github.continuedev.continueintellijextension.continue.ConfigJsonSchemaProviderFactory"/>
+                implementation="com.github.antalysedev.antalyseintellijextension.antalyse.ConfigJsonSchemaProviderFactory"/>
     </extensions>
         <extensions defaultExtensionNs="JavaScript.JsonSchema">
         <ProviderFactory
-                implementation="com.github.continuedev.continueintellijextension.continue.ConfigRcJsonSchemaProviderFactory"/>
+                implementation="com.github.antalysedev.antalyseintellijextension.antalyse.ConfigRcJsonSchemaProviderFactory"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
         <editorFactoryListener
-                implementation="com.github.continuedev.continueintellijextension.autocomplete.AutocompleteEditorListener"/>
-        <toolWindow id="Continue" anchor="right" icon="/tool-window-icon.svg"
-                    factoryClass="com.github.continuedev.continueintellijextension.toolWindow.ContinuePluginToolWindowFactory"/>
-        <projectService id="ContinuePluginService"
-                        serviceImplementation="com.github.continuedev.continueintellijextension.services.ContinuePluginService"/>
+                implementation="com.github.antalysedev.antalyseintellijextension.autocomplete.AutocompleteEditorListener"/>
+        <toolWindow id="antalyse" anchor="right" icon="/tool-window-icon.svg"
+                    factoryClass="com.github.antalysedev.antalyseintellijextension.toolWindow.antalysePluginToolWindowFactory"/>
+        <projectService id="antalysePluginService"
+                        serviceImplementation="com.github.antalysedev.antalyseintellijextension.services.antalysePluginService"/>
         <projectService
                 id="DiffStreamService"
-                serviceImplementation="com.github.continuedev.continueintellijextension.editor.DiffStreamService"/>
+                serviceImplementation="com.github.antalysedev.antalyseintellijextension.editor.DiffStreamService"/>
         <projectService
                 id="AutocompleteLookupListener"
-                serviceImplementation="com.github.continuedev.continueintellijextension.autocomplete.AutocompleteLookupListener"/>
+                serviceImplementation="com.github.antalysedev.antalyseintellijextension.autocomplete.AutocompleteLookupListener"/>
         <statusBarWidgetFactory
-                implementation="com.github.continuedev.continueintellijextension.autocomplete.AutocompleteSpinnerWidgetFactory"
+                implementation="com.github.antalysedev.antalyseintellijextension.autocomplete.AutocompleteSpinnerWidgetFactory"
                 id="AutocompleteSpinnerWidget"/>
-        <notificationGroup id="Continue"
+        <notificationGroup id="antalyse"
                            displayType="BALLOON"/>
     </extensions>
 
@@ -44,128 +44,128 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <postStartupActivity
-                implementation="com.github.continuedev.continueintellijextension.activities.ContinuePluginStartupActivity"/>
+                implementation="com.github.antalysedev.antalyseintellijextension.activities.antalysePluginStartupActivity"/>
         <applicationConfigurable
                 parentId="tools"
-                instance="com.github.continuedev.continueintellijextension.services.ContinueExtensionConfigurable"
-                id="com.github.continuedev.continueintellijextension.services.ContinueExtensionConfigurable"
-                displayName="Continue"/>
+                instance="com.github.antalysedev.antalyseintellijextension.services.antalyseExtensionConfigurable"
+                id="com.github.antalysedev.antalyseintellijextension.services.antalyseExtensionConfigurable"
+                displayName="antalyse"/>
         <applicationService
-                serviceImplementation="com.github.continuedev.continueintellijextension.services.ContinueExtensionSettings"/>
+                serviceImplementation="com.github.antalysedev.antalyseintellijextension.services.antalyseExtensionSettings"/>
     </extensions>
 
     <actions>
-        <action class="com.github.continuedev.continueintellijextension.editor.InlineEditAction"
-                id="continue.inlineEdit"
+        <action class="com.github.antalysedev.antalyseintellijextension.editor.InlineEditAction"
+                id="antalyse.inlineEdit"
                 description="Inline Edit"
                 text="Inline Edit">
             <keyboard-shortcut keymap="$default"
                                first-keystroke="ctrl I"/>
             <keyboard-shortcut keymap="Mac OS X"
                                first-keystroke="meta I"/>
-            <override-text place="GoToAction" text="Continue: Edit Code"/>
+            <override-text place="GoToAction" text="antalyse: Edit Code"/>
         </action>
 
-        <action id="continue.acceptDiff"
-                class="com.github.continuedev.continueintellijextension.actions.AcceptDiffAction"
+        <action id="antalyse.acceptDiff"
+                class="com.github.antalysedev.antalyseintellijextension.actions.AcceptDiffAction"
                 text="Accept Diff" description="Accept Diff">
             <keyboard-shortcut keymap="$default"
                                first-keystroke="shift ctrl ENTER"/>
             <keyboard-shortcut keymap="Mac OS X"
                                first-keystroke="shift meta ENTER"/>
-            <override-text place="GoToAction" text="Continue: Accept Diff"/>
+            <override-text place="GoToAction" text="antalyse: Accept Diff"/>
         </action>
 
-        <action id="continue.rejectDiff"
-                class="com.github.continuedev.continueintellijextension.actions.RejectDiffAction"
+        <action id="antalyse.rejectDiff"
+                class="com.github.antalysedev.antalyseintellijextension.actions.RejectDiffAction"
                 text="Reject Diff" description="Reject Diff">
             <keyboard-shortcut keymap="$default"
                                first-keystroke="shift ctrl DELETE"/>
             <keyboard-shortcut keymap="Mac OS X"
                                first-keystroke="shift meta DELETE"/>
-            <override-text place="GoToAction" text="Continue: Reject Diff"/>
+            <override-text place="GoToAction" text="antalyse: Reject Diff"/>
         </action>
 
-        <action id="continue.acceptVerticalDiffBlock"
-                class="com.github.continuedev.continueintellijextension.actions.AcceptDiffAction"
+        <action id="antalyse.acceptVerticalDiffBlock"
+                class="com.github.antalysedev.antalyseintellijextension.actions.AcceptDiffAction"
                 text="Accept Diff" description="Accept Vertical Diff Block">
             <keyboard-shortcut keymap="$default"
                                first-keystroke="alt shift Y"/>
             <keyboard-shortcut keymap="Mac OS X"
                                first-keystroke="alt shift Y"/>
-            <override-text place="GoToAction" text="Continue: Accept Vertical Diff Block"/>
+            <override-text place="GoToAction" text="antalyse: Accept Vertical Diff Block"/>
         </action>
 
-        <action id="continue.rejectVerticalDiffBlock"
-                class="com.github.continuedev.continueintellijextension.actions.RejectDiffAction"
+        <action id="antalyse.rejectVerticalDiffBlock"
+                class="com.github.antalysedev.antalyseintellijextension.actions.RejectDiffAction"
                 text="Reject Diff" description="Reject Vertical Diff Block">
             <keyboard-shortcut keymap="$default"
                                first-keystroke="alt shift N"/>
             <keyboard-shortcut keymap="Mac OS X"
                                first-keystroke="alt shift N"/>
-            <override-text place="GoToAction" text="Continue: Reject Vertical Diff Block"/>
+            <override-text place="GoToAction" text="antalyse: Reject Vertical Diff Block"/>
         </action>
 
-        <action id="continue.focusContinueInputWithoutClear"
-                class="com.github.continuedev.continueintellijextension.actions.FocusContinueInputWithoutClearAction"
+        <action id="antalyse.focusantalyseInputWithoutClear"
+                class="com.github.antalysedev.antalyseintellijextension.actions.FocusantalyseInputWithoutClearAction"
                 text="Add selected code to context"
-                description="Focus Continue Input With Edit">
+                description="Focus antalyse Input With Edit">
             <keyboard-shortcut keymap="$default"
                                first-keystroke="ctrl shift J"/>
             <keyboard-shortcut keymap="Mac OS X"
                                first-keystroke="meta shift J"/>
-            <override-text place="GoToAction" text="Continue: Add Highlighted Code to Context"/>
+            <override-text place="GoToAction" text="antalyse: Add Highlighted Code to Context"/>
         </action>
 
-        <action id="continue.newContinueSession"
+        <action id="antalyse.newantalyseSession"
                 icon="AllIcons.General.Add"
-                class="com.github.continuedev.continueintellijextension.actions.NewContinueSessionAction"
-                text="Start New Continue Session"
-                description="Start New Continue Session">
+                class="com.github.antalysedev.antalyseintellijextension.actions.NewantalyseSessionAction"
+                text="Start New antalyse Session"
+                description="Start New antalyse Session">
 
-            <override-text place="GoToAction" text="Continue: New Session"/>
+            <override-text place="GoToAction" text="antalyse: New Session"/>
         </action>
 
-        <action id="continue.viewHistory"
+        <action id="antalyse.viewHistory"
                 icon="AllIcons.Vcs.History"
-                class="com.github.continuedev.continueintellijextension.actions.ViewHistoryAction"
+                class="com.github.antalysedev.antalyseintellijextension.actions.ViewHistoryAction"
                 text="View History"
                 description="View History">
-            <override-text place="GoToAction" text="Continue: View History"/>
+            <override-text place="GoToAction" text="antalyse: View History"/>
         </action>
 
-        <action id="continue.focusContinueInput"
-                class="com.github.continuedev.continueintellijextension.actions.FocusContinueInputAction"
+        <action id="antalyse.focusantalyseInput"
+                class="com.github.antalysedev.antalyseintellijextension.actions.FocusantalyseInputAction"
                 text="Add selected code to context"
-                description="Focus Continue Input">
+                description="Focus antalyse Input">
             <keyboard-shortcut keymap="$default"
                                first-keystroke="ctrl J"/>
             <keyboard-shortcut keymap="Mac OS X"
                                first-keystroke="meta J"/>
             <add-to-group group-id="EditorPopupMenu"/>
-            <override-text place="GoToAction" text="Continue: Add Highlighted Code to Context and Clear Chat"/>
+            <override-text place="GoToAction" text="antalyse: Add Highlighted Code to Context and Clear Chat"/>
         </action>
 
-        <group id="ContinueSidebarActionsGroup">
-            <reference ref="continue.newContinueSession"/>
-            <reference ref="continue.viewHistory"/>
+        <group id="antalyseSidebarActionsGroup">
+            <reference ref="antalyse.newantalyseSession"/>
+            <reference ref="antalyse.viewHistory"/>
         </group>
 
-        <action id="com.github.continuedev.continueintellijextension.autocomplete.AcceptAutocompleteAction"
-                class="com.github.continuedev.continueintellijextension.autocomplete.AcceptAutocompleteAction"
+        <action id="com.github.antalysedev.antalyseintellijextension.autocomplete.AcceptAutocompleteAction"
+                class="com.github.antalysedev.antalyseintellijextension.autocomplete.AcceptAutocompleteAction"
                 text="Accept Autocomplete Suggestion" description="Accept Autocomplete Suggestion">
             <keyboard-shortcut keymap="$default" first-keystroke="TAB"/>
             <keyboard-shortcut keymap="Mac OS X" first-keystroke="TAB"/>
         </action>
 
-        <action id="com.github.continuedev.continueintellijextension.autocomplete.CancelAutocompleteAction"
-                class="com.github.continuedev.continueintellijextension.autocomplete.CancelAutocompleteAction"
+        <action id="com.github.antalysedev.antalyseintellijextension.autocomplete.CancelAutocompleteAction"
+                class="com.github.antalysedev.antalyseintellijextension.autocomplete.CancelAutocompleteAction"
                 text="Cancel Autocomplete Suggestion" description="Cancel Autocomplete Suggestion">
             <keyboard-shortcut keymap="$default" first-keystroke="ESCAPE"/>
         </action>
 
-        <action id="com.github.continuedev.continueintellijextension.autocomplete.PartialAcceptAutocompleteAction"
-                class="com.github.continuedev.continueintellijextension.autocomplete.PartialAcceptAutocompleteAction"
+        <action id="com.github.antalysedev.antalyseintellijextension.autocomplete.PartialAcceptAutocompleteAction"
+                class="com.github.antalysedev.antalyseintellijextension.autocomplete.PartialAcceptAutocompleteAction"
                 text="Partial Accept Autocomplete Suggestion"
                 description="Partial Accept Autocomplete Suggestion">
             <keyboard-shortcut first-keystroke="control alt RIGHT" keymap="$default"/>

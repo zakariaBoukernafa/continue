@@ -6,11 +6,11 @@ import path from "path";
 
 import * as tar from "tar";
 import {
-  BrowserSerializedContinueConfig,
+  BrowserSerializedantalyseConfig,
   Config,
   ContextProviderWithParams,
-  ContinueConfig,
-  ContinueRcJson,
+  antalyseConfig,
+  antalyseRcJson,
   CustomContextProvider,
   CustomLLM,
   EmbeddingsProviderDescription,
@@ -21,7 +21,7 @@ import {
   ModelDescription,
   Reranker,
   RerankerDescription,
-  SerializedContinueConfig,
+  SerializedantalyseConfig,
   SlashCommand,
 } from "..";
 import {
@@ -29,7 +29,7 @@ import {
   slashFromCustomCommand,
 } from "../commands/index.js";
 import CodebaseContextProvider from "../context/providers/CodebaseContextProvider";
-import ContinueProxyContextProvider from "../context/providers/ContinueProxyContextProvider";
+import antalyseProxyContextProvider from "../context/providers/antalyseProxyContextProvider";
 import CustomContextProviderClass from "../context/providers/CustomContextProvider";
 import FileContextProvider from "../context/providers/FileContextProvider";
 import { contextProviderClassFromName } from "../context/providers/index";
@@ -53,7 +53,7 @@ import {
   getConfigJsonPath,
   getConfigJsonPathForRemote,
   getConfigTsPath,
-  getContinueDotEnv,
+  getantalyseDotEnv,
   getEsbuildBinaryPath,
   readAllGlobalPromptFiles,
 } from "../util/paths";
@@ -77,13 +77,13 @@ export interface ConfigResult<T> {
   configLoadInterrupted: boolean;
 }
 
-function resolveSerializedConfig(filepath: string): SerializedContinueConfig {
+function resolveSerializedConfig(filepath: string): SerializedantalyseConfig {
   let content = fs.readFileSync(filepath, "utf8");
-  const config = JSONC.parse(content) as unknown as SerializedContinueConfig;
+  const config = JSONC.parse(content) as unknown as SerializedantalyseConfig;
   if (config.env && Array.isArray(config.env)) {
     const env = {
       ...process.env,
-      ...getContinueDotEnv(),
+      ...getantalyseDotEnv(),
     };
 
     config.env.forEach((envVar) => {
@@ -96,7 +96,7 @@ function resolveSerializedConfig(filepath: string): SerializedContinueConfig {
     });
   }
 
-  return JSONC.parse(content) as unknown as SerializedContinueConfig;
+  return JSONC.parse(content) as unknown as SerializedantalyseConfig;
 }
 
 const configMergeKeys = {
@@ -107,13 +107,13 @@ const configMergeKeys = {
 };
 
 function loadSerializedConfig(
-  workspaceConfigs: ContinueRcJson[],
+  workspaceConfigs: antalyseRcJson[],
   ideSettings: IdeSettings,
   ideType: IdeType,
-  overrideConfigJson: SerializedContinueConfig | undefined,
-): ConfigResult<SerializedContinueConfig> {
+  overrideConfigJson: SerializedantalyseConfig | undefined,
+): ConfigResult<SerializedantalyseConfig> {
   const configPath = getConfigJsonPath(ideType);
-  let config: SerializedContinueConfig = overrideConfigJson!;
+  let config: SerializedantalyseConfig = overrideConfigJson!;
   if (!config) {
     try {
       config = resolveSerializedConfig(configPath);
@@ -177,7 +177,7 @@ function loadSerializedConfig(
 }
 
 async function serializedToIntermediateConfig(
-  initial: SerializedContinueConfig,
+  initial: SerializedantalyseConfig,
   ide: IDE,
   loadPromptFiles: boolean = true,
 ): Promise<Config> {
@@ -211,7 +211,7 @@ async function serializedToIntermediateConfig(
       .flat()
       .filter(({ path }) => path.endsWith(".prompt"));
 
-    // Also read from ~/.continue/.prompts
+    // Also read from ~/.antalyse/.prompts
     promptFiles.push(...readAllGlobalPromptFiles());
 
     for (const file of promptFiles) {
@@ -253,7 +253,7 @@ async function intermediateToFinalConfig(
   workOsAccessToken: string | undefined,
   loadPromptFiles: boolean = true,
   allowFreeTrial: boolean = true,
-): Promise<ContinueConfig> {
+): Promise<antalyseConfig> {
   // Auto-detect models
   let models: BaseLLM[] = [];
   for (const desc of config.models) {
@@ -425,9 +425,9 @@ async function intermediateToFinalConfig(
       }
       const instance: IContextProvider = new cls(provider.params);
 
-      // Handle continue-proxy
-      if (instance.description.title === "continue-proxy") {
-        (instance as ContinueProxyContextProvider).workOsAccessToken =
+      // Handle antalyse-proxy
+      if (instance.description.title === "antalyse-proxy") {
+        (instance as antalyseProxyContextProvider).workOsAccessToken =
           workOsAccessToken;
       }
 
@@ -494,8 +494,8 @@ async function intermediateToFinalConfig(
 }
 
 function finalToBrowserConfig(
-  final: ContinueConfig,
-): BrowserSerializedContinueConfig {
+  final: antalyseConfig,
+): BrowserSerializedantalyseConfig {
   return {
     allowAnonymousTelemetry: final.allowAnonymousTelemetry,
     models: final.models.map((m) => ({
@@ -641,7 +641,7 @@ async function tryBuildConfigTs() {
     }
   } catch (e) {
     console.log(
-      `Build error. Please check your ~/.continue/config.ts file: ${e}`,
+      `Build error. Please check your ~/.antalyse/config.ts file: ${e}`,
     );
   }
 }
@@ -711,14 +711,14 @@ async function buildConfigTsandReadConfigJs(ide: IDE, ideType: IdeType) {
 
 async function loadFullConfigNode(
   ide: IDE,
-  workspaceConfigs: ContinueRcJson[],
+  workspaceConfigs: antalyseRcJson[],
   ideSettings: IdeSettings,
   ideType: IdeType,
   uniqueId: string,
   writeLog: (log: string) => Promise<void>,
   workOsAccessToken: string | undefined,
-  overrideConfigJson: SerializedContinueConfig | undefined,
-): Promise<ConfigResult<ContinueConfig>> {
+  overrideConfigJson: SerializedantalyseConfig | undefined,
+): Promise<ConfigResult<antalyseConfig>> {
   // Serialized config
   let {
     config: serialized,
@@ -810,5 +810,5 @@ export {
   intermediateToFinalConfig,
   loadFullConfigNode,
   serializedToIntermediateConfig,
-  type BrowserSerializedContinueConfig,
+  type BrowserSerializedantalyseConfig,
 };

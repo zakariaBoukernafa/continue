@@ -4,7 +4,7 @@ out/
 .vscode-test/
 data/
 src/client
-.continue
+.antalyse
 
 exe
 bin
@@ -16,4 +16,4 @@ gui/**
 .devcontainer
 .github
 
-continue_rc_schema.json
+antalyse_rc_schema.json

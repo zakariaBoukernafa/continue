@@ -1,14 +1,14 @@
 import { vscForeground } from "..";
 
-interface ContinueLogoProps {
+interface antalyseLogoProps {
   height?: number;
   width?: number;
 }
 
-export default function ContinueLogo({
+export default function antalyseLogo({
   height = 987,
   width = 299,
-}: ContinueLogoProps) {
+}: antalyseLogoProps) {
   return (
     <svg
       width={width}

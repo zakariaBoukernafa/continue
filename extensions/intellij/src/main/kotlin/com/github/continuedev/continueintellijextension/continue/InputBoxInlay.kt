@@ -1,4 +1,4 @@
-package com.github.continuedev.continueintellijextension.`continue`
+package com.github.antalysedev.antalyseintellijextension.`antalyse`
 
 import com.intellij.codeInsight.hints.*
 import com.intellij.openapi.editor.Editor
@@ -11,10 +11,10 @@ class InputBoxInlayProvider : InlayHintsProvider<NoSettings> {
     override val key: SettingsKey<NoSettings>
         get() = SettingsKey<NoSettings>("InputBoxInlayProviderSettingsKey")
     override val name: String
-        get() = "Continue Quick Input"
+        get() = "antalyse Quick Input"
 
     override val previewText: String?
-        get() = "Continue Quick Input"
+        get() = "antalyse Quick Input"
 
     override fun createSettings() = NoSettings()
 
@@ -29,7 +29,7 @@ class InputBoxInlayProvider : InlayHintsProvider<NoSettings> {
 
     private class Collector(editor: Editor) : FactoryInlayHintsCollector(editor) {
         override fun collect(element: PsiElement, editor: Editor, sink: InlayHintsSink): Boolean {
-            if (element.text == "continue") {
+            if (element.text == "antalyse") {
 //                val presentation = HorizontalBarPresentation.create(factory, editor, element)
 //                sink.addInlineElement(element.textOffset, true, presentation)
             }

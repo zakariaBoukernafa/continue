@@ -7,11 +7,11 @@ import { Handler, HTTPResponse, Page } from "puppeteer";
 // @prettier-ignore
 import PCR from "puppeteer-chromium-resolver";
 
-import { ContinueConfig, IDE } from "../../..";
+import { antalyseConfig, IDE } from "../../..";
 import {
   editConfigJson,
   getChromiumPath,
-  getContinueUtilsPath,
+  getantalyseUtilsPath,
 } from "../../../util/paths";
 import { PageData } from "../DocsCrawler";
 
@@ -186,11 +186,11 @@ export class ChromiumCrawler {
 }
 
 export class ChromiumInstaller {
-  static PCR_CONFIG = { downloadPath: getContinueUtilsPath() };
+  static PCR_CONFIG = { downloadPath: getantalyseUtilsPath() };
 
   constructor(
     private readonly ide: IDE,
-    private readonly config: ContinueConfig,
+    private readonly config: antalyseConfig,
   ) {
     if (this.shouldInstallOnStartup()) {
       console.log("Installing Chromium");

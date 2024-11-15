@@ -2,7 +2,7 @@ import { AutocompleteInput } from "../autocomplete/util/types";
 import { ProfileDescription } from "../config/ConfigHandler";
 
 import type {
-  BrowserSerializedContinueConfig,
+  BrowserSerializedantalyseConfig,
   ChatMessage,
   ContextItemWithId,
   ContextSubmenuItem,
@@ -14,7 +14,7 @@ import type {
   ModelRoles,
   PersistedSessionInfo,
   RangeInFile,
-  SerializedContinueConfig,
+  SerializedantalyseConfig,
   SessionInfo,
   SiteIndexingConfig,
 } from "../";
@@ -52,7 +52,7 @@ export type ToCoreFromIdeOrWebviewProtocol = {
   "config/addOpenAiKey": [string, void];
   "config/addModel": [
     {
-      model: SerializedContinueConfig["models"][number];
+      model: SerializedantalyseConfig["models"][number];
       role?: keyof ModelRoles;
     },
     void,
@@ -61,10 +61,10 @@ export type ToCoreFromIdeOrWebviewProtocol = {
   "config/ideSettingsUpdate": [IdeSettings, void];
   "config/getSerializedProfileInfo": [
     undefined,
-    { config: BrowserSerializedContinueConfig; profileId: string },
+    { config: BrowserSerializedantalyseConfig; profileId: string },
   ];
   "config/deleteModel": [{ title: string }, void];
-  "config/reload": [undefined, BrowserSerializedContinueConfig];
+  "config/reload": [undefined, BrowserSerializedantalyseConfig];
   "config/listProfiles": [undefined, ProfileDescription[]];
   "context/getContextItems": [
     {

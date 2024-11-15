@@ -5,7 +5,7 @@ import {
 import { FromIdeProtocol } from "../protocol/index.js";
 
 import type {
-  ContinueRcJson,
+  antalyseRcJson,
   FileType,
   IDE,
   IdeInfo,
@@ -28,7 +28,7 @@ export class MessageIde implements IDE {
       messageType: T,
       callback: (data: FromIdeProtocol[T][0]) => FromIdeProtocol[T][1],
     ) => void,
-  ) { }
+  ) {}
 
   pathSep(): Promise<string> {
     return this.request("pathSep", undefined);
@@ -105,7 +105,7 @@ export class MessageIde implements IDE {
     return this.request("getUniqueId", undefined);
   }
 
-  getWorkspaceConfigs(): Promise<ContinueRcJson[]> {
+  getWorkspaceConfigs(): Promise<antalyseRcJson[]> {
     return this.request("getWorkspaceConfigs", undefined);
   }
 
@@ -133,14 +133,14 @@ export class MessageIde implements IDE {
     return await this.request("listFolders", undefined);
   }
 
-  _continueDir: string | null = null;
+  _antalyseDir: string | null = null;
 
-  async getContinueDir(): Promise<string> {
-    if (this._continueDir) {
-      return this._continueDir;
+  async getantalyseDir(): Promise<string> {
+    if (this._antalyseDir) {
+      return this._antalyseDir;
     }
-    const dir = await this.request("getContinueDir", undefined);
-    this._continueDir = dir;
+    const dir = await this.request("getantalyseDir", undefined);
+    this._antalyseDir = dir;
     return dir;
   }
 

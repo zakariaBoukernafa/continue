@@ -28,7 +28,7 @@ interface VsCodeCompletionInput {
   context: vscode.InlineCompletionContext;
 }
 
-export class ContinueCompletionProvider
+export class antalyseCompletionProvider
   implements vscode.InlineCompletionItemProvider
 {
   private onError(e: any) {
@@ -49,7 +49,7 @@ export class ContinueCompletionProvider
       if (val === "Documentation") {
         vscode.env.openExternal(
           vscode.Uri.parse(
-            "https://docs.continue.dev/features/tab-autocomplete",
+            "https://docs.antalyse.dev/features/tab-autocomplete",
           ),
         );
       } else if (val === "Download Ollama") {
@@ -265,7 +265,7 @@ export class ContinueCompletionProvider
         completionRange,
         {
           title: "Log Autocomplete Outcome",
-          command: "continue.logAutocompleteOutcome",
+          command: "antalyse.logAutocompleteOutcome",
           arguments: [input.completionId, this.completionProvider],
         },
       );
