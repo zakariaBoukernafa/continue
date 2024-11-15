@@ -17,37 +17,6 @@ export const DEFAULT_AUTOCOMPLETE_MODEL_CONFIG: ModelDescription = {
   model: "qwen2.5-coder:3b",
 };
 
-export const FREE_TRIAL_MODELS: ModelDescription[] = [
-  {
-    title: "Claude 3.5 Sonnet (Free Trial)",
-    provider: "free-trial",
-    model: "claude-3-5-sonnet-latest",
-    systemMessage:
-      "You are an expert software developer. You give helpful and concise responses.",
-  },
-  {
-    title: "GPT-4o (Free Trial)",
-    provider: "free-trial",
-    model: "gpt-4o",
-    systemMessage:
-      "You are an expert software developer. You give helpful and concise responses.",
-  },
-  {
-    title: "Llama3.1 70b (Free Trial)",
-    provider: "free-trial",
-    model: "llama3.1-70b",
-    systemMessage:
-      "You are an expert software developer. You give helpful and concise responses.",
-  },
-  {
-    title: "Codestral (Free Trial)",
-    provider: "free-trial",
-    model: "codestral-latest",
-    systemMessage:
-      "You are an expert software developer. You give helpful and concise responses.",
-  },
-];
-
 export const defaultContextProvidersVsCode: ContextProviderWithParams[] = [
   { name: "code", params: {} },
   { name: "docs", params: {} },

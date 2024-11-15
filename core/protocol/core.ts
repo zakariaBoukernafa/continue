@@ -28,7 +28,6 @@ export type OnboardingModes =
   | "Local"
   | "Best"
   | "Custom"
-  | "Quickstart"
   | "LocalAfterFreeTrial";
 
 export interface ListHistoryOptions {

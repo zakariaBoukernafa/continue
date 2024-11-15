@@ -1,5 +1,5 @@
-import * as Tabs from "./tabs";
-import { TabTitle, OnboardingCardTabs } from "./components/OnboardingCardTabs";
+import { Local } from "./tabs";
+import { OnboardingHeader } from "./components/OnboardingCardTabs";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import styled from "styled-components";
 import { CloseButton, defaultBorderRadius, vscInputBackground } from "../";
@@ -17,26 +17,10 @@ const StyledCard = styled.div`
 
 export interface OnboardingCardState {
   show?: boolean;
-  activeTab?: TabTitle;
 }
 
-export type OnboardingCardProps = Pick<OnboardingCardState, "activeTab">;
-
-export function OnboardingCard(props: OnboardingCardProps) {
+export function OnboardingCard() {
   const onboardingCard = useOnboardingCard();
-
-  function renderTabContent() {
-    switch (onboardingCard.activeTab) {
-      case "Quickstart":
-        return <Tabs.Quickstart />;
-      case "Best":
-        return <Tabs.Best />;
-      case "Local":
-        return <Tabs.Local />;
-      default:
-        return null;
-    }
-  }
 
   if (getLocalStorage("onboardingStatus") === undefined) {
     setLocalStorage("onboardingStatus", "Started");
@@ -44,14 +28,13 @@ export function OnboardingCard(props: OnboardingCardProps) {
 
   return (
     <StyledCard className="xs:py-4 xs:px-4 relative px-2 py-3">
-      <OnboardingCardTabs
-        activeTab={onboardingCard.activeTab}
-        onTabClick={onboardingCard.setActiveTab}
-      />
+      <OnboardingHeader />
       <CloseButton onClick={onboardingCard.close}>
         <XMarkIcon className="hidden h-5 w-5 sm:flex" />
       </CloseButton>
-      <div className="content py-4">{renderTabContent()}</div>
+      <div className="content py-4">
+        <Local />
+      </div>
     </StyledCard>
   );
 }

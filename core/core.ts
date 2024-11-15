@@ -9,7 +9,6 @@ import {
   setupBestConfig,
   setupLocalConfig,
   setupLocalConfigAfterFreeTrial,
-  setupQuickstartConfig,
 } from "./config/onboarding";
 import { addModel, addOpenAIKey, deleteModel } from "./config/util";
 import { recentlyEditedFilesCache } from "./context/retrieval/recentlyEditedFilesCache";
@@ -83,7 +82,7 @@ export class Core {
   constructor(
     private readonly messenger: IMessenger<ToCoreProtocol, FromCoreProtocol>,
     private readonly ide: IDE,
-    private readonly onWrite: (text: string) => Promise<void> = async () => { },
+    private readonly onWrite: (text: string) => Promise<void> = async () => {},
   ) {
     // Ensure .continue directory is created
     setupInitialDotContinueDirectory();
@@ -174,7 +173,7 @@ export class Core {
       this.configHandler,
       ide,
       getLlm,
-      (e) => { },
+      (e) => {},
       (..._) => Promise.resolve([]),
     );
 
@@ -638,10 +637,6 @@ export class Core {
           editConfigJsonCallback = setupLocalConfig;
           break;
 
-        case "Quickstart":
-          editConfigJsonCallback = setupQuickstartConfig;
-          break;
-
         case "LocalAfterFreeTrial":
           editConfigJsonCallback = setupLocalConfigAfterFreeTrial;
           break;
@@ -684,7 +679,7 @@ export class Core {
         await codebaseIndexer.clearIndexes();
       }
 
-      const dirs = data?.dirs ?? await this.ide.getWorkspaceDirs();
+      const dirs = data?.dirs ?? (await this.ide.getWorkspaceDirs());
       await this.refreshCodebaseIndex(dirs);
     });
     on("index/setPaused", (msg) => {

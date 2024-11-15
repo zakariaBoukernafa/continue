@@ -158,8 +158,8 @@ function Settings() {
               ideMessenger.post("showFile", {
                 filepath:
                   getPlatform() == "windows"
-                    ? "~\\.continue\\config.json"
-                    : "~/.continue/config.json",
+                    ? "~\\.antalyse\\config.json"
+                    : "~/.antalyse/config.json",
               });
             }}
           >
