@@ -134,16 +134,20 @@ jobs:
         run: |
           cd extensions/vscode
           rm -rf node_modules/esbuild
-          npm install --no-save esbuild@latest
-          npm rebuild esbuild
+          npm cache clean --force
+          set npm_config_archive_url=https://registry.npmjs.org/
+          npm install --no-save esbuild@latest --ignore-scripts
+          cd node_modules/esbuild
+          node install.js
         env:
           GITHUB_TOKEN: ${{ secrets.CI_GITHUB_TOKEN }}
           npm_config_arch: ${{ matrix.npm_config_arch }}
+          npm_config_platform: ${{ matrix.platform }}
 
-      # Replace the existing "Re-install esbuild" step with:
       - name: Verify esbuild installation
         run: |
           cd extensions/vscode
+          node -e "require('esbuild')"
           ./node_modules/.bin/esbuild --version
         shell: bash
       # 4. Run tests for the extension
