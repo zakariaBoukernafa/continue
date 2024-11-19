@@ -128,12 +128,19 @@ jobs:
         run: |
           cd extensions/vscode
           npm run prepackage -- --target ${{ env.target }}
-
+      - name: Setup esbuild for Linux
+        if: matrix.platform == 'linux'
+        run: |
+          cd extensions/vscode
+          npm cache clean --force
+          npm install -g esbuild
+          npm install --force esbuild
       # 3. Re-install esbuild (for cases that we force installed for another arch in prepackage.js)
       - name: Re-install esbuild
         run: |
           cd extensions/vscode
           npm install -f esbuild
+          npm rebuild esbuild
 
       # 4. Run tests for the extension
       # - name: Install Xvfb for Linux and run tests
