@@ -1,5 +1,4 @@
 import { getantalyseRcPath, getTsConfigPath } from "core/util/paths";
-import { Telemetry } from "core/util/posthog";
 import * as vscode from "vscode";
 
 import { VsCodeExtension } from "../extension/VsCodeExtension";
@@ -23,13 +22,6 @@ export async function activateExtension(context: vscode.ExtensionContext) {
   // Load antalyse configuration
   if (!context.globalState.get("hasBeenInstalled")) {
     context.globalState.update("hasBeenInstalled", true);
-    Telemetry.capture(
-      "install",
-      {
-        extensionVersion: getExtensionVersion(),
-      },
-      true,
-    );
   }
 
   const api = new VsCodeantalyseApi(vscodeExtension);

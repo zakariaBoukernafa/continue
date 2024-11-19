@@ -28,7 +28,6 @@ import { fetchwithRequestOptions } from "./util/fetchWithOptions";
 import { GlobalContext } from "./util/GlobalContext";
 import historyManager from "./util/history";
 import { editConfigJson, setupInitialDotantalyseDirectory } from "./util/paths";
-import { Telemetry } from "./util/posthog";
 import { TTS } from "./util/tts";
 
 import type { ContextItemId, IDE, IndexingProgressUpdate } from ".";
@@ -181,10 +180,7 @@ export class Core {
 
     this.messenger.onError((err) => {
       console.error(err);
-      void Telemetry.capture("core_messenger_error", {
-        message: err.message,
-        stack: err.stack,
-      });
+
       void this.ide.showToast("error", err.message);
     });
 
@@ -342,14 +338,6 @@ export class Core {
           fetch: (url, init) =>
             fetchwithRequestOptions(url, init, config.requestOptions),
         });
-
-        void Telemetry.capture(
-          "useContextProvider",
-          {
-            name: provider.description.title,
-          },
-          true,
-        );
 
         return items.map((item) => ({
           ...item,
@@ -523,14 +511,6 @@ export class Core {
       if (!slashCommand) {
         throw new Error(`Unknown slash command ${slashCommandName}`);
       }
-
-      void Telemetry.capture(
-        "useSlashCommand",
-        {
-          name: slashCommandName,
-        },
-        true,
-      );
 
       const checkActiveInterval = setInterval(() => {
         if (abortedMessageIds.has(msg.messageId)) {
@@ -742,14 +722,6 @@ export class Core {
           "Indexing failed with error: ",
           update.desc,
           update.debugInfo,
-        );
-        void Telemetry.capture(
-          "indexing_error",
-          {
-            error: update.desc,
-            stack: update.debugInfo,
-          },
-          false,
         );
       }
     }

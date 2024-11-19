@@ -1,5 +1,4 @@
 import { TRIAL_FIM_MODEL } from "../../config/onboarding.js";
-import { getHeaders } from "../../antalyseServer/stubs/headers.js";
 import { TRIAL_PROXY_URL } from "../../control-plane/client.js";
 import { ChatMessage, CompletionOptions, ModelProvider } from "../../index.js";
 import { BaseLLM } from "../index.js";
@@ -23,7 +22,6 @@ class FreeTrial extends BaseLLM {
     return {
       "Content-Type": "application/json",
       Authorization: `Bearer ${this.ghAuthToken}`,
-      ...(await getHeaders()),
     };
   }
 

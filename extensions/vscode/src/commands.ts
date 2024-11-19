@@ -14,7 +14,6 @@ import { Core } from "core/core";
 import { walkDirAsync } from "core/indexing/walkDir";
 import { GlobalContext } from "core/util/GlobalContext";
 import { getConfigJsonPath, getDevDataFilePath } from "core/util/paths";
-import { Telemetry } from "core/util/posthog";
 import readLastLines from "read-last-lines";
 import * as vscode from "vscode";
 
@@ -48,17 +47,8 @@ function getFullScreenTab() {
   );
 }
 
-type TelemetryCaptureParams = Parameters<typeof Telemetry.capture>;
-
 /**
- * Helper method to add the `isCommandEvent` to all telemetry captures
  */
-function captureCommandTelemetry(
-  commandName: TelemetryCaptureParams[0],
-  properties: TelemetryCaptureParams[1] = {},
-) {
-  Telemetry.capture(commandName, { isCommandEvent: true, ...properties });
-}
 
 function addCodeToContextFromRange(
   range: vscode.Range,
@@ -272,8 +262,6 @@ const commandsMap: (
 
   return {
     "antalyse.acceptDiff": async (newFilepath?: string | vscode.Uri) => {
-      captureCommandTelemetry("acceptDiff");
-
       let fullPath = newFilepath;
 
       if (fullPath instanceof vscode.Uri) {
@@ -292,8 +280,6 @@ const commandsMap: (
       });
     },
     "antalyse.rejectDiff": async (newFilepath?: string | vscode.Uri) => {
-      captureCommandTelemetry("rejectDiff");
-
       let fullPath = newFilepath;
 
       if (fullPath instanceof vscode.Uri) {
@@ -311,36 +297,28 @@ const commandsMap: (
       });
     },
     "antalyse.acceptVerticalDiffBlock": (filepath?: string, index?: number) => {
-      captureCommandTelemetry("acceptVerticalDiffBlock");
       verticalDiffManager.acceptRejectVerticalDiffBlock(true, filepath, index);
     },
     "antalyse.rejectVerticalDiffBlock": (filepath?: string, index?: number) => {
-      captureCommandTelemetry("rejectVerticalDiffBlock");
       verticalDiffManager.acceptRejectVerticalDiffBlock(false, filepath, index);
     },
     "antalyse.quickFix": async (
       range: vscode.Range,
       diagnosticMessage: string,
     ) => {
-      captureCommandTelemetry("quickFix");
-
       const prompt = `Please explain the cause of this error and how to solve it: ${diagnosticMessage}`;
 
       addCodeToContextFromRange(range, sidebar.webviewProtocol, prompt);
 
       vscode.commands.executeCommand("antalyse.antalyseGUIView.focus");
     },
-    // Passthrough for telemetry purposes
     "antalyse.defaultQuickAction": async (args: QuickEditShowParams) => {
-      captureCommandTelemetry("defaultQuickAction");
       vscode.commands.executeCommand("antalyse.quickEdit", args);
     },
     "antalyse.customQuickActionSendToChat": async (
       prompt: string,
       range: vscode.Range,
     ) => {
-      captureCommandTelemetry("customQuickActionSendToChat");
-
       addCodeToContextFromRange(range, sidebar.webviewProtocol, prompt);
 
       vscode.commands.executeCommand("antalyse.antalyseGUIView.focus");
@@ -349,8 +327,6 @@ const commandsMap: (
       prompt: string,
       range: vscode.Range,
     ) => {
-      captureCommandTelemetry("customQuickActionStreamInlineEdit");
-
       streamInlineEdit("docstring", prompt, false, range);
     },
     "antalyse.codebaseForceReIndex": async () => {
@@ -423,7 +399,6 @@ const commandsMap: (
       }
     },
     "antalyse.edit": async () => {
-      captureCommandTelemetry("edit");
       focusGUI();
 
       const editor = vscode.window.activeTextEditor;
@@ -460,7 +435,6 @@ const commandsMap: (
       }
     },
     "antalyse.exitEditMode": async () => {
-      captureCommandTelemetry("exitEditMode");
       await sidebar.webviewProtocol?.request("exitEditMode", undefined);
     },
     "antalyse.quickEdit": async (args: QuickEditShowParams) => {
@@ -468,22 +442,16 @@ const commandsMap: (
       if (args.range) {
         linesOfCode = args.range.end.line - args.range.start.line;
       }
-      captureCommandTelemetry("quickEdit", {
-        linesOfCode,
-      });
+
       quickEdit.show(args);
     },
     "antalyse.writeCommentsForCode": async () => {
-      captureCommandTelemetry("writeCommentsForCode");
-
       streamInlineEdit(
         "comment",
         "Write comments for this code. Do not change anything about the code itself.",
       );
     },
     "antalyse.writeDocstringForCode": async () => {
-      captureCommandTelemetry("writeDocstringForCode");
-
       streamInlineEdit(
         "docstring",
         "Write a docstring for this code. Do not change anything about the code itself.",
@@ -491,27 +459,21 @@ const commandsMap: (
       );
     },
     "antalyse.fixCode": async () => {
-      captureCommandTelemetry("fixCode");
-
       streamInlineEdit(
         "fix",
         "Fix this code. If it is already 100% correct, simply rewrite the code.",
       );
     },
     "antalyse.optimizeCode": async () => {
-      captureCommandTelemetry("optimizeCode");
       streamInlineEdit("optimize", "Optimize this code");
     },
     "antalyse.fixGrammar": async () => {
-      captureCommandTelemetry("fixGrammar");
       streamInlineEdit(
         "fixGrammar",
         "If there are any grammar or spelling mistakes in this writing, fix them. Do not make other large changes to the writing.",
       );
     },
     "antalyse.viewLogs": async () => {
-      captureCommandTelemetry("viewLogs");
-
       // Open ~/.antalyse/antalyse.log
       const logFile = path.join(os.homedir(), ".antalyse", "antalyse.log");
       // Make sure the file/directory exist
@@ -524,8 +486,6 @@ const commandsMap: (
       await vscode.window.showTextDocument(uri);
     },
     "antalyse.debugTerminal": async () => {
-      captureCommandTelemetry("debugTerminal");
-
       const terminalContents = await ide.getTerminalContents();
 
       vscode.commands.executeCommand("antalyse.antalyseGUIView.focus");
@@ -542,8 +502,6 @@ const commandsMap: (
 
     // Commands without keyboard shortcuts
     "antalyse.addModel": () => {
-      captureCommandTelemetry("addModel");
-
       vscode.commands.executeCommand("antalyse.antalyseGUIView.focus");
       sidebar.webviewProtocol?.request("addModel", undefined);
     },
@@ -579,7 +537,6 @@ const commandsMap: (
       });
     },
     "antalyse.sendToTerminal": (text: string) => {
-      captureCommandTelemetry("sendToTerminal");
       ide.runCommand(text);
     },
     "antalyse.newSession": () => {
@@ -614,7 +571,6 @@ const commandsMap: (
       }
 
       // Full screen not open - open it
-      captureCommandTelemetry("openFullScreen");
 
       // Create the full screen panel
       let panel = vscode.window.createWebviewPanel(
@@ -686,8 +642,6 @@ const commandsMap: (
       completionProvider.accept(completionId);
     },
     "antalyse.toggleTabAutocompleteEnabled": () => {
-      captureCommandTelemetry("toggleTabAutocompleteEnabled");
-
       const config = vscode.workspace.getConfiguration(EXTENSION_NAME);
       const enabled = config.get("enableTabAutocomplete");
       const pauseOnBattery = config.get<boolean>(
@@ -722,8 +676,6 @@ const commandsMap: (
       }
     },
     "antalyse.openTabAutocompleteConfigMenu": async () => {
-      captureCommandTelemetry("openTabAutocompleteConfigMenu");
-
       const config = vscode.workspace.getConfiguration(EXTENSION_NAME);
       const quickPick = vscode.window.createQuickPick();
       const autocompleteModels =

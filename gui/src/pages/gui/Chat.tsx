@@ -28,7 +28,7 @@ import { ChatScrollAnchor } from "../../components/ChatScrollAnchor";
 import { useFindWidget } from "../../components/find/FindWidget";
 import StepContainer from "../../components/gui/StepContainer";
 import TimelineItem from "../../components/gui/TimelineItem";
-import antalyseInputBox from "../../components/mainInput/antalyseInputBox";
+import AntalyseInputBox from "../../components/mainInput/antalyseInputBox";
 import { defaultInputModifiers } from "../../components/mainInput/inputModifiers";
 import { NewSessionButton } from "../../components/mainInput/NewSessionButton";
 import { TutorialCard } from "../../components/mainInput/TutorialCard";
@@ -89,6 +89,8 @@ const StopButton = styled.div`
 const StepsDiv = styled.div`
   position: relative;
   background-color: transparent;
+  flex: 1; // Add this to allow flex growing
+  min-height: 0; // Add this to enable proper scrolling
 
   & > * {
     position: relative;
@@ -315,11 +317,15 @@ export function Chat() {
     state.config.ui?.showChatScrollbar || window.innerHeight > 5000;
 
   return (
-    <>
+    <div className="flex h-full flex-col">
+      {" "}
+      {/* Add this wrapper */}
       {widget}
       <StepsDiv
         ref={stepsDivRef}
-        className={`overflow-y-scroll pt-[8px] ${showScrollbar ? "thin-scrollbar" : "no-scrollbar"} ${state.history.length > 0 ? "h-full" : ""}`}
+        className={`overflow-y-scroll pt-[8px] ${
+          showScrollbar ? "thin-scrollbar" : "no-scrollbar"
+        } ${state.history.length > 0 ? "flex-1" : "flex flex-1 items-end"}`}
         onScroll={handleScroll}
       >
         {highlights}
@@ -332,7 +338,7 @@ export function Chat() {
               }}
             >
               {item.message.role === "user" ? (
-                <antalyseInputBox
+                <AntalyseInputBox
                   onEnter={async (editorState, modifiers) => {
                     streamResponse(editorState, modifiers, ideMessenger, index);
                   }}
@@ -418,93 +424,98 @@ export function Chat() {
           trackVisibility={active}
         />
       </StepsDiv>
-
-      <div className={`relative`}>
-        <div className="absolute -top-8 right-2 z-30">
-          {ttsActive && (
-            <StopButton
-              className=""
-              onClick={() => {
-                ideMessenger.post("tts/kill", undefined);
-              }}
-            >
-              ■ Stop TTS
-            </StopButton>
-          )}
-          {active && (
-            <StopButton
-              onClick={() => {
-                dispatch(setInactive());
-                if (
-                  state.history[state.history.length - 1]?.message.content
-                    .length === 0
-                ) {
-                  dispatch(clearLastResponse());
-                }
-              }}
-            >
-              {getMetaKeyLabel()} ⌫ Cancel
-            </StopButton>
-          )}
-        </div>
-        <antalyseInputBox
-          isMainInput
-          isLastUserInput={false}
-          onEnter={(editorContent, modifiers) => {
-            sendInput(editorContent, modifiers);
-          }}
-        />
-        <div
-          style={{
-            pointerEvents: active ? "none" : "auto",
-          }}
-        >
-          {state.history.length > 0 ? (
-            <div className="xs:inline mt-2 hidden">
-              <NewSessionButton
+      <div className={`mt-auto`}>
+        {" "}
+        {/* Add mt-auto to push to bottom */}
+        <div className="relative">
+          <div className="absolute -top-8 right-2 z-30">
+            {ttsActive && (
+              <StopButton
+                className=""
                 onClick={() => {
-                  saveSession();
+                  ideMessenger.post("tts/kill", undefined);
                 }}
-                className="mr-auto"
               >
-                <span className="xs:inline hidden">
-                  New Session ({getMetaKeyLabel()} {isJetBrains() ? "J" : "L"})
-                </span>
-              </NewSessionButton>
-            </div>
-          ) : (
-            <>
-              {getLastSessionId() ? (
-                <div className="xs:inline mt-2 hidden">
-                  <NewSessionButton
-                    onClick={async () => {
-                      loadLastSession().catch((e) =>
-                        console.error(`Failed to load last session: ${e}`),
-                      );
-                    }}
-                    className="mr-auto flex items-center gap-2"
-                  >
-                    <ArrowLeftIcon className="h-3 w-3" />
-                    Last Session
-                  </NewSessionButton>
-                </div>
-              ) : null}
+                ■ Stop TTS
+              </StopButton>
+            )}
+            {active && (
+              <StopButton
+                onClick={() => {
+                  dispatch(setInactive());
+                  if (
+                    state.history[state.history.length - 1]?.message.content
+                      .length === 0
+                  ) {
+                    dispatch(clearLastResponse());
+                  }
+                }}
+              >
+                {getMetaKeyLabel()} ⌫ Cancel
+              </StopButton>
+            )}
+          </div>
+          <AntalyseInputBox
+            isMainInput
+            isLastUserInput={false}
+            onEnter={(editorContent, modifiers) => {
+              sendInput(editorContent, modifiers);
+            }}
+          />
 
-              {onboardingCard.show && (
-                <div className="mx-2 mt-10">
-                  <OnboardingCard activeTab={onboardingCard.activeTab} />
-                </div>
-              )}
+          <div
+            style={{
+              pointerEvents: active ? "none" : "auto",
+            }}
+          >
+            {state.history.length > 0 ? (
+              <div className="xs:inline mt-2 hidden">
+                <NewSessionButton
+                  onClick={() => {
+                    saveSession();
+                  }}
+                  className="mr-auto"
+                >
+                  <span className="xs:inline hidden">
+                    New Session ({getMetaKeyLabel()} {isJetBrains() ? "J" : "L"}
+                    )
+                  </span>
+                </NewSessionButton>
+              </div>
+            ) : (
+              <>
+                {getLastSessionId() ? (
+                  <div className="xs:inline mt-2 hidden">
+                    <NewSessionButton
+                      onClick={async () => {
+                        loadLastSession().catch((e) =>
+                          console.error(`Failed to load last session: ${e}`),
+                        );
+                      }}
+                      className="mr-auto flex items-center gap-2"
+                    >
+                      <ArrowLeftIcon className="h-3 w-3" />
+                      Last Session
+                    </NewSessionButton>
+                  </div>
+                ) : null}
 
-              {showTutorialCard !== false && !onboardingCard.open && (
-                <div className="flex w-full justify-center">
-                  <TutorialCard onClose={closeTutorialCard} />
-                </div>
-              )}
-            </>
-          )}
+                {onboardingCard.show && (
+                  <div className="mx-2 mt-10">
+                    <OnboardingCard activeTab={onboardingCard.activeTab} />
+                  </div>
+                )}
+
+                {showTutorialCard !== false && !onboardingCard.open && (
+                  <div className="flex w-full justify-center">
+                    <TutorialCard onClose={closeTutorialCard} />
+                  </div>
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

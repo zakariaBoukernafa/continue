@@ -72,7 +72,6 @@ export type ToIdeFromWebviewOrCoreProtocol = {
     string[],
   ];
   getAvailableThreads: [undefined, Thread[]];
-  isTelemetryEnabled: [undefined, boolean];
   getUniqueId: [undefined, string];
   getTags: [string, IndexTag[]];
   // end methods from IDE type

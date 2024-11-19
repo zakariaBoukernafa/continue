@@ -9,7 +9,6 @@ import {
 } from "../..";
 import DocsService from "../../indexing/docs/DocsService";
 import preIndexedDocs from "../../indexing/docs/preIndexedDocs";
-import { Telemetry } from "../../util/posthog";
 
 import { INSTRUCTIONS_BASE_ITEM } from "./utils";
 
@@ -105,15 +104,8 @@ class DocsContextProvider extends BaseContextProvider {
 
     const preIndexedDoc = preIndexedDocs[query];
 
-    if (!!preIndexedDoc) {
-      void Telemetry.capture("docs_pre_indexed_doc_used", {
-        doc: preIndexedDoc["title"],
-      });
-    }
-
-    const embeddingsProvider = await docsService.getEmbeddingsProvider(
-      !!preIndexedDoc,
-    );
+    const embeddingsProvider =
+      await docsService.getEmbeddingsProvider(!!preIndexedDoc);
 
     const [vector] = await embeddingsProvider.embed([extras.fullInput]);
 

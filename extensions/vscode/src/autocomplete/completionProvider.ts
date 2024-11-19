@@ -226,7 +226,6 @@ export class antalyseCompletionProvider
 
       // VS Code displays dependent on selectedCompletionInfo (their docstring below)
       // We should first always make sure we have a valid completion, but if it goes wrong we
-      // want telemetry to be correct
       /**
        * Provides information about the currently selected item in the autocomplete widget if it is visible.
        *

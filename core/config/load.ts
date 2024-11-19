@@ -132,10 +132,6 @@ function loadSerializedConfig(
     };
   }
 
-  if (config.allowAnonymousTelemetry === undefined) {
-    config.allowAnonymousTelemetry = true;
-  }
-
   if (config.ui?.getChatTitles === undefined) {
     config.ui = {
       ...config.ui,
@@ -497,7 +493,6 @@ function finalToBrowserConfig(
   final: antalyseConfig,
 ): BrowserSerializedantalyseConfig {
   return {
-    allowAnonymousTelemetry: final.allowAnonymousTelemetry,
     models: final.models.map((m) => ({
       provider: m.providerName,
       model: m.model,

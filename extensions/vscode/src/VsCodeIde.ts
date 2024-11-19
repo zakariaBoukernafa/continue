@@ -297,15 +297,6 @@ class VsCodeIde implements IDE {
     return this.ideUtils.getRepo(dir);
   }
 
-  async isTelemetryEnabled(): Promise<boolean> {
-    const globalEnabled = vscode.env.isTelemetryEnabled;
-    const antalyseEnabled: boolean =
-      (await vscode.workspace
-        .getConfiguration(EXTENSION_NAME)
-        .get("telemetryEnabled")) ?? true;
-    return globalEnabled && antalyseEnabled;
-  }
-
   getUniqueId(): Promise<string> {
     return Promise.resolve(vscode.env.machineId);
   }

@@ -1,6 +1,5 @@
 import { URL } from "node:url";
 
-import { getHeaders } from "../../../antalyseServer/stubs/headers";
 import { TRIAL_PROXY_URL } from "../../../control-plane/client";
 import { PageData } from "../DocsCrawler";
 
@@ -12,7 +11,6 @@ export class DefaultCrawler {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...(await getHeaders()),
       },
       body: JSON.stringify({ startUrl: this.startUrl.toString() }),
     });

@@ -5,7 +5,6 @@ import { FromWebviewProtocol, ToWebviewProtocol } from "core/protocol";
 import { WebviewMessengerResult } from "core/protocol/util";
 import { extractMinimalStackTraceInfo } from "core/util/extractMinimalStackTraceInfo";
 import { Message } from "core/util/messenger";
-import { Telemetry } from "core/util/posthog";
 import { v4 as uuidv4 } from "uuid";
 import * as vscode from "vscode";
 
@@ -148,15 +147,6 @@ export class VsCodeWebviewProtocol
               this.request("openOnboardingCard", undefined),
             );
           } else {
-            Telemetry.capture(
-              "webview_protocol_error",
-              {
-                messageType: msg.messageType,
-                errorMsg: message.split("\n\n")[0],
-                stack: extractMinimalStackTraceInfo(e.stack),
-              },
-              false,
-            );
             vscode.window
               .showErrorMessage(
                 message.split("\n\n")[0],

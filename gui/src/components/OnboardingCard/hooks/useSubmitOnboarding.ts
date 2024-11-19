@@ -22,7 +22,6 @@ export function useSubmitOnboarding(mode: OnboardingModes) {
     });
 
     if (onboardingStatus === "Started") {
-      // Telemetry
       posthog.capture("Onboarding Step", { status: "Completed" });
       posthog.capture("onboardingSelection", {
         mode,

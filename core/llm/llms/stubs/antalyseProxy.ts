@@ -1,5 +1,4 @@
 import { ControlPlaneProxyInfo } from "../../../control-plane/analytics/IAnalyticsProvider.js";
-import { Telemetry } from "../../../util/posthog.js";
 import OpenAI from "../OpenAI.js";
 
 import type { LLMOptions, ModelProvider } from "../../../index.js";
@@ -13,11 +12,6 @@ class antalyseProxy extends OpenAI {
   static providerName: ModelProvider = "antalyse-proxy";
   static defaultOptions: Partial<LLMOptions> = {
     useLegacyCompletionsEndpoint: false,
-    requestOptions: {
-      headers: {
-        "x-antalyse-unique-id": Telemetry.uniqueId,
-      },
-    },
   };
 
   supportsCompletions(): boolean {

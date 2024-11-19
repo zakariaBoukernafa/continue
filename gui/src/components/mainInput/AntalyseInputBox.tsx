@@ -12,7 +12,7 @@ import ContextItemsPeek from "./ContextItemsPeek";
 import TipTapEditor from "./TipTapEditor";
 import AcceptRejectAllButtons from "./AcceptRejectAllButtons";
 
-interface antalyseInputBoxProps {
+interface AntalyseInputBoxProps {
   isLastUserInput: boolean;
   isMainInput?: boolean;
   onEnter: (
@@ -27,10 +27,13 @@ interface antalyseInputBoxProps {
 
 const gradient = keyframes`
   0% {
-    background-position: 0px 0;
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
   }
   100% {
-    background-position: 100em 0;
+    background-position: 0% 50%;
   }
 `;
 
@@ -39,22 +42,24 @@ const GradientBorder = styled.div<{
   borderColor?: string;
   loading: 0 | 1;
 }>`
-  border-radius: ${(props) => props.borderRadius || "0"};
-  padding: 1px;
+  border-radius: ${(props) => props.borderRadius || "8px"};
+  padding: 2px;
+
   background: ${(props) =>
     props.borderColor
       ? props.borderColor
-      : `repeating-linear-gradient(
-      101.79deg,
-      #1BBE84 0%,
-      #331BBE 16%,
-      #BE1B55 33%,
-      #A6BE1B 55%,
-      #BE1B55 67%,
-      #331BBE 85%,
-      #1BBE84 99%
-    )`};
-  animation: ${(props) => (props.loading ? gradient : "")} 6s linear infinite;
+      : `linear-gradient(
+        45deg,
+        #FF3366,
+        #8833FF,
+        #33FFCC,
+        #FF3366
+      )`};
+  animation: ${(props) => (props.loading ? gradient : "")} 3s ease infinite;
+  box-shadow: ${(props) =>
+    props.loading ? "0 4px 12px rgba(0,0,0,0.2)" : "none"};
+  transition: all 0.3s ease;
+
   background-size: 200% 200%;
   width: 100%;
   display: flex;
@@ -62,7 +67,7 @@ const GradientBorder = styled.div<{
   align-items: center;
 `;
 
-function antalyseInputBox(props: antalyseInputBoxProps) {
+function AntalyseInputBox(props: AntalyseInputBoxProps) {
   const dispatch = useDispatch();
 
   const active = useSelector((store: RootState) => store.state.active);
@@ -151,4 +156,4 @@ function antalyseInputBox(props: antalyseInputBoxProps) {
   );
 }
 
-export default antalyseInputBox;
+export default AntalyseInputBox;

@@ -1,6 +1,5 @@
 import { Response } from "node-fetch";
 
-import { getHeaders } from "../../antalyseServer/stubs/headers.js";
 import { TRIAL_PROXY_URL } from "../../control-plane/client.js";
 import {
   EmbeddingsProviderName,
@@ -43,7 +42,6 @@ class FreeTrialEmbeddingsProvider extends BaseEmbeddingsProvider {
                 }),
                 headers: {
                   "Content-Type": "application/json",
-                  ...(await getHeaders()),
                 },
               }),
             );

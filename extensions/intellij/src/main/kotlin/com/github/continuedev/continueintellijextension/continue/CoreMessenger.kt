@@ -192,7 +192,6 @@ class CoreMessenger(
         }
 
         // Log the cause of the failure
-        val telemetryService = service<TelemetryService>()
         telemetryService.capture("jetbrains_core_exit", mapOf("error" to err))
 
         // Clean up all resources

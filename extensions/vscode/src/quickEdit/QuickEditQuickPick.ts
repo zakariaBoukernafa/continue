@@ -3,7 +3,6 @@ import { IDE } from "core";
 import { ConfigHandler } from "core/config/ConfigHandler";
 import { getModelByRole } from "core/config/util";
 import { logDevData } from "core/util/devdata";
-import { Telemetry } from "core/util/posthog";
 import * as vscode from "vscode";
 
 import { VerticalDiffManager } from "../diff/vertical/manager";
@@ -168,13 +167,6 @@ export class QuickEdit {
     if (!selectedValue && !selectedLabel) {
       return;
     }
-
-    Telemetry.capture("quickEditSelection", {
-      selection: {
-        label: selectedLabel,
-        value: selectedValue,
-      },
-    });
 
     const prompt = await this.handleSelect({
       selectedLabel,

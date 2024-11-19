@@ -10,7 +10,6 @@ import { streamDiff } from "../diff/streamDiff.js";
 import { streamLines } from "../diff/util.js";
 import { ChatMessage, DiffLine, ILLM, Prediction } from "../index.js";
 import { gptEditPrompt } from "../llm/templates/edit.js";
-import { Telemetry } from "../util/posthog.js";
 
 function constructPrompt(
   prefix: string,
@@ -55,15 +54,6 @@ export async function* streamDiffLines(
   language: string | undefined,
   onlyOneInsertion?: boolean,
 ): AsyncGenerator<DiffLine> {
-  void Telemetry.capture(
-    "inlineEdit",
-    {
-      model: llm.model,
-      provider: llm.providerName,
-    },
-    true,
-  );
-
   // Strip common indentation for the LLM, then add back after generation
   let oldLines =
     highlighted.length > 0

@@ -11,7 +11,6 @@ class MessageTypes {
 
         val ideMessageTypes = listOf(
             "readRangeInFile",
-            "isTelemetryEnabled",
             "getUniqueId",
             "getWorkspaceConfigs",
             "getDiff",

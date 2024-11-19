@@ -1,6 +1,5 @@
 import { logDevData } from "../../util/devdata";
 import { COUNT_COMPLETION_REJECTED_AFTER } from "../../util/parameters";
-import { Telemetry } from "../../util/posthog";
 
 import { AutocompleteOutcome } from "./types";
 
@@ -97,24 +96,5 @@ export class AutocompleteLoggingService {
     outcome.accepted = true;
     logDevData("autocomplete", outcome);
     const { prompt, completion, prefix, suffix, ...restOfOutcome } = outcome;
-    void Telemetry.capture(
-      "autocomplete",
-      {
-        accepted: restOfOutcome.accepted,
-        cacheHit: restOfOutcome.cacheHit,
-        completionId: restOfOutcome.completionId,
-        completionOptions: restOfOutcome.completionOptions,
-        debounceDelay: restOfOutcome.debounceDelay,
-        fileExtension: restOfOutcome.filepath.split(".")?.slice(-1)[0],
-        maxPromptTokens: restOfOutcome.maxPromptTokens,
-        modelName: restOfOutcome.modelName,
-        modelProvider: restOfOutcome.modelProvider,
-        multilineCompletions: restOfOutcome.multilineCompletions,
-        time: restOfOutcome.time,
-        useRecentlyEdited: restOfOutcome.useRecentlyEdited,
-        useRootPathContext: restOfOutcome.useRootPathContext,
-      },
-      true,
-    );
   }
 }

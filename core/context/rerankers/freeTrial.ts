@@ -1,6 +1,5 @@
 import fetch from "node-fetch";
 
-import { getHeaders } from "../../antalyseServer/stubs/headers.js";
 import { TRIAL_PROXY_URL } from "../../control-plane/client.js";
 import { Chunk, Reranker } from "../../index.js";
 
@@ -15,7 +14,6 @@ export class FreeTrialReranker implements Reranker {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...(await getHeaders()),
       },
       body: JSON.stringify({
         query,

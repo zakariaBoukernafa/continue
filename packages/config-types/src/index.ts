@@ -222,7 +222,6 @@ export const configJsonSchema = z.object({
   reranker: rerankerSchema.optional(),
   analytics: analyticsSchema,
   devData: devDataSchema,
-  allowAnonymousTelemetry: z.boolean().optional(),
   systemMessage: z.string().optional(),
   completionOptions: completionOptionsSchema.optional(),
   requestOptions: requestOptionsSchema.optional(),

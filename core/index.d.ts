@@ -462,7 +462,6 @@ export interface IDE {
   getIdeInfo(): Promise<IdeInfo>;
   getIdeSettings(): Promise<IdeSettings>;
   getDiff(includeUnstaged: boolean): Promise<string>;
-  isTelemetryEnabled(): Promise<boolean>;
   getUniqueId(): Promise<string>;
   getTerminalContents(): Promise<string>;
   getDebugLocals(threadIndex: number): Promise<string>;
@@ -1024,7 +1023,6 @@ interface AnalyticsConfig {
 // config.json
 export interface SerializedantalyseConfig {
   env?: string[];
-  allowAnonymousTelemetry?: boolean;
   models: ModelDescription[];
   systemMessage?: string;
   completionOptions?: BaseCompletionOptions;
@@ -1053,12 +1051,6 @@ export type antalyseRcJson = Partial<SerializedantalyseConfig> & {
 
 // config.ts - give users simplified interfaces
 export interface Config {
-  /** If set to true, antalyse will collect anonymous usage data to improve the product. If set to false, we will collect nothing. Read here to learn more: https://docs.antalyse.dev/telemetry */
-  allowAnonymousTelemetry?: boolean;
-  /** Each entry in this array will originally be a ModelDescription, the same object from your config.json, but you may add CustomLLMs.
-   * A CustomLLM requires you only to define an AsyncGenerator that calls the LLM and yields string updates. You can choose to define either `streamCompletion` or `streamChat` (or both).
-   * antalyse will do the rest of the work to construct prompt templates, handle context items, prune context, etc.
-   */
   models: (CustomLLM | ModelDescription)[];
   /** A system message to be followed by all of your models */
   systemMessage?: string;
@@ -1099,7 +1091,6 @@ export interface Config {
 
 // in the actual antalyse source code
 export interface antalyseConfig {
-  allowAnonymousTelemetry?: boolean;
   models: ILLM[];
   systemMessage?: string;
   completionOptions?: BaseCompletionOptions;
@@ -1120,7 +1111,6 @@ export interface antalyseConfig {
 }
 
 export interface BrowserSerializedantalyseConfig {
-  allowAnonymousTelemetry?: boolean;
   models: ModelDescription[];
   systemMessage?: string;
   completionOptions?: BaseCompletionOptions;

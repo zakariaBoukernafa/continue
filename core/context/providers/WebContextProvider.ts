@@ -4,7 +4,6 @@ import {
   ContextProviderDescription,
   ContextProviderExtras,
 } from "../..";
-import { getHeaders } from "../../antalyseServer/stubs/headers";
 import { TRIAL_PROXY_URL } from "../../control-plane/client";
 
 export default class WebContextProvider extends BaseContextProvider {
@@ -27,7 +26,6 @@ export default class WebContextProvider extends BaseContextProvider {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...(await getHeaders()),
       },
       body: JSON.stringify({
         query: extras.fullInput,

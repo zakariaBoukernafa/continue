@@ -1,5 +1,4 @@
 import { ModelDescription, SerializedantalyseConfig } from "../";
-import { Telemetry } from "../util/posthog";
 
 export interface ConfigValidationError {
   fatal: boolean;
@@ -134,9 +133,9 @@ export function validateConfig(config: SerializedantalyseConfig) {
   const booleanFlags: Array<
     keyof Pick<
       SerializedantalyseConfig,
-      "allowAnonymousTelemetry" | "disableIndexing" | "disableSessionTitles"
+      "disableIndexing" | "disableSessionTitles"
     >
-  > = ["allowAnonymousTelemetry", "disableIndexing", "disableSessionTitles"];
+  > = ["disableIndexing", "disableSessionTitles"];
 
   booleanFlags.forEach((flag) => {
     if (config[flag] !== undefined && typeof config[flag] !== "boolean") {
@@ -148,14 +147,6 @@ export function validateConfig(config: SerializedantalyseConfig) {
   });
 
   if (errors.length > 0) {
-    void Telemetry.capture(
-      "configValidationError",
-      {
-        errors,
-      },
-      true,
-    );
-
     return errors;
   }
 

@@ -21,7 +21,6 @@ import { logDevData } from "../util/devdata.js";
 import { DevDataSqliteDb } from "../util/devdataSqlite.js";
 import { fetchwithRequestOptions } from "../util/fetchWithOptions.js";
 import mergeJson from "../util/merge.js";
-import { Telemetry } from "../util/posthog.js";
 import { withExponentialBackoff } from "../util/withExponentialBackoff.js";
 
 import {
@@ -285,17 +284,6 @@ export abstract class BaseLLM implements ILLM {
   ) {
     let promptTokens = this.countTokens(prompt);
     let generatedTokens = this.countTokens(completion);
-
-    void Telemetry.capture(
-      "tokens_generated",
-      {
-        model: model,
-        provider: this.providerName,
-        promptTokens: promptTokens,
-        generatedTokens: generatedTokens,
-      },
-      true,
-    );
 
     void DevDataSqliteDb.logTokensGenerated(
       model,

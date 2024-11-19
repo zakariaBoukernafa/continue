@@ -22,7 +22,6 @@ import {
   getDocsSqlitePath,
   getLanceDbPath,
 } from "../../util/paths";
-import { Telemetry } from "../../util/posthog";
 import TransformersJsEmbeddingsProvider from "../embeddings/TransformersJsEmbeddingsProvider";
 
 import { Article, chunkArticle, pageToArticle } from "./article";
@@ -256,10 +255,6 @@ export default class DocsService {
       }
     }
 
-    void Telemetry.capture("docs_pages_crawled", {
-      count: processedPages,
-    });
-
     const chunks: Chunk[] = [];
     const embeddings: number[][] = [];
 
@@ -477,7 +472,6 @@ export default class DocsService {
 
     for (const doc of newDocs) {
       console.log(`Indexing new doc: ${doc.startUrl}`);
-      void Telemetry.capture("add_docs_config", { url: doc.startUrl });
 
       const generator = this.indexAndAdd(doc);
       while (!(await generator.next()).done) {}

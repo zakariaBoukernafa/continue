@@ -12,7 +12,6 @@ import { controlPlaneEnv } from "../../control-plane/env.js";
 import { TeamAnalytics } from "../../control-plane/TeamAnalytics";
 import antalyseProxyEmbeddingsProvider from "../../indexing/embeddings/antalyseProxyEmbeddingsProvider";
 import antalyseProxy from "../../llm/llms/stubs/antalyseProxy";
-import { Telemetry } from "../../util/posthog";
 import { TTS } from "../../util/tts";
 import { ConfigResult, loadFullConfigNode } from "../load";
 
@@ -48,16 +47,6 @@ export default async function doLoadConfig(
   if (configLoadInterrupted || !newConfig) {
     return { errors, config: newConfig, configLoadInterrupted: true };
   }
-
-  newConfig.allowAnonymousTelemetry =
-    newConfig.allowAnonymousTelemetry && (await ide.isTelemetryEnabled());
-
-  // Setup telemetry only after (and if) we know it is enabled
-  await Telemetry.setup(
-    newConfig.allowAnonymousTelemetry ?? true,
-    await ide.getUniqueId(),
-    ideInfo,
-  );
 
   // TODO: pass config to pre-load non-system TTS models
   await TTS.setup();
