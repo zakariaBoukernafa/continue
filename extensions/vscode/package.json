@@ -2,7 +2,7 @@
   "name": "antalyse",
   "icon": "media/icon.png",
   "author": "antalyse Dev, Inc",
-  "version": "0.9.255",
+  "version": "0.8.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/antalysedev/antalyse"
