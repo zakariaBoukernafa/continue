@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useRouteError } from "react-router-dom";
 import { newSession } from "../redux/slices/stateSlice";
 import { vscBackground } from "../components";
-import AntalyseButton from "../components/mainInput/antalyseButton";
+import AntalyseButton from "../components/mainInput/AntalyseButton";
 
 export default function ErrorPage() {
   const error: any = useRouteError();

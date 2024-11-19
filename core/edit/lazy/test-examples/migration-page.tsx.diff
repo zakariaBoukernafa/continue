@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import antalyseButton from "../components/mainInput/antalyseButton";
+import AntalyseButton from "../components/mainInput/AntalyseButton";
 
 function MigrationPage() {
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ export default MigrationPage;
 ---
 
 import { useNavigate } from "react-router-dom";
-import antalyseButton from "../components/mainInput/antalyseButton";
+import AntalyseButton from "../components/mainInput/AntalyseButton";
 
 function MigrationPage() {
   const navigate = useNavigate();
@@ -107,7 +107,7 @@ export default MigrationPage;
 ---
 
 import { useNavigate } from "react-router-dom";
-import antalyseButton from "../components/mainInput/antalyseButton";
+import AntalyseButton from "../components/mainInput/AntalyseButton";
 
 function MigrationPage() {
   const navigate = useNavigate();

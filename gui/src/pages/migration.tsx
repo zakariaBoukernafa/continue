@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import AntalyseButton from "../components/mainInput/antalyseButton";
+import AntalyseButton from "../components/mainInput/AntalyseButton";
 
 function MigrationPage() {
   const navigate = useNavigate();
