@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useNavigate, useRouteError } from "react-router-dom";
 import { newSession } from "../redux/slices/stateSlice";
-import antalyseButton from "../components/mainInput/antalyseButton";
 import { vscBackground } from "../components";
+import AntalyseButton from "../components/mainInput/antalyseButton";
 
 export default function ErrorPage() {
   const error: any = useRouteError();
@@ -23,7 +23,7 @@ export default function ErrorPage() {
       <br />
       <p>Click below to antalyse</p>
       <br />
-      <antalyseButton
+      <AntalyseButton
         disabled={false}
         showStop={false}
         onClick={() => {
@@ -31,7 +31,7 @@ export default function ErrorPage() {
           localStorage.removeItem("persist:root");
           navigate("/");
         }}
-      ></antalyseButton>
+      ></AntalyseButton>
     </div>
   );
 }

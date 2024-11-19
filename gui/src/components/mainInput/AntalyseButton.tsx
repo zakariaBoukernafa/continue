@@ -37,7 +37,7 @@ const StyledButton = styled(Button)<{
   }
 `;
 
-function antalyseButton(props: {
+function AntalyseButton(props: {
   onClick?: () => void;
   hidden?: boolean;
   disabled: boolean;
@@ -71,4 +71,4 @@ function antalyseButton(props: {
   );
 }
 
-export default antalyseButton;
+export default AntalyseButton;

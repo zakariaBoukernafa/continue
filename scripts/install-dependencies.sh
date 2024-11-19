@@ -43,8 +43,4 @@ npm run build
 
 popd
 
-echo "Installing docs dependencies..."
-pushd docs
-npm install
 
-popd

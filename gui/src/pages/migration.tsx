@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import antalyseButton from "../components/mainInput/antalyseButton";
+import AntalyseButton from "../components/mainInput/antalyseButton";
 
 function MigrationPage() {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ function MigrationPage() {
         server, this message does not apply.
       </i>
 
-      <antalyseButton
+      <AntalyseButton
         showStop={false}
         onClick={() => {
           navigate("/");

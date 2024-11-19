@@ -28,7 +28,6 @@ import { ChatScrollAnchor } from "../../components/ChatScrollAnchor";
 import { useFindWidget } from "../../components/find/FindWidget";
 import StepContainer from "../../components/gui/StepContainer";
 import TimelineItem from "../../components/gui/TimelineItem";
-import AntalyseInputBox from "../../components/mainInput/antalyseInputBox";
 import { defaultInputModifiers } from "../../components/mainInput/inputModifiers";
 import { NewSessionButton } from "../../components/mainInput/NewSessionButton";
 import { TutorialCard } from "../../components/mainInput/TutorialCard";
@@ -62,6 +61,7 @@ import {
 } from "../../util";
 import { FREE_TRIAL_LIMIT_REQUESTS } from "../../util/freeTrial";
 import { getLocalStorage, setLocalStorage } from "../../util/localStorage";
+import AntalyseInputBox from "../../components/mainInput/AntalyseInputBox";
 
 const StopButton = styled.div`
   background-color: ${vscBackground};
@@ -205,16 +205,6 @@ export function Chat() {
         const u = getLocalStorage("ftc");
         if (u) {
           setLocalStorage("ftc", u + 1);
-
-          if (u >= FREE_TRIAL_LIMIT_REQUESTS) {
-            onboardingCard.open("Best");
-            posthog?.capture("ftc_reached");
-            ideMessenger.ide.showToast(
-              "info",
-              "You've reached the free trial limit. Please configure a model to antalyse.",
-            );
-            return;
-          }
         } else {
           setLocalStorage("ftc", 1);
         }
@@ -499,18 +489,6 @@ export function Chat() {
                     </NewSessionButton>
                   </div>
                 ) : null}
-
-                {onboardingCard.show && (
-                  <div className="mx-2 mt-10">
-                    <OnboardingCard activeTab={onboardingCard.activeTab} />
-                  </div>
-                )}
-
-                {showTutorialCard !== false && !onboardingCard.open && (
-                  <div className="flex w-full justify-center">
-                    <TutorialCard onClose={closeTutorialCard} />
-                  </div>
-                )}
               </>
             )}
           </div>

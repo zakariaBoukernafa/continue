@@ -24,7 +24,6 @@ export function isNewUserOnboarding() {
 
 export const defaultOnboardingCardState: OnboardingCardState = {
   show: false,
-  activeTab: "Quickstart",
 };
 
 export enum OllamaConnectionStatuses {

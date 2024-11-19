@@ -163,21 +163,9 @@ const Layout = () => {
     [],
   );
 
-  useWebviewListener(
-    "openOnboardingCard",
-    async () => {
-      onboardingCard.open("Best");
-    },
-    [],
-  );
+  useWebviewListener("openOnboardingCard", async () => {}, []);
 
-  useWebviewListener(
-    "setupLocalConfig",
-    async () => {
-      onboardingCard.open("Local");
-    },
-    [],
-  );
+  useWebviewListener("setupLocalConfig", async () => {}, []);
 
   useWebviewListener(
     "startEditMode",
@@ -202,7 +190,6 @@ const Layout = () => {
       isNewUserOnboarding() &&
       (location.pathname === "/" || location.pathname === "/index.html")
     ) {
-      onboardingCard.open("Quickstart");
     }
   }, [location]);
 
