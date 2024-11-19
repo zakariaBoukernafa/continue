@@ -12,13 +12,7 @@ jobs:
       should_run: ${{ steps.check.outputs.should_run }}
     steps:
       - id: check
-        working-directory: .
-        run: |
-          if [[ "${{ github.event.release.tag_name }}" == v0.8.*-vscode ]]; then
-            echo "should_run=true" >> $GITHUB_OUTPUT
-          else
-            echo "should_run=false" >> $GITHUB_OUTPUT
-          fi
+        run: echo "should_run=true" >> $GITHUB_OUTPUT
 
   build:
     needs: check_release_name
