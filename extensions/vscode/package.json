@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/antalyse"
+    "url": "https://github.com/antalyse/antalyse.git"
   },
   "engines": {
     "vscode": "^1.70.0",
@@ -17,10 +17,10 @@
     "workspace"
   ],
   "bugs": {
-    "url": "https://github.com/antalyse",
+    "url": "https://github.com/antalyse/antalyse/issues",
     "email": "support@antalyse.com"
   },
-  "homepage": "https://antalyse.com",
+  "homepage": "https://github.com/antalyse/antalyse",
   "qna": "https://github.com/antalyse",
   "license": "Apache-2.0",
   "displayName": "Antalyse - AI Powered Code Assistant",
