@@ -133,7 +133,7 @@ jobs:
       - name: Re-install esbuild
         run: |
           cd extensions/vscode
-          npm install esbuild@0.19.11 --save-dev
+          npm install -f esbuild
 
       # 4. Run tests for the extension
       # - name: Install Xvfb for Linux and run tests

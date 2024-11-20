@@ -382,7 +382,7 @@ const exe = os === "win32" ? ".exe" : "";
     rimrafSync("node_modules/@esbuild");
     fs.mkdirSync("node_modules/@esbuild", { recursive: true });
     execCmdSync(
-      `curl -o node_modules/@esbuild/esbuild.zip https://antalyse-server-binaries.s3.us-west-1.amazonaws.com/${target}/esbuild.zip`,
+      `curl -o node_modules/@esbuild/esbuild.zip https://continue-server-binaries.s3.us-west-1.amazonaws.com/${target}/esbuild.zip`,
     );
     execCmdSync(`cd node_modules/@esbuild && unzip esbuild.zip`);
     fs.unlinkSync("node_modules/@esbuild/esbuild.zip");
