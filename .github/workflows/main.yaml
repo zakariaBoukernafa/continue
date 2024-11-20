@@ -96,9 +96,6 @@ jobs:
         run: |
           cd extensions/vscode
           npm ci
-          # Fix potential esbuild issues
-          npm uninstall esbuild
-          npm install esbuild@latest
         env:
           # https://github.com/microsoft/vscode-ripgrep/issues/9#issuecomment-643965333
           GITHUB_TOKEN: ${{ secrets.CI_GITHUB_TOKEN }}
@@ -122,7 +119,7 @@ jobs:
       #   env:
       #     OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
-      # 2.5. Pre packageInstall GUI Dependencies
+      # 2.5. Pre package
       - name: Set var for environment info
         shell: pwsh
         run: echo "target=${{ matrix.platform }}-${{ matrix.arch }}" >> $env:GITHUB_ENV
@@ -136,9 +133,7 @@ jobs:
       - name: Re-install esbuild
         run: |
           cd extensions/vscode
-          npm uninstall esbuild
-          npm cache clean --force
-          npm install esbuild@latest
+          npm install esbuild@0.19.11 --save-dev
 
       # 4. Run tests for the extension
       # - name: Install Xvfb for Linux and run tests
