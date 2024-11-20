@@ -78,13 +78,13 @@ export class JiraClient {
     this.baseUrl = `https://${this.options.domain}/rest/api/${this.options.apiVersion}`;
     this.authHeader = this.options.username
       ? {
-          Authorization: `Basic ${btoa(
-            `${this.options.username}:${this.options.password}`,
-          )}`,
-        }
+        Authorization: `Basic ${btoa(
+          `${this.options.username}:${this.options.password}`,
+        )}`,
+      }
       : {
-          Authorization: `Bearer ${this.options.password}`,
-        };
+        Authorization: `Bearer ${this.options.password}`,
+      };
   }
 
   async issue(
@@ -143,10 +143,9 @@ export class JiraClient {
     const response = await customFetch(
       new URL(
         this.baseUrl +
-          `/search?fields=summary&jql=${
-            this.options.issueQuery ??
-            "assignee = currentUser() AND resolution = Unresolved order by updated DESC"
-          }`,
+        `/search?fields=summary&jql=${this.options.issueQuery ??
+        "assignee = currentUser() AND resolution = Unresolved order by updated DESC"
+        }`,
       ),
       {
         method: "GET",
@@ -160,7 +159,7 @@ export class JiraClient {
     if (response.status === 500) {
       const text = await response.text();
       console.warn(
-        "Unable to get Jira tickets. You may need to set 'apiVersion': 2 in your config.json. See full documentation here: https://docs.antalyse.dev/customize/context-providers#jira-datacenter-support\n\n",
+        "Unable to get Jira tickets. You may need to set 'apiVersion': 2 in your config.json. See full documentation here: https://antalyse.com/customize/context-providers#jira-datacenter-support\n\n",
         text,
       );
       return Promise.resolve([]);

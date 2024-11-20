@@ -6,7 +6,7 @@
 
 [**Continue**](https://docs.continue.dev) is the leading open-source AI code assistant.
 
-You can connect any models and any context to build custom autocomplete and chat experiences inside [**VS Code**](https://marketplace.visualstudio.com/items?itemName=Continue.continue) and [**JetBrains**](https://plugins.jetbrains.com/plugin/22707-continue-extension) IDEs.
+You can connect any models and any context to build custom autocomplete and chat experiences inside [**VS Code**](https://marketplace.visualstudio.com/items?itemName=Antalyse.antalyse) and [**JetBrains**](https://plugins.jetbrains.com/plugin/22707-continue-extension) IDEs.
 
 </div>
 

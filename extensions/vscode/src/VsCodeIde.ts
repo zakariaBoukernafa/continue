@@ -150,7 +150,7 @@ class VsCodeIde implements IDE {
             } else if (selection === "Learn more") {
               vscode.env.openExternal(
                 vscode.Uri.parse(
-                  "https://docs.antalyse.dev/reference/Model%20Providers/freetrial",
+                  "https://antalyse.com/reference/Model%20Providers/freetrial",
                 ),
               );
             } else if (selection === "Sign in") {

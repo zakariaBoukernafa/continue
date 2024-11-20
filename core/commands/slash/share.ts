@@ -42,7 +42,7 @@ const ShareSlashCommand: SlashCommand = {
   run: async function* ({ ide, history, params }) {
     const now = new Date();
 
-    let content = `### [antalyse](https://antalyse.dev) session transcript\n Exported: ${now.toLocaleString()}`;
+    let content = `### [antalyse](https://antalyse.com) session transcript\n Exported: ${now.toLocaleString()}`;
 
     // As currently implemented, the /share command is by definition the last
     // message in the chat history, this will omit it
@@ -57,9 +57,8 @@ const ShareSlashCommand: SlashCommand = {
       // format messages as blockquotes
       msgText = msgText.replace(/^/gm, "> ");
 
-      content += `\n\n#### ${
-        msg.role === "user" ? "_User_" : "_Assistant_"
-      }\n\n${msgText}`;
+      content += `\n\n#### ${msg.role === "user" ? "_User_" : "_Assistant_"
+        }\n\n${msgText}`;
     }
 
     let outputDir: string = params?.outputDir;

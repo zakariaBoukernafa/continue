@@ -52,4 +52,4 @@ public static int[] sortingAlgorithm2(int[] x) {
 // Basic assertion for sortingAlgorithm...
 
 
-/* ——————————————————      Learn more at https://docs.antalyse.dev/getting-started/overview      ——————————————————— */
+/* ——————————————————      Learn more at https://antalyse.com/getting-started/overview      ——————————————————— */

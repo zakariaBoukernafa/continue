@@ -59,7 +59,7 @@ function MorePage() {
               description="Learn how to configure and use antalyse"
               Icon={ArrowTopRightOnSquareIcon}
               onClick={() =>
-                ideMessenger.post("openUrl", "https://docs.antalyse.dev/")
+                ideMessenger.post("openUrl", "https://antalyse.com/")
               }
             />
 
@@ -79,9 +79,7 @@ function MorePage() {
               title="Join the community!"
               description="Join us on Discord to stay up-to-date on the latest developments"
               Icon={ArrowTopRightOnSquareIcon}
-              onClick={() =>
-                ideMessenger.post("openUrl", "https://discord.gg/vapESyrFmJ")
-              }
+              onClick={() => ideMessenger.post("openUrl", "https://discord.gg")}
             />
 
             <MoreHelpRow

@@ -45,7 +45,7 @@ export async function getPromptFiles(
 const DEFAULT_PROMPT_FILE = `# This is an example ".prompt" file
 # It is used to define and reuse prompts within antalyse
 # antalyse will automatically create a slash command for each prompt in the .prompts folder
-# To learn more, see the full .prompt file reference: https://docs.antalyse.dev/features/prompt-files
+# To learn more, see the full .prompt file reference: https://antalyse.com/features/prompt-files
 temperature: 0.0
 ---
 {{{ diff }}}

@@ -32,8 +32,7 @@ export async function showTutorial() {
 }
 
 export class VsCodeWebviewProtocol
-  implements IMessenger<FromWebviewProtocol, ToWebviewProtocol>
-{
+  implements IMessenger<FromWebviewProtocol, ToWebviewProtocol> {
   listeners = new Map<
     keyof FromWebviewProtocol,
     ((message: Message) => any)[]
@@ -115,9 +114,9 @@ export class VsCodeWebviewProtocol
           let message = e.message;
           if (e.cause) {
             if (e.cause.name === "ConnectTimeoutError") {
-              message = `Connection timed out. If you expect it to take a long time to connect, you can increase the timeout in config.json by setting "requestOptions": { "timeout": 10000 }. You can find the full config reference here: https://docs.antalyse.dev/reference/config`;
+              message = `Connection timed out. If you expect it to take a long time to connect, you can increase the timeout in config.json by setting "requestOptions": { "timeout": 10000 }. You can find the full config reference here: https://antalyse.com/reference/config`;
             } else if (e.cause.code === "ECONNREFUSED") {
-              message = `Connection was refused. This likely means that there is no server running at the specified URL. If you are running your own server you may need to set the "apiBase" parameter in config.json. For example, you can set up an OpenAI-compatible server like here: https://docs.antalyse.dev/reference/Model%20Providers/openai#openai-compatible-servers--apis`;
+              message = `Connection was refused. This likely means that there is no server running at the specified URL. If you are running your own server you may need to set the "apiBase" parameter in config.json. For example, you can set up an OpenAI-compatible server like here: https://antalyse.com/reference/Model%20Providers/openai#openai-compatible-servers--apis`;
             } else {
               message = `The request failed with "${e.cause.name}": ${e.cause.message}. If you're having trouble setting up antalyse, please see the troubleshooting guide for help.`;
             }
@@ -127,7 +126,7 @@ export class VsCodeWebviewProtocol
             message = message.split("\n").filter((l: string) => l !== "")[1];
             try {
               message = JSON.parse(message).message;
-            } catch {}
+            } catch { }
             if (message.includes("exceeded")) {
               message +=
                 " To keep using antalyse, you can set up a local model or use your own API key.";
@@ -161,7 +160,7 @@ export class VsCodeWebviewProtocol
                 } else if (selection === "Troubleshooting") {
                   vscode.env.openExternal(
                     vscode.Uri.parse(
-                      "https://docs.antalyse.dev/troubleshooting",
+                      "https://antalyse.com/troubleshooting",
                     ),
                   );
                 }
@@ -172,7 +171,7 @@ export class VsCodeWebviewProtocol
     });
   }
 
-  constructor(private readonly reloadConfig: () => void) {}
+  constructor(private readonly reloadConfig: () => void) { }
   invoke<T extends keyof FromWebviewProtocol>(
     messageType: T,
     data: FromWebviewProtocol[T][0],

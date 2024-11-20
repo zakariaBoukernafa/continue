@@ -495,7 +495,6 @@ const exe = os === "win32" ? ".exe" : "";
     "gui/assets/index.css",
 
     // Tutorial
-    "media/move-chat-panel-right.md",
     "antalyse_tutorial.py",
     "config_schema.json",
 

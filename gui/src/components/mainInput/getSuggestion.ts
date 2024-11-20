@@ -8,9 +8,9 @@ import { ComboBoxItem, ComboBoxItemType, ComboBoxSubAction } from "./types";
 
 function getSuggestion(
   items: (props: { query: string }) => Promise<ComboBoxItem[]>,
-  enterSubmenu: (editor: Editor, providerId: string) => void = (editor) => {},
-  onClose: () => void = () => {},
-  onOpen: () => void = () => {},
+  enterSubmenu: (editor: Editor, providerId: string) => void = (editor) => { },
+  onClose: () => void = () => { },
+  onOpen: () => void = () => { },
 ) {
   return {
     items,
@@ -168,7 +168,7 @@ export function getContextProviderDropdownOptions(
         action: () => {
           ideMessenger.request(
             "openUrl",
-            "https://docs.antalyse.dev/customization/context-providers#built-in-context-providers",
+            "https://antalyse.com/customization/context-providers#built-in-context-providers",
           );
         },
         description: "",

@@ -167,11 +167,11 @@ const preIndexedDocs: Record<
     rootUrl: "https://code.visualstudio.com/api",
     faviconUrl: "https://code.visualstudio.com/favicon.ico",
   },
-  "https://docs.antalyse.dev/intro": {
+  "https://antalyse.com/intro": {
     title: "antalyse",
-    startUrl: "https://docs.antalyse.dev/intro",
-    rootUrl: "https://docs.antalyse.dev",
-    faviconUrl: "https://docs.antalyse.dev/favicon.ico",
+    startUrl: "https://antalyse.com/intro",
+    rootUrl: "https://antalyse.com",
+    faviconUrl: "https://antalyse.com/favicon.ico",
   },
   "https://api.jquery.com/": {
     title: "jQuery",

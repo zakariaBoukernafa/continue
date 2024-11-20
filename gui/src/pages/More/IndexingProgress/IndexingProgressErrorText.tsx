@@ -28,11 +28,11 @@ function IndexingProgressErrorText({ update }: IndexingProgressErrorTextProps) {
           unsupported in JetBrains. To enable codebase indexing, you can use any
           of the other providers described in the docs:{" "}
           <a
-            href="https://docs.antalyse.dev/walkthroughs/codebase-embeddings#embeddings-providers"
+            href="https://antalyse.com/walkthroughs/codebase-embeddings#embeddings-providers"
             target="_blank"
             className="cursor-pointer text-inherit underline hover:text-inherit"
           >
-            https://docs.antalyse.dev/walkthroughs/codebase-embeddings#embeddings-providers
+            https://antalyse.com/walkthroughs/codebase-embeddings#embeddings-providers
           </a>
         </span>
       </div>

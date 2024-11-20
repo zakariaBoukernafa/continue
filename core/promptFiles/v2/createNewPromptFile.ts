@@ -27,7 +27,7 @@ const FIRST_TIME_DEFAULT_PROMPT_FILE = `# This is an example ".prompt" file
   # e.g. @os
   # e.g. @repo-map
 
-# To learn more, see the full .prompt file reference: https://docs.antalyse.dev/features/prompt-files
+# To learn more, see the full .prompt file reference: https://antalyse.com/features/prompt-files
 name: Example
 description: Example prompt file
 version: 2

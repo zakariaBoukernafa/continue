@@ -11,11 +11,11 @@ body:
     attributes:
       label: Before submitting your bug report
       options:
-        - label: I believe this is a bug. I'll try to join the [antalyse Discord](https://discord.gg/NWtdYexhMs) for questions
+        - label: I believe this is a bug. I'll try to join the [antalyse Discord](https://discord.gg/) for questions
           required: false
-        - label: I'm not able to find an [open issue](https://github.com/antalysedev/antalyse/issues?q=is%3Aopen+is%3Aissue) that reports the same bug
+        - label: I'm not able to find an [open issue](https://github.com/antalyse) that reports the same bug
           required: false
-        - label: I've seen the [troubleshooting guide](https://docs.antalyse.dev/troubleshooting) on the antalyse Docs
+        - label: I've seen the [troubleshooting guide](https://antalyse.com) on the antalyse Docs
           required: false
   - type: textarea
     attributes:
@@ -65,5 +65,5 @@ body:
     attributes:
       label: Log output
       description: |
-        Please refer to the [troubleshooting guide](https://docs.antalyse.dev/troubleshooting) in the antalyse Docs for instructions on obtaining the logs. Copy either the relevant lines or the last 100 lines or so.
+        Please refer to the [troubleshooting guide](https://antalyse.com/troubleshooting) in the antalyse Docs for instructions on obtaining the logs. Copy either the relevant lines or the last 100 lines or so.
       render: Shell

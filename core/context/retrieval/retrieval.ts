@@ -24,16 +24,16 @@ export async function retrieveContextItemsFromEmbeddings(
 
   const isJetBrainsAndTransformersJs =
     extras.embeddingsProvider.providerName ===
-      TransformersJsEmbeddingsProvider.providerName &&
+    TransformersJsEmbeddingsProvider.providerName &&
     (await extras.ide.getIdeInfo()).ideType === "jetbrains";
 
   if (isJetBrainsAndTransformersJs) {
     void extras.ide.showToast(
       "warning",
       "Codebase retrieval is limited when `embeddingsProvider` is empty or set to `transformers.js` in JetBrains. " +
-        "You can use Ollama to set up local embeddings, use our 'free-trial', " +
-        "or configure your own. See here to learn more: " +
-        "https://docs.antalyse.dev/customize/model-types/embeddings",
+      "You can use Ollama to set up local embeddings, use our 'free-trial', " +
+      "or configure your own. See here to learn more: " +
+      "https://antalyse.com/customize/model-types/embeddings",
     );
   }
 
@@ -114,9 +114,8 @@ export async function retrieveContextItemsFromEmbeddings(
     ...results
       .sort((a, b) => a.filepath.localeCompare(b.filepath))
       .map((r) => {
-        const name = `${path.basename(r.filepath)} (${r.startLine}-${
-          r.endLine
-        })`;
+        const name = `${path.basename(r.filepath)} (${r.startLine}-${r.endLine
+          })`;
         const description = `${r.filepath}`;
 
         if (r.filepath.includes("package.json")) {

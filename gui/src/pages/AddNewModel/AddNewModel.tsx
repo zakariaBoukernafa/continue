@@ -91,10 +91,7 @@ function AddNewModel() {
             </li>
             <li>Select a specific model directly</li>
           </ul>
-          <Link
-            target="_blank"
-            to="https://docs.antalyse.dev/model-setup/overview"
-          >
+          <Link target="_blank" to="https://antalyse.com/model-setup/overview">
             Visit our setup overview docs
           </Link>{" "}
           to learn more.
@@ -129,7 +126,7 @@ function AddNewModel() {
                   description={modelInfo.description}
                   tags={modelInfo.tags}
                   icon={modelInfo.icon}
-                  refUrl={`https://docs.antalyse.dev/reference/Model%20Providers/${
+                  refUrl={`https://antalyse.com/reference/Model%20Providers/${
                     modelInfo.refPage || modelInfo.provider.toLowerCase()
                   }`}
                   onClick={(e) => {

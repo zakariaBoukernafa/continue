@@ -1,57 +1,67 @@
 <div align="center">
+  <img src="media/antalyse-logo.png" width="120" alt="Antalyse Logo">
+  <h1>Antalyse</h1>
+  <p><strong>The Next Generation AI-Powered Code Assistant</strong></p>
 
-![Continue logo](media/readme.png)
-
-</div>
-
-<h1 align="center">Continue</h1>
-
-<div align="center">
-
-**[Continue](https://docs.continue.dev) is the leading open-source AI code assistant. You can connect any models and any context to build custom autocomplete and chat experiences inside [VS Code](https://marketplace.visualstudio.com/items?itemName=Continue.continue) and [JetBrains](https://plugins.jetbrains.com/plugin/22707-continue-extension)**
+[![Version](https://img.shields.io/visual-studio-marketplace/v/antalyse.antalyse?color=blue&label=VS%20Code)](https://marketplace.visualstudio.com/items?itemName=antalyse.antalyse)
+[![License](https://img.shields.io/badge/License-Apache_2.0-green.svg)](LICENSE)
+[![Website](https://img.shields.io/badge/website-antalyse.com-purple)](https://antalyse.com)
 
 </div>
 
-<div align="center">
+## 🚀 Overview
 
-<a target="_blank" href="https://opensource.org/licenses/Apache-2.0" style="background:none">
-    <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" style="height: 22px;" />
-</a>
-<a target="_blank" href="https://docs.continue.dev" style="background:none">
-    <img src="https://img.shields.io/badge/continue_docs-%23BE1B55" style="height: 22px;" />
-</a>
-<a target="_blank" href="https://discord.gg/vapESyrFmJ" style="background:none">
-    <img src="https://img.shields.io/badge/discord-join-continue.svg?labelColor=191937&color=6F6FF7&logo=discord" style="height: 22px;" />
-</a>
+Antalyse is an intelligent coding companion powered by Claude 3.5 Sonnet, designed to enhance your development workflow. With deep IDE integration and powerful AI capabilities, Antalyse helps you write, refactor, and understand code better.
 
-<p></p>
+## ✨ Key Features
 
-## Chat
+### 💡 Smart Code Generation
 
-[Chat](https://continue.dev/docs/chat/how-to-use-it) makes it easy to ask for help from an LLM without needing to leave the IDE
+- Intelligent code suggestions as you type
+- Context-aware completions
 
-![chat](docs/static/img/chat.gif)
+### 🔄 Code Refactoring
 
-## Autocomplete
+- One-click code improvements
+- Performance optimization suggestions
+- Code style consistency
 
-[Autocomplete](https://continue.dev/docs/autocomplete/how-to-use-it) provides inline code suggestions as you type
+### 📝 Documentation Assistant
 
-![autocomplete](docs/static/img/autocomplete.gif)
+- Automatic documentation generation
+- Smart docstring creation
+- Code explanation on demand
 
-## Edit
+### 🛠️ Developer Tools
 
-[Edit](https://continue.dev/docs/edit/how-to-use-it) is a convenient way to modify code without leaving your current file
+- Integrated test generation
+- Code review assistance
+- Bug detection and fixes
 
-![edit](docs/static/img/edit.gif)
+## 🔧 Installation
 
-## Actions
+Install Antalyse directly from the VS Code marketplace:
 
-[Actions](https://continue.dev/docs/actions/how-to-use-it) are shortcuts for common use cases.
+1. Open VS Code
+2. Press `Cmd+P`
+3. Type `ext install antalyse.antalyse`
 
-![actions](docs/static/img/actions.gif)
+## 🚀 Getting Started
 
-</div>
+1. Open any code file in VS Code
+2. Press `Cmd+L` to activate Antalyse
+3. Start coding with AI assistance
 
-## License
+## 📚 Documentation
 
-[Apache 2.0 © 2023-2024 Continue Dev, Inc.](./LICENSE)
+Visit [antalyse.com](https://antalyse.com) for comprehensive documentation.
+
+## 🤝 Support
+
+- Website: [antalyse.com](https://antalyse.com)
+- Email: office@antalyse.com
+
+## 📄 License
+
+Copyright © 2024 Antalyse, Inc.  
+Licensed under [Apache License 2.0](LICENSE)

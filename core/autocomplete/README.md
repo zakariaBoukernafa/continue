@@ -1,6 +1,6 @@
 # Tab Autocomplete (beta)
 
-Continue now provides support for tab autocomplete in [VS Code](https://marketplace.visualstudio.com/items?itemName=Continue.continue) and [JetBrains IDEs](https://plugins.jetbrains.com/plugin/22707-continue/edit). We will be greatly improving the experience over the next few releases, and it is always helpful to hear feedback. If you have any problems or suggestions, please let us know in our [Discord](https://discord.gg/vapESyrFmJ).
+Continue now provides support for tab autocomplete in [VS Code](https://marketplace.visualstudio.com/items?itemName=Antalyse.antalyse) and [JetBrains IDEs](https://plugins.jetbrains.com/plugin/22707-continue/edit). We will be greatly improving the experience over the next few releases, and it is always helpful to hear feedback. If you have any problems or suggestions, please let us know in our [Discord](https://discord.gg).
 
 ## Setting up with Ollama (default)
 
@@ -132,7 +132,7 @@ Follow these steps to ensure that everything is set up correctly:
 4. Make sure that any other completion providers are disabled (e.g. Copilot), as they may interfere.
 5. Make sure that you aren't also using another Ollama model for chat. This will cause Ollama to constantly load and unload the models from memory, resulting in slow responses (or none at all) for both.
 6. Check the output of the logs to find any potential errors (cmd/ctrl+shift+p -> "Toggle Developer Tools" -> "Console" tab in VS Code, ~/.continue/logs/core.log in JetBrains).
-7. If you are still having issues, please let us know in our [Discord](https://discord.gg/vapESyrFmJ) and we'll help as soon as possible.
+7. If you are still having issues, please let us know in our [Discord](https://discord.gg) and we'll help as soon as possible.
 
 ### Completions are slow
 
@@ -160,4 +160,4 @@ Open Settings -> Tools -> Continue and uncheck the box for "Enable Tab Autocompl
 
 ### Feedback
 
-If you're turning off autocomplete, we'd love to hear how we can improve! Please let us know in our [Discord](https://discord.gg/vapESyrFmJ) or file an issue on GitHub.
+If you're turning off autocomplete, we'd love to hear how we can improve! Please let us know in our [Discord](https://discord.gg) or file an issue on GitHub.

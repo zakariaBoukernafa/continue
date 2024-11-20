@@ -29,8 +29,7 @@ interface VsCodeCompletionInput {
 }
 
 export class antalyseCompletionProvider
-  implements vscode.InlineCompletionItemProvider
-{
+  implements vscode.InlineCompletionItemProvider {
   private onError(e: any) {
     const options = ["Documentation"];
     if (e.message.includes("https://ollama.ai")) {
@@ -49,7 +48,7 @@ export class antalyseCompletionProvider
       if (val === "Documentation") {
         vscode.env.openExternal(
           vscode.Uri.parse(
-            "https://docs.antalyse.dev/features/tab-autocomplete",
+            "https://antalyse.com/features/tab-autocomplete",
           ),
         );
       } else if (val === "Download Ollama") {

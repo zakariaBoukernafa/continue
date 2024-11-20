@@ -95,7 +95,7 @@ export function TutorialCard({ onClose }: TutorialCardProps) {
             <a
               className="cursor-pointer text-inherit underline hover:text-inherit"
               onClick={() =>
-                ideMessenger.post("openUrl", "https://docs.antalyse.dev")
+                ideMessenger.post("openUrl", "https://antalyse.com")
               }
             >
               Read our documentation

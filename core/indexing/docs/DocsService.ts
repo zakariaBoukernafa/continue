@@ -179,7 +179,7 @@ export default class DocsService {
 
     for (const doc of docs) {
       const generator = this.indexAndAdd(doc, reIndex);
-      while (!(await generator.next()).done) {}
+      while (!(await generator.next()).done) { }
     }
 
     await this.ide.showToast("info", "Docs indexing completed");
@@ -474,7 +474,7 @@ export default class DocsService {
       console.log(`Indexing new doc: ${doc.startUrl}`);
 
       const generator = this.indexAndAdd(doc);
-      while (!(await generator.next()).done) {}
+      while (!(await generator.next()).done) { }
     }
 
     for (const doc of deletedDocs) {
@@ -584,7 +584,7 @@ export default class DocsService {
       } else {
         console.trace(
           "No existing Lance DB docs table was found and no initialization " +
-            "vector was passed to create one",
+          "vector was passed to create one",
         );
       }
     }
@@ -740,7 +740,7 @@ export default class DocsService {
       //   "The 'transformers.js' embeddings provider currently cannot be used to index " +
       //     "documentation in JetBrains. To enable documentation indexing, you can use " +
       //     "any of the other providers described in the docs: " +
-      //     "https://docs.antalyse.dev/walkthroughs/codebase-embeddings#embeddings-providers",
+      //     "https://antalyse.com/walkthroughs/codebase-embeddings#embeddings-providers",
       // );
 
       this.globalContext.update(
@@ -794,7 +794,7 @@ export default class DocsService {
 
       const generator = this.indexAndAdd(doc);
 
-      while (!(await generator.next()).done) {}
+      while (!(await generator.next()).done) { }
     }
 
     // Important that this only is invoked after we have successfully

@@ -1,55 +1,45 @@
 {
   "name": "antalyse",
   "icon": "media/icon.png",
-  "author": "antalyse Dev, Inc",
-  "version": "0.8.0",
+  "author": "Antalyse, Inc",
+  "version": "0.2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/antalysedev/antalyse"
+    "url": "https://github.com/antalyse"
   },
   "extensionKind": [
     "ui",
     "workspace"
   ],
   "bugs": {
-    "url": "https://github.com/antalysedev/antalyse/issues",
-    "email": "nate@antalyse.dev"
+    "url": "https://github.com/antalyse",
+    "email": "support@antalyse.com"
   },
-  "homepage": "https://antalyse.dev",
-  "qna": "https://github.com/antalysedev/antalyse/issues/new/choose",
+  "homepage": "https://antalyse.com",
+  "qna": "https://github.com/antalyse",
   "license": "Apache-2.0",
-  "displayName": "antalyse - Codestral, Claude, and more",
+  "displayName": "Antalyse - AI Powered Code Assistant",
   "pricing": "Free",
-  "description": "The leading open-source AI code assistant",
+  "description": "The next generation AI code assistant powered by Claude 3.5 Sonnet. Get intelligent code suggestions, refactoring, documentation and more.",
   "publisher": "antalyse",
-  "engines": {
-    "vscode": "^1.70.0",
-    "node": ">=20.11.0"
-  },
-  "engine-strict": true,
-  "galleryBanner": {
-    "color": "#1E1E1E",
-    "theme": "dark"
-  },
   "categories": [
     "AI",
-    "Chat",
     "Programming Languages",
-    "Education",
     "Machine Learning",
-    "Snippets"
+    "Snippets",
+    "Other"
   ],
   "keywords": [
-    "chatgpt",
-    "github",
-    "copilot",
+    "ai",
+    "code assistant",
     "claude",
     "sonnet",
-    "mistral",
-    "codestral",
-    "codegpt",
-    "ai",
-    "llama"
+    "code generation",
+    "refactoring",
+    "documentation",
+    "code analysis",
+    "productivity",
+    "automation"
   ],
   "activationEvents": [
     "onStartupFinished",
@@ -99,12 +89,12 @@
         "antalyse.enableQuickActions": {
           "type": "boolean",
           "default": false,
-          "markdownDescription": "Enable the experimental Quick Actions feature. Read our walkthrough to learn about configuration and how to share feedback: [antalyse.dev › Walkthrough: Quick Actions (experimental)](https://docs.antalyse.dev/features/quick-actions)"
+          "markdownDescription": "Enable the experimental Quick Actions feature. Read our walkthrough to learn about configuration and how to share feedback: [antalyse.dev › Walkthrough: Quick Actions (experimental)](https://antalyse.com/features/quick-actions)"
         },
         "antalyse.enableTabAutocomplete": {
           "type": "boolean",
           "default": true,
-          "markdownDescription": "Enable antalyse's tab autocomplete feature. Read our walkthrough to learn about configuration and how to share feedback: [antalyse.dev › Walkthrough: Tab Autocomplete (beta)](https://docs.antalyse.dev/features/tab-autocomplete)"
+          "markdownDescription": "Enable antalyse's tab autocomplete feature. Read our walkthrough to learn about configuration and how to share feedback: [antalyse.dev › Walkthrough: Tab Autocomplete (beta)](https://antalyse.com/features/tab-autocomplete)"
         },
         "antalyse.pauseTabAutocompleteOnBattery": {
           "type": "boolean",
