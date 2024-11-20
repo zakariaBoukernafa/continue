@@ -7,6 +7,11 @@
     "type": "git",
     "url": "https://github.com/antalyse"
   },
+  "engines": {
+    "vscode": "^1.70.0",
+    "node": ">=20.11.0"
+  },
+  "engine-strict": true,
   "extensionKind": [
     "ui",
     "workspace"
